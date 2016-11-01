@@ -2,16 +2,23 @@ package br.com.gfsoft.sisacademic.ui;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.SystemColor;
 
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
-import javax.swing.JMenu;
 import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.SoftBevelBorder;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Principal extends JFrame {
+	
+	private static CadAluno aluno;
 
 	private JPanel contentPane;
 
@@ -37,48 +44,39 @@ public class Principal extends JFrame {
 	public Principal() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 525, 411);
+		this.setExtendedState(MAXIMIZED_BOTH);
 		
-		JMenuBar menuBar = new JMenuBar();
-		setJMenuBar(menuBar);
-		
-		JMenu mnNewMenu = new JMenu("New menu");
-		menuBar.add(mnNewMenu);
-		
-		JMenuItem mntmNewMenuItem = new JMenuItem("New menu item");
-		mnNewMenu.add(mntmNewMenuItem);
-		
-		JMenuItem mntmNewMenuItem_1 = new JMenuItem("New menu item");
-		mnNewMenu.add(mntmNewMenuItem_1);
-		
-		JMenu mnNewMenu_1 = new JMenu("New menu");
-		menuBar.add(mnNewMenu_1);
-		
-		JMenuItem mntmNewMenuItem_2 = new JMenuItem("New menu item");
-		mnNewMenu_1.add(mntmNewMenuItem_2);
-		
-		JMenuItem mntmNewMenuItem_3 = new JMenuItem("New menu item");
-		mnNewMenu_1.add(mntmNewMenuItem_3);
-		
-		JMenu mnNewMenu_2 = new JMenu("New menu");
-		menuBar.add(mnNewMenu_2);
-		
-		JMenuItem mntmNewMenuItem_4 = new JMenuItem("New menu item");
-		mnNewMenu_2.add(mntmNewMenuItem_4);
-		
-		JMenuItem mntmNewMenuItem_6 = new JMenuItem("New menu item");
-		mnNewMenu_2.add(mntmNewMenuItem_6);
-		
-		JMenu mnNewMenu_3 = new JMenu("New menu");
-		menuBar.add(mnNewMenu_3);
-		
-		JMenuItem mntmNewMenuItem_5 = new JMenuItem("New menu item");
-		mnNewMenu_3.add(mntmNewMenuItem_5);
 		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		
 		JDesktopPane desktopPane = new JDesktopPane();
-		contentPane.add(desktopPane, BorderLayout.CENTER);
+		desktopPane.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		desktopPane.setBackground(SystemColor.desktop);
+		contentPane.add(desktopPane, BorderLayout.CENTER);		
+		
+		JMenuBar menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
+		
+		JMenu mnTteste = new JMenu("tteste");
+		menuBar.add(mnTteste);
+		
+		JMenuItem mntmDsfsd = new JMenuItem("dsfsd");
+		mntmDsfsd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				if (aluno == null) {
+		            aluno = new CadAluno();
+		            desktopPane.add(aluno);
+		            aluno.setVisible(true);
+		        } else {
+		            aluno.setVisible(true);
+		            desktopPane.moveToFront(aluno);
+		        }
+				
+			}
+		});
+		mnTteste.add(mntmDsfsd);
 	}
 }
