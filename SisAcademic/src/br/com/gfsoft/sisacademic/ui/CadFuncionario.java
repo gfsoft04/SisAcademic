@@ -1,13 +1,10 @@
 package br.com.gfsoft.sisacademic.ui;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JInternalFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EtchedBorder;
 
-public class CadAluno extends JInternalFrame {
+public class CadFuncionario extends JInternalFrame {
 
 	/**
 	 * Launch the application.
@@ -16,7 +13,7 @@ public class CadAluno extends JInternalFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					CadAluno frame = new CadAluno();
+					CadFuncionario frame = new CadFuncionario();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -28,14 +25,8 @@ public class CadAluno extends JInternalFrame {
 	/**
 	 * Create the frame.
 	 */
-	public CadAluno() {
-		setClosable(true);
-		setTitle("Cadastro de Aluno");
+	public CadFuncionario() {
 		setBounds(100, 100, 450, 300);
-		
-		JPanel panel = new JPanel();
-		panel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		getContentPane().add(panel, BorderLayout.CENTER);
 
 	}
 
