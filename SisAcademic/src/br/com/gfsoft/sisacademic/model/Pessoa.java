@@ -14,7 +14,8 @@ public class Pessoa {
 	private String sexo; 			//M (masculino),  F (feminino)
 	private String email;
 	private String telefone;
-	private String endereco;
+	private String rua;
+	private int numero;
 	private String bairro;
 	private String cidade;
 	private String estado; 			//sigla do estado 'PB'
@@ -85,11 +86,17 @@ public class Pessoa {
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
-	public String getEndereco() {
-		return endereco;
+	public String getRua() {
+		return rua;
 	}
-	public void setEndereco(String endereco) {
-		this.endereco = endereco;
+	public void setRua(String rua) {
+		this.rua = rua;
+	}
+	public int getNumero() {
+		return numero;
+	}
+	public void setNumero(int numeoro) {
+		this.numero = numeoro;
 	}
 	public String getBairro() {
 		return bairro;
