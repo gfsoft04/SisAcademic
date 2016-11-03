@@ -23,7 +23,7 @@ import javax.swing.JTextPane;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
-public class CadAluno extends JInternalFrame {
+public class CadFuncionario extends JInternalFrame {
 	private JTextField txtNome;
 	private JTextField txtRg;
 	private JTextField txtEmail;
@@ -32,7 +32,8 @@ public class CadAluno extends JInternalFrame {
 	private JTextField txtBairro;
 	private JTextField txtCidade;
 	private JTextField txtEstado;
-	private JTextField txtProfissao;
+	private JTextField txtSalario;
+	private JTextField txtCargo;
 
 	/**
 	 * Launch the application.
@@ -41,7 +42,7 @@ public class CadAluno extends JInternalFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					CadAluno frame = new CadAluno();
+					CadFuncionario frame = new CadFuncionario();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -53,13 +54,13 @@ public class CadAluno extends JInternalFrame {
 	/**
 	 * Create the frame.
 	 */
-	public CadAluno() {
+	public CadFuncionario() {
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setClosable(true);
-		setTitle("Cadastro de Aluno");
+		setTitle("Cadastro de Funcionário");
 		setBounds(100, 100, 1000, 670);
 		setLocation(0, 0);
-
+		
 		JPanel panel = new JPanel();
 		panel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		getContentPane().add(panel, BorderLayout.CENTER);
@@ -67,7 +68,7 @@ public class CadAluno extends JInternalFrame {
 
 		JButton btnCadastrar = new JButton("Cadastrar");
 		btnCadastrar.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnCadastrar.setBounds(554, 564, 100, 30);
+		btnCadastrar.setBounds(847, 579, 100, 30);
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -75,12 +76,13 @@ public class CadAluno extends JInternalFrame {
 
 			}
 		});
+		
 		panel.add(btnCadastrar);
 
 		JPanel pane_2 = new JPanel();
 		pane_2.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Endere\u00E7o",
 				TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		pane_2.setBounds(10, 225, 974, 196);
+		pane_2.setBounds(10, 240, 974, 196);
 		panel.add(pane_2);
 		pane_2.setLayout(null);
 
@@ -102,7 +104,7 @@ public class CadAluno extends JInternalFrame {
 		});
 		formattedTxtCep.setBounds(73, 40, 120, 20);
 		pane_2.add(formattedTxtCep);
-
+		
 		JLabel lblRua = new JLabel("Rua:");
 		lblRua.setBounds(40, 90, 35, 14);
 		pane_2.add(lblRua);
@@ -153,7 +155,7 @@ public class CadAluno extends JInternalFrame {
 		pane_1.setBounds(10, 30, 974, 184);
 		panel.add(pane_1);
 		pane_1.setLayout(null);
-
+		
 		JLabel lblNewLabel = new JLabel("Nome:");
 		lblNewLabel.setBounds(40, 43, 40, 14);
 		pane_1.add(lblNewLabel);
@@ -245,31 +247,73 @@ public class CadAluno extends JInternalFrame {
 		});
 		formattedTxtTelefone.setBounds(431, 130, 151, 20);
 		pane_1.add(formattedTxtTelefone);
-		
-		JLabel lblProfisso = new JLabel("Profiss\u00E3o:");
-		lblProfisso.setBounds(620, 133, 60, 14);
-		pane_1.add(lblProfisso);
-		
-		txtProfissao = new JTextField();
-		txtProfissao.setColumns(10);
-		txtProfissao.setBounds(688, 130, 180, 20);
-		pane_1.add(txtProfissao);
 
 		JPanel panel_3 = new JPanel();
 		panel_3.setBorder(
 				new TitledBorder(null, "Observa\u00E7\u00E3o", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_3.setBounds(10, 432, 296, 127);
+		panel_3.setBounds(360, 447, 296, 162);
 		panel.add(panel_3);
 		panel_3.setLayout(null);
-
+		
 		JTextPane txtPaneObservacao = new JTextPane();
-		txtPaneObservacao.setBounds(10, 21, 276, 95);
+		txtPaneObservacao.setBounds(10, 21, 276, 130);
 		panel_3.add(txtPaneObservacao);
 
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnCancelar.setBounds(413, 564, 100, 30);
+		btnCancelar.setBounds(706, 579, 100, 30);
 		panel.add(btnCancelar);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setLayout(null);
+		panel_1.setBorder(new TitledBorder(null, "Dados Profissionais", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_1.setBounds(10, 447, 340, 162);
+		panel.add(panel_1);
+		
+		JLabel lblEscolaridade = new JLabel("Escolaridade:");
+		lblEscolaridade.setBounds(30, 33, 75, 14);
+		panel_1.add(lblEscolaridade);
+		
+		JLabel label_1 = new JLabel("Sal\u00E1rio: R$");
+		label_1.setBounds(30, 96, 65, 14);
+		panel_1.add(label_1);
+		
+		txtSalario = new JTextField();
+		txtSalario.setColumns(10);
+		txtSalario.setBounds(99, 93, 120, 20);
+		panel_1.add(txtSalario);
+		
+		JComboBox comboBoxEscolaridade = new JComboBox();
+		comboBoxEscolaridade.setBounds(105, 29, 180, 22);
+		panel_1.add(comboBoxEscolaridade);
+		
+		JLabel label_2 = new JLabel("Data de Contrata\u00E7\u00E3o:");
+		label_2.setBounds(30, 124, 120, 14);
+		panel_1.add(label_2);
+		
+		JFormattedTextField formattedtxtDtContratacao = new JFormattedTextField();
+		formattedtxtDtContratacao.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				try {
+					formattedtxtDtContratacao.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(
+							new javax.swing.text.MaskFormatter("##/##/####")));
+				} catch (ParseException pe) {
+					pe.printStackTrace();
+				}
+			}
+		});
+		formattedtxtDtContratacao.setBounds(160, 121, 139, 20);
+		panel_1.add(formattedtxtDtContratacao);
+		
+		txtCargo = new JTextField();
+		txtCargo.setColumns(10);
+		txtCargo.setBounds(84, 62, 186, 20);
+		panel_1.add(txtCargo);
+		
+		JLabel lblCargo = new JLabel("Cargo:");
+		lblCargo.setBounds(30, 65, 52, 14);
+		panel_1.add(lblCargo);
 		formattedTxtDtNascimento.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
@@ -283,4 +327,5 @@ public class CadAluno extends JInternalFrame {
 		});
 
 	}
+
 }

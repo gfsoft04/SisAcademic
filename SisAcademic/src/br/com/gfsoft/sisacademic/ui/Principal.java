@@ -44,7 +44,7 @@ public class Principal extends JFrame {
 	public Principal() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 525, 411);
-		this.setExtendedState(MAXIMIZED_BOTH);
+		setExtendedState(MAXIMIZED_BOTH);
 		
 		contentPane = new JPanel();
 		contentPane.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
