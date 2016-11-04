@@ -66,19 +66,6 @@ public class CadFuncionario extends JInternalFrame {
 		getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
 
-		JButton btnCadastrar = new JButton("Cadastrar");
-		btnCadastrar.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnCadastrar.setBounds(847, 579, 100, 30);
-		btnCadastrar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				setVisible(false);
-
-			}
-		});
-		
-		panel.add(btnCadastrar);
-
 		JPanel pane_2 = new JPanel();
 		pane_2.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Endere\u00E7o",
 				TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
@@ -258,11 +245,6 @@ public class CadFuncionario extends JInternalFrame {
 		JTextPane txtPaneObservacao = new JTextPane();
 		txtPaneObservacao.setBounds(10, 21, 276, 130);
 		panel_3.add(txtPaneObservacao);
-
-		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnCancelar.setBounds(706, 579, 100, 30);
-		panel.add(btnCancelar);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setLayout(null);
@@ -314,6 +296,29 @@ public class CadFuncionario extends JInternalFrame {
 		JLabel lblCargo = new JLabel("Cargo:");
 		lblCargo.setBounds(30, 65, 52, 14);
 		panel_1.add(lblCargo);
+		
+		JPanel panel_4 = new JPanel();
+		panel_4.setBorder(null);
+		panel_4.setBounds(666, 559, 290, 50);
+		panel.add(panel_4);
+		panel_4.setLayout(null);
+		
+				JButton btnCancelar = new JButton("Cancelar");
+				btnCancelar.setBounds(10, 11, 100, 30);
+				panel_4.add(btnCancelar);
+				btnCancelar.setFont(new Font("Tahoma", Font.BOLD, 11));
+				
+						JButton btnCadastrar = new JButton("Cadastrar");
+						btnCadastrar.setBounds(180, 11, 100, 30);
+						panel_4.add(btnCadastrar);
+						btnCadastrar.setFont(new Font("Tahoma", Font.BOLD, 11));
+						btnCadastrar.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent e) {
+
+								setVisible(false);
+
+							}
+						});
 		formattedTxtDtNascimento.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
