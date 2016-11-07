@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 public class Aluno extends Pessoa{
 	
-	private LocalDate dtMatricula; //xxx
+	private LocalDate dtMatricula;
 	private String profissao;
 		
 

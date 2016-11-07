@@ -144,7 +144,7 @@ public class CadAluno extends JInternalFrame {
 		pane_1.setLayout(null);
 
 		JLabel lblNewLabel = new JLabel("Nome:");
-		lblNewLabel.setBounds(40, 43, 40, 14);
+		lblNewLabel.setBounds(40, 43, 60, 14);
 		pane_1.add(lblNewLabel);
 
 		txtNome = new JTextField();
