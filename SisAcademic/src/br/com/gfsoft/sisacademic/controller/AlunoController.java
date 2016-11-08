@@ -8,28 +8,25 @@ import br.com.gfsoft.sisacademic.persistence.AlunoDao;
 
 public class AlunoController {
 	
+	private AlunoDao alunoDao;
+	
 	public void adicionarAluno(Aluno aluno){
-		AlunoDao alunoDao = new AlunoDao();
 		alunoDao.insert(aluno);
 	}
 	
 	public void removerAluno(Aluno aluno){
-		AlunoDao alunoDao = new AlunoDao();
 		alunoDao.delete(aluno);
 	}
 	
 	public void atualizarAluno(Aluno aluno){
-		AlunoDao alunoDao = new AlunoDao();
 		alunoDao.update(aluno);
 	}
 	
 	public Aluno listarAluno(Aluno aluno){
-		AlunoDao alunoDao = new AlunoDao();
 		return alunoDao.selectAluno(aluno.getMatricula());
 	}
 	
 	public Set<Aluno> listarAlunos(long id){
-		AlunoDao alunoDao = new AlunoDao();
 		return alunoDao.selectAlunos();
 	}
 
