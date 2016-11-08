@@ -4,7 +4,7 @@ import java.util.Set;
 
 import br.com.gfsoft.sisacademic.model.Aluno;
 
-public interface IAlunoDao {
+public interface IPersistenceAluno {
 	
 	public boolean insert(Aluno aluno);
 	public boolean delete(Aluno aluno);

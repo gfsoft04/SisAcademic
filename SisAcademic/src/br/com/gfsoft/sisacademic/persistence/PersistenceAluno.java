@@ -7,7 +7,7 @@ import java.util.Set;
 
 import br.com.gfsoft.sisacademic.model.Aluno;
 
-public class AlunoDao implements IAlunoDao {
+public class PersistenceAluno implements IPersistenceAluno {
 
 	private static Statement stmt;
 	private static ResultSet rs;

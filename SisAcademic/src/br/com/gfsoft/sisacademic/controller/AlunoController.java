@@ -3,12 +3,12 @@ package br.com.gfsoft.sisacademic.controller;
 import java.util.Set;
 
 import br.com.gfsoft.sisacademic.model.Aluno;
-import br.com.gfsoft.sisacademic.persistence.AlunoDao;
+import br.com.gfsoft.sisacademic.persistence.PersistenceAluno;
 
 
 public class AlunoController {
 	
-	private AlunoDao alunoDao;
+	private PersistenceAluno alunoDao;
 	
 	public void adicionarAluno(Aluno aluno){
 		alunoDao.insert(aluno);

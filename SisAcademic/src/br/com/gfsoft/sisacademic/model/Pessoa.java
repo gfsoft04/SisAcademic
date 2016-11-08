@@ -3,16 +3,21 @@ package br.com.gfsoft.sisacademic.model;
 import java.time.LocalDate;
 
 public class Pessoa {
-	//CEARA BUMBUM NERVOSO
+	
+	/**
+	 * Atributos da classe Pessoa
+	 */
 	private String matricula;
 	private String nome;
 	private String rg;
 	private String cpf;
-	private String situacao; 		//matriculado (M) ou não matriculado (N) ou ativo (A) ou Inativo (I)
+	private String estadoCivil; 	//S(solteiro), C(casado), V (viuvo), UE(Uniao Estavel), D(divorciado)
+	private String sexo; 			//M(masculino), F(feminino)
+	private String situacao; 		//Matriculado (M) ou Nao matriculado (N) ou Ativo (A) ou Inativo (I)
 	private LocalDate dtNascimento;
-	private String estadoCivil; 	// S (solteiro), C (casado), V (viúvo), UE (União Estável), D (divorciado) 
-	private String sexo; 			//M (masculino),  F (feminino)
 	private String email;
+	private String observacao;
+	
 	private String telefone;
 	private String rua;
 	private int numero;
@@ -20,7 +25,7 @@ public class Pessoa {
 	private String cidade;
 	private String estado; 			//sigla do estado 'PB'
 	private String cep;
-	private String observacao;
+	
 	
 	
 	/**
@@ -130,7 +135,7 @@ public class Pessoa {
 	}
 	
 	/**
-	 * ToString
+	 * metodo ToString
 	 */
 	@Override
 	public String toString() {
