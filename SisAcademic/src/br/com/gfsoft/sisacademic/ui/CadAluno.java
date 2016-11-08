@@ -189,11 +189,11 @@ public class CadAluno extends JInternalFrame {
         pane_1.add(formattedTxtDtNascimento);
 
         JLabel lblEmail = new JLabel("Email:");
-        lblEmail.setBounds(40, 133, 35, 14);
+        lblEmail.setBounds(12, 129, 35, 14);
         pane_1.add(lblEmail);
 
         txtEmail = new JTextField();
-        txtEmail.setBounds(120, 131, 250, 20);
+        txtEmail.setBounds(92, 127, 250, 20);
         pane_1.add(txtEmail);
         txtEmail.setColumns(10);
 
@@ -202,26 +202,26 @@ public class CadAluno extends JInternalFrame {
         pane_1.add(lblTelefone);
 
         JLabel lblEstadoCivil = new JLabel("Estado Civil:");
-        lblEstadoCivil.setBounds(497, 87, 86, 14);
+        lblEstadoCivil.setBounds(420, 87, 86, 14);
         pane_1.add(lblEstadoCivil);
 
         JComboBox comboBoxEstadoCivil = new JComboBox();
-        comboBoxEstadoCivil.setBounds(601, 83, 151, 22);
+        comboBoxEstadoCivil.setBounds(524, 83, 151, 22);
         pane_1.add(comboBoxEstadoCivil);
         comboBoxEstadoCivil.setModel(new DefaultComboBoxModel(
                 new String[]{"Solteiro", "Casado", "Vi\u00FAvo", "Divorciado", "Uni\u00E3o Est\u00E1vel"}));
 
         txtRg = new JTextField();
-        txtRg.setBounds(613, 41, 139, 20);
+        txtRg.setBounds(497, 39, 139, 20);
         pane_1.add(txtRg);
         txtRg.setColumns(10);
 
         JLabel lblRg = new JLabel("RG:");
-        lblRg.setBounds(404, 67, 24, 14);
+        lblRg.setBounds(463, 42, 24, 14);
         pane_1.add(lblRg);
 
         JFormattedTextField formattedTxtCpf = new JFormattedTextField();
-        formattedTxtCpf.setBounds(823, 41, 139, 20);
+        formattedTxtCpf.setBounds(741, 36, 139, 20);
         pane_1.add(formattedTxtCpf);
         formattedTxtCpf.addFocusListener(new FocusAdapter() {
             @Override
@@ -236,15 +236,15 @@ public class CadAluno extends JInternalFrame {
         });
 
         JLabel lblCpf = new JLabel("CPF:");
-        lblCpf.setBounds(770, 43, 35, 14);
+        lblCpf.setBounds(688, 38, 35, 14);
         pane_1.add(lblCpf);
 
         JLabel lblSexo = new JLabel("Sexo:");
-        lblSexo.setBounds(761, 87, 44, 14);
+        lblSexo.setBounds(717, 86, 44, 14);
         pane_1.add(lblSexo);
 
         JComboBox comboBoxSexo = new JComboBox();
-        comboBoxSexo.setBounds(811, 84, 151, 22);
+        comboBoxSexo.setBounds(767, 83, 151, 22);
         pane_1.add(comboBoxSexo);
         comboBoxSexo.setModel(new DefaultComboBoxModel(new String[]{"Masculino", "Feminino"}));
 

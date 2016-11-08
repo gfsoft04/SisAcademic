@@ -20,6 +20,10 @@ import javax.swing.border.SoftBevelBorder;
 public class Principal extends JFrame {
 
 	private static CadAluno aluno;
+	private static CadFuncionario funcionario;
+	private static CadProfessor professor;
+	private static CadDisciplina disciplina;
+	
 
 	private JPanel contentPane;
 
@@ -44,7 +48,7 @@ public class Principal extends JFrame {
 	 */
 	public Principal() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 525, 411);
+		setBounds(100, 100, 500, 400);
 		setExtendedState(MAXIMIZED_BOTH);
 
 		contentPane = new JPanel();
@@ -86,16 +90,73 @@ public class Principal extends JFrame {
 		mnArquivo.add(mntmCadAluno);
 
 		JMenuItem mntmCadProfessor = new JMenuItem("Cadastro de Professor");
+		mntmCadProfessor.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				if (professor == null) {
+					professor = new CadProfessor();
+					desktopPane.add(professor);
+					try {
+						professor.setMaximum(true);
+					} catch (PropertyVetoException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					professor.setVisible(true);
+				} else {
+					professor.setVisible(true);
+					desktopPane.moveToFront(professor);
+				}
+				
+			}
+		});
 		mnArquivo.add(mntmCadProfessor);
 
 		JMenuItem mntmCadFuncinario = new JMenuItem("Cadastro de Funcion\u00E1rio");
+		mntmCadFuncinario.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			
+				if (funcionario == null) {
+					funcionario = new CadFuncionario();
+					desktopPane.add(funcionario);
+					try {
+						funcionario.setMaximum(true);
+					} catch (PropertyVetoException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					funcionario.setVisible(true);
+				} else {
+					funcionario.setVisible(true);
+					desktopPane.moveToFront(funcionario);
+				}
+			
+			}
+		});
 		mnArquivo.add(mntmCadFuncinario);
 
 		JMenuItem mntmCadDisciplina = new JMenuItem("Cadastro de Disciplina");
+		mntmCadDisciplina.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				if (disciplina == null) {
+					disciplina = new CadDisciplina();
+					desktopPane.add(disciplina);
+					try {
+						disciplina.setMaximum(true);
+					} catch (PropertyVetoException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					disciplina.setVisible(true);
+				} else {
+					disciplina.setVisible(true);
+					desktopPane.moveToFront(disciplina);
+				}
+				
+			}
+		});
 		mnArquivo.add(mntmCadDisciplina);
-
-		JMenuItem mntmCadTurma = new JMenuItem("Cadastro de Turma");
-		mnArquivo.add(mntmCadTurma);
 
 		JMenuItem mntmSair = new JMenuItem("Sair");
 		mnArquivo.add(mntmSair);

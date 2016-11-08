@@ -10,8 +10,18 @@ import java.awt.BorderLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.border.TitledBorder;
+import javax.swing.JTextField;
+import javax.swing.JLabel;
+import javax.swing.JTextPane;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class CadDisciplina extends JInternalFrame {
+	private JTextField txtNome;
+	private JTextField txtDescricao;
+	private JTextField textField_2;
 
 	/**
 	 * Launch the application.
@@ -46,8 +56,66 @@ public class CadDisciplina extends JInternalFrame {
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new TitledBorder(null, "Dados da Disciplina", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_1.setBounds(12, 40, 424, 222);
+		panel_1.setBounds(10, 11, 622, 343);
 		panel.add(panel_1);
+		panel_1.setLayout(null);
+		
+		txtNome = new JTextField();
+		txtNome.setBounds(76, 24, 219, 20);
+		panel_1.add(txtNome);
+		txtNome.setColumns(10);
+		
+		JLabel label_3 = new JLabel("Nome:");
+		label_3.setBounds(24, 27, 53, 14);
+		panel_1.add(label_3);
+		
+		txtDescricao = new JTextField();
+		txtDescricao.setColumns(10);
+		txtDescricao.setBounds(95, 80, 200, 20);
+		panel_1.add(txtDescricao);
+		
+		JLabel label_2 = new JLabel("Descri\u00E7\u00E3o:");
+		label_2.setBounds(24, 83, 82, 14);
+		panel_1.add(label_2);
+		
+		textField_2 = new JTextField();
+		textField_2.setColumns(10);
+		textField_2.setBounds(417, 80, 86, 20);
+		panel_1.add(textField_2);
+		
+		JLabel lblSemestre = new JLabel("Semestre:");
+		lblSemestre.setBounds(346, 83, 86, 14);
+		panel_1.add(lblSemestre);
+		
+		JTextPane textPane = new JTextPane();
+		textPane.setBounds(106, 144, 299, 141);
+		panel_1.add(textPane);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Dispon\u00EDvel", "Indispon\u00EDvel"}));
+		comboBox.setBounds(421, 23, 155, 22);
+		panel_1.add(comboBox);
+		
+		JLabel lblSituao = new JLabel("Situa\u00E7\u00E3o:");
+		lblSituao.setBounds(346, 27, 46, 14);
+		panel_1.add(lblSituao);
+		
+		JLabel lblNewLabel = new JLabel("Observa\u00E7\u00E3o:");
+		lblNewLabel.setBounds(24, 144, 124, 14);
+		panel_1.add(lblNewLabel);
+		
+		JPanel panel_2 = new JPanel();
+		panel_2.setBounds(350, 365, 282, 54);
+		panel.add(panel_2);
+		panel_2.setLayout(null);
+		
+		JButton btnNewButton_1 = new JButton("Cancelar");
+		btnNewButton_1.setBounds(10, 11, 100, 30);
+		panel_2.add(btnNewButton_1);
+		
+		JButton btnNewButton = new JButton("Cadastrar");
+		btnNewButton.setBounds(172, 11, 100, 30);
+		panel_2.add(btnNewButton);
 
 	}
 }
