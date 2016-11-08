@@ -137,113 +137,6 @@ public class CadAluno extends JInternalFrame {
 		txtEstado.setBounds(420, 133, 250, 20);
 		pane_2.add(txtEstado);
 
-		JPanel pane_1 = new JPanel();
-		pane_1.setBorder(new TitledBorder(null, "Dados Pessoais", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		pane_1.setBounds(10, 30, 974, 184);
-		panel.add(pane_1);
-		pane_1.setLayout(null);
-
-		JLabel lblNewLabel = new JLabel("Nome:");
-		lblNewLabel.setBounds(40, 43, 60, 14);
-		pane_1.add(lblNewLabel);
-
-		txtNome = new JTextField();
-		txtNome.setBounds(90, 40, 329, 20);
-		pane_1.add(txtNome);
-		txtNome.setColumns(10);
-
-		JLabel lblDataDeNascimento = new JLabel("Data de Nascimento:");
-		lblDataDeNascimento.setBounds(41, 88, 120, 14);
-		pane_1.add(lblDataDeNascimento);
-
-		JFormattedTextField formattedTxtDtNascimento = new JFormattedTextField();
-		formattedTxtDtNascimento.setBounds(171, 85, 139, 20);
-		pane_1.add(formattedTxtDtNascimento);
-
-		JLabel lblEmail = new JLabel("Email:");
-		lblEmail.setBounds(40, 133, 35, 14);
-		pane_1.add(lblEmail);
-
-		txtEmail = new JTextField();
-		txtEmail.setBounds(81, 130, 250, 20);
-		pane_1.add(txtEmail);
-		txtEmail.setColumns(10);
-
-		JLabel lblTelefone = new JLabel("Telefone:");
-		lblTelefone.setBounds(368, 133, 60, 14);
-		pane_1.add(lblTelefone);
-
-		JLabel lblEstadoCivil = new JLabel("Estado Civil:");
-		lblEstadoCivil.setBounds(333, 89, 70, 14);
-		pane_1.add(lblEstadoCivil);
-
-		JComboBox comboBoxEstadoCivil = new JComboBox();
-		comboBoxEstadoCivil.setBounds(413, 84, 151, 22);
-		pane_1.add(comboBoxEstadoCivil);
-		comboBoxEstadoCivil.setModel(new DefaultComboBoxModel(
-				new String[] { "Solteiro", "Casado", "Vi\u00FAvo", "Divorciado", "Uni\u00E3o Est\u00E1vel" }));
-
-		txtRg = new JTextField();
-		txtRg.setBounds(482, 40, 139, 20);
-		pane_1.add(txtRg);
-		txtRg.setColumns(10);
-
-		JLabel lblRg = new JLabel("RG:");
-		lblRg.setBounds(454, 43, 20, 14);
-		pane_1.add(lblRg);
-
-		JFormattedTextField formattedTxtCpf = new JFormattedTextField();
-		formattedTxtCpf.setBounds(688, 40, 139, 20);
-		pane_1.add(formattedTxtCpf);
-		formattedTxtCpf.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusGained(FocusEvent e) {
-				try {
-					formattedTxtCpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(
-							new javax.swing.text.MaskFormatter("###.###.###-##")));
-				} catch (ParseException pe) {
-					pe.printStackTrace();
-				}
-			}
-		});
-
-		JLabel lblCpf = new JLabel("CPF:");
-		lblCpf.setBounds(655, 43, 25, 14);
-		pane_1.add(lblCpf);
-
-		JLabel lblSexo = new JLabel("Sexo:");
-		lblSexo.setBounds(595, 88, 35, 14);
-		pane_1.add(lblSexo);
-
-		JComboBox comboBoxSexo = new JComboBox();
-		comboBoxSexo.setBounds(636, 83, 151, 22);
-		pane_1.add(comboBoxSexo);
-		comboBoxSexo.setModel(new DefaultComboBoxModel(new String[] { "Masculino", "Feminino" }));
-
-		JFormattedTextField formattedTxtTelefone = new JFormattedTextField();
-		formattedTxtTelefone.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusGained(FocusEvent e) {
-				try {
-					formattedTxtTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(
-							new javax.swing.text.MaskFormatter("(##) 9 ####-####")));
-				} catch (ParseException pe) {
-					pe.printStackTrace();
-				}
-			}
-		});
-		formattedTxtTelefone.setBounds(431, 130, 151, 20);
-		pane_1.add(formattedTxtTelefone);
-		
-		JLabel lblProfisso = new JLabel("Profiss\u00E3o:");
-		lblProfisso.setBounds(620, 133, 60, 14);
-		pane_1.add(lblProfisso);
-		
-		txtProfissao = new JTextField();
-		txtProfissao.setColumns(10);
-		txtProfissao.setBounds(688, 130, 180, 20);
-		pane_1.add(txtProfissao);
-
 		JPanel panel_3 = new JPanel();
 		panel_3.setBorder(
 				new TitledBorder(null, "Observa\u00E7\u00E3o", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -252,12 +145,12 @@ public class CadAluno extends JInternalFrame {
 		panel_3.setLayout(null);
 
 		JTextPane txtPaneObservacao = new JTextPane();
-		txtPaneObservacao.setBounds(10, 21, 276, 95);
+		txtPaneObservacao.setBounds(12, 20, 276, 95);
 		panel_3.add(txtPaneObservacao);
 		
 		JPanel panel_4 = new JPanel();
 		panel_4.setBorder(null);
-		panel_4.setBounds(316, 509, 290, 50);
+		panel_4.setBounds(475, 487, 290, 50);
 		panel.add(panel_4);
 						panel_4.setLayout(null);
 				
@@ -270,6 +163,124 @@ public class CadAluno extends JInternalFrame {
 				btnCadastrar.setBounds(180, 11, 100, 30);
 				panel_4.add(btnCadastrar);
 				btnCadastrar.setFont(new Font("Tahoma", Font.BOLD, 11));
+				
+						JPanel pane_1 = new JPanel();
+						pane_1.setBounds(10, 12, 962, 196);
+						panel.add(pane_1);
+						pane_1.setBorder(new TitledBorder(null, "Dados Pessoais", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+						pane_1.setLayout(null);
+						
+								JLabel lblNewLabel = new JLabel("Nome:");
+								lblNewLabel.setBounds(12, 42, 60, 14);
+								pane_1.add(lblNewLabel);
+								
+										txtNome = new JTextField();
+										txtNome.setBounds(65, 40, 329, 20);
+										pane_1.add(txtNome);
+										txtNome.setColumns(10);
+										
+												JLabel lblDataDeNascimento = new JLabel("Data de Nascimento:");
+												lblDataDeNascimento.setBounds(12, 87, 151, 14);
+												pane_1.add(lblDataDeNascimento);
+												
+														JFormattedTextField formattedTxtDtNascimento = new JFormattedTextField();
+														formattedTxtDtNascimento.setBounds(254, 85, 139, 20);
+														pane_1.add(formattedTxtDtNascimento);
+														
+																JLabel lblEmail = new JLabel("Email:");
+																lblEmail.setBounds(40, 133, 35, 14);
+																pane_1.add(lblEmail);
+																
+																		txtEmail = new JTextField();
+																		txtEmail.setBounds(120, 131, 250, 20);
+																		pane_1.add(txtEmail);
+																		txtEmail.setColumns(10);
+																		
+																				JLabel lblTelefone = new JLabel("Telefone:");
+																				lblTelefone.setBounds(368, 133, 60, 14);
+																				pane_1.add(lblTelefone);
+																				
+																						JLabel lblEstadoCivil = new JLabel("Estado Civil:");
+																						lblEstadoCivil.setBounds(497, 87, 86, 14);
+																						pane_1.add(lblEstadoCivil);
+																						
+																								JComboBox comboBoxEstadoCivil = new JComboBox();
+																								comboBoxEstadoCivil.setBounds(601, 83, 151, 22);
+																								pane_1.add(comboBoxEstadoCivil);
+																								comboBoxEstadoCivil.setModel(new DefaultComboBoxModel(
+																										new String[] { "Solteiro", "Casado", "Vi\u00FAvo", "Divorciado", "Uni\u00E3o Est\u00E1vel" }));
+																								
+																										txtRg = new JTextField();
+																										txtRg.setBounds(613, 41, 139, 20);
+																										pane_1.add(txtRg);
+																										txtRg.setColumns(10);
+																										
+																												JLabel lblRg = new JLabel("RG:");
+																												lblRg.setBounds(404, 67, 24, 14);
+																												pane_1.add(lblRg);
+																												
+																														JFormattedTextField formattedTxtCpf = new JFormattedTextField();
+																														formattedTxtCpf.setBounds(823, 41, 139, 20);
+																														pane_1.add(formattedTxtCpf);
+																														formattedTxtCpf.addFocusListener(new FocusAdapter() {
+																															@Override
+																															public void focusGained(FocusEvent e) {
+																																try {
+																																	formattedTxtCpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(
+																																			new javax.swing.text.MaskFormatter("###.###.###-##")));
+																																} catch (ParseException pe) {
+																																	pe.printStackTrace();
+																																}
+																															}
+																														});
+																														
+																																JLabel lblCpf = new JLabel("CPF:");
+																																lblCpf.setBounds(770, 43, 35, 14);
+																																pane_1.add(lblCpf);
+																																
+																																		JLabel lblSexo = new JLabel("Sexo:");
+																																		lblSexo.setBounds(761, 87, 44, 14);
+																																		pane_1.add(lblSexo);
+																																		
+																																				JComboBox comboBoxSexo = new JComboBox();
+																																				comboBoxSexo.setBounds(811, 84, 151, 22);
+																																				pane_1.add(comboBoxSexo);
+																																				comboBoxSexo.setModel(new DefaultComboBoxModel(new String[] { "Masculino", "Feminino" }));
+																																				
+																																						JFormattedTextField formattedTxtTelefone = new JFormattedTextField();
+																																						formattedTxtTelefone.addFocusListener(new FocusAdapter() {
+																																							@Override
+																																							public void focusGained(FocusEvent e) {
+																																								try {
+																																									formattedTxtTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(
+																																											new javax.swing.text.MaskFormatter("(##) 9 ####-####")));
+																																								} catch (ParseException pe) {
+																																									pe.printStackTrace();
+																																								}
+																																							}
+																																						});
+																																						formattedTxtTelefone.setBounds(431, 130, 151, 20);
+																																						pane_1.add(formattedTxtTelefone);
+																																						
+																																						JLabel lblProfisso = new JLabel("Profiss\u00E3o:");
+																																						lblProfisso.setBounds(620, 133, 60, 14);
+																																						pane_1.add(lblProfisso);
+																																						
+																																						txtProfissao = new JTextField();
+																																						txtProfissao.setColumns(10);
+																																						txtProfissao.setBounds(688, 130, 180, 20);
+																																						pane_1.add(txtProfissao);
+																																						formattedTxtDtNascimento.addFocusListener(new FocusAdapter() {
+																																							@Override
+																																							public void focusGained(FocusEvent e) {
+																																								try {
+																																									formattedTxtDtNascimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(
+																																											new javax.swing.text.MaskFormatter("##/##/####")));
+																																								} catch (ParseException pe) {
+																																									pe.printStackTrace();
+																																								}
+																																							}
+																																						});
 				btnCadastrar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 
@@ -277,17 +288,6 @@ public class CadAluno extends JInternalFrame {
 
 					}
 				});
-		formattedTxtDtNascimento.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusGained(FocusEvent e) {
-				try {
-					formattedTxtDtNascimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(
-							new javax.swing.text.MaskFormatter("##/##/####")));
-				} catch (ParseException pe) {
-					pe.printStackTrace();
-				}
-			}
-		});
 
 	}
 }
