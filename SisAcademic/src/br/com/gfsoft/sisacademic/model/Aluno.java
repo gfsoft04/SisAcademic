@@ -10,6 +10,10 @@ public class Aluno extends Pessoa{
 	private LocalDate dtMatricula;
 	private String profissao;
 	
+	public Aluno getInstance(){
+		return new Aluno();
+	}
+	
 	/**
 	 * Metodos Getter's e Setter's
 	 */

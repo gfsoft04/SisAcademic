@@ -12,6 +12,10 @@ public class Funcionario extends Pessoa{
 	private Double salario;
 	private String escolaridade; // 1º Grau Incompleto, Superior Completo 
 	
+	public Funcionario getInstance(){
+		return new Funcionario();
+	}
+	
 	/**
 	 * Metodos Getter's e Setter's
 	 */

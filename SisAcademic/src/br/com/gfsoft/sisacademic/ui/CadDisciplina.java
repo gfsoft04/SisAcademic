@@ -16,12 +16,16 @@ import javax.swing.JTextPane;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.text.ParseException;
 import java.awt.event.ActionEvent;
+import javax.swing.JFormattedTextField;
 
 public class CadDisciplina extends JInternalFrame {
 	private JTextField txtNome;
 	private JTextField txtDescricao;
-	private JTextField textField_2;
+	private JTextField txtSemestre;
 
 	/**
 	 * Launch the application.
@@ -78,44 +82,63 @@ public class CadDisciplina extends JInternalFrame {
 		label_2.setBounds(24, 83, 82, 14);
 		panel_1.add(label_2);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(417, 80, 86, 20);
-		panel_1.add(textField_2);
+		txtSemestre = new JTextField();
+		txtSemestre.setColumns(10);
+		txtSemestre.setBounds(417, 80, 86, 20);
+		panel_1.add(txtSemestre);
 		
 		JLabel lblSemestre = new JLabel("Semestre:");
 		lblSemestre.setBounds(346, 83, 86, 14);
 		panel_1.add(lblSemestre);
 		
-		JTextPane textPane = new JTextPane();
-		textPane.setBounds(106, 144, 299, 141);
-		panel_1.add(textPane);
+		JTextPane textPaneObservacao = new JTextPane();
+		textPaneObservacao.setBounds(109, 191, 299, 141);
+		panel_1.add(textPaneObservacao);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Dispon\u00EDvel", "Indispon\u00EDvel"}));
-		comboBox.setBounds(421, 23, 155, 22);
-		panel_1.add(comboBox);
+		JComboBox comboBoxSituacao = new JComboBox();
+		comboBoxSituacao.setModel(new DefaultComboBoxModel(new String[] {"Dispon\u00EDvel", "Indispon\u00EDvel"}));
+		comboBoxSituacao.setBounds(421, 23, 155, 22);
+		panel_1.add(comboBoxSituacao);
 		
 		JLabel lblSituao = new JLabel("Situa\u00E7\u00E3o:");
 		lblSituao.setBounds(346, 27, 46, 14);
 		panel_1.add(lblSituao);
 		
 		JLabel lblNewLabel = new JLabel("Observa\u00E7\u00E3o:");
-		lblNewLabel.setBounds(24, 144, 124, 14);
+		lblNewLabel.setBounds(26, 186, 62, 14);
 		panel_1.add(lblNewLabel);
+		
+		JLabel lblDataDeCriao = new JLabel("Data de cria\u00E7\u00E3o:");
+		lblDataDeCriao.setBounds(24, 132, 82, 14);
+		panel_1.add(lblDataDeCriao);
+		
+		JFormattedTextField formattedTxtDtCriacao = new JFormattedTextField();
+		formattedTxtDtCriacao.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                try {
+                	formattedTxtDtCriacao.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(
+                            new javax.swing.text.MaskFormatter("##/##/####")));
+                } catch (ParseException pe) {
+                    pe.printStackTrace();
+                }
+            }
+        });
+		formattedTxtDtCriacao.setBounds(109, 129, 98, 20);
+		panel_1.add(formattedTxtDtCriacao);
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBounds(350, 365, 282, 54);
 		panel.add(panel_2);
 		panel_2.setLayout(null);
 		
-		JButton btnNewButton_1 = new JButton("Cancelar");
-		btnNewButton_1.setBounds(10, 11, 100, 30);
-		panel_2.add(btnNewButton_1);
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.setBounds(10, 11, 100, 30);
+		panel_2.add(btnCancelar);
 		
-		JButton btnNewButton = new JButton("Cadastrar");
-		btnNewButton.setBounds(172, 11, 100, 30);
-		panel_2.add(btnNewButton);
+		JButton btnCadastrar = new JButton("Cadastrar");
+		btnCadastrar.setBounds(172, 11, 100, 30);
+		panel_2.add(btnCadastrar);
 
 	}
 }
