@@ -14,7 +14,6 @@ public class BuscaCep {
 
 	public String getLogradouro(String CEP) throws IOException {
 
-		// ***************************************************
 		try {
 
 			Document doc = Jsoup.connect("http://www.qualocep.com/busca-cep/" + CEP).timeout(120000).get();
@@ -67,14 +66,14 @@ public class BuscaCep {
 		return "";
 	}
 
-	public String getUF(String CEP) throws IOException {
+	public String getEstado(String CEP) throws IOException {
 
 		try {
 
 			Document doc = Jsoup.connect("http://www.qualocep.com/busca-cep/" + CEP).timeout(120000).get();
 			Elements urlPesquisa = doc.select("span[itemprop=addressRegion]");
-			for (Element urlUF : urlPesquisa) {
-				return urlUF.text();
+			for (Element urlEstado : urlPesquisa) {
+				return urlEstado.text();
 			}
 
 		} catch (SocketTimeoutException e) {
