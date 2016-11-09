@@ -2,7 +2,7 @@ package br.com.gfsoft.sisacademic.model;
 
 import java.time.LocalDate;
 
-public class Pessoa {
+public class Pessoa{
 	
 	/**
 	 * Atributos da classe Pessoa
@@ -26,7 +26,6 @@ public class Pessoa {
 	private String cidade;
 	private String estado; 			//sigla do estado 'PB'
 	private String observacao;
-	
 	
 	/**
 	 * Metodos Getter's e Setter's
