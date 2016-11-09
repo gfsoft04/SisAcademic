@@ -159,6 +159,11 @@ public class Principal extends JFrame {
 		mnArquivo.add(mntmCadDisciplina);
 
 		JMenuItem mntmSair = new JMenuItem("Sair");
+		mntmSair.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
 		mnArquivo.add(mntmSair);
 
 		JMenu mnConsulta = new JMenu("Consulta");
@@ -175,9 +180,6 @@ public class Principal extends JFrame {
 
 		JMenuItem mntmConsultaDisciplina = new JMenuItem("Disciplina");
 		mnConsulta.add(mntmConsultaDisciplina);
-
-		JMenuItem mntmConsultaTurma = new JMenuItem("Turma");
-		mnConsulta.add(mntmConsultaTurma);
 
 		JMenu mnAjuda = new JMenu("Ajuda");
 		menuBar.add(mnAjuda);
