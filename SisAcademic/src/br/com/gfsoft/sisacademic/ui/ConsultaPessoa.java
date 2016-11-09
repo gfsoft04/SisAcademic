@@ -1,16 +1,25 @@
 package br.com.gfsoft.sisacademic.ui;
 
+import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
-import javax.swing.JPanel;
-import java.awt.BorderLayout;
-import javax.swing.JTextField;
 import javax.swing.JLabel;
-import javax.swing.JButton;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
+
+import br.com.gfsoft.sisacademic.model.TabelaConsulta;
+import br.com.gfsoft.sisacademic.persistence.Conexao;
 
 public class ConsultaPessoa extends JInternalFrame {
 	private JTextField textField;
@@ -42,6 +51,8 @@ public class ConsultaPessoa extends JInternalFrame {
 		setBounds(100, 100, 1000, 670);
 		setLocation(0, 0);
 		
+		preencherTabela("SELECT * FROM tb_Pessoa");
+		
 		JPanel panel = new JPanel();
 		getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
@@ -67,4 +78,51 @@ public class ConsultaPessoa extends JInternalFrame {
 		scrollPane.setViewportView(table);
 
 	}
+	
+	
+	public void preencherTabela(String sql){
+        ArrayList dados = new ArrayList();
+        String[] colunas = new String[]{"Matricula","Nome","cpf","rg","email","Data Nascimento"};
+        
+        Conexao con = new Conexao();
+        try{
+            PreparedStatement stmt = con.getConnection().prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+            //rs.first();
+            while(rs.next()){
+                dados.add(new Object[]{rs.getString("matricula"), rs.getString("nome"), rs.getString("cpf"), rs.getString("rg"), rs.getString("email"), rs.getDate("dtNascimento")});
+            }
+            stmt.close();
+            con.getConnection().close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "ERRO AO PREENCHER O ARRAYLIST!: " + e);
+        }
+        
+        TabelaConsulta modelo = new TabelaConsulta(dados, colunas);
+        table.setModel(modelo);
+        
+        table.getColumnModel().getColumn(0).setPreferredWidth(80);
+        table.getColumnModel().getColumn(0).setResizable(true);
+        table.getColumnModel().getColumn(1).setPreferredWidth(80);
+        table.getColumnModel().getColumn(1).setResizable(true);
+        table.getColumnModel().getColumn(2).setPreferredWidth(80);
+        table.getColumnModel().getColumn(2).setResizable(true);
+        table.getColumnModel().getColumn(3).setPreferredWidth(80);
+        table.getColumnModel().getColumn(3).setResizable(true);
+        table.getColumnModel().getColumn(4).setPreferredWidth(80);
+        table.getColumnModel().getColumn(4).setResizable(true);
+        table.getColumnModel().getColumn(5).setPreferredWidth(80);
+        table.getColumnModel().getColumn(5).setResizable(true);
+//        table.getColumnModel().getColumn(6).setPreferredWidth(80);
+//        table.getColumnModel().getColumn(6).setResizable(true);
+//        table.getColumnModel().getColumn(7).setPreferredWidth(80);
+//        table.getColumnModel().getColumn(7).setResizable(true);
+        
+        table.getTableHeader().setReorderingAllowed(true);
+        //jTableConsulta.getAutoResizeMode(jTableConsulta.AUTO_RESIZE_OFF);
+        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        table.setAutoCreateRowSorter(true);
+        
+    } //Fim do Metodo preencherTabela
+	
 }

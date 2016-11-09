@@ -23,6 +23,7 @@ public class Principal extends JFrame {
 	private static CadFuncionario funcionario;
 	private static CadProfessor professor;
 	private static CadDisciplina disciplina;
+	private static ConsultaPessoa consultaPessoa;
 	
 
 	private JPanel contentPane;
@@ -169,14 +170,28 @@ public class Principal extends JFrame {
 		JMenu mnConsulta = new JMenu("Consulta");
 		menuBar.add(mnConsulta);
 
-		JMenuItem mntmConsultaAluno = new JMenuItem("Aluno");
-		mnConsulta.add(mntmConsultaAluno);
-
-		JMenuItem mntmConsultaProfessor = new JMenuItem("Professor");
-		mnConsulta.add(mntmConsultaProfessor);
-
-		JMenuItem mntmConsultaFuncionario = new JMenuItem("Funcion\u00E1rio");
-		mnConsulta.add(mntmConsultaFuncionario);
+		JMenuItem mntmConsultaPessoa = new JMenuItem("Pessoa");
+		mntmConsultaPessoa.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				if (consultaPessoa == null) {
+					consultaPessoa = new ConsultaPessoa();
+					desktopPane.add(consultaPessoa);
+					try {
+						consultaPessoa.setMaximum(true);
+					} catch (PropertyVetoException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					consultaPessoa.setVisible(true);
+				} else {
+					consultaPessoa.setVisible(true);
+					desktopPane.moveToFront(consultaPessoa);
+				}
+				
+			}
+		});
+		mnConsulta.add(mntmConsultaPessoa);
 
 		JMenuItem mntmConsultaDisciplina = new JMenuItem("Disciplina");
 		mnConsulta.add(mntmConsultaDisciplina);
