@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.io.IOException;
 import java.text.ParseException;
 
 import javax.swing.DefaultComboBoxModel;
@@ -22,7 +23,8 @@ import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
-import javax.swing.border.LineBorder;
+
+import br.com.gfsoft.sisacademic.util.BuscaCep;
 
 public class CadAluno extends JInternalFrame {
 
@@ -89,6 +91,19 @@ public class CadAluno extends JInternalFrame {
                     pe.printStackTrace();
                 }
             }
+        	@Override
+        	public void focusLost(FocusEvent e) {
+        		BuscaCep buscaCep = new BuscaCep();
+        		try {
+					txtRua.setText(buscaCep.getLogradouro(formattedTxtCep.getText()));
+					txtBairro.setText(buscaCep.getBairro(formattedTxtCep.getText()));
+					txtCidade.setText(buscaCep.getCidade(formattedTxtCep.getText()));
+					txtEstado.setText(buscaCep.getEstado(formattedTxtCep.getText()));
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+        	}
         });
         formattedTxtCep.setBounds(73, 40, 120, 20);
         pane_2.add(formattedTxtCep);
