@@ -34,6 +34,7 @@ public class CadFuncionario extends JInternalFrame {
 	private JTextField txtEstado;
 	private JTextField txtSalario;
 	private JTextField txtCargo;
+	private JTextField txtComplemento;
 
 	/**
 	 * Launch the application.
@@ -136,6 +137,15 @@ public class CadFuncionario extends JInternalFrame {
 		txtEstado.setColumns(10);
 		txtEstado.setBounds(420, 133, 250, 20);
 		pane_2.add(txtEstado);
+		
+		JLabel lblComplementol = new JLabel("Complemento:");
+		lblComplementol.setBounds(238, 43, 71, 14);
+		pane_2.add(lblComplementol);
+		
+		txtComplemento = new JTextField();
+		txtComplemento.setBounds(319, 40, 171, 20);
+		pane_2.add(txtComplemento);
+		txtComplemento.setColumns(10);
 
 		JPanel pane_1 = new JPanel();
 		pane_1.setBorder(new TitledBorder(null, "Dados Pessoais", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -144,56 +154,56 @@ public class CadFuncionario extends JInternalFrame {
 		pane_1.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Nome:");
-		lblNewLabel.setBounds(40, 43, 40, 14);
+		lblNewLabel.setBounds(10, 26, 40, 14);
 		pane_1.add(lblNewLabel);
 
 		txtNome = new JTextField();
-		txtNome.setBounds(90, 40, 329, 20);
+		txtNome.setBounds(41, 23, 329, 20);
 		pane_1.add(txtNome);
 		txtNome.setColumns(10);
 
 		JLabel lblDataDeNascimento = new JLabel("Data de Nascimento:");
-		lblDataDeNascimento.setBounds(41, 88, 120, 14);
+		lblDataDeNascimento.setBounds(10, 59, 107, 14);
 		pane_1.add(lblDataDeNascimento);
 
 		JFormattedTextField formattedTxtDtNascimento = new JFormattedTextField();
-		formattedTxtDtNascimento.setBounds(171, 85, 139, 20);
+		formattedTxtDtNascimento.setBounds(127, 56, 139, 20);
 		pane_1.add(formattedTxtDtNascimento);
 
 		JLabel lblEmail = new JLabel("Email:");
-		lblEmail.setBounds(40, 133, 35, 14);
+		lblEmail.setBounds(10, 96, 35, 14);
 		pane_1.add(lblEmail);
 
 		txtEmail = new JTextField();
-		txtEmail.setBounds(81, 130, 250, 20);
+		txtEmail.setBounds(55, 96, 250, 20);
 		pane_1.add(txtEmail);
 		txtEmail.setColumns(10);
 
 		JLabel lblTelefone = new JLabel("Telefone:");
-		lblTelefone.setBounds(368, 133, 60, 14);
+		lblTelefone.setBounds(315, 96, 60, 14);
 		pane_1.add(lblTelefone);
 
 		JLabel lblEstadoCivil = new JLabel("Estado Civil:");
-		lblEstadoCivil.setBounds(333, 89, 70, 14);
+		lblEstadoCivil.setBounds(276, 59, 62, 14);
 		pane_1.add(lblEstadoCivil);
 
 		JComboBox comboBoxEstadoCivil = new JComboBox();
-		comboBoxEstadoCivil.setBounds(413, 84, 151, 22);
+		comboBoxEstadoCivil.setBounds(348, 55, 151, 22);
 		pane_1.add(comboBoxEstadoCivil);
 		comboBoxEstadoCivil.setModel(new DefaultComboBoxModel(
 				new String[] { "Solteiro", "Casado", "Vi\u00FAvo", "Divorciado", "Uni\u00E3o Est\u00E1vel" }));
 
 		txtRg = new JTextField();
-		txtRg.setBounds(482, 40, 139, 20);
+		txtRg.setBounds(401, 23, 139, 20);
 		pane_1.add(txtRg);
 		txtRg.setColumns(10);
 
 		JLabel lblRg = new JLabel("RG:");
-		lblRg.setBounds(454, 43, 20, 14);
+		lblRg.setBounds(380, 26, 20, 14);
 		pane_1.add(lblRg);
 
 		JFormattedTextField formattedTxtCpf = new JFormattedTextField();
-		formattedTxtCpf.setBounds(688, 40, 139, 20);
+		formattedTxtCpf.setBounds(585, 23, 139, 20);
 		pane_1.add(formattedTxtCpf);
 		formattedTxtCpf.addFocusListener(new FocusAdapter() {
 			@Override
@@ -208,15 +218,15 @@ public class CadFuncionario extends JInternalFrame {
 		});
 
 		JLabel lblCpf = new JLabel("CPF:");
-		lblCpf.setBounds(655, 43, 25, 14);
+		lblCpf.setBounds(550, 26, 25, 14);
 		pane_1.add(lblCpf);
 
 		JLabel lblSexo = new JLabel("Sexo:");
-		lblSexo.setBounds(595, 88, 35, 14);
+		lblSexo.setBounds(505, 59, 35, 14);
 		pane_1.add(lblSexo);
 
 		JComboBox comboBoxSexo = new JComboBox();
-		comboBoxSexo.setBounds(636, 83, 151, 22);
+		comboBoxSexo.setBounds(550, 55, 151, 22);
 		pane_1.add(comboBoxSexo);
 		comboBoxSexo.setModel(new DefaultComboBoxModel(new String[] { "Masculino", "Feminino" }));
 
@@ -232,8 +242,17 @@ public class CadFuncionario extends JInternalFrame {
 				}
 			}
 		});
-		formattedTxtTelefone.setBounds(431, 130, 151, 20);
+		formattedTxtTelefone.setBounds(380, 96, 151, 20);
 		pane_1.add(formattedTxtTelefone);
+		
+		JLabel lblSituao = new JLabel("Situa\u00E7\u00E3o:");
+		lblSituao.setBounds(715, 59, 46, 14);
+		pane_1.add(lblSituao);
+		
+		JComboBox comboBoxSituacao = new JComboBox();
+		comboBoxSituacao.setModel(new DefaultComboBoxModel(new String[] {"Matriculado (M)", "N\u00E3o Matriculado (N)", "Ativo (A)", "Inativo (I)"}));
+		comboBoxSituacao.setBounds(771, 55, 118, 22);
+		pane_1.add(comboBoxSituacao);
 
 		JPanel panel_3 = new JPanel();
 		panel_3.setBorder(
@@ -332,5 +351,4 @@ public class CadFuncionario extends JInternalFrame {
 		});
 
 	}
-
 }

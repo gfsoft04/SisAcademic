@@ -33,6 +33,8 @@ public class CadProfessor extends JInternalFrame {
 	private JTextField txtCidade;
 	private JTextField txtEstado;
 	private JTextField txtSalario;
+	private JTextField txtComplemento;
+	private JTextField txtEscolaridade;
 
 	/**
 	 * Launch the application.
@@ -135,6 +137,15 @@ public class CadProfessor extends JInternalFrame {
 		txtEstado.setColumns(10);
 		txtEstado.setBounds(420, 133, 250, 20);
 		pane_2.add(txtEstado);
+		
+		JLabel lblComplemento = new JLabel("Complemento:");
+		lblComplemento.setBounds(262, 43, 69, 14);
+		pane_2.add(lblComplemento);
+		
+		txtComplemento = new JTextField();
+		txtComplemento.setBounds(341, 40, 149, 20);
+		pane_2.add(txtComplemento);
+		txtComplemento.setColumns(10);
 
 		JPanel pane_1 = new JPanel();
 		pane_1.setBorder(new TitledBorder(null, "Dados Pessoais", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -233,11 +244,20 @@ public class CadProfessor extends JInternalFrame {
 		});
 		formattedTxtTelefone.setBounds(431, 130, 151, 20);
 		pane_1.add(formattedTxtTelefone);
+		
+		JLabel lblSituao = new JLabel("Situa\u00E7\u00E3o:");
+		lblSituao.setBounds(595, 133, 46, 14);
+		pane_1.add(lblSituao);
+		
+		JComboBox comboBoxSituacao = new JComboBox();
+		comboBoxSituacao.setModel(new DefaultComboBoxModel(new String[] {"Matriculado (M)", "N\u00E3o Matriculado (N)", "Ativo (A)", "Inativo (I)"}));
+		comboBoxSituacao.setBounds(651, 129, 136, 22);
+		pane_1.add(comboBoxSituacao);
 
 		JPanel panel_3 = new JPanel();
 		panel_3.setBorder(
 				new TitledBorder(null, "Observa\u00E7\u00E3o", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_3.setBounds(368, 432, 296, 162);
+		panel_3.setBounds(368, 432, 296, 201);
 		panel.add(panel_3);
 		panel_3.setLayout(null);
 		
@@ -247,7 +267,7 @@ public class CadProfessor extends JInternalFrame {
 		
 		JPanel panel_4 = new JPanel();
 		panel_4.setBorder(new TitledBorder(null, "Dados Profissionais", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_4.setBounds(10, 432, 340, 162);
+		panel_4.setBounds(10, 432, 340, 201);
 		panel.add(panel_4);
 		panel_4.setLayout(null);
 		
@@ -287,6 +307,15 @@ public class CadProfessor extends JInternalFrame {
 		});
 		formattedTxtDtContratacao.setBounds(160, 114, 139, 20);
 		panel_4.add(formattedTxtDtContratacao);
+		
+		JLabel lblEscolaridade = new JLabel("Escolaridade:");
+		lblEscolaridade.setBounds(30, 154, 64, 14);
+		panel_4.add(lblEscolaridade);
+		
+		txtEscolaridade = new JTextField();
+		txtEscolaridade.setBounds(99, 151, 120, 20);
+		panel_4.add(txtEscolaridade);
+		txtEscolaridade.setColumns(10);
 		
 		JPanel panel_5 = new JPanel();
 		panel_5.setBorder(null);
