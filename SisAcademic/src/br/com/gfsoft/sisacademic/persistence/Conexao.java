@@ -42,7 +42,7 @@ public class Conexao {
 			try {
 				connection = DriverManager.getConnection(url, username, password);
 			} catch (SQLException ex) {
-				System.out.println("Houve um erro ao conectar com o Banco de Dados.");
+				System.out.println("Houve um erro ao conectar com o Banco de Dados.\n" + ex);
 			}
 		}
 

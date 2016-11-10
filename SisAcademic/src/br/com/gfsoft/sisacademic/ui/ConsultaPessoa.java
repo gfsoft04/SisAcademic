@@ -51,8 +51,6 @@ public class ConsultaPessoa extends JInternalFrame {
 		setBounds(100, 100, 1000, 670);
 		setLocation(0, 0);
 		
-		preencherTabela("SELECT * FROM tb_Pessoa");
-		
 		JPanel panel = new JPanel();
 		getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
@@ -76,6 +74,8 @@ public class ConsultaPessoa extends JInternalFrame {
 		
 		table = new JTable();
 		scrollPane.setViewportView(table);
+		
+		preencherTabela("SELECT * FROM tb_Pessoa");
 
 	}
 	
