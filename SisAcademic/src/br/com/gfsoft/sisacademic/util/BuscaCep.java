@@ -10,19 +10,24 @@ import java.text.ParseException;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-
 import org.jsoup.HttpStatusException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import br.com.gfsoft.sisacademic.model.Endereco;
+
 public class BuscaCep {
+	
+	private Endereco endereco;
+	private JSONObject jsonObjeto;
+	JSONParser parser;
 
 	public String getLogradouro(String CEP) throws IOException {
 		
-		JSONObject jsonObjeto;
-		JSONParser parser = new JSONParser();
+		
+		parser = new JSONParser();
 				
 		try {
 			
