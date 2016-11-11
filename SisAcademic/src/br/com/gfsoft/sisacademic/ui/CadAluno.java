@@ -31,12 +31,12 @@ public class CadAluno extends JInternalFrame {
 	private JTextField txtNome;
 	private JTextField txtRg;
 	private JTextField txtEmail;
+	private JTextField txtProfissao;
 	private JTextField txtRua;
 	private JTextField txtNumero;
 	private JTextField txtBairro;
 	private JTextField txtCidade;
 	private JTextField txtEstado;
-	private JTextField txtProfissao;
 	private JTextField txtComplemento;
 
 	/**
@@ -73,7 +73,7 @@ public class CadAluno extends JInternalFrame {
 		JPanel pane_2 = new JPanel();
 		pane_2.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Endere\u00E7o",
 				TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		pane_2.setBounds(10, 225, 974, 196);
+		pane_2.setBounds(10, 223, 974, 196);
 		panel.add(pane_2);
 		pane_2.setLayout(null);
 
@@ -109,60 +109,60 @@ public class CadAluno extends JInternalFrame {
 				}
 			}
 		});
-		formattedTxtCep.setBounds(73, 40, 120, 20);
+		formattedTxtCep.setBounds(82, 40, 120, 20);
 		pane_2.add(formattedTxtCep);
 
 		JLabel lblRua = new JLabel("Rua:");
-		lblRua.setBounds(40, 90, 35, 14);
+		lblRua.setBounds(253, 43, 35, 14);
 		pane_2.add(lblRua);
 
 		txtRua = new JTextField();
-		txtRua.setBounds(81, 87, 250, 20);
+		txtRua.setBounds(300, 40, 250, 20);
 		pane_2.add(txtRua);
 		txtRua.setColumns(10);
 
 		JLabel lblNumero = new JLabel("Numero:");
-		lblNumero.setBounds(368, 93, 50, 14);
+		lblNumero.setBounds(600, 43, 50, 14);
 		pane_2.add(lblNumero);
 
 		txtNumero = new JTextField();
-		txtNumero.setBounds(431, 90, 59, 20);
+		txtNumero.setBounds(667, 40, 59, 20);
 		pane_2.add(txtNumero);
 		txtNumero.setColumns(10);
 
 		JLabel lblBairro = new JLabel("Bairro:");
-		lblBairro.setBounds(532, 93, 44, 14);
+		lblBairro.setBounds(38, 93, 44, 14);
 		pane_2.add(lblBairro);
 
 		txtBairro = new JTextField();
-		txtBairro.setBounds(586, 90, 237, 20);
+		txtBairro.setBounds(94, 90, 248, 20);
 		pane_2.add(txtBairro);
 		txtBairro.setColumns(10);
 
 		JLabel lblCidade = new JLabel("Cidade:");
-		lblCidade.setBounds(40, 136, 42, 14);
+		lblCidade.setBounds(393, 93, 42, 14);
 		pane_2.add(lblCidade);
 
 		txtCidade = new JTextField();
 		txtCidade.setColumns(10);
-		txtCidade.setBounds(92, 133, 250, 20);
+		txtCidade.setBounds(447, 90, 250, 20);
 		pane_2.add(txtCidade);
 
 		JLabel lblEstado = new JLabel("Estado:");
-		lblEstado.setBounds(368, 136, 42, 14);
+		lblEstado.setBounds(40, 139, 42, 14);
 		pane_2.add(lblEstado);
 
 		txtEstado = new JTextField();
 		txtEstado.setColumns(10);
-		txtEstado.setBounds(420, 133, 250, 20);
+		txtEstado.setBounds(102, 136, 250, 20);
 		pane_2.add(txtEstado);
 
 		JLabel lblComplemento = new JLabel("Complemento: ");
-		lblComplemento.setBounds(259, 43, 72, 14);
+		lblComplemento.setBounds(386, 139, 98, 14);
 		pane_2.add(lblComplemento);
 
 		txtComplemento = new JTextField();
-		txtComplemento.setBounds(332, 40, 158, 20);
+		txtComplemento.setBounds(488, 136, 238, 20);
 		pane_2.add(txtComplemento);
 		txtComplemento.setColumns(10);
 

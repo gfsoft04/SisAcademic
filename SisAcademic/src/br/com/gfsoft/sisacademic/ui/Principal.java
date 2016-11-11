@@ -16,6 +16,8 @@ import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.SoftBevelBorder;
+import java.awt.Color;
+import javax.swing.UIManager;
 
 public class Principal extends JFrame {
 

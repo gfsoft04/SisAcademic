@@ -23,18 +23,22 @@ import javax.swing.JTextPane;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
+import br.com.gfsoft.sisacademic.model.Endereco;
+import br.com.gfsoft.sisacademic.util.BuscaCep;
+
 public class CadFuncionario extends JInternalFrame {
 	private JTextField txtNome;
 	private JTextField txtRg;
 	private JTextField txtEmail;
+	private JTextField txtSalario;
+	private JTextField txtCargo;
 	private JTextField txtRua;
 	private JTextField txtNumero;
 	private JTextField txtBairro;
 	private JTextField txtCidade;
 	private JTextField txtEstado;
-	private JTextField txtSalario;
-	private JTextField txtCargo;
 	private JTextField txtComplemento;
+
 
 	/**
 	 * Launch the application.
@@ -66,86 +70,6 @@ public class CadFuncionario extends JInternalFrame {
 		panel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
-
-		JPanel pane_2 = new JPanel();
-		pane_2.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Endere\u00E7o",
-				TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		pane_2.setBounds(10, 240, 974, 196);
-		panel.add(pane_2);
-		pane_2.setLayout(null);
-
-		JLabel lblCep = new JLabel("CEP:");
-		lblCep.setBounds(40, 43, 30, 14);
-		pane_2.add(lblCep);
-
-		JFormattedTextField formattedTxtCep = new JFormattedTextField();
-		formattedTxtCep.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusGained(FocusEvent e) {
-				try {
-					formattedTxtCep.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(
-							new javax.swing.text.MaskFormatter("#####-###")));
-				} catch (ParseException pe) {
-					pe.printStackTrace();
-				}
-			}
-		});
-		formattedTxtCep.setBounds(73, 40, 120, 20);
-		pane_2.add(formattedTxtCep);
-		
-		JLabel lblRua = new JLabel("Rua:");
-		lblRua.setBounds(40, 90, 35, 14);
-		pane_2.add(lblRua);
-
-		txtRua = new JTextField();
-		txtRua.setBounds(81, 87, 250, 20);
-		pane_2.add(txtRua);
-		txtRua.setColumns(10);
-
-		JLabel lblNumero = new JLabel("Numero:");
-		lblNumero.setBounds(368, 93, 50, 14);
-		pane_2.add(lblNumero);
-
-		txtNumero = new JTextField();
-		txtNumero.setBounds(431, 90, 59, 20);
-		pane_2.add(txtNumero);
-		txtNumero.setColumns(10);
-
-		JLabel lblBairro = new JLabel("Bairro:");
-		lblBairro.setBounds(532, 93, 44, 14);
-		pane_2.add(lblBairro);
-
-		txtBairro = new JTextField();
-		txtBairro.setBounds(586, 90, 237, 20);
-		pane_2.add(txtBairro);
-		txtBairro.setColumns(10);
-
-		JLabel lblCidade = new JLabel("Cidade:");
-		lblCidade.setBounds(40, 136, 42, 14);
-		pane_2.add(lblCidade);
-
-		txtCidade = new JTextField();
-		txtCidade.setColumns(10);
-		txtCidade.setBounds(92, 133, 250, 20);
-		pane_2.add(txtCidade);
-
-		JLabel lblEstado = new JLabel("Estado:");
-		lblEstado.setBounds(368, 136, 42, 14);
-		pane_2.add(lblEstado);
-
-		txtEstado = new JTextField();
-		txtEstado.setColumns(10);
-		txtEstado.setBounds(420, 133, 250, 20);
-		pane_2.add(txtEstado);
-		
-		JLabel lblComplementol = new JLabel("Complemento:");
-		lblComplementol.setBounds(238, 43, 71, 14);
-		pane_2.add(lblComplementol);
-		
-		txtComplemento = new JTextField();
-		txtComplemento.setBounds(319, 40, 171, 20);
-		pane_2.add(txtComplemento);
-		txtComplemento.setColumns(10);
 
 		JPanel pane_1 = new JPanel();
 		pane_1.setBorder(new TitledBorder(null, "Dados Pessoais", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -253,6 +177,102 @@ public class CadFuncionario extends JInternalFrame {
 		comboBoxSituacao.setModel(new DefaultComboBoxModel(new String[] {"Matriculado (M)", "N\u00E3o Matriculado (N)", "Ativo (A)", "Inativo (I)"}));
 		comboBoxSituacao.setBounds(771, 55, 118, 22);
 		pane_1.add(comboBoxSituacao);
+		
+		JPanel pane_2 = new JPanel();
+		pane_2.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Endere\u00E7o",
+				TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		pane_2.setBounds(10, 223, 974, 196);
+		panel.add(pane_2);
+		pane_2.setLayout(null);
+
+		JLabel lblCep = new JLabel("CEP:");
+		lblCep.setBounds(40, 43, 30, 14);
+		pane_2.add(lblCep);
+
+		JFormattedTextField formattedTxtCep = new JFormattedTextField();
+		formattedTxtCep.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				try {
+					formattedTxtCep.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(
+							new javax.swing.text.MaskFormatter("#####-###")));
+				} catch (ParseException pe) {
+					pe.printStackTrace();
+				}
+			}
+
+			@Override
+			public void focusLost(FocusEvent e) {
+				BuscaCep buscaCep = new BuscaCep();
+				Endereco endereco = new Endereco();
+				String cep = formattedTxtCep.getText();
+				
+				endereco = buscaCep.getEndereco(cep);
+				
+				if(endereco != null){
+					txtRua.setText(endereco.getLogradouro());
+					txtBairro.setText(endereco.getBairro());
+					txtCidade.setText(endereco.getCidade());
+					txtEstado.setText(endereco.getEstado());
+				}
+			}
+		});
+		formattedTxtCep.setBounds(82, 40, 120, 20);
+		pane_2.add(formattedTxtCep);
+
+		JLabel lblRua = new JLabel("Rua:");
+		lblRua.setBounds(253, 43, 35, 14);
+		pane_2.add(lblRua);
+
+		txtRua = new JTextField();
+		txtRua.setBounds(300, 40, 250, 20);
+		pane_2.add(txtRua);
+		txtRua.setColumns(10);
+
+		JLabel lblNumero = new JLabel("Numero:");
+		lblNumero.setBounds(600, 43, 50, 14);
+		pane_2.add(lblNumero);
+
+		txtNumero = new JTextField();
+		txtNumero.setBounds(667, 40, 59, 20);
+		pane_2.add(txtNumero);
+		txtNumero.setColumns(10);
+
+		JLabel lblBairro = new JLabel("Bairro:");
+		lblBairro.setBounds(38, 93, 44, 14);
+		pane_2.add(lblBairro);
+
+		txtBairro = new JTextField();
+		txtBairro.setBounds(94, 90, 248, 20);
+		pane_2.add(txtBairro);
+		txtBairro.setColumns(10);
+
+		JLabel lblCidade = new JLabel("Cidade:");
+		lblCidade.setBounds(393, 93, 42, 14);
+		pane_2.add(lblCidade);
+
+		txtCidade = new JTextField();
+		txtCidade.setColumns(10);
+		txtCidade.setBounds(447, 90, 250, 20);
+		pane_2.add(txtCidade);
+
+		JLabel lblEstado = new JLabel("Estado:");
+		lblEstado.setBounds(40, 139, 42, 14);
+		pane_2.add(lblEstado);
+
+		txtEstado = new JTextField();
+		txtEstado.setColumns(10);
+		txtEstado.setBounds(102, 136, 250, 20);
+		pane_2.add(txtEstado);
+
+		JLabel lblComplemento = new JLabel("Complemento: ");
+		lblComplemento.setBounds(386, 139, 98, 14);
+		pane_2.add(lblComplemento);
+
+		txtComplemento = new JTextField();
+		txtComplemento.setBounds(488, 136, 238, 20);
+		pane_2.add(txtComplemento);
+		txtComplemento.setColumns(10);
 
 		JPanel panel_3 = new JPanel();
 		panel_3.setBorder(
@@ -265,32 +285,32 @@ public class CadFuncionario extends JInternalFrame {
 		txtPaneObservacao.setBounds(10, 21, 276, 130);
 		panel_3.add(txtPaneObservacao);
 		
-		JPanel panel_1 = new JPanel();
-		panel_1.setLayout(null);
-		panel_1.setBorder(new TitledBorder(null, "Dados Profissionais", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_1.setBounds(10, 447, 340, 162);
-		panel.add(panel_1);
+		JPanel panel_2 = new JPanel();
+		panel_2.setLayout(null);
+		panel_2.setBorder(new TitledBorder(null, "Dados Profissionais", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_2.setBounds(10, 447, 340, 162);
+		panel.add(panel_2);
 		
 		JLabel lblEscolaridade = new JLabel("Escolaridade:");
 		lblEscolaridade.setBounds(30, 33, 75, 14);
-		panel_1.add(lblEscolaridade);
+		panel_2.add(lblEscolaridade);
 		
 		JLabel label_1 = new JLabel("Sal\u00E1rio: R$");
 		label_1.setBounds(30, 96, 65, 14);
-		panel_1.add(label_1);
+		panel_2.add(label_1);
 		
 		txtSalario = new JTextField();
 		txtSalario.setColumns(10);
 		txtSalario.setBounds(99, 93, 120, 20);
-		panel_1.add(txtSalario);
+		panel_2.add(txtSalario);
 		
 		JComboBox comboBoxEscolaridade = new JComboBox();
 		comboBoxEscolaridade.setBounds(105, 29, 180, 22);
-		panel_1.add(comboBoxEscolaridade);
+		panel_2.add(comboBoxEscolaridade);
 		
 		JLabel label_2 = new JLabel("Data de Contrata\u00E7\u00E3o:");
 		label_2.setBounds(30, 124, 120, 14);
-		panel_1.add(label_2);
+		panel_2.add(label_2);
 		
 		JFormattedTextField formattedtxtDtContratacao = new JFormattedTextField();
 		formattedtxtDtContratacao.addFocusListener(new FocusAdapter() {
@@ -305,16 +325,16 @@ public class CadFuncionario extends JInternalFrame {
 			}
 		});
 		formattedtxtDtContratacao.setBounds(160, 121, 139, 20);
-		panel_1.add(formattedtxtDtContratacao);
+		panel_2.add(formattedtxtDtContratacao);
 		
 		txtCargo = new JTextField();
 		txtCargo.setColumns(10);
 		txtCargo.setBounds(84, 62, 186, 20);
-		panel_1.add(txtCargo);
+		panel_2.add(txtCargo);
 		
 		JLabel lblCargo = new JLabel("Cargo:");
 		lblCargo.setBounds(30, 65, 52, 14);
-		panel_1.add(lblCargo);
+		panel_2.add(lblCargo);
 		
 		JPanel panel_4 = new JPanel();
 		panel_4.setBorder(null);
