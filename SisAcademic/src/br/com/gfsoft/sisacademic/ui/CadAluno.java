@@ -179,19 +179,27 @@ public class CadAluno extends JInternalFrame {
 
 		JPanel panel_4 = new JPanel();
 		panel_4.setBorder(null);
-		panel_4.setBounds(475, 487, 290, 50);
+		panel_4.setBounds(339, 484, 621, 50);
 		panel.add(panel_4);
 		panel_4.setLayout(null);
 
 		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.setBounds(10, 11, 100, 30);
+		btnCancelar.setBounds(12, 11, 100, 30);
 		panel_4.add(btnCancelar);
 		btnCancelar.setFont(new Font("Tahoma", Font.BOLD, 11));
 
 		JButton btnCadastrar = new JButton("Cadastrar");
-		btnCadastrar.setBounds(180, 11, 100, 30);
+		btnCadastrar.setBounds(485, 11, 100, 30);
 		panel_4.add(btnCadastrar);
 		btnCadastrar.setFont(new Font("Tahoma", Font.BOLD, 11));
+		
+		JButton btnDeletar = new JButton("Deletar");
+		btnDeletar.setBounds(167, 11, 98, 30);
+		panel_4.add(btnDeletar);
+		
+		JButton btnAlterar = new JButton("Alterar");
+		btnAlterar.setBounds(326, 11, 98, 30);
+		panel_4.add(btnAlterar);
 
 		JPanel pane_1 = new JPanel();
 		pane_1.setBounds(10, 12, 962, 196);

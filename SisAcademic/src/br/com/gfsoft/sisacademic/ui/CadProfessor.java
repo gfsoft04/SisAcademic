@@ -339,19 +339,27 @@ public class CadProfessor extends JInternalFrame {
 		
 		JPanel panel_5 = new JPanel();
 		panel_5.setBorder(null);
-		panel_5.setBounds(674, 544, 290, 50);
+		panel_5.setBounds(674, 444, 290, 150);
 		panel.add(panel_5);
 		panel_5.setLayout(null);
 		
 				JButton btnCancelar = new JButton("Cancelar");
-				btnCancelar.setBounds(10, 11, 100, 30);
+				btnCancelar.setBounds(10, 43, 100, 30);
 				panel_5.add(btnCancelar);
-				btnCancelar.setFont(new Font("Tahoma", Font.BOLD, 11));
+				btnCancelar.setFont(new Font("Tahoma", Font.PLAIN, 11));
 				
 						JButton btnCadastrar = new JButton("Cadastrar");
-						btnCadastrar.setBounds(180, 11, 100, 30);
+						btnCadastrar.setBounds(180, 43, 100, 30);
 						panel_5.add(btnCadastrar);
-						btnCadastrar.setFont(new Font("Tahoma", Font.BOLD, 11));
+						btnCadastrar.setFont(new Font("Tahoma", Font.PLAIN, 11));
+						
+						JButton btnDeletar = new JButton("Deletar");
+						btnDeletar.setBounds(10, 101, 91, 30);
+						panel_5.add(btnDeletar);
+						
+						JButton btnAlterar = new JButton("Alterar");
+						btnAlterar.setBounds(189, 104, 91, 30);
+						panel_5.add(btnAlterar);
 						btnCadastrar.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
 

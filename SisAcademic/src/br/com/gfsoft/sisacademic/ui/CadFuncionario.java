@@ -338,19 +338,27 @@ public class CadFuncionario extends JInternalFrame {
 		
 		JPanel panel_4 = new JPanel();
 		panel_4.setBorder(null);
-		panel_4.setBounds(666, 559, 290, 50);
+		panel_4.setBounds(666, 455, 290, 154);
 		panel.add(panel_4);
 		panel_4.setLayout(null);
 		
 				JButton btnCancelar = new JButton("Cancelar");
 				btnCancelar.setBounds(10, 11, 100, 30);
 				panel_4.add(btnCancelar);
-				btnCancelar.setFont(new Font("Tahoma", Font.BOLD, 11));
+				btnCancelar.setFont(new Font("Tahoma", Font.PLAIN, 11));
 				
 						JButton btnCadastrar = new JButton("Cadastrar");
 						btnCadastrar.setBounds(180, 11, 100, 30);
 						panel_4.add(btnCadastrar);
-						btnCadastrar.setFont(new Font("Tahoma", Font.BOLD, 11));
+						btnCadastrar.setFont(new Font("Tahoma", Font.PLAIN, 11));
+						
+						JButton btnDeletar = new JButton("Deletar");
+						btnDeletar.setBounds(10, 99, 91, 30);
+						panel_4.add(btnDeletar);
+						
+						JButton btnAlterar = new JButton("Alterar");
+						btnAlterar.setBounds(189, 102, 91, 30);
+						panel_4.add(btnAlterar);
 						btnCadastrar.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
 

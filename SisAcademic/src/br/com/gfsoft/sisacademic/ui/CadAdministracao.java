@@ -269,18 +269,26 @@ public class CadAdministracao extends JInternalFrame {
 		JPanel panel_5 = new JPanel();
 		panel_5.setLayout(null);
 		panel_5.setBorder(null);
-		panel_5.setBounds(666, 559, 290, 50);
+		panel_5.setBounds(666, 454, 290, 155);
 		panel.add(panel_5);
 		
 		JButton button = new JButton("Cancelar");
-		button.setFont(new Font("Tahoma", Font.BOLD, 11));
+		button.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		button.setBounds(10, 11, 100, 30);
 		panel_5.add(button);
 		
 		JButton button_1 = new JButton("Cadastrar");
-		button_1.setFont(new Font("Tahoma", Font.BOLD, 11));
+		button_1.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		button_1.setBounds(180, 11, 100, 30);
 		panel_5.add(button_1);
+		
+		JButton btnDeletar = new JButton("Deletar");
+		btnDeletar.setBounds(10, 106, 91, 30);
+		panel_5.add(btnDeletar);
+		
+		JButton btnAlterar = new JButton("Alterar");
+		btnAlterar.setBounds(189, 106, 91, 30);
+		panel_5.add(btnAlterar);
 
 	}
 }

@@ -128,7 +128,7 @@ public class CadDisciplina extends JInternalFrame {
 		panel_1.add(formattedTxtDtCriacao);
 		
 		JPanel panel_2 = new JPanel();
-		panel_2.setBounds(350, 365, 282, 54);
+		panel_2.setBounds(20, 365, 612, 54);
 		panel.add(panel_2);
 		panel_2.setLayout(null);
 		
@@ -137,8 +137,16 @@ public class CadDisciplina extends JInternalFrame {
 		panel_2.add(btnCancelar);
 		
 		JButton btnCadastrar = new JButton("Cadastrar");
-		btnCadastrar.setBounds(172, 11, 100, 30);
+		btnCadastrar.setBounds(471, 11, 100, 30);
 		panel_2.add(btnCadastrar);
+		
+		JButton btnDeletar = new JButton("Deletar");
+		btnDeletar.setBounds(168, 11, 91, 30);
+		panel_2.add(btnDeletar);
+		
+		JButton btnAlterar = new JButton("Alterar");
+		btnAlterar.setBounds(323, 11, 91, 30);
+		panel_2.add(btnAlterar);
 
 	}
 }
