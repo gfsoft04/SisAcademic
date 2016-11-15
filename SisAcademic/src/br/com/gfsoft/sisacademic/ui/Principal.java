@@ -24,9 +24,21 @@ public class Principal extends JFrame {
 	private static CadProfessor professor;
 	private static CadDisciplina disciplina;
 	private static ConsultaPessoa consultaPessoa;
-	
-
+	private static Principal principal;
 	private JPanel contentPane;
+	private JDesktopPane desktopPane;
+    
+	public static Principal getInstancia(){
+        if(principal == null){
+        	principal = new Principal();
+        }
+        return principal;
+    }
+    
+    public static JDesktopPane getDesktop(){
+        return getInstancia().desktopPane;
+    }
+		
 
 	/**
 	 * Launch the application.
@@ -57,7 +69,7 @@ public class Principal extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 
-		JDesktopPane desktopPane = new JDesktopPane();
+		desktopPane = new JDesktopPane();
 		desktopPane.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		desktopPane.setBackground(SystemColor.desktop);
 		contentPane.add(desktopPane, BorderLayout.CENTER);
@@ -205,4 +217,5 @@ public class Principal extends JFrame {
 		JMenuItem mntmSobre = new JMenuItem("Sobre");
 		mnAjuda.add(mntmSobre);
 	}
+	
 }

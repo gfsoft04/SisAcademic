@@ -20,6 +20,9 @@ import javax.swing.ListSelectionModel;
 
 import br.com.gfsoft.sisacademic.model.TabelaConsulta;
 import br.com.gfsoft.sisacademic.persistence.Conexao;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.beans.PropertyVetoException;
 
 public class ConsultaPessoa extends JInternalFrame {
 	private JTextField textField;
@@ -73,6 +76,39 @@ public class ConsultaPessoa extends JInternalFrame {
 		panel.add(scrollPane);
 		
 		table = new JTable();
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			//DUPLO CLICK SOBRE LINHA DA TABELA
+			public void mouseClicked(MouseEvent e) {
+				
+				if(e.getClickCount() == 2){
+					CadAluno aluno = new CadAluno();
+					Principal.getDesktop().add(aluno);
+					aluno.setVisible(true);
+					try {
+	                    aluno.setMaximum(true);
+	                } catch (PropertyVetoException pe) {
+	                    pe.printStackTrace();
+	                }
+//					if(Principal.ALUNO == null){
+//						Principal.ALUNO = new CadAluno();
+//						Principal.getDesktop().add(Principal.ALUNO);
+//						Principal.ALUNO.setVisible(true);
+//						try {
+//							Principal.ALUNO.setMaximum(true);
+//						} catch (PropertyVetoException e1) {
+//							// TODO Auto-generated catch block
+//							e1.printStackTrace();
+//						}
+//					
+//					} else {
+//						Principal.ALUNO.setVisible(true);
+//						Principal.getDesktop().moveToFront(Principal.ALUNO);
+//					}	
+				}
+				
+			}
+		});
 		scrollPane.setViewportView(table);
 		
 		preencherTabela("SELECT * FROM tb_Pessoa");
