@@ -7,6 +7,7 @@ import br.com.gfsoft.sisacademic.service.DisciplinaService;
 
 public class Academico {
 	
+	//
 	DisciplinaService disciplinaService;
 	
 	public Academico(){
