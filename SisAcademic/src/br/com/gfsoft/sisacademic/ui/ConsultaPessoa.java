@@ -7,6 +7,7 @@ import java.awt.event.MouseEvent;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -86,6 +87,7 @@ public class ConsultaPessoa extends JInternalFrame {
 					aluno.setNome("Bruno Cesar Alves Ramos");
 					aluno.setRg("1234567");
 					aluno.setCpf("012.345.678-91");
+					aluno.setDtNascimento(LocalDate.now());
 					
 					Principal.ALUNO.preencheCampos(aluno);
 					Principal.ALUNO.setEditable(false);
