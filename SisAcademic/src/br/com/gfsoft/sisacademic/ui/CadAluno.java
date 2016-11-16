@@ -9,6 +9,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.text.ParseException;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -23,6 +25,7 @@ import javax.swing.JTextPane;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
+import br.com.gfsoft.sisacademic.model.Aluno;
 import br.com.gfsoft.sisacademic.model.Endereco;
 import br.com.gfsoft.sisacademic.util.BuscaCep;
 
@@ -32,13 +35,24 @@ public class CadAluno extends JInternalFrame {
 	private JTextField txtRg;
 	private JTextField txtEmail;
 	private JTextField txtProfissao;
+	private JFormattedTextField formattedTxtDtNascimento;
+	private JFormattedTextField formattedTxtCpf;
+	private JFormattedTextField formattedTxtTelefone;
+	private JComboBox comboBoxEstadoCivil;
+	private JComboBox comboBoxSituacao;
+	private JComboBox comboBoxSexo;
+	private JFormattedTextField formattedTxtCep;
 	private JTextField txtRua;
 	private JTextField txtNumero;
 	private JTextField txtBairro;
 	private JTextField txtCidade;
 	private JTextField txtEstado;
 	private JTextField txtComplemento;
-
+	private JButton btnCadastrar;
+	private JButton btnCancelar;
+	private JButton btnDeletar;
+	private JButton btnAlterar;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -81,7 +95,7 @@ public class CadAluno extends JInternalFrame {
 		lblCep.setBounds(40, 43, 30, 14);
 		pane_2.add(lblCep);
 
-		JFormattedTextField formattedTxtCep = new JFormattedTextField();
+		formattedTxtCep = new JFormattedTextField();
 		formattedTxtCep.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
@@ -183,21 +197,21 @@ public class CadAluno extends JInternalFrame {
 		panel.add(panel_4);
 		panel_4.setLayout(null);
 
-		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar = new JButton("Cancelar");
 		btnCancelar.setBounds(12, 11, 100, 30);
 		panel_4.add(btnCancelar);
 		btnCancelar.setFont(new Font("Tahoma", Font.BOLD, 11));
 
-		JButton btnCadastrar = new JButton("Cadastrar");
+		btnCadastrar = new JButton("Cadastrar");
 		btnCadastrar.setBounds(485, 11, 100, 30);
 		panel_4.add(btnCadastrar);
 		btnCadastrar.setFont(new Font("Tahoma", Font.BOLD, 11));
 		
-		JButton btnDeletar = new JButton("Deletar");
+		btnDeletar = new JButton("Deletar");
 		btnDeletar.setBounds(167, 11, 98, 30);
 		panel_4.add(btnDeletar);
 		
-		JButton btnAlterar = new JButton("Alterar");
+		btnAlterar = new JButton("Alterar");
 		btnAlterar.setBounds(326, 11, 98, 30);
 		panel_4.add(btnAlterar);
 
@@ -220,7 +234,7 @@ public class CadAluno extends JInternalFrame {
 		lblDataDeNascimento.setBounds(10, 71, 108, 14);
 		pane_1.add(lblDataDeNascimento);
 
-		JFormattedTextField formattedTxtDtNascimento = new JFormattedTextField();
+		formattedTxtDtNascimento = new JFormattedTextField();
 		formattedTxtDtNascimento.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
@@ -252,7 +266,7 @@ public class CadAluno extends JInternalFrame {
 		lblEstadoCivil.setBounds(291, 71, 86, 14);
 		pane_1.add(lblEstadoCivil);
 
-		JComboBox comboBoxEstadoCivil = new JComboBox();
+		comboBoxEstadoCivil = new JComboBox();
 		comboBoxEstadoCivil.setBounds(368, 67, 151, 22);
 		pane_1.add(comboBoxEstadoCivil);
 		comboBoxEstadoCivil.setModel(new DefaultComboBoxModel(
@@ -267,7 +281,7 @@ public class CadAluno extends JInternalFrame {
 		lblRg.setBounds(388, 26, 24, 14);
 		pane_1.add(lblRg);
 
-		JFormattedTextField formattedTxtCpf = new JFormattedTextField();
+		formattedTxtCpf = new JFormattedTextField();
 		formattedTxtCpf.setBounds(599, 23, 139, 20);
 		pane_1.add(formattedTxtCpf);
 		formattedTxtCpf.addFocusListener(new FocusAdapter() {
@@ -290,12 +304,12 @@ public class CadAluno extends JInternalFrame {
 		lblSexo.setBounds(538, 71, 44, 14);
 		pane_1.add(lblSexo);
 
-		JComboBox comboBoxSexo = new JComboBox();
+		comboBoxSexo = new JComboBox();
 		comboBoxSexo.setBounds(569, 67, 151, 22);
 		pane_1.add(comboBoxSexo);
 		comboBoxSexo.setModel(new DefaultComboBoxModel(new String[] { "Masculino", "Feminino" }));
 
-		JFormattedTextField formattedTxtTelefone = new JFormattedTextField();
+		formattedTxtTelefone = new JFormattedTextField();
 		formattedTxtTelefone.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
@@ -323,7 +337,7 @@ public class CadAluno extends JInternalFrame {
 		lblNewLabel_1.setBounds(730, 71, 46, 14);
 		pane_1.add(lblNewLabel_1);
 
-		JComboBox comboBoxSituacao = new JComboBox();
+		comboBoxSituacao = new JComboBox();
 		comboBoxSituacao.setModel(new DefaultComboBoxModel(
 				new String[] { "Matriculado(M)", "N\u00E3o Matriculado(N)", "Ativo(A)", "Inativo(I) " }));
 		comboBoxSituacao.setBounds(786, 68, 139, 20);
@@ -354,6 +368,52 @@ public class CadAluno extends JInternalFrame {
 
 			}
 		});
-
 	}
+	
+	/**
+	 * Metodo que recebe um objeto e preenche os campos
+	 */
+	public void preencheCampos(Aluno aluno){
+		txtNome.setText(aluno.getNome());
+		txtRg.setText(aluno.getRg());
+		formattedTxtCpf.setText(aluno.getCpf());
+		txtEmail.setText(aluno.getEmail());
+		txtProfissao.setText(aluno.getProfissao());
+		//formattedTxtDtNascimento.setText(aluno.getDtNascimento().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT)));
+		formattedTxtTelefone.setText(aluno.getTelefone());
+		comboBoxEstadoCivil.setSelectedIndex(0);
+		comboBoxSexo.setSelectedIndex(0);
+		comboBoxSituacao.setSelectedIndex(0);
+		formattedTxtCep.setText(aluno.getCep());
+		txtRua.setText(aluno.getRua());
+		//txtNumero.setText(aluno.getNumero());
+		txtBairro.setText(aluno.getBairro());
+		txtCidade.setText(aluno.getCidade());
+		txtEstado.setText(aluno.getEstado());
+		txtComplemento.setText(aluno.getComplemento());
+		
+	}
+	
+	/**
+	 * Metodo para alternar botoes habilitados e desabilitados
+	 * true = habilita botao alterar e deletar
+	 * flase = habilita botao cadastrar
+	 */
+	public void alternaBotoes(boolean flag){
+		btnCadastrar.setVisible(!flag);
+		btnAlterar.setVisible(flag);
+		btnDeletar.setVisible(flag);
+	}
+	
+	/**
+	 * Metodo para desabilitar alguns campos para edicao
+	 */
+	public void setEditable(boolean flag){
+		txtNome.setEditable(flag);
+		formattedTxtCpf.setEditable(flag);
+		formattedTxtCpf.setFocusable(flag);
+		
+		btnCadastrar.setVisible(flag);
+	}
+	
 }

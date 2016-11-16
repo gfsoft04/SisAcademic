@@ -19,27 +19,13 @@ import javax.swing.border.SoftBevelBorder;
 
 public class Principal extends JFrame {
 
-	private static CadAluno aluno;
-	private static CadFuncionario funcionario;
-	private static CadProfessor professor;
-	private static CadDisciplina disciplina;
-	private static ConsultaPessoa consultaPessoa;
-	private static Principal principal;
-	private JPanel contentPane;
-	private JDesktopPane desktopPane;
-    
-	public static Principal getInstancia(){
-        if(principal == null){
-        	principal = new Principal();
-        }
-        return principal;
-    }
-    
-    public static JDesktopPane getDesktop(){
-        return getInstancia().desktopPane;
-    }
-		
+	public static CadAluno ALUNO;
+	public static CadFuncionario FUNCIONARIO;
+	public static CadProfessor PROFESSOR;
+	public static CadDisciplina DISCIPLINA;
+	public static ConsultaPessoa CONSULTAPESSOA;
 
+	
 	/**
 	 * Launch the application.
 	 */
@@ -64,12 +50,12 @@ public class Principal extends JFrame {
 		setBounds(100, 100, 500, 400);
 		setExtendedState(MAXIMIZED_BOTH);
 
-		contentPane = new JPanel();
+		JPanel contentPane = new JPanel();
 		contentPane.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 
-		desktopPane = new JDesktopPane();
+		JDesktopPane desktopPane = new JDesktopPane();
 		desktopPane.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		desktopPane.setBackground(SystemColor.desktop);
 		contentPane.add(desktopPane, BorderLayout.CENTER);
@@ -83,21 +69,10 @@ public class Principal extends JFrame {
 		JMenuItem mntmCadAluno = new JMenuItem("Cadastro de Aluno");
 		mntmCadAluno.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (aluno == null) {
-					aluno = new CadAluno();
-					desktopPane.add(aluno);
-					try {
-						aluno.setMaximum(true);
-					} catch (PropertyVetoException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-					aluno.setVisible(true);
-				} else {
-					aluno.setVisible(true);
-					desktopPane.moveToFront(aluno);
-				}
-
+				ALUNO.setVisible(true);
+				ALUNO.alternaBotoes(false);
+				ALUNO.setTitle("Cadastro de Aluno");
+				desktopPane.moveToFront(ALUNO);
 			}
 		});
 		mnArquivo.add(mntmCadAluno);
@@ -105,22 +80,9 @@ public class Principal extends JFrame {
 		JMenuItem mntmCadProfessor = new JMenuItem("Cadastro de Professor");
 		mntmCadProfessor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				if (professor == null) {
-					professor = new CadProfessor();
-					desktopPane.add(professor);
-					try {
-						professor.setMaximum(true);
-					} catch (PropertyVetoException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-					professor.setVisible(true);
-				} else {
-					professor.setVisible(true);
-					desktopPane.moveToFront(professor);
-				}
-				
+				PROFESSOR.setVisible(true);
+				PROFESSOR.setTitle("Cadastro de Professor");
+				desktopPane.moveToFront(PROFESSOR);
 			}
 		});
 		mnArquivo.add(mntmCadProfessor);
@@ -128,22 +90,9 @@ public class Principal extends JFrame {
 		JMenuItem mntmCadFuncinario = new JMenuItem("Cadastro de Funcion\u00E1rio");
 		mntmCadFuncinario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			
-				if (funcionario == null) {
-					funcionario = new CadFuncionario();
-					desktopPane.add(funcionario);
-					try {
-						funcionario.setMaximum(true);
-					} catch (PropertyVetoException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-					funcionario.setVisible(true);
-				} else {
-					funcionario.setVisible(true);
-					desktopPane.moveToFront(funcionario);
-				}
-			
+				FUNCIONARIO.setVisible(true);
+				FUNCIONARIO.setTitle("Cadastro de Funcionário");
+				desktopPane.moveToFront(FUNCIONARIO);
 			}
 		});
 		mnArquivo.add(mntmCadFuncinario);
@@ -151,22 +100,9 @@ public class Principal extends JFrame {
 		JMenuItem mntmCadDisciplina = new JMenuItem("Cadastro de Disciplina");
 		mntmCadDisciplina.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				if (disciplina == null) {
-					disciplina = new CadDisciplina();
-					desktopPane.add(disciplina);
-					try {
-						disciplina.setMaximum(true);
-					} catch (PropertyVetoException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-					disciplina.setVisible(true);
-				} else {
-					disciplina.setVisible(true);
-					desktopPane.moveToFront(disciplina);
-				}
-				
+				DISCIPLINA.setVisible(true);
+				DISCIPLINA.setTitle("Cadastro de Disciplina");
+				desktopPane.moveToFront(DISCIPLINA);
 			}
 		});
 		mnArquivo.add(mntmCadDisciplina);
@@ -185,22 +121,9 @@ public class Principal extends JFrame {
 		JMenuItem mntmConsultaPessoa = new JMenuItem("Pessoa");
 		mntmConsultaPessoa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				if (consultaPessoa == null) {
-					consultaPessoa = new ConsultaPessoa();
-					desktopPane.add(consultaPessoa);
-					try {
-						consultaPessoa.setMaximum(true);
-					} catch (PropertyVetoException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-					consultaPessoa.setVisible(true);
-				} else {
-					consultaPessoa.setVisible(true);
-					desktopPane.moveToFront(consultaPessoa);
-				}
-				
+				CONSULTAPESSOA.setVisible(true);
+				CONSULTAPESSOA.setTitle("Consulta");
+				desktopPane.moveToFront(CONSULTAPESSOA);			
 			}
 		});
 		mnConsulta.add(mntmConsultaPessoa);
@@ -216,6 +139,41 @@ public class Principal extends JFrame {
 
 		JMenuItem mntmSobre = new JMenuItem("Sobre");
 		mnAjuda.add(mntmSobre);
+		
+		
+		/**
+		 * Instanciando todas as telas e deixando invisiveis
+		 */
+		ALUNO = new CadAluno();
+		FUNCIONARIO = new CadFuncionario();
+		PROFESSOR = new CadProfessor();
+		DISCIPLINA = new CadDisciplina();
+		CONSULTAPESSOA = new ConsultaPessoa();
+		
+		desktopPane.add(ALUNO);
+		desktopPane.add(FUNCIONARIO);
+		desktopPane.add(PROFESSOR);
+		desktopPane.add(DISCIPLINA);
+		desktopPane.add(CONSULTAPESSOA);
+		
+		try {
+			ALUNO.setMaximum(true);
+			FUNCIONARIO.setMaximum(true);
+			PROFESSOR.setMaximum(true);
+			DISCIPLINA.setMaximum(true);
+			CONSULTAPESSOA.setMaximum(true);
+		} catch (PropertyVetoException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		ALUNO.setVisible(false);
+		FUNCIONARIO.setVisible(false);
+		PROFESSOR.setVisible(false);
+		DISCIPLINA.setVisible(false);
+		CONSULTAPESSOA.setVisible(false);
+		// =======================================================
+		
 	}
-	
+		
 }

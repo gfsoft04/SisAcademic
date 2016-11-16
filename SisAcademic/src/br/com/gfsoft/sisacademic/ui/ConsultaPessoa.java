@@ -2,6 +2,8 @@ package br.com.gfsoft.sisacademic.ui;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,11 +20,9 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 
+import br.com.gfsoft.sisacademic.model.Aluno;
 import br.com.gfsoft.sisacademic.model.TabelaConsulta;
 import br.com.gfsoft.sisacademic.persistence.Conexao;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.beans.PropertyVetoException;
 
 public class ConsultaPessoa extends JInternalFrame {
 	private JTextField textField;
@@ -82,29 +82,17 @@ public class ConsultaPessoa extends JInternalFrame {
 			public void mouseClicked(MouseEvent e) {
 				
 				if(e.getClickCount() == 2){
-					CadAluno aluno = new CadAluno();
-					Principal.getDesktop().add(aluno);
-					aluno.setVisible(true);
-					try {
-	                    aluno.setMaximum(true);
-	                } catch (PropertyVetoException pe) {
-	                    pe.printStackTrace();
-	                }
-//					if(Principal.ALUNO == null){
-//						Principal.ALUNO = new CadAluno();
-//						Principal.getDesktop().add(Principal.ALUNO);
-//						Principal.ALUNO.setVisible(true);
-//						try {
-//							Principal.ALUNO.setMaximum(true);
-//						} catch (PropertyVetoException e1) {
-//							// TODO Auto-generated catch block
-//							e1.printStackTrace();
-//						}
-//					
-//					} else {
-//						Principal.ALUNO.setVisible(true);
-//						Principal.getDesktop().moveToFront(Principal.ALUNO);
-//					}	
+					Aluno aluno = new Aluno();
+					aluno.setNome("Bruno Cesar Alves Ramos");
+					aluno.setRg("1234567");
+					aluno.setCpf("012.345.678-91");
+					
+					Principal.ALUNO.preencheCampos(aluno);
+					Principal.ALUNO.setEditable(false);
+					Principal.ALUNO.alternaBotoes(true);
+					Principal.ALUNO.setVisible(true);
+					Principal.ALUNO.setTitle("Editar");
+					
 				}
 				
 			}
