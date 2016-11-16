@@ -17,11 +17,8 @@ public class PersistenceAluno implements IPersistenceAluno {
 	public boolean insert(Aluno aluno) {
 
 		try {
-
 			stmt = con.getConnection().createStatement();
-
 			String sql = "INSERT INTO ...";
-
 			rs = stmt.executeQuery(sql);
 
 			return true;
@@ -50,18 +47,27 @@ public class PersistenceAluno implements IPersistenceAluno {
 		Aluno aluno = new Aluno();
 
 		try {
-
 			stmt = con.getConnection().createStatement();
-
-			String sql = "SELECT * FROM tabela WHERE matricula='0123456789'";
-
+			String sql = "SELECT * FROM tabela WHERE matricula='" + matricula + "'";
 			rs = stmt.executeQuery(sql);
 
 			while (rs.next()) {
 				aluno.setMatricula(rs.getString("matricula"));
 				aluno.setNome(rs.getString("nome"));
+				aluno.setRg(rs.getString("rg"));
+				aluno.setCpf(rs.getString("cpf"));
+				aluno.setEmail(rs.getString("email"));
+				aluno.setProfissao(rs.getString("profissao"));
+				aluno.setTelefone(rs.getString("telefone"));
+				//aluno.setDtNascimento(rs.getDate("dtNascimento"));
+				aluno.setCep(rs.getString("cep"));
+				aluno.setRua(rs.getString("rua"));
+				aluno.setNumero(rs.getInt("numero"));
+				aluno.setBairro(rs.getString("bairro"));
+				aluno.setCidade(rs.getString("cidade"));
+				aluno.setEstado(rs.getString("estado"));
+				aluno.setComplemento(rs.getString("complemento"));
 			}
-
 			return aluno;
 
 		} catch (SQLException e) {
@@ -74,7 +80,6 @@ public class PersistenceAluno implements IPersistenceAluno {
 
 	@Override
 	public Set<Aluno> selectAlunos() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
