@@ -6,6 +6,10 @@ public class Administracao extends Funcionario{
 	 * Atributos da classe Administracao
 	 */
 	private String senha;
+	
+	public Administracao getInstance(){
+		return new Administracao();
+	}
 
 	/**
 	 * Metodos Getter's e Setter's
