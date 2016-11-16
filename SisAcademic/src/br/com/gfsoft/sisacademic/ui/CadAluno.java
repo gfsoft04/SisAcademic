@@ -27,6 +27,7 @@ import javax.swing.border.TitledBorder;
 
 import br.com.gfsoft.sisacademic.model.Aluno;
 import br.com.gfsoft.sisacademic.model.Endereco;
+import br.com.gfsoft.sisacademic.persistence.PersistenceAluno;
 import br.com.gfsoft.sisacademic.util.BuscaCep;
 
 public class CadAluno extends JInternalFrame {
@@ -198,6 +199,11 @@ public class CadAluno extends JInternalFrame {
 		panel_4.setLayout(null);
 
 		btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+			}
+		});
 		btnCancelar.setBounds(12, 11, 100, 30);
 		panel_4.add(btnCancelar);
 		btnCancelar.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -364,7 +370,36 @@ public class CadAluno extends JInternalFrame {
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				setVisible(false);
+				Aluno aluno = new Aluno();
+				PersistenceAluno pAluno = new PersistenceAluno();
+				
+				aluno.setNome(txtNome.getText());
+				aluno.setMatricula("7675675");
+				aluno.setCpf("08747786460");
+				//aluno.setCpf(formattedTxtCpf.getText());
+				aluno.setRg(txtRg.getText());
+				//aluno.setDtNascimento(Date.);
+//				aluno.setEstadoCivil(comboBoxEstadoCivil.getSelectedItem().toString());
+//				aluno.setSexo(comboBoxSexo.getSelectedItem().toString());
+//				aluno.setSituacao(comboBoxSituacao.getSelectedItem().toString());
+				aluno.setEstadoCivil("S");
+				aluno.setSexo("M");
+				aluno.setSituacao("M");
+				
+				aluno.setEmail(txtEmail.getText());
+				aluno.setTelefone("83988236678");
+				aluno.setProfissao(txtProfissao.getText());
+				
+				aluno.setCep("58075060");
+				aluno.setRua(txtRua.getText());
+				aluno.setNumero(125);
+				aluno.setBairro(txtBairro.getText());
+				aluno.setCidade(txtCidade.getText());
+				aluno.setEstado(txtEstado.getText());
+				aluno.setComplemento(txtComplemento.getText());
+				aluno.setObservacao(txtPaneObservacao.getText());
+				
+				pAluno.insert(aluno);
 
 			}
 		});

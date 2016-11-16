@@ -118,8 +118,8 @@ public class ConsultaPessoa extends JInternalFrame {
             while(rs.next()){
                 dados.add(new Object[]{rs.getString("matricula"), rs.getString("nome"), rs.getString("cpf"), rs.getString("rg"), rs.getString("email"), rs.getDate("dtNascimento")});
             }
-            stmt.close();
-            con.getConnection().close();
+            //stmt.close();
+            //con.getConnection().close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "ERRO AO PREENCHER O ARRAYLIST!: " + e);
         }

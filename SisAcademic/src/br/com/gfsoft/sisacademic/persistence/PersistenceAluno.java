@@ -16,18 +16,25 @@ public class PersistenceAluno implements IPersistenceAluno {
 
 	@Override
 	public boolean insert(Aluno aluno) {
-
+		
+		PersistencePessoa pPessoa = new PersistencePessoa();
+		String sql;
+		int id;
+		
+		pPessoa.insert(aluno);
+		id = pPessoa.selectPessoa(aluno.getMatricula());
+		
+		sql = "INSERT INTO tb_Aluno(tb_Pessoa_idPessoa, dtMatricula, profissao) "
+				+ "VALUES("+ id + ",'16/11/2016','" + aluno.getProfissao() + "')";
+		
 		try {
-			stmt = con.getConnection().createStatement();
-			String sql = "INSERT INTO ...";
-			rs = stmt.executeQuery(sql);
-
+			con.getConnection().createStatement().executeUpdate(sql);
 			return true;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		
 		return false;
 	}
 

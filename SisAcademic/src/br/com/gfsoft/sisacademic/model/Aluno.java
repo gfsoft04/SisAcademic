@@ -1,13 +1,13 @@
 package br.com.gfsoft.sisacademic.model;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 public class Aluno extends Pessoa{
 	
 	/**
 	 * Atributos da classe Aluno
 	 */
-	private LocalDate dtMatricula;
+	private Date dtMatricula;
 	private String profissao;
 	
 	public Aluno getInstance(){
@@ -17,10 +17,10 @@ public class Aluno extends Pessoa{
 	/**
 	 * Metodos Getter's e Setter's
 	 */
-	public LocalDate getDtMatricula() {
+	public Date getDtMatricula() {
 		return dtMatricula;
 	}
-	public void setDtMatricula(LocalDate dtMatricula) {
+	public void setDtMatricula(Date dtMatricula) {
 		this.dtMatricula = dtMatricula;
 	}
 	public String getProfissao() {
