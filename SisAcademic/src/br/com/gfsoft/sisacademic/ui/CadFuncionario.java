@@ -353,11 +353,11 @@ public class CadFuncionario extends JInternalFrame {
 						btnCadastrar.setFont(new Font("Tahoma", Font.PLAIN, 11));
 						
 						JButton btnDeletar = new JButton("Deletar");
-						btnDeletar.setBounds(10, 99, 91, 30);
+						btnDeletar.setBounds(10, 99, 100, 30);
 						panel_4.add(btnDeletar);
 						
 						JButton btnAlterar = new JButton("Alterar");
-						btnAlterar.setBounds(189, 102, 91, 30);
+						btnAlterar.setBounds(180, 99, 100, 30);
 						panel_4.add(btnAlterar);
 						btnCadastrar.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {

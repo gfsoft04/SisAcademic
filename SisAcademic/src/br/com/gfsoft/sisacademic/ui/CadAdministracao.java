@@ -283,11 +283,11 @@ public class CadAdministracao extends JInternalFrame {
 		panel_5.add(button_1);
 		
 		JButton btnDeletar = new JButton("Deletar");
-		btnDeletar.setBounds(10, 106, 91, 30);
+		btnDeletar.setBounds(10, 106, 100, 30);
 		panel_5.add(btnDeletar);
 		
 		JButton btnAlterar = new JButton("Alterar");
-		btnAlterar.setBounds(189, 106, 91, 30);
+		btnAlterar.setBounds(180, 106, 100, 30);
 		panel_5.add(btnAlterar);
 
 	}
