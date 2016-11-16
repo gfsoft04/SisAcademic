@@ -27,7 +27,7 @@ public abstract class Pessoa{
 	private String estado; 			//sigla do estado 'PB'
 	private String observacao;
 	
-	public abstract Object getInstance();
+	public abstract Pessoa getInstance();
 	
 	/**
 	 * Metodos Getter's e Setter's

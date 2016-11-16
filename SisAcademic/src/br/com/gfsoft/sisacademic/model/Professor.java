@@ -6,7 +6,11 @@ public class Professor extends Funcionario{
 	/**
 	 * Atributos da classe Professor
 	 */
-	private String titularidade;		//(M) Mestrado, (D) Doutorado, (E) Especialista	
+	private String titularidade;		//(M) Mestrado, (D) Doutorado, (E) Especialista
+	
+	public Professor getInstance(){
+		return new Professor();
+	}
 
 	/**
 	 * Metodos Getter's e Setter's
