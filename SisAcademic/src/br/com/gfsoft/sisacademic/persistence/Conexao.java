@@ -36,7 +36,7 @@ public class Conexao {
 		password = properties.getProperty("password");
 	}
 
-	public static Connection getConnection() {
+	public Connection getConnection() {
 		
 		if (connection == null) {
 			try {

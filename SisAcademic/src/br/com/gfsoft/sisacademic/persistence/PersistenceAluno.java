@@ -3,6 +3,7 @@ package br.com.gfsoft.sisacademic.persistence;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.HashSet;
 import java.util.Set;
 
 import br.com.gfsoft.sisacademic.model.Aluno;
@@ -48,7 +49,7 @@ public class PersistenceAluno implements IPersistenceAluno {
 
 		try {
 			stmt = con.getConnection().createStatement();
-			String sql = "SELECT * FROM tabela WHERE matricula='" + matricula + "'";
+			String sql = "SELECT * FROM tb_Aluno WHERE matricula='" + matricula + "'";
 			rs = stmt.executeQuery(sql);
 
 			while (rs.next()) {
@@ -80,6 +81,40 @@ public class PersistenceAluno implements IPersistenceAluno {
 
 	@Override
 	public Set<Aluno> selectAlunos() {
+		Set<Aluno> alunos = new HashSet<>();
+		Aluno aluno = new Aluno();
+
+		try {
+			stmt = con.getConnection().createStatement();
+			String sql = "SELECT * FROM tb_Aluno";
+			rs = stmt.executeQuery(sql);
+
+			while (rs.next()) {
+				aluno.setMatricula(rs.getString("matricula"));
+				aluno.setNome(rs.getString("nome"));
+				aluno.setRg(rs.getString("rg"));
+				aluno.setCpf(rs.getString("cpf"));
+				aluno.setEmail(rs.getString("email"));
+				aluno.setProfissao(rs.getString("profissao"));
+				aluno.setTelefone(rs.getString("telefone"));
+				//aluno.setDtNascimento(rs.getDate("dtNascimento"));
+				aluno.setCep(rs.getString("cep"));
+				aluno.setRua(rs.getString("rua"));
+				aluno.setNumero(rs.getInt("numero"));
+				aluno.setBairro(rs.getString("bairro"));
+				aluno.setCidade(rs.getString("cidade"));
+				aluno.setEstado(rs.getString("estado"));
+				aluno.setComplemento(rs.getString("complemento"));
+				
+				alunos.add(aluno);
+			}
+			return alunos;
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		return null;
 	}
 
