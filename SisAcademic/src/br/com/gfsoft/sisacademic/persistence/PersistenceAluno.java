@@ -3,6 +3,7 @@ package br.com.gfsoft.sisacademic.persistence;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,22 +24,23 @@ public class PersistenceAluno implements IPersistenceAluno {
 		String sql;
 		int id;
 		
-		pPessoa.insert(aluno);
-		id = pPessoa.selectPessoa(aluno.getMatricula());
-		
-		sql = "INSERT INTO tb_Aluno(tb_Pessoa_idPessoa, dtMatricula, profissao) "
-				+ "VALUES("+ id + ","
-				+ "'"+ aluno.getDtNascimento().getDayOfMonth() + "/" + aluno.getDtNascimento().getMonthValue() + "/" + aluno.getDtNascimento().getYear() +"',"
-				+ "'"+ aluno.getProfissao() + "')";
-		
-		try {
-			con.getConnection().createStatement().executeUpdate(sql);
-			return true;
-		} catch (SQLException ex) {
-			// Excecao para banco de dados
-			ex.printStackTrace();
-			JOptionPane.showMessageDialog(null, "Erro na inserção dos dados na base!", "Erro", JOptionPane.ERROR_MESSAGE);
-		}
+		if(pPessoa.insert(aluno)){
+			id = pPessoa.selectPessoa(aluno.getMatricula());
+			
+			sql = "INSERT INTO tb_Aluno(tb_Pessoa_idPessoa, dtMatricula, profissao) "
+					+ "VALUES("+ id + ","
+					+ "'"+ aluno.getDtNascimento().getDayOfMonth() + "/" + aluno.getDtNascimento().getMonthValue() + "/" + aluno.getDtNascimento().getYear() +"',"
+					+ "'"+ aluno.getProfissao() + "')";
+			
+			try {
+				con.getConnection().createStatement().executeUpdate(sql);
+				return true;
+			} catch (SQLException ex) {
+				// Excecao para banco de dados
+				ex.printStackTrace();
+				JOptionPane.showMessageDialog(null, "Erro na inserção dos dados na base!", "Erro", JOptionPane.ERROR_MESSAGE);
+			}
+		}//if inseriu corretamente em pessoa
 		
 		return false;
 	}
@@ -58,10 +60,10 @@ public class PersistenceAluno implements IPersistenceAluno {
 	@Override
 	public Aluno selectAluno(String matricula) {
 		Aluno aluno = new Aluno();
+		String sql = "SELECT * FROM tb_Aluno WHERE matricula='" + matricula + "'";
 
 		try {
 			stmt = con.getConnection().createStatement();
-			String sql = "SELECT * FROM tb_Aluno WHERE matricula='" + matricula + "'";
 			rs = stmt.executeQuery(sql);
 
 			while (rs.next()) {
@@ -70,9 +72,13 @@ public class PersistenceAluno implements IPersistenceAluno {
 				aluno.setRg(rs.getString("rg"));
 				aluno.setCpf(rs.getString("cpf"));
 				aluno.setEmail(rs.getString("email"));
+				aluno.setEstadoCivil(rs.getString("estadoCivil"));
+				aluno.setSexo(rs.getString("sexo"));
+				aluno.setSituacao(rs.getString("situacao"));
 				aluno.setProfissao(rs.getString("profissao"));
 				aluno.setTelefone(rs.getString("telefone"));
-				//aluno.setDtNascimento(rs.getDate("dtNascimento"));
+				aluno.setDtNascimento(LocalDate.of(rs.getDate("dtNascimento").getDay(), rs.getDate("dtNascimento").getMonth(), rs.getDate("dtNascimento").getYear()));
+				aluno.setDtMatricula(LocalDate.of(rs.getDate("dtMatricula").getDay(), rs.getDate("dtMatricula").getMonth(), rs.getDate("dtMatricula").getYear()));
 				aluno.setCep(rs.getString("cep"));
 				aluno.setRua(rs.getString("rua"));
 				aluno.setNumero(rs.getInt("numero"));

@@ -123,6 +123,34 @@ public class PersistencePessoa implements IPersistencePessoa {
 		return true;
 	}
 	
+	public boolean selectRg(String rg){
+		
+		String sql = "SELECT * FROM tb_Pessoa WHERE rg='" + rg + "'";
+		String campo = "";
+		
+		try {
+			stmt = con.getConnection().prepareStatement(sql);
+			rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				campo = rs.getString("cpf");
+				System.out.println("entrou na while!");
+			}
+			
+			System.out.println(campo);
+			
+			if(campo.equals("")){
+				return false;
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return true;
+	}
+	
 	public int selectUltimoID(){
 		String sql = "SELECT * FROM tb_Pessoa ORDER BY idPessoa";
 		int id = 0;

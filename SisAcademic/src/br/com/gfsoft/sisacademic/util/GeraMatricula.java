@@ -5,7 +5,7 @@ import br.com.gfsoft.sisacademic.persistence.PersistencePessoa;
 public class GeraMatricula {
 	
 	private String matricula;
-	private int id;
+	private String id;
 	PersistencePessoa pPessoa;
 	
 	/**
@@ -15,15 +15,17 @@ public class GeraMatricula {
 	 */
 	public String gerarMatricula(int tipoPessoa, int ano){// parametro tipo de pessoal
 		pPessoa = new PersistencePessoa();
-		id = pPessoa.selectUltimoID();
-
+		id = String.valueOf(pPessoa.selectUltimoID());
 		
+		while(id.length() < 5){
+			id = "0" + id;
+		}
 		
 		matricula = tipoPessoa + ano + "semestre" + id;
 		
 		
-		
 		return matricula;
+		
 	}
 
 }
