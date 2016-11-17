@@ -23,7 +23,6 @@ public class GeraMatricula {
 		
 		matricula = tipoPessoa + ano + "semestre" + id;
 		
-		
 		return matricula;
 		
 	}

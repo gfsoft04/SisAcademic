@@ -393,8 +393,12 @@ public class CadAluno extends JInternalFrame {
 					
 					String cpf = formattedTxtCpf.getText().replace(".", "").replace("-", "");
 					
-					if(pPessoa.selectCpf(cpf)){
+					if(pPessoa.qtdRegistros("cpf", cpf) == 0){
 						System.out.println("CPF NAO ENCONTRADO!");
+					}
+					
+					if(pPessoa.qtdRegistros("rg", txtRg.getText()) == 0){
+						System.out.println("RG NAO ENCONTRADO!");
 					}
 					
 					

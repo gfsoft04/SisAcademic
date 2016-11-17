@@ -2,16 +2,17 @@ package br.com.gfsoft.sisacademic.util;
 
 public class VerificaCamposUnique {
 
-	public void validaCpf() {
-
-	}
-
-	public void validaRg() {
+	
+	public void verificaRg() {
 
 	}
 
 	private void verificaCpf(){
 		
+	}
+	
+	public void validaCpf() {
+
 	}
 
 }

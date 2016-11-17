@@ -95,62 +95,36 @@ public class PersistencePessoa implements IPersistencePessoa {
 		return null;
 	}
 	
-	public boolean selectCpf(String cpf){
+	/**
+	 * Metodo para buscar quantidade de registros (CPF OU RG)
+	 * 
+	 * @param campo -> Coluna ou Campo da tabela
+	 * @param valor -> Valor a ser buscado
+	 * @return quantidade de registros encontrado na base
+	 */
+	public int qtdRegistros(String campo, String valor){
 		
-		String sql = "SELECT * FROM tb_Pessoa WHERE cpf='" + cpf + "'";
-		String campo = "";
-		
-		try {
-			stmt = con.getConnection().prepareStatement(sql);
-			rs = stmt.executeQuery();
-
-			while (rs.next()) {
-				campo = rs.getString("cpf");
-				System.out.println("entrou na while!");
-			}
-			
-			System.out.println(campo);
-			
-			if(campo.equals("")){
-				return false;
-			}
-
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return true;
-	}
-	
-	public boolean selectRg(String rg){
-		
-		String sql = "SELECT * FROM tb_Pessoa WHERE rg='" + rg + "'";
-		String campo = "";
+		String sql = "SELECT COUNT(*) AS QTD FROM tb_Pessoa WHERE " + campo + "='" + valor + "'";
+		int qtd = 0;
 		
 		try {
 			stmt = con.getConnection().prepareStatement(sql);
 			rs = stmt.executeQuery();
 
 			while (rs.next()) {
-				campo = rs.getString("cpf");
-				System.out.println("entrou na while!");
+				qtd = rs.getInt("QTD");
+				System.out.println(qtd);
 			}
 			
-			System.out.println(campo);
-			
-			if(campo.equals("")){
-				return false;
-			}
-
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		return true;
+		return qtd;
 	}
 	
+
 	public int selectUltimoID(){
 		String sql = "SELECT * FROM tb_Pessoa ORDER BY idPessoa";
 		int id = 0;
@@ -164,7 +138,6 @@ public class PersistencePessoa implements IPersistencePessoa {
 			}
 			
 			System.out.println(id);
-			return id;
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
