@@ -38,7 +38,7 @@ public class PersistenceAluno implements IPersistenceAluno {
 			} catch (SQLException ex) {
 				// Excecao para banco de dados
 				ex.printStackTrace();
-				JOptionPane.showMessageDialog(null, "Erro na insercao dos dados na base!", "Erro", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Erro na insercao do aluno na base!", "Erro", JOptionPane.ERROR_MESSAGE);
 			}
 		}//if inseriu corretamente em pessoa
 		
@@ -92,6 +92,7 @@ public class PersistenceAluno implements IPersistenceAluno {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Erro na busca do aluno na base!", "Erro", JOptionPane.ERROR_MESSAGE);
 		}
 
 		return null;
@@ -113,9 +114,13 @@ public class PersistenceAluno implements IPersistenceAluno {
 				aluno.setRg(rs.getString("rg"));
 				aluno.setCpf(rs.getString("cpf"));
 				aluno.setEmail(rs.getString("email"));
+				aluno.setEstadoCivil(rs.getString("estadoCivil"));
+				aluno.setSexo(rs.getString("sexo"));
+				aluno.setSituacao(rs.getString("situacao"));
 				aluno.setProfissao(rs.getString("profissao"));
 				aluno.setTelefone(rs.getString("telefone"));
-				//aluno.setDtNascimento(rs.getDate("dtNascimento"));
+				aluno.setDtNascimento(LocalDate.of(rs.getDate("dtNascimento").getDay(), rs.getDate("dtNascimento").getMonth(), rs.getDate("dtNascimento").getYear()));
+				aluno.setDtMatricula(LocalDate.of(rs.getDate("dtMatricula").getDay(), rs.getDate("dtMatricula").getMonth(), rs.getDate("dtMatricula").getYear()));
 				aluno.setCep(rs.getString("cep"));
 				aluno.setRua(rs.getString("rua"));
 				aluno.setNumero(rs.getInt("numero"));
@@ -131,6 +136,7 @@ public class PersistenceAluno implements IPersistenceAluno {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Erro na busca dos alunos na base!", "Erro", JOptionPane.ERROR_MESSAGE);
 		}
 		
 		return null;
