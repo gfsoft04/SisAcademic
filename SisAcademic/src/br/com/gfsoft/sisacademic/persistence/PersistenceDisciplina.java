@@ -3,6 +3,7 @@ package br.com.gfsoft.sisacademic.persistence;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JOptionPane;
@@ -59,7 +60,34 @@ public class PersistenceDisciplina implements IPersistenceDisciplina {
 
 	@Override
 	public boolean update(Disciplina disciplina) {
-		// TODO Auto-generated method stub
+		
+		String sql = "UPDATE tb_Disciplina SET nome = '"+disciplina.getNome()+"',"
+				+ " descricao = '"+disciplina.getDescricao()+"',"
+				+ " dtCriacao = '"+disciplina.getDtCriacao()+"',"
+				+ " situacao = '"+disciplina.getSituacao()+"',"
+				+ " semestre = '"+disciplina.getSemestre()+"',"
+				+ " observacao = '"+disciplina.getObservacao()+"'"
+				+ " WHERE idDisciplina = "+disciplina.getId()+"";
+		
+		try {
+			//Nao tenho certeza se e a mesma linha para alterar
+			con.getConnection().createStatement().executeUpdate(sql);
+			return true;
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		} /*finally {
+			if (con != null)
+				con.close();
+			
+			if (stmt != null)
+				stmt.close();
+
+			if (rs != null)
+				rs.close();
+			System.out.println("--- Após encerrar as conexões. ---");
+		}*/
+		
 		return false;
 	}
 
@@ -105,7 +133,45 @@ public class PersistenceDisciplina implements IPersistenceDisciplina {
 
 	@Override
 	public List<Disciplina> selectDisciplinas() {
-		// TODO Auto-generated method stub
+		
+		List<Disciplina> disciplinas =  new ArrayList<>();
+		Disciplina disciplina;
+		
+		try {
+			stmt = con.getConnection().createStatement();
+			String sql = "SELECT * FROM tb_Disciplina";
+			rs = stmt.executeQuery(sql);
+			
+			while(rs.next()){
+				disciplina = new Disciplina();
+				
+				disciplina.setNome(rs.getString("nome"));
+				disciplina.setDescricao(rs.getString("descricao"));
+				//disciplina.setDtCriacao();
+				disciplina.setSituacao(rs.getString("situacao"));
+				disciplina.setSemestre(rs.getString("semestre"));
+				disciplina.setObservacao(rs.getString("observacao"));
+				
+				disciplinas.add(disciplina);
+			}
+			
+			return disciplinas;
+			
+		} catch (SQLException e) {
+		
+			e.printStackTrace();
+		} /*finally {
+			if (con != null)
+				con.close();
+	
+			if (stmt != null)
+				stmt.close();
+
+			if (rs != null)
+				rs.close();
+			System.out.println("--- Após encerrar as conexões. ---");
+		}*/
+
 		return null;
 	}
 
