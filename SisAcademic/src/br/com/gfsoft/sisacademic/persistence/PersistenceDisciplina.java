@@ -45,7 +45,7 @@ public class PersistenceDisciplina implements IPersistenceDisciplina {
 		
 		String sql;
 		
-		sql = "DELETE FROM tb_Disciplina WHERE ... id/nome";
+		sql = "DELETE FROM tb_Disciplina WHERE id = "+disciplina.getId()+"";
 		
 		try {
 			con.getConnection().createStatement().executeUpdate(sql);

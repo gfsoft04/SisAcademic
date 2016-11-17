@@ -395,10 +395,14 @@ public class CadAluno extends JInternalFrame {
 					
 					if(pPessoa.qtdRegistros("cpf", cpf) == 0){
 						System.out.println("CPF NAO ENCONTRADO!");
+					} else {
+						System.out.println("CPF ENCONTRADO");
 					}
 					
 					if(pPessoa.qtdRegistros("rg", txtRg.getText()) == 0){
 						System.out.println("RG NAO ENCONTRADO!");
+					} else {
+						System.out.println("RG ENCONTRADO");
 					}
 					
 					
@@ -419,7 +423,7 @@ public class CadAluno extends JInternalFrame {
 					LocalDate dtMatricula = LocalDate.of(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
 					
 					
-					aluno.setMatricula("7675675");
+					aluno.setMatricula("767495675");
 					
 					aluno.setNome(txtNome.getText());
 					aluno.setCpf(cpf);

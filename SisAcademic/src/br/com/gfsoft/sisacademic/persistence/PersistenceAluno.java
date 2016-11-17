@@ -47,13 +47,57 @@ public class PersistenceAluno implements IPersistenceAluno {
 
 	@Override
 	public boolean delete(Aluno aluno) {
-		// TODO Auto-generated method stub
+		
+		String sqlAluno;
+		String sqlPessoa;
+		
+		sqlAluno = "DELETE FROM tb_Aluno WHERE tb_Pessoa_idPessoa = "+aluno.getId()+"";
+		
+		sqlPessoa = "DELETE FROM tb_Pessoa WHERE idPessoa = "+aluno.getId()+"";
+		
+		try {
+			con.getConnection().createStatement().executeUpdate(sqlAluno);
+			con.getConnection().createStatement().executeUpdate(sqlPessoa);
+			return true;
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Erro ao deletar dados na base!", "Erro", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+		}
+		
 		return false;
 	}
 
 	@Override
 	public boolean update(Aluno aluno) {
-		// TODO Auto-generated method stub
+		
+		PersistencePessoa pPessoa = new PersistencePessoa();
+		
+		if(pPessoa.update(aluno)){
+			
+			String sql = "UPDATE tb_Aluno SET "
+					+ "profissao = '" + aluno.getProfissao() + "' "
+					+ "WHERE tb_Pessoa_idPessoa = " + aluno.getId();
+			
+			try {
+				//Nao tenho certeza se e a mesma linha para alterar(executeUpdate)
+				con.getConnection().createStatement().executeUpdate(sql);
+				return true;
+			} catch (SQLException e) {
+				
+				e.printStackTrace();
+			} /*finally {
+				if (con != null)
+					con.close();
+				
+				if (stmt != null)
+					stmt.close();
+	
+				if (rs != null)
+					rs.close();
+				System.out.println("--- Após encerrar as conexões. ---");
+			}*/
+		}
+		
 		return false;
 	}
 
@@ -101,7 +145,7 @@ public class PersistenceAluno implements IPersistenceAluno {
 	@Override
 	public Set<Aluno> selectAlunos() {
 		Set<Aluno> alunos = new HashSet<>();
-		Aluno aluno = new Aluno();
+		Aluno aluno;
 
 		try {
 			stmt = con.getConnection().createStatement();
@@ -109,6 +153,8 @@ public class PersistenceAluno implements IPersistenceAluno {
 			rs = stmt.executeQuery(sql);
 
 			while (rs.next()) {
+				aluno = new Aluno();
+				
 				aluno.setMatricula(rs.getString("matricula"));
 				aluno.setNome(rs.getString("nome"));
 				aluno.setRg(rs.getString("rg"));

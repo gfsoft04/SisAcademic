@@ -55,13 +55,61 @@ public class PersistencePessoa implements IPersistencePessoa {
 
 	@Override
 	public boolean delete(Pessoa pessoa) {
-		// TODO Auto-generated method stub
+		
+		String sql;
+		
+		sql = "DELETE FROM tb_Pessoa WHERE idPessoa = "+pessoa.getId()+"";
+		
+		try {
+			con.getConnection().createStatement().executeUpdate(sql);
+			return true;
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Erro ao deletar dados na base!", "Erro", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+		}
+		
+		
 		return false;
 	}
 
 	@Override
 	public boolean update(Pessoa pessoa) {
-		// TODO Auto-generated method stub
+		
+		String sql = "UPDATE tb_Pessoa SET nome = '"+pessoa.getNome()+"',"
+				+ " estadoCivil = '"+pessoa.getEstadoCivil()+"',"
+				+ " sexo = '"+pessoa.getSexo()+"',"
+				+ " situacao = '"+pessoa.getSituacao()+"',"
+				+ " email = '"+pessoa.getEmail()+"',"
+				+ " telefone = '"+pessoa.getTelefone()+"',"
+				+ " rua = '"+pessoa.getRua()+"',"
+				+ " numero = "+pessoa.getNumero()+","
+				+ " complemento = '"+pessoa.getComplemento()+"',"
+				+ " cep = '"+pessoa.getCep()+"',"
+				+ " bairro = '"+pessoa.getBairro()+"',"
+				+ " cidade = '"+pessoa.getCidade()+"',"
+				+ " estado = '"+pessoa.getEstado()+"',"
+				+ " observacao = '"+pessoa.getObservacao()+"'"
+																				
+				+ " WHERE idPessoa = "+pessoa.getId()+"";
+		
+		try {
+			con.getConnection().createStatement().executeUpdate(sql);
+			return true;
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		} /*finally {
+			if (con != null)
+				con.close();
+			
+			if (stmt != null)
+				stmt.close();
+
+			if (rs != null)
+				rs.close();
+			System.out.println("--- Após encerrar as conexões. ---");
+		}*/
+		
 		return false;
 	}
 
@@ -113,7 +161,6 @@ public class PersistencePessoa implements IPersistencePessoa {
 
 			while (rs.next()) {
 				qtd = rs.getInt("QTD");
-				System.out.println(qtd);
 			}
 			
 		} catch (SQLException e) {
