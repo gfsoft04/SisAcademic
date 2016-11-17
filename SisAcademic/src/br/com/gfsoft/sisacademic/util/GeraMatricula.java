@@ -1,41 +1,29 @@
 package br.com.gfsoft.sisacademic.util;
 
-import br.com.gfsoft.sisacademic.model.Pessoa;
+import br.com.gfsoft.sisacademic.persistence.PersistencePessoa;
 
 public class GeraMatricula {
 	
 	private String matricula;
+	private int id;
+	PersistencePessoa pPessoa;
 	
 	/**
 	 * 
 	 * @param String contendo o tipo de Pessoa
 	 * @return String -> Matricula ou NULL, se der problema
 	 */
-	public String gerarMatricula(Pessoa pessoa){// parametro tipo de pessoal
+	public String gerarMatricula(int tipoPessoa, int ano){// parametro tipo de pessoal
+		pPessoa = new PersistencePessoa();
+		id = pPessoa.selectUltimoID();
 
-		if(pessoa.getTipoPessoa().equals("Aluno")){
-			
-			matricula = "1" + "ano" + "semestre" + "pessoa.getId()";
-			return matricula;
-			
-		} else if(pessoa.getTipoPessoa().equals("Professor")){
-			
-			matricula = "2" + "ano" + "semestre" + "pessoa.getId()";
-			return matricula;
-			
-		} else if(pessoa.getTipoPessoa().equals("Funcionario")){
-			
-			matricula = "3" + "ano" + "semestre" + "pessoa.getId()";
-			return matricula;
-			
-		} else if(pessoa.getTipoPessoa().equals("Administracao")) {
-			
-			matricula = "9" + "ano" + "semestre" + "pessoa.getId()";
-			return matricula;
-			
-		}
 		
-		return null;
+		
+		matricula = tipoPessoa + ano + "semestre" + id;
+		
+		
+		
+		return matricula;
 	}
 
 }

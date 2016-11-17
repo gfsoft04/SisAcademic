@@ -9,6 +9,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.text.ParseException;
+import java.time.DateTimeException;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
@@ -19,6 +21,7 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
@@ -28,6 +31,7 @@ import javax.swing.border.TitledBorder;
 import br.com.gfsoft.sisacademic.model.Aluno;
 import br.com.gfsoft.sisacademic.model.Endereco;
 import br.com.gfsoft.sisacademic.persistence.PersistenceAluno;
+import br.com.gfsoft.sisacademic.persistence.PersistencePessoa;
 import br.com.gfsoft.sisacademic.util.BuscaCep;
 
 public class CadAluno extends JInternalFrame {
@@ -146,38 +150,38 @@ public class CadAluno extends JInternalFrame {
 		txtNumero.setColumns(10);
 
 		JLabel lblBairro = new JLabel("Bairro:");
-		lblBairro.setBounds(38, 93, 44, 14);
+		lblBairro.setBounds(417, 92, 44, 14);
 		pane_2.add(lblBairro);
 
 		txtBairro = new JTextField();
-		txtBairro.setBounds(94, 90, 248, 20);
+		txtBairro.setBounds(479, 89, 248, 20);
 		pane_2.add(txtBairro);
 		txtBairro.setColumns(10);
 
 		JLabel lblCidade = new JLabel("Cidade:");
-		lblCidade.setBounds(393, 93, 42, 14);
+		lblCidade.setBounds(40, 143, 42, 14);
 		pane_2.add(lblCidade);
 
 		txtCidade = new JTextField();
 		txtCidade.setColumns(10);
-		txtCidade.setBounds(447, 90, 250, 20);
+		txtCidade.setBounds(94, 140, 250, 20);
 		pane_2.add(txtCidade);
 
 		JLabel lblEstado = new JLabel("Estado:");
-		lblEstado.setBounds(40, 139, 42, 14);
+		lblEstado.setBounds(395, 143, 42, 14);
 		pane_2.add(lblEstado);
 
 		txtEstado = new JTextField();
 		txtEstado.setColumns(10);
-		txtEstado.setBounds(102, 136, 250, 20);
+		txtEstado.setBounds(455, 140, 250, 20);
 		pane_2.add(txtEstado);
 
 		JLabel lblComplemento = new JLabel("Complemento: ");
-		lblComplemento.setBounds(386, 139, 98, 14);
+		lblComplemento.setBounds(40, 92, 98, 14);
 		pane_2.add(lblComplemento);
 
 		txtComplemento = new JTextField();
-		txtComplemento.setBounds(488, 136, 238, 20);
+		txtComplemento.setBounds(141, 89, 238, 20);
 		pane_2.add(txtComplemento);
 		txtComplemento.setColumns(10);
 
@@ -228,16 +232,16 @@ public class CadAluno extends JInternalFrame {
 		pane_1.setLayout(null);
 
 		JLabel lblNewLabel = new JLabel("Nome:");
-		lblNewLabel.setBounds(10, 26, 43, 14);
+		lblNewLabel.setBounds(12, 30, 43, 14);
 		pane_1.add(lblNewLabel);
 
 		txtNome = new JTextField();
-		txtNome.setBounds(49, 23, 329, 20);
+		txtNome.setBounds(51, 27, 329, 20);
 		pane_1.add(txtNome);
 		txtNome.setColumns(10);
 
 		JLabel lblDataDeNascimento = new JLabel("Data de Nascimento:");
-		lblDataDeNascimento.setBounds(10, 71, 108, 14);
+		lblDataDeNascimento.setBounds(10, 69, 132, 14);
 		pane_1.add(lblDataDeNascimento);
 
 		formattedTxtDtNascimento = new JFormattedTextField();
@@ -252,43 +256,42 @@ public class CadAluno extends JInternalFrame {
 				}
 			}
 		});
-		formattedTxtDtNascimento.setBounds(122, 68, 139, 20);
+		formattedTxtDtNascimento.setBounds(152, 66, 140, 20);
 		pane_1.add(formattedTxtDtNascimento);
 
 		JLabel lblEmail = new JLabel("Email:");
-		lblEmail.setBounds(10, 112, 35, 14);
+		lblEmail.setBounds(10, 155, 35, 14);
 		pane_1.add(lblEmail);
 
 		txtEmail = new JTextField();
-		txtEmail.setBounds(49, 109, 250, 20);
+		txtEmail.setBounds(61, 152, 250, 20);
 		pane_1.add(txtEmail);
 		txtEmail.setColumns(10);
 
 		JLabel lblTelefone = new JLabel("Telefone:");
-		lblTelefone.setBounds(309, 112, 60, 14);
+		lblTelefone.setBounds(343, 155, 60, 14);
 		pane_1.add(lblTelefone);
 
 		JLabel lblEstadoCivil = new JLabel("Estado Civil:");
-		lblEstadoCivil.setBounds(291, 71, 86, 14);
+		lblEstadoCivil.setBounds(10, 112, 86, 14);
 		pane_1.add(lblEstadoCivil);
 
 		comboBoxEstadoCivil = new JComboBox();
-		comboBoxEstadoCivil.setBounds(368, 67, 151, 22);
+		comboBoxEstadoCivil.setBounds(98, 108, 151, 22);
 		pane_1.add(comboBoxEstadoCivil);
-		comboBoxEstadoCivil.setModel(new DefaultComboBoxModel(
-				new String[] { "Solteiro", "Casado", "Vi\u00FAvo", "Divorciado", "Uni\u00E3o Est\u00E1vel" }));
+		comboBoxEstadoCivil.setModel(new DefaultComboBoxModel(new String[] {"S - Solteiro", "C - Casado", "V - Vi\u00FAvo", "D - Divorciado", "UE - Uni\u00E3o Est\u00E1vel"}));
 
 		txtRg = new JTextField();
-		txtRg.setBounds(420, 23, 139, 20);
+		txtRg.setBounds(445, 27, 139, 20);
 		pane_1.add(txtRg);
 		txtRg.setColumns(10);
 
 		JLabel lblRg = new JLabel("RG:");
-		lblRg.setBounds(388, 26, 24, 14);
+		lblRg.setBounds(414, 30, 24, 14);
 		pane_1.add(lblRg);
 
 		formattedTxtCpf = new JFormattedTextField();
-		formattedTxtCpf.setBounds(599, 23, 139, 20);
+		formattedTxtCpf.setBounds(647, 27, 139, 20);
 		pane_1.add(formattedTxtCpf);
 		formattedTxtCpf.addFocusListener(new FocusAdapter() {
 			@Override
@@ -303,17 +306,17 @@ public class CadAluno extends JInternalFrame {
 		});
 
 		JLabel lblCpf = new JLabel("CPF:");
-		lblCpf.setBounds(569, 26, 35, 14);
+		lblCpf.setBounds(605, 30, 35, 14);
 		pane_1.add(lblCpf);
 
 		JLabel lblSexo = new JLabel("Sexo:");
-		lblSexo.setBounds(538, 71, 44, 14);
+		lblSexo.setBounds(292, 112, 44, 14);
 		pane_1.add(lblSexo);
 
 		comboBoxSexo = new JComboBox();
-		comboBoxSexo.setBounds(569, 67, 151, 22);
+		comboBoxSexo.setBounds(343, 108, 151, 22);
 		pane_1.add(comboBoxSexo);
-		comboBoxSexo.setModel(new DefaultComboBoxModel(new String[] { "Masculino", "Feminino" }));
+		comboBoxSexo.setModel(new DefaultComboBoxModel(new String[] {"M - Masculino", "F - Feminino"}));
 
 		formattedTxtTelefone = new JFormattedTextField();
 		formattedTxtTelefone.addFocusListener(new FocusAdapter() {
@@ -327,34 +330,44 @@ public class CadAluno extends JInternalFrame {
 				}
 			}
 		});
-		formattedTxtTelefone.setBounds(368, 109, 151, 20);
+		formattedTxtTelefone.setBounds(412, 152, 151, 20);
 		pane_1.add(formattedTxtTelefone);
 
 		JLabel lblProfisso = new JLabel("Profiss\u00E3o:");
-		lblProfisso.setBounds(538, 112, 58, 14);
+		lblProfisso.setBounds(580, 155, 58, 14);
 		pane_1.add(lblProfisso);
 
 		txtProfissao = new JTextField();
 		txtProfissao.setColumns(10);
-		txtProfissao.setBounds(596, 109, 180, 20);
+		txtProfissao.setBounds(656, 152, 180, 20);
 		pane_1.add(txtProfissao);
 
 		JLabel lblNewLabel_1 = new JLabel("Situa\u00E7\u00E3o:");
-		lblNewLabel_1.setBounds(730, 71, 46, 14);
+		lblNewLabel_1.setBounds(536, 112, 66, 14);
 		pane_1.add(lblNewLabel_1);
 
 		comboBoxSituacao = new JComboBox();
-		comboBoxSituacao.setModel(new DefaultComboBoxModel(
-				new String[] { "Matriculado(M)", "N\u00E3o Matriculado(N)", "Ativo(A)", "Inativo(I) " }));
-		comboBoxSituacao.setBounds(786, 68, 139, 20);
+		comboBoxSituacao.setModel(new DefaultComboBoxModel(new String[] {"M - Matriculado", "N - N\u00E3o Matriculado", "A - Ativo", "I - Inativo "}));
+		comboBoxSituacao.setBounds(603, 109, 151, 20);
 		pane_1.add(comboBoxSituacao);
 
 		JLabel lblDataDeMatricula = new JLabel("Data de matr\u00EDcula:");
-		lblDataDeMatricula.setBounds(10, 153, 92, 14);
+		lblDataDeMatricula.setBounds(362, 69, 116, 14);
 		pane_1.add(lblDataDeMatricula);
 
 		JFormattedTextField formattedTxtDtMatricula = new JFormattedTextField();
-		formattedTxtDtMatricula.setBounds(112, 150, 108, 20);
+		formattedTxtDtMatricula.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				try {
+					formattedTxtDtMatricula.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(
+							new javax.swing.text.MaskFormatter("##/##/####")));
+				} catch (ParseException pe) {
+					pe.printStackTrace();
+				}
+			}
+		});
+		formattedTxtDtMatricula.setBounds(496, 66, 140, 20);
 		pane_1.add(formattedTxtDtMatricula);
 		formattedTxtDtNascimento.addFocusListener(new FocusAdapter() {
 			@Override
@@ -369,38 +382,70 @@ public class CadAluno extends JInternalFrame {
 		});
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
-				Aluno aluno = new Aluno();
-				PersistenceAluno pAluno = new PersistenceAluno();
 				
-				aluno.setNome(txtNome.getText());
-				aluno.setMatricula("7675675");
-				aluno.setCpf("08747786460");
-				//aluno.setCpf(formattedTxtCpf.getText());
-				aluno.setRg(txtRg.getText());
-				//aluno.setDtNascimento(Date.);
-//				aluno.setEstadoCivil(comboBoxEstadoCivil.getSelectedItem().toString());
-//				aluno.setSexo(comboBoxSexo.getSelectedItem().toString());
-//				aluno.setSituacao(comboBoxSituacao.getSelectedItem().toString());
-				aluno.setEstadoCivil("S");
-				aluno.setSexo("M");
-				aluno.setSituacao("M");
+				//VERIFICAR OS CAMPOS OBRIGATORIOS PREENCHIDOS
+				//if(campo.getText.equals("")){}
 				
-				aluno.setEmail(txtEmail.getText());
-				aluno.setTelefone("83988236678");
-				aluno.setProfissao(txtProfissao.getText());
-				
-				aluno.setCep("58075060");
-				aluno.setRua(txtRua.getText());
-				aluno.setNumero(125);
-				aluno.setBairro(txtBairro.getText());
-				aluno.setCidade(txtCidade.getText());
-				aluno.setEstado(txtEstado.getText());
-				aluno.setComplemento(txtComplemento.getText());
-				aluno.setObservacao(txtPaneObservacao.getText());
-				
-				pAluno.insert(aluno);
-
+				try {
+					Aluno aluno = new Aluno();
+					PersistencePessoa pPessoa = new PersistencePessoa();
+					PersistenceAluno pAluno = new PersistenceAluno();
+					
+					String cpf = formattedTxtCpf.getText().replace(".", "").replace("-", "");
+					
+					if(pPessoa.selectCpf(cpf)){
+						System.out.println("CPF NAO ENCONTRADO!");
+					}
+					
+					
+					String telefone = formattedTxtTelefone.getText().replace("(", "").replace(")", "").replace("-", "");
+					String cep = formattedTxtCep.getText().replace("-", "");
+					String estadoCivil = comboBoxEstadoCivil.getSelectedItem().toString().substring(0, 2).trim();
+					String sexo = comboBoxSexo.getSelectedItem().toString().substring(0, 2).trim();
+					String situacao = comboBoxSituacao.getSelectedItem().toString().substring(0, 2).trim();
+					
+					String dia = formattedTxtDtNascimento.getText().substring(0, 2);
+					String mes = formattedTxtDtNascimento.getText().substring(3, 5);
+					String ano = formattedTxtDtNascimento.getText().substring(6, 10);
+					LocalDate dtNascimento = LocalDate.of(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
+					
+					dia = formattedTxtDtMatricula.getText().substring(0, 2);
+					mes = formattedTxtDtMatricula.getText().substring(3, 5);
+					ano = formattedTxtDtMatricula.getText().substring(6, 10);
+					LocalDate dtMatricula = LocalDate.of(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
+					
+					
+					aluno.setMatricula("7675675");
+					
+					aluno.setNome(txtNome.getText());
+					aluno.setCpf(cpf);
+					aluno.setRg(txtRg.getText());
+					aluno.setDtNascimento(dtNascimento);
+					aluno.setEstadoCivil(estadoCivil);
+					aluno.setSexo(sexo);
+					aluno.setSituacao(situacao);
+					aluno.setEmail(txtEmail.getText());
+					aluno.setTelefone(telefone);
+					aluno.setProfissao(txtProfissao.getText());
+					aluno.setCep(cep);
+					aluno.setRua(txtRua.getText());
+					aluno.setNumero(Integer.parseInt(txtNumero.getText()));
+					aluno.setBairro(txtBairro.getText());
+					aluno.setCidade(txtCidade.getText());
+					aluno.setEstado(txtEstado.getText());
+					aluno.setComplemento(txtComplemento.getText());
+					aluno.setObservacao(txtPaneObservacao.getText());
+					
+					pAluno.insert(aluno);
+					JOptionPane.showMessageDialog(null, "Cadastro eferuado com sucesso!", "Cadastrado", JOptionPane.INFORMATION_MESSAGE);
+					
+				} catch (DateTimeException ex) {
+					// Excesao para data invalida
+					JOptionPane.showMessageDialog(null, "Data Invalida!", "Erro", JOptionPane.ERROR_MESSAGE);
+				} catch (NumberFormatException ex) {
+					// Excecao para conversao de texto em numero
+					JOptionPane.showMessageDialog(null, "Campo numero só aceita digitos", "Erro", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 	}

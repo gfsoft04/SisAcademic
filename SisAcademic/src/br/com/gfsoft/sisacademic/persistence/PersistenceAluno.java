@@ -6,6 +6,8 @@ import java.sql.Statement;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.swing.JOptionPane;
+
 import br.com.gfsoft.sisacademic.model.Aluno;
 
 public class PersistenceAluno implements IPersistenceAluno {
@@ -25,14 +27,17 @@ public class PersistenceAluno implements IPersistenceAluno {
 		id = pPessoa.selectPessoa(aluno.getMatricula());
 		
 		sql = "INSERT INTO tb_Aluno(tb_Pessoa_idPessoa, dtMatricula, profissao) "
-				+ "VALUES("+ id + ",'16/11/2016','" + aluno.getProfissao() + "')";
+				+ "VALUES("+ id + ","
+				+ "'"+ aluno.getDtNascimento().getDayOfMonth() + "/" + aluno.getDtNascimento().getMonthValue() + "/" + aluno.getDtNascimento().getYear() +"',"
+				+ "'"+ aluno.getProfissao() + "')";
 		
 		try {
 			con.getConnection().createStatement().executeUpdate(sql);
 			return true;
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (SQLException ex) {
+			// Excecao para banco de dados
+			ex.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Erro na inserção dos dados na base!", "Erro", JOptionPane.ERROR_MESSAGE);
 		}
 		
 		return false;

@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Set;
 
+import javax.swing.JOptionPane;
+
 import br.com.gfsoft.sisacademic.model.Pessoa;
 
 public class PersistencePessoa implements IPersistencePessoa {
@@ -26,8 +28,7 @@ public class PersistencePessoa implements IPersistencePessoa {
 						+ "'"+ pessoa.getEstadoCivil() +"',"
 						+ "'"+ pessoa.getSexo() +"',"
 						+ "'"+ pessoa.getSituacao() +"',"
-						+"'29/02/1992',"
-						//+ "'"+ pessoa.getDtNascimento() +"',"
+						+ "'"+ pessoa.getDtNascimento().getDayOfMonth() + "/" + pessoa.getDtNascimento().getMonthValue() + "/" + pessoa.getDtNascimento().getYear() +"',"
 						+ "'"+ pessoa.getEmail() +"',"
 						+ "'"+ pessoa.getTelefone() +"',"
 						+ "'"+ pessoa.getRua() +"',"
@@ -43,9 +44,10 @@ public class PersistencePessoa implements IPersistencePessoa {
 		try {
 			con.getConnection().createStatement().executeUpdate(sql);
 			return true;
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (SQLException ex) {
+			// Excecao para banco de dados
+			ex.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Erro na inserção dos dados na base!", "Erro", JOptionPane.ERROR_MESSAGE);
 		}
 		
 		return false;
@@ -76,6 +78,7 @@ public class PersistencePessoa implements IPersistencePessoa {
 			while (rs.next()) {
 				id = rs.getInt("idPessoa");
 			}
+			
 			return id;
 
 		} catch (SQLException e) {
@@ -90,6 +93,57 @@ public class PersistencePessoa implements IPersistencePessoa {
 	public Set<Pessoa> selectPessoas() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public boolean selectCpf(String cpf){
+		
+		String sql = "SELECT * FROM tb_Pessoa WHERE cpf='" + cpf + "'";
+		String campo = "";
+		
+		try {
+			stmt = con.getConnection().prepareStatement(sql);
+			rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				campo = rs.getString("cpf");
+				System.out.println("entrou na while!");
+			}
+			
+			System.out.println(campo);
+			
+			if(campo.equals("")){
+				return false;
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return true;
+	}
+	
+	public int selectUltimoID(){
+		String sql = "SELECT * FROM tb_Pessoa ORDER BY idPessoa";
+		int id = 0;
+		
+		try {
+			stmt = con.getConnection().prepareStatement(sql);
+			rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				id = rs.getInt("idPessoa");
+			}
+			
+			System.out.println(id);
+			return id;
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return id;
 	}
 
 }
