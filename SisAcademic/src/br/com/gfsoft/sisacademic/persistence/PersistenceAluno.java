@@ -38,7 +38,7 @@ public class PersistenceAluno implements IPersistenceAluno {
 			} catch (SQLException ex) {
 				// Excecao para banco de dados
 				ex.printStackTrace();
-				JOptionPane.showMessageDialog(null, "Erro na inserção dos dados na base!", "Erro", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Erro na insercao dos dados na base!", "Erro", JOptionPane.ERROR_MESSAGE);
 			}
 		}//if inseriu corretamente em pessoa
 		

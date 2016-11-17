@@ -1,20 +1,59 @@
 package br.com.gfsoft.sisacademic.persistence;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
+
+import javax.swing.JOptionPane;
 
 import br.com.gfsoft.sisacademic.model.Disciplina;
 
 public class PersistenceDisciplina implements IPersistenceDisciplina {
+	
+	private static Statement stmt;
+	private static ResultSet rs;
+	private static Conexao con = new Conexao();
 
 	@Override
 	public boolean insert(Disciplina disciplina) {
-		// TODO Auto-generated method stub
+		
+		String sql;
+		
+		sql = "INSERT INTO tb_Disciplina(nome, descricao, dtCriacao, situacao, semestre, observacao)"
+				+ " VALUES('"+disciplina.getNome()+"',"
+				+ "'"+disciplina.getDescricao()+"',"
+				+ "'"+disciplina.getDtCriacao()+"',"
+				+ "'"+disciplina.getSituacao()+"',"
+				+ "'"+disciplina.getSemestre()+"',"
+				+ "'"+disciplina.getObservacao()+"')";
+		
+		try {
+			con.getConnection().createStatement().executeUpdate(sql);
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Erro na insercao dos dados na base!", "Erro", JOptionPane.ERROR_MESSAGE);
+		}
+		
 		return false;
 	}
 
 	@Override
 	public boolean delete(Disciplina disciplina) {
-		// TODO Auto-generated method stub
+		
+		String sql;
+		
+		sql = "DELETE FROM tb_Disciplina WHERE ... id/nome";
+		
+		try {
+			con.getConnection().createStatement().executeUpdate(sql);
+			return true;
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Erro ao deletar dados na base!", "Erro", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+		}
+		
 		return false;
 	}
 
@@ -26,7 +65,41 @@ public class PersistenceDisciplina implements IPersistenceDisciplina {
 
 	@Override
 	public Disciplina selectDisciplina(String nome) {
-		// TODO Auto-generated method stub
+		
+		Disciplina disciplina = new Disciplina();
+		String sql = "SELECT * FROM tb_Disciplina WHERE nome = '"+nome+"'";
+		
+		try {
+			stmt = con.getConnection().createStatement();
+			rs = stmt.executeQuery(sql);
+			
+			while(rs.next()){
+				disciplina.setNome(rs.getString("nome"));
+				disciplina.setDescricao(rs.getString("descricao"));
+				//disciplina.setDtCriacao();
+				disciplina.setSituacao(rs.getString("situacao"));
+				disciplina.setSemestre(rs.getString("semestre"));
+				disciplina.setObservacao(rs.getString("observacao"));
+			}
+			
+			return disciplina;
+			
+		} catch (SQLException e) {
+	
+			e.printStackTrace();
+		} /*finally {
+			if (con != null)
+				con.close();
+			
+			if (stmt != null)
+				stmt.close();
+
+			if (rs != null)
+				rs.close();
+			System.out.println("--- Após encerrar as conexões. ---");
+		}*/
+		
+		
 		return null;
 	}
 
