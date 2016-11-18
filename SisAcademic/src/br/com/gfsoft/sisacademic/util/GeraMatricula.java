@@ -15,13 +15,13 @@ public class GeraMatricula {
 	 */
 	public String gerarMatricula(int tipoPessoa, int ano){// parametro tipo de pessoal
 		pPessoa = new PersistencePessoa();
-		id = String.valueOf(pPessoa.selectUltimoID());
+		id = String.valueOf(pPessoa.selectUltimoID()+1);
 		
 		while(id.length() < 5){
 			id = "0" + id;
 		}
 		
-		matricula = tipoPessoa + ano + "semestre" + id;
+		matricula = "" + tipoPessoa + ano + id;
 		
 		return matricula;
 		

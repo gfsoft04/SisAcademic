@@ -24,12 +24,23 @@ import javax.swing.JTextPane;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
+import com.sun.mail.handlers.text_html;
+import com.sun.mail.handlers.text_plain;
+
 import br.com.gfsoft.sisacademic.model.Disciplina;
 import br.com.gfsoft.sisacademic.persistence.PersistenceDisciplina;
 
 public class CadDisciplina extends JInternalFrame {
 	private JTextField txtNome;
 	private JTextField txtDescricao;
+	private JComboBox comboBoxSituacao;
+	private JTextPane textPaneObservacao;
+	private JFormattedTextField formattedTxtDtCriacao;
+	private JFormattedTextField formattedTextSemestre;
+	private JButton btnCadastrar;
+	private JButton btnCancelar;
+	private JButton btnAlterar;
+	private JButton btnDeletar;
 
 	/**
 	 * Launch the application.
@@ -90,11 +101,11 @@ public class CadDisciplina extends JInternalFrame {
 		lblSemestre.setBounds(346, 83, 86, 14);
 		panel_1.add(lblSemestre);
 		
-		JTextPane textPaneObservacao = new JTextPane();
+		textPaneObservacao = new JTextPane();
 		textPaneObservacao.setBounds(109, 191, 299, 141);
 		panel_1.add(textPaneObservacao);
 		
-		JComboBox comboBoxSituacao = new JComboBox();
+		comboBoxSituacao = new JComboBox();
 		comboBoxSituacao.setModel(new DefaultComboBoxModel(new String[] {"Dispon\u00EDvel", "Indispon\u00EDvel"}));
 		comboBoxSituacao.setBounds(421, 23, 155, 22);
 		panel_1.add(comboBoxSituacao);
@@ -111,7 +122,7 @@ public class CadDisciplina extends JInternalFrame {
 		lblDataDeCriao.setBounds(24, 132, 82, 14);
 		panel_1.add(lblDataDeCriao);
 		
-		JFormattedTextField formattedTxtDtCriacao = new JFormattedTextField();
+		formattedTxtDtCriacao = new JFormattedTextField();
 		formattedTxtDtCriacao.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
@@ -126,7 +137,7 @@ public class CadDisciplina extends JInternalFrame {
 		formattedTxtDtCriacao.setBounds(109, 129, 98, 20);
 		panel_1.add(formattedTxtDtCriacao);
 		
-		JFormattedTextField formattedTextSemestre = new JFormattedTextField();
+		formattedTextSemestre = new JFormattedTextField();
 		formattedTextSemestre.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
@@ -146,11 +157,18 @@ public class CadDisciplina extends JInternalFrame {
 		panel.add(panel_2);
 		panel_2.setLayout(null);
 		
-		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				limparCampos();
+				setVisible(false);
+				
+			}
+		});
 		btnCancelar.setBounds(10, 11, 100, 30);
 		panel_2.add(btnCancelar);
 		
-		JButton btnCadastrar = new JButton("Cadastrar");
+		btnCadastrar = new JButton("Cadastrar");
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -191,13 +209,48 @@ public class CadDisciplina extends JInternalFrame {
 		btnCadastrar.setBounds(159, 11, 100, 30);
 		panel_2.add(btnCadastrar);
 		
-		JButton btnDeletar = new JButton("Deletar");
+		btnDeletar = new JButton("Deletar");
 		btnDeletar.setBounds(317, 11, 100, 30);
 		panel_2.add(btnDeletar);
 		
-		JButton btnAlterar = new JButton("Alterar");
+		btnAlterar = new JButton("Alterar");
 		btnAlterar.setBounds(159, 11, 100, 30);
 		panel_2.add(btnAlterar);
 
 	}
+	
+	
+	/**
+	 * Metodo para alternar botoes habilitados e desabilitados
+	 * true = habilita botao alterar e deletar
+	 * flase = habilita botao cadastrar
+	 */
+	public void alternaBotoes(boolean flag){
+		btnCadastrar.setVisible(!flag);
+		btnAlterar.setVisible(flag);
+		btnDeletar.setVisible(flag);
+	}
+	
+	/**
+	 * Metodo para desabilitar alguns campos para edicao
+	 */
+	public void setEditable(boolean flag){
+//		txtNome.setEditable(flag);
+//		formattedTxtCpf.setEditable(flag);
+//		formattedTxtCpf.setFocusable(flag);
+		
+	}
+	
+	/**
+	 * Metodo para limpar campos
+	 */
+	public void limparCampos(){
+		txtNome.setText("");
+		txtDescricao.setText("");
+		textPaneObservacao.setText("");
+		formattedTextSemestre.setValue(null);
+		formattedTxtDtCriacao.setValue(null);
+		comboBoxSituacao.setSelectedIndex(0);
+	}
+	
 }

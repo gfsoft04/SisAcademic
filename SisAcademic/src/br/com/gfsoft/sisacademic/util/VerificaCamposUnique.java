@@ -25,7 +25,7 @@ public class VerificaCamposUnique {
 	public boolean validaCpf(String cpf) {
 		
 		
-		return false;
+		return true;
 	}
 
 }

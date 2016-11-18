@@ -71,6 +71,7 @@ public class Principal extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				ALUNO.setVisible(true);
 				ALUNO.alternaBotoes(false);
+				ALUNO.setEditable(true);
 				ALUNO.setTitle("Cadastro de Aluno");
 				desktopPane.moveToFront(ALUNO);
 			}
@@ -101,6 +102,8 @@ public class Principal extends JFrame {
 		mntmCadDisciplina.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DISCIPLINA.setVisible(true);
+				DISCIPLINA.alternaBotoes(false);
+				DISCIPLINA.setEditable(true);
 				DISCIPLINA.setTitle("Cadastro de Disciplina");
 				desktopPane.moveToFront(DISCIPLINA);
 			}
