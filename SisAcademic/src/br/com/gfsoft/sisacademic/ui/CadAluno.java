@@ -273,6 +273,7 @@ public class CadAluno extends JInternalFrame {
 					if(JOptionPane.showConfirmDialog(null, "Tem certeza que deseja excluir?", "Confirmação", JOptionPane.WARNING_MESSAGE) == 0){
 						if(pAluno.delete(aluno)){
 							JOptionPane.showMessageDialog(null, "Exclusão eferuada com sucesso!", "Cadastrado", JOptionPane.INFORMATION_MESSAGE);
+							limparCampos();
 						}
 					} 
 					
@@ -501,6 +502,7 @@ public class CadAluno extends JInternalFrame {
 					if(verificaCamposUnique.validaCpfRg(cpf, txtRg.getText())){
 						if(pAluno.insert(aluno)){
 							JOptionPane.showMessageDialog(null, "Cadastro eferuado com sucesso!", "Cadastrado", JOptionPane.INFORMATION_MESSAGE);
+							limparCampos();
 						}
 					} else {
 						JOptionPane.showMessageDialog(null, "CPF ou RG já cadastrado!", "Erro", JOptionPane.ERROR_MESSAGE);
