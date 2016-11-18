@@ -1,31 +1,35 @@
 package br.com.gfsoft.sisacademic.ui;
 
-import java.awt.EventQueue;
-
-import javax.swing.JInternalFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EtchedBorder;
-
 import java.awt.BorderLayout;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.border.TitledBorder;
-import javax.swing.JTextField;
-import javax.swing.JLabel;
-import javax.swing.JTextPane;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
+import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.text.ParseException;
-import java.awt.event.ActionEvent;
+import java.time.DateTimeException;
+import java.time.LocalDate;
+
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
+import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.JTextPane;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.TitledBorder;
+
+import br.com.gfsoft.sisacademic.model.Disciplina;
+import br.com.gfsoft.sisacademic.persistence.PersistenceDisciplina;
 
 public class CadDisciplina extends JInternalFrame {
 	private JTextField txtNome;
 	private JTextField txtDescricao;
-	private JTextField txtSemestre;
 
 	/**
 	 * Launch the application.
@@ -82,11 +86,6 @@ public class CadDisciplina extends JInternalFrame {
 		label_2.setBounds(24, 83, 82, 14);
 		panel_1.add(label_2);
 		
-		txtSemestre = new JTextField();
-		txtSemestre.setColumns(10);
-		txtSemestre.setBounds(417, 80, 86, 20);
-		panel_1.add(txtSemestre);
-		
 		JLabel lblSemestre = new JLabel("Semestre:");
 		lblSemestre.setBounds(346, 83, 86, 14);
 		panel_1.add(lblSemestre);
@@ -127,6 +126,21 @@ public class CadDisciplina extends JInternalFrame {
 		formattedTxtDtCriacao.setBounds(109, 129, 98, 20);
 		panel_1.add(formattedTxtDtCriacao);
 		
+		JFormattedTextField formattedTextSemestre = new JFormattedTextField();
+		formattedTextSemestre.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				try {
+					formattedTextSemestre.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(
+                            new javax.swing.text.MaskFormatter("####.#")));
+                } catch (ParseException pe) {
+                    pe.printStackTrace();
+                }
+			}
+		});
+		formattedTextSemestre.setBounds(421, 80, 103, 20);
+		panel_1.add(formattedTextSemestre);
+		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBounds(20, 365, 612, 54);
 		panel.add(panel_2);
@@ -137,6 +151,43 @@ public class CadDisciplina extends JInternalFrame {
 		panel_2.add(btnCancelar);
 		
 		JButton btnCadastrar = new JButton("Cadastrar");
+		btnCadastrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				//VERIFICAR OS CAMPOS OBRIGATORIOS PREENCHIDOS
+				//if(campo.getText.equals("")){}
+				
+				try {
+					Disciplina disciplina = new Disciplina();
+					PersistenceDisciplina pDisciplina = new PersistenceDisciplina();
+					
+					String situacao = comboBoxSituacao.getSelectedItem().toString().substring(0, 1);
+					
+					String dia = formattedTxtDtCriacao.getText().substring(0, 2);
+					String mes = formattedTxtDtCriacao.getText().substring(3, 5);
+					String ano = formattedTxtDtCriacao.getText().substring(6, 10);
+					LocalDate dtCriacao = LocalDate.of(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
+					
+					disciplina.setNome(txtNome.getText());
+					disciplina.setSituacao(situacao);
+					disciplina.setDescricao(txtDescricao.getText());
+					disciplina.setSemestre(formattedTextSemestre.getText());
+					disciplina.setDtCriacao(dtCriacao);
+					disciplina.setObservacao(textPaneObservacao.getText());
+					
+					pDisciplina.insert(disciplina);
+					JOptionPane.showMessageDialog(null, "Cadastro eferuado com sucesso!", "Cadastrado", JOptionPane.INFORMATION_MESSAGE);
+					
+				} catch (DateTimeException ex) {
+					// Excesao para data invalida
+					JOptionPane.showMessageDialog(null, "Data Invalida!", "Erro", JOptionPane.ERROR_MESSAGE);
+				} /*catch (NumberFormatException ex) {
+					// Excecao para conversao de texto em numero
+					JOptionPane.showMessageDialog(null, "Campo numero só aceita digitos", "Erro", JOptionPane.ERROR_MESSAGE);
+				}*/
+				
+			}
+		});
 		btnCadastrar.setBounds(159, 11, 100, 30);
 		panel_2.add(btnCadastrar);
 		
