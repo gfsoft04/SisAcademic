@@ -43,6 +43,7 @@ public class CadAluno extends JInternalFrame {
 	private JTextField txtEmail;
 	private JTextField txtProfissao;
 	private JFormattedTextField formattedTxtDtNascimento;
+	private JFormattedTextField formattedTxtDtMatricula;
 	private JFormattedTextField formattedTxtCpf;
 	private JFormattedTextField formattedTxtTelefone;
 	private JComboBox comboBoxEstadoCivil;
@@ -220,6 +221,71 @@ public class CadAluno extends JInternalFrame {
 		btnCadastrar.setFont(new Font("Tahoma", Font.BOLD, 11));
 		
 		btnDeletar = new JButton("Deletar");
+		btnDeletar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				//VERIFICAR OS CAMPOS OBRIGATORIOS PREENCHIDOS
+				//if(campo.getText.equals("")){}
+				
+				try {
+					Aluno aluno = new Aluno();
+					PersistenceAluno pAluno = new PersistenceAluno();
+					
+					String cpf = formattedTxtCpf.getText().replace(".", "").replace("-", "");
+					String telefone = formattedTxtTelefone.getText().replace("(", "").replace(")", "").replace("-", "");
+					String cep = formattedTxtCep.getText().replace("-", "");
+					String estadoCivil = comboBoxEstadoCivil.getSelectedItem().toString().substring(0, 2).trim();
+					String sexo = comboBoxSexo.getSelectedItem().toString().substring(0, 2).trim();
+					String situacao = comboBoxSituacao.getSelectedItem().toString().substring(0, 2).trim();
+					
+					String dia = formattedTxtDtNascimento.getText().substring(0, 2);
+					String mes = formattedTxtDtNascimento.getText().substring(3, 5);
+					String ano = formattedTxtDtNascimento.getText().substring(6, 10);
+					LocalDate dtNascimento = LocalDate.of(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
+					dia = formattedTxtDtMatricula.getText().substring(0, 2);
+					mes = formattedTxtDtMatricula.getText().substring(3, 5);
+					ano = formattedTxtDtMatricula.getText().substring(6, 10);
+					LocalDate dtMatricula = LocalDate.of(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
+					
+					//aluno.setId();
+					//aluno.setMatricula();
+					aluno.setNome(txtNome.getText());
+					aluno.setCpf(cpf);
+					aluno.setRg(txtRg.getText());
+					aluno.setDtNascimento(dtNascimento);
+					aluno.setEstadoCivil(estadoCivil);
+					aluno.setSexo(sexo);
+					aluno.setSituacao(situacao);
+					aluno.setEmail(txtEmail.getText());
+					aluno.setTelefone(telefone);
+					aluno.setProfissao(txtProfissao.getText());
+					aluno.setCep(cep);
+					aluno.setRua(txtRua.getText());
+					aluno.setNumero(Integer.parseInt(txtNumero.getText()));
+					aluno.setBairro(txtBairro.getText());
+					aluno.setCidade(txtCidade.getText());
+					aluno.setEstado(txtEstado.getText());
+					aluno.setComplemento(txtComplemento.getText());
+					aluno.setObservacao(txtPaneObservacao.getText());
+					
+					//Confirmacao do usuario
+					if(JOptionPane.showConfirmDialog(null, "Tem certeza que deseja excluir?", "Confirmação", JOptionPane.WARNING_MESSAGE) == 0){
+						if(pAluno.delete(aluno)){
+							JOptionPane.showMessageDialog(null, "Exclusão eferuada com sucesso!", "Cadastrado", JOptionPane.INFORMATION_MESSAGE);
+						}
+					} 
+					
+				} catch (DateTimeException ex) {
+					// Excesao para data invalida
+					JOptionPane.showMessageDialog(null, "Data Invalida!", "Erro", JOptionPane.ERROR_MESSAGE);
+				} catch (NumberFormatException ex) {
+					// Excecao para conversao de texto em numero
+					JOptionPane.showMessageDialog(null, "Campo numero só aceita digitos", "Erro", JOptionPane.ERROR_MESSAGE);
+				}
+				
+			}
+		});
+		btnDeletar.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnDeletar.setBounds(314, 10, 98, 30);
 		panel_4.add(btnDeletar);
 		
@@ -357,7 +423,7 @@ public class CadAluno extends JInternalFrame {
 		lblDataDeMatricula.setBounds(362, 69, 116, 14);
 		pane_1.add(lblDataDeMatricula);
 
-		JFormattedTextField formattedTxtDtMatricula = new JFormattedTextField();
+		formattedTxtDtMatricula = new JFormattedTextField();
 		formattedTxtDtMatricula.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
@@ -432,8 +498,9 @@ public class CadAluno extends JInternalFrame {
 					
 					//Verifica se o cpf ou rg esta cadastrado na base
 					if(verificaCamposUnique.validaCpfRg(cpf, txtRg.getText())){
-						pAluno.insert(aluno);
-						JOptionPane.showMessageDialog(null, "Cadastro eferuado com sucesso!", "Cadastrado", JOptionPane.INFORMATION_MESSAGE);
+						if(pAluno.insert(aluno)){
+							JOptionPane.showMessageDialog(null, "Cadastro eferuado com sucesso!", "Cadastrado", JOptionPane.INFORMATION_MESSAGE);
+						}
 					} else {
 						JOptionPane.showMessageDialog(null, "CPF ou RG já cadastrado!", "Erro", JOptionPane.ERROR_MESSAGE);
 					}
