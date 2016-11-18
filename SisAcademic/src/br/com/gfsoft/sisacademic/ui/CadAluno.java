@@ -34,6 +34,7 @@ import br.com.gfsoft.sisacademic.persistence.PersistenceAluno;
 import br.com.gfsoft.sisacademic.persistence.PersistencePessoa;
 import br.com.gfsoft.sisacademic.util.BuscaCep;
 import br.com.gfsoft.sisacademic.util.GeraMatricula;
+import br.com.gfsoft.sisacademic.util.VerificaCamposUnique;
 
 public class CadAluno extends JInternalFrame {
 
@@ -390,7 +391,7 @@ public class CadAluno extends JInternalFrame {
 				try {
 					Aluno aluno = new Aluno();
 					GeraMatricula geraMatricula = new GeraMatricula();
-					PersistencePessoa pPessoa = new PersistencePessoa();
+					VerificaCamposUnique verificaCamposUnique = new VerificaCamposUnique();
 					PersistenceAluno pAluno = new PersistenceAluno();
 					
 					String cpf = formattedTxtCpf.getText().replace(".", "").replace("-", "");
@@ -430,7 +431,7 @@ public class CadAluno extends JInternalFrame {
 					aluno.setObservacao(txtPaneObservacao.getText());
 					
 					//Verifica se o cpf ou rg esta cadastrado na base
-					if(pPessoa.qtdRegistros("cpf", cpf) == 0 && pPessoa.qtdRegistros("rg", txtRg.getText()) == 0){
+					if(verificaCamposUnique.validaCpfRg(cpf, txtRg.getText())){
 						pAluno.insert(aluno);
 						JOptionPane.showMessageDialog(null, "Cadastro eferuado com sucesso!", "Cadastrado", JOptionPane.INFORMATION_MESSAGE);
 					} else {
