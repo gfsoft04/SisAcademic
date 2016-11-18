@@ -208,6 +208,7 @@ public class CadAluno extends JInternalFrame {
 		btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				limparCampos();
 				setVisible(false);
 			}
 		});
@@ -560,6 +561,30 @@ public class CadAluno extends JInternalFrame {
 		formattedTxtCpf.setFocusable(flag);
 		
 		btnCadastrar.setVisible(flag);
+	}
+	
+	/**
+	 * Metodo para limpar campos
+	 */
+	public void limparCampos(){
+		txtNome.setText("");
+		txtRg.setText("");;
+		txtEmail.setText("");;
+		txtProfissao.setText("");;
+		formattedTxtDtNascimento.setValue(null);
+		formattedTxtDtMatricula.setValue(null);
+		formattedTxtCpf.setValue(null);
+		formattedTxtTelefone.setValue(null);
+		comboBoxEstadoCivil.setSelectedIndex(0);
+		comboBoxSituacao.setSelectedIndex(0);
+		comboBoxSexo.setSelectedIndex(0);
+		formattedTxtCep.setValue(null);
+		txtRua.setText("");;
+		txtNumero.setText("");;
+		txtBairro.setText("");;
+		txtCidade.setText("");;
+		txtEstado.setText("");;
+		txtComplemento.setText("");;
 	}
 	
 }
