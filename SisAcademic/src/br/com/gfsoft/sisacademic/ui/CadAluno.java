@@ -33,6 +33,7 @@ import br.com.gfsoft.sisacademic.model.Endereco;
 import br.com.gfsoft.sisacademic.persistence.PersistenceAluno;
 import br.com.gfsoft.sisacademic.persistence.PersistencePessoa;
 import br.com.gfsoft.sisacademic.util.BuscaCep;
+import br.com.gfsoft.sisacademic.util.GeraMatricula;
 
 public class CadAluno extends JInternalFrame {
 
@@ -388,24 +389,11 @@ public class CadAluno extends JInternalFrame {
 				
 				try {
 					Aluno aluno = new Aluno();
+					GeraMatricula geraMatricula = new GeraMatricula();
 					PersistencePessoa pPessoa = new PersistencePessoa();
 					PersistenceAluno pAluno = new PersistenceAluno();
 					
 					String cpf = formattedTxtCpf.getText().replace(".", "").replace("-", "");
-					
-					if(pPessoa.qtdRegistros("cpf", cpf) == 0){
-						System.out.println("CPF NAO ENCONTRADO!");
-					} else {
-						System.out.println("CPF ENCONTRADO");
-					}
-					
-					if(pPessoa.qtdRegistros("rg", txtRg.getText()) == 0){
-						System.out.println("RG NAO ENCONTRADO!");
-					} else {
-						System.out.println("RG ENCONTRADO");
-					}
-					
-					
 					String telefone = formattedTxtTelefone.getText().replace("(", "").replace(")", "").replace("-", "");
 					String cep = formattedTxtCep.getText().replace("-", "");
 					String estadoCivil = comboBoxEstadoCivil.getSelectedItem().toString().substring(0, 2).trim();
@@ -416,15 +404,12 @@ public class CadAluno extends JInternalFrame {
 					String mes = formattedTxtDtNascimento.getText().substring(3, 5);
 					String ano = formattedTxtDtNascimento.getText().substring(6, 10);
 					LocalDate dtNascimento = LocalDate.of(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
-					
 					dia = formattedTxtDtMatricula.getText().substring(0, 2);
 					mes = formattedTxtDtMatricula.getText().substring(3, 5);
 					ano = formattedTxtDtMatricula.getText().substring(6, 10);
 					LocalDate dtMatricula = LocalDate.of(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
 					
-					
-					aluno.setMatricula("767495675");
-					
+					aluno.setMatricula(geraMatricula.gerarMatricula(1, Integer.parseInt(ano)));
 					aluno.setNome(txtNome.getText());
 					aluno.setCpf(cpf);
 					aluno.setRg(txtRg.getText());
@@ -444,8 +429,13 @@ public class CadAluno extends JInternalFrame {
 					aluno.setComplemento(txtComplemento.getText());
 					aluno.setObservacao(txtPaneObservacao.getText());
 					
-					pAluno.insert(aluno);
-					JOptionPane.showMessageDialog(null, "Cadastro eferuado com sucesso!", "Cadastrado", JOptionPane.INFORMATION_MESSAGE);
+					//Verifica se o cpf ou rg esta cadastrado na base
+					if(pPessoa.qtdRegistros("cpf", cpf) == 0 && pPessoa.qtdRegistros("rg", txtRg.getText()) == 0){
+						pAluno.insert(aluno);
+						JOptionPane.showMessageDialog(null, "Cadastro eferuado com sucesso!", "Cadastrado", JOptionPane.INFORMATION_MESSAGE);
+					} else {
+						JOptionPane.showMessageDialog(null, "CPF ou RG já cadastrado!", "Erro", JOptionPane.ERROR_MESSAGE);
+					}
 					
 				} catch (DateTimeException ex) {
 					// Excesao para data invalida
