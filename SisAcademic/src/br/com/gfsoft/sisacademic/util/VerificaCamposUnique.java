@@ -2,6 +2,8 @@ package br.com.gfsoft.sisacademic.util;
 
 import java.util.InputMismatchException;
 
+import javax.swing.JOptionPane;
+
 import br.com.gfsoft.sisacademic.persistence.PersistencePessoa;
 
 public class VerificaCamposUnique {
@@ -17,11 +19,16 @@ public class VerificaCamposUnique {
 			
 			if(validaCpf(cpf)){
 				return true;
+			} else {
+				JOptionPane.showMessageDialog(null, "CPF Inválido!", "Erro", JOptionPane.ERROR_MESSAGE);
+				return false;
 			}
 			
+		} else {
+			JOptionPane.showMessageDialog(null, "Data Invalida!", "Erro", JOptionPane.ERROR_MESSAGE);
+			return false;
 		}
 		
-		return false;
 	}
 	
 	public static boolean validaCpf(String CPF) {

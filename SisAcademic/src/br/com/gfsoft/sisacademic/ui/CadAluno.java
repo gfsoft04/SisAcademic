@@ -504,8 +504,6 @@ public class CadAluno extends JInternalFrame {
 							JOptionPane.showMessageDialog(null, "Cadastro eferuado com sucesso!", "Cadastrado", JOptionPane.INFORMATION_MESSAGE);
 							limparCampos();
 						}
-					} else {
-						JOptionPane.showMessageDialog(null, "CPF ou RG já cadastrado!", "Erro", JOptionPane.ERROR_MESSAGE);
 					}
 					
 				} catch (DateTimeException ex) {
