@@ -3,7 +3,6 @@ package br.com.gfsoft.sisacademic.persistence;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.Set;
 
 import javax.swing.JOptionPane;

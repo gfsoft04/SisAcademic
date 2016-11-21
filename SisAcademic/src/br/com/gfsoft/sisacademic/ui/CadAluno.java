@@ -568,9 +568,9 @@ public class CadAluno extends JInternalFrame {
 	 */
 	public void limparCampos(){
 		txtNome.setText("");
-		txtRg.setText("");;
-		txtEmail.setText("");;
-		txtProfissao.setText("");;
+		txtRg.setText("");
+		txtEmail.setText("");
+		txtProfissao.setText("");
 		formattedTxtDtNascimento.setValue(null);
 		formattedTxtDtMatricula.setValue(null);
 		formattedTxtCpf.setValue(null);
@@ -579,12 +579,12 @@ public class CadAluno extends JInternalFrame {
 		comboBoxSituacao.setSelectedIndex(0);
 		comboBoxSexo.setSelectedIndex(0);
 		formattedTxtCep.setValue(null);
-		txtRua.setText("");;
-		txtNumero.setText("");;
-		txtBairro.setText("");;
-		txtCidade.setText("");;
-		txtEstado.setText("");;
-		txtComplemento.setText("");;
+		txtRua.setText("");
+		txtNumero.setText("");
+		txtBairro.setText("");
+		txtCidade.setText("");
+		txtEstado.setText("");
+		txtComplemento.setText("");
 	}
 	
 }

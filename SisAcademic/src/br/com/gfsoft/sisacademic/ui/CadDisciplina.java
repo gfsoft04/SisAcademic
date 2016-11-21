@@ -9,6 +9,8 @@ import java.awt.event.FocusEvent;
 import java.text.ParseException;
 import java.time.DateTimeException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -27,6 +29,7 @@ import javax.swing.border.TitledBorder;
 import com.sun.mail.handlers.text_html;
 import com.sun.mail.handlers.text_plain;
 
+import br.com.gfsoft.sisacademic.model.Aluno;
 import br.com.gfsoft.sisacademic.model.Disciplina;
 import br.com.gfsoft.sisacademic.persistence.PersistenceDisciplina;
 
@@ -219,6 +222,18 @@ public class CadDisciplina extends JInternalFrame {
 
 	}
 	
+	
+	/**
+	 * Metodo que recebe um objeto e preenche os campos
+	 */
+	public void preencheCampos(Disciplina disciplina){
+		txtNome.setText(disciplina.getNome());
+		txtDescricao.setText(disciplina.getDescricao());
+		//comboBoxSituacao.setSelectedIndex(0);
+		textPaneObservacao.setText(disciplina.getObservacao());
+		formattedTxtDtCriacao.setText(disciplina.getDtCriacao().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT)));
+		formattedTextSemestre.setText(disciplina.getSemestre());
+	}	
 	
 	/**
 	 * Metodo para alternar botoes habilitados e desabilitados

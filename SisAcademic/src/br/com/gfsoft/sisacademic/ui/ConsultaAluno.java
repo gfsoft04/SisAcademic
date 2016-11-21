@@ -81,7 +81,10 @@ public class ConsultaAluno extends JInternalFrame {
 			public void mouseClicked(MouseEvent e) {
 				
 				if(e.getClickCount() == 2){
+					String matricula;// = table.getValueAt(e.getX(), 0);
+					PersistenceAluno pPersistenceAluno = new PersistenceAluno();
 					Aluno aluno = new Aluno();
+					//aluno = pPersistenceAluno.selectAluno(matricula);
 					aluno.setNome("Bruno Cesar Alves Ramos");
 					aluno.setRg("1234567");
 					aluno.setCpf("012.345.678-91");

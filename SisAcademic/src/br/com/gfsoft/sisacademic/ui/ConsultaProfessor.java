@@ -79,20 +79,19 @@ public class ConsultaProfessor extends JInternalFrame {
 			//DUPLO CLICK SOBRE LINHA DA TABELA
 			public void mouseClicked(MouseEvent e) {
 				
-//				if(e.getClickCount() == 2){
-//					Aluno aluno = new Aluno();
-//					aluno.setNome("Bruno Cesar Alves Ramos");
-//					aluno.setRg("1234567");
-//					aluno.setCpf("012.345.678-91");
-//					aluno.setDtNascimento(LocalDate.now());
-//					
-//					Principal.ALUNO.preencheCampos(aluno);
-//					Principal.ALUNO.setEditable(false);
-//					Principal.ALUNO.alternaBotoes(true);
-//					Principal.ALUNO.setVisible(true);
-//					Principal.ALUNO.setTitle("Editar");
-//					
-//				}
+				if(e.getClickCount() == 2){
+					String matricula;
+					PersistenceProfessor pPersistenceProfessor = new PersistenceProfessor();
+					Professor professor = new Professor();
+					//professor = pPersistenceProfessor.selectProfessor(matricula);					
+					
+//					Principal.ALUNO.preencheCampos(professor);
+//					Principal.PROFESSOR.setEditable(false);
+//					Principal.PROFESSOR.alternaBotoes(true);
+//					Principal.PROFESSOR.setVisible(true);
+//					Principal.PROFESSOR.setTitle("Editar");
+					
+				}
 				
 			}
 		});

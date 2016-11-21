@@ -80,17 +80,16 @@ public class ConsultaDisciplina extends JInternalFrame {
 			public void mouseClicked(MouseEvent e) {
 				
 				if(e.getClickCount() == 2){
-//					Aluno aluno = new Aluno();
-//					aluno.setNome("Bruno Cesar Alves Ramos");
-//					aluno.setRg("1234567");
-//					aluno.setCpf("012.345.678-91");
-//					aluno.setDtNascimento(LocalDate.now());
-//					
-//					Principal.ALUNO.preencheCampos(aluno);
-//					Principal.ALUNO.setEditable(false);
-//					Principal.ALUNO.alternaBotoes(true);
-//					Principal.ALUNO.setVisible(true);
-//					Principal.ALUNO.setTitle("Editar");
+					long id;
+					PersistenceDisciplina pPersistenceDisciplina = new PersistenceDisciplina();
+					Disciplina disciplina = new Disciplina();
+					//disciplina = pPersistenceDisciplina.selectDisciplina(id);
+					
+					//Principal.ALUNO.preencheCampos(disciplina);
+					Principal.DISCIPLINA.setEditable(false);
+					Principal.DISCIPLINA.alternaBotoes(true);
+					Principal.DISCIPLINA.setVisible(true);
+					Principal.DISCIPLINA.setTitle("Editar");
 					
 				}
 				
