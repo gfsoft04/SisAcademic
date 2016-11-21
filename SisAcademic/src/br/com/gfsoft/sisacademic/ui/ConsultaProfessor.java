@@ -97,7 +97,7 @@ public class ConsultaProfessor extends JInternalFrame {
 		});
 		scrollPane.setViewportView(table);
 		
-		preencherTabela();
+		//preencherTabela();
 
 	}
 	

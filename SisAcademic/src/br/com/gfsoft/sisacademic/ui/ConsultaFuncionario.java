@@ -99,7 +99,7 @@ public class ConsultaFuncionario extends JInternalFrame {
 		});
 		scrollPane.setViewportView(table);
 		
-		preencherTabela();
+		//preencherTabela();
 
 	}
 	

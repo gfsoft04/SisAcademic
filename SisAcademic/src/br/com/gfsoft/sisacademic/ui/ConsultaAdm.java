@@ -98,7 +98,7 @@ public class ConsultaAdm extends JInternalFrame {
 		});
 		scrollPane.setViewportView(table);
 		
-		preencherTabela();
+		//preencherTabela();
 
 	}
 	
