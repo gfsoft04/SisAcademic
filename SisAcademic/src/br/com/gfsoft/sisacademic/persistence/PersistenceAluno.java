@@ -104,13 +104,14 @@ public class PersistenceAluno implements IPersistenceAluno {
 	@Override
 	public Aluno selectAluno(String matricula) {
 		Aluno aluno = new Aluno();
-		String sql = "SELECT * FROM tb_Aluno WHERE matricula='" + matricula + "'";
+		String sql = "SELECT * FROM tb_Aluno JOIN tb_Pessoa	ON tb_Aluno.tb_Pessoa_idPessoa = tb_Pessoa.idPessoa WHERE matricula='" + matricula + "'";
 
 		try {
 			stmt = con.getConnection().createStatement();
 			rs = stmt.executeQuery(sql);
 
 			while (rs.next()) {
+				aluno.setId(rs.getInt("idPessoa"));
 				aluno.setMatricula(rs.getString("matricula"));
 				aluno.setNome(rs.getString("nome"));
 				aluno.setRg(rs.getString("rg"));
@@ -155,6 +156,7 @@ public class PersistenceAluno implements IPersistenceAluno {
 			while (rs.next()) {
 				aluno = new Aluno();
 				
+				aluno.setId(rs.getInt("idPessoa"));
 				aluno.setMatricula(rs.getString("matricula"));
 				aluno.setNome(rs.getString("nome"));
 				aluno.setRg(rs.getString("rg"));

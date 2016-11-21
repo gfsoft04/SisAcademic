@@ -7,7 +7,7 @@ public class Disciplina {
 	/**
 	 * Atributos da classe Disciplina
 	 */
-	private int id;
+	private long id;
 	private String nome;
 	private String descricao; 		//descricao do conteudo ministrado na disciplina 
 	private LocalDate dtCriacao; 	//data da criacao da disciplina
@@ -18,10 +18,10 @@ public class Disciplina {
 	/**
 	 * Metodos Getter's e Setter's
 	 */
-	public int getId() {
+	public long getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 	public String getNome() {
