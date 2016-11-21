@@ -23,7 +23,8 @@ public class Principal extends JFrame {
 	public static CadFuncionario FUNCIONARIO;
 	public static CadProfessor PROFESSOR;
 	public static CadDisciplina DISCIPLINA;
-	public static ConsultaPessoa CONSULTAPESSOA;
+	public static ConsultaAluno CONSULTAPESSOA;
+	public static ConsultaDisciplina CONSULTADISCIPLINA;
 
 	
 	/**
@@ -126,12 +127,21 @@ public class Principal extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				CONSULTAPESSOA.setVisible(true);
 				CONSULTAPESSOA.setTitle("Consulta");
-				desktopPane.moveToFront(CONSULTAPESSOA);			
+				CONSULTAPESSOA.preencherTabela();
+				desktopPane.moveToFront(CONSULTAPESSOA);
 			}
 		});
 		mnConsulta.add(mntmConsultaPessoa);
 
 		JMenuItem mntmConsultaDisciplina = new JMenuItem("Disciplina");
+		mntmConsultaDisciplina.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CONSULTADISCIPLINA.setVisible(true);
+				CONSULTADISCIPLINA.setTitle("Consulta Disciplinas");
+				CONSULTADISCIPLINA.preencherTabela();
+				desktopPane.moveToFront(CONSULTADISCIPLINA);
+			}
+		});
 		mnConsulta.add(mntmConsultaDisciplina);
 
 		JMenu mnAjuda = new JMenu("Ajuda");
@@ -151,13 +161,15 @@ public class Principal extends JFrame {
 		FUNCIONARIO = new CadFuncionario();
 		PROFESSOR = new CadProfessor();
 		DISCIPLINA = new CadDisciplina();
-		CONSULTAPESSOA = new ConsultaPessoa();
+		CONSULTAPESSOA = new ConsultaAluno();
+		CONSULTADISCIPLINA = new ConsultaDisciplina();
 		
 		desktopPane.add(ALUNO);
 		desktopPane.add(FUNCIONARIO);
 		desktopPane.add(PROFESSOR);
 		desktopPane.add(DISCIPLINA);
 		desktopPane.add(CONSULTAPESSOA);
+		desktopPane.add(CONSULTADISCIPLINA);
 		
 		try {
 			ALUNO.setMaximum(true);
@@ -165,6 +177,7 @@ public class Principal extends JFrame {
 			PROFESSOR.setMaximum(true);
 			DISCIPLINA.setMaximum(true);
 			CONSULTAPESSOA.setMaximum(true);
+			CONSULTADISCIPLINA.setMaximum(true);
 		} catch (PropertyVetoException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -175,6 +188,7 @@ public class Principal extends JFrame {
 		PROFESSOR.setVisible(false);
 		DISCIPLINA.setVisible(false);
 		CONSULTAPESSOA.setVisible(false);
+		CONSULTADISCIPLINA.setVisible(false);
 		// =======================================================
 		
 	}

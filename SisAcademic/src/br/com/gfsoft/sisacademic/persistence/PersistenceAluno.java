@@ -121,8 +121,8 @@ public class PersistenceAluno implements IPersistenceAluno {
 				aluno.setSituacao(rs.getString("situacao"));
 				aluno.setProfissao(rs.getString("profissao"));
 				aluno.setTelefone(rs.getString("telefone"));
-				aluno.setDtNascimento(LocalDate.of(rs.getDate("dtNascimento").getDay(), rs.getDate("dtNascimento").getMonth(), rs.getDate("dtNascimento").getYear()));
-				aluno.setDtMatricula(LocalDate.of(rs.getDate("dtMatricula").getDay(), rs.getDate("dtMatricula").getMonth(), rs.getDate("dtMatricula").getYear()));
+				aluno.setDtNascimento(LocalDate.of(Integer.parseInt(rs.getString("dtNascimento").substring(0, 4)), Integer.parseInt(rs.getString("dtNascimento").substring(5, 7)), Integer.parseInt(rs.getString("dtNascimento").substring(8, 10))));
+				aluno.setDtMatricula(LocalDate.of(Integer.parseInt(rs.getString("dtMatricula").substring(0, 4)), Integer.parseInt(rs.getString("dtMatricula").substring(5, 7)), Integer.parseInt(rs.getString("dtMatricula").substring(8, 10))));
 				aluno.setCep(rs.getString("cep"));
 				aluno.setRua(rs.getString("rua"));
 				aluno.setNumero(rs.getInt("numero"));
@@ -149,7 +149,7 @@ public class PersistenceAluno implements IPersistenceAluno {
 
 		try {
 			stmt = con.getConnection().createStatement();
-			String sql = "SELECT * FROM tb_Aluno";
+			String sql = "SELECT * FROM tb_Aluno JOIN tb_Pessoa	ON tb_Aluno.tb_Pessoa_idPessoa = tb_Pessoa.idPessoa";
 			rs = stmt.executeQuery(sql);
 
 			while (rs.next()) {
@@ -165,8 +165,8 @@ public class PersistenceAluno implements IPersistenceAluno {
 				aluno.setSituacao(rs.getString("situacao"));
 				aluno.setProfissao(rs.getString("profissao"));
 				aluno.setTelefone(rs.getString("telefone"));
-				aluno.setDtNascimento(LocalDate.of(rs.getDate("dtNascimento").getDay(), rs.getDate("dtNascimento").getMonth(), rs.getDate("dtNascimento").getYear()));
-				aluno.setDtMatricula(LocalDate.of(rs.getDate("dtMatricula").getDay(), rs.getDate("dtMatricula").getMonth(), rs.getDate("dtMatricula").getYear()));
+				aluno.setDtNascimento(LocalDate.of(Integer.parseInt(rs.getString("dtNascimento").substring(0, 4)), Integer.parseInt(rs.getString("dtNascimento").substring(5, 7)), Integer.parseInt(rs.getString("dtNascimento").substring(8, 10))));
+				aluno.setDtMatricula(LocalDate.of(Integer.parseInt(rs.getString("dtMatricula").substring(0, 4)), Integer.parseInt(rs.getString("dtMatricula").substring(5, 7)), Integer.parseInt(rs.getString("dtMatricula").substring(8, 10))));
 				aluno.setCep(rs.getString("cep"));
 				aluno.setRua(rs.getString("rua"));
 				aluno.setNumero(rs.getInt("numero"));

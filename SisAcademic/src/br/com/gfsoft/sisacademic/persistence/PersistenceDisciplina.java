@@ -3,6 +3,7 @@ package br.com.gfsoft.sisacademic.persistence;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class PersistenceDisciplina implements IPersistenceDisciplina {
 		sql = "INSERT INTO tb_Disciplina(nome, descricao, dtCriacao, situacao, semestre, observacao)"
 				+ " VALUES('"+disciplina.getNome()+"',"
 				+ "'"+disciplina.getDescricao()+"',"
-				+ "'"+disciplina.getDtCriacao()+"',"
+				+ "'"+ disciplina.getDtCriacao().getDayOfMonth() + "/" + disciplina.getDtCriacao().getMonthValue() + "/" + disciplina.getDtCriacao().getYear() +"',"
 				+ "'"+disciplina.getSituacao()+"',"
 				+ "'"+disciplina.getSemestre()+"',"
 				+ "'"+disciplina.getObservacao()+"')";
@@ -63,7 +64,7 @@ public class PersistenceDisciplina implements IPersistenceDisciplina {
 		
 		String sql = "UPDATE tb_Disciplina SET nome = '"+disciplina.getNome()+"',"
 				+ " descricao = '"+disciplina.getDescricao()+"',"
-				+ " dtCriacao = '"+disciplina.getDtCriacao()+"',"
+				+ " dtCriacao = '"+disciplina.getDtCriacao().getDayOfMonth() + "/" + disciplina.getDtCriacao().getMonthValue() + "/" + disciplina.getDtCriacao().getYear() +"',"
 				+ " situacao = '"+disciplina.getSituacao()+"',"
 				+ " semestre = '"+disciplina.getSemestre()+"',"
 				+ " observacao = '"+disciplina.getObservacao()+"'"
@@ -102,9 +103,10 @@ public class PersistenceDisciplina implements IPersistenceDisciplina {
 			rs = stmt.executeQuery(sql);
 			
 			while(rs.next()){
+				disciplina.setId(rs.getInt("idDisciplina"));
 				disciplina.setNome(rs.getString("nome"));
 				disciplina.setDescricao(rs.getString("descricao"));
-				//disciplina.setDtCriacao();
+				disciplina.setDtCriacao(LocalDate.of(Integer.parseInt(rs.getString("dtCriacao").substring(0, 4)), Integer.parseInt(rs.getString("dtCriacao").substring(5, 7)), Integer.parseInt(rs.getString("dtCriacao").substring(8, 10))));
 				disciplina.setSituacao(rs.getString("situacao"));
 				disciplina.setSemestre(rs.getString("semestre"));
 				disciplina.setObservacao(rs.getString("observacao"));
@@ -144,10 +146,11 @@ public class PersistenceDisciplina implements IPersistenceDisciplina {
 			
 			while(rs.next()){
 				disciplina = new Disciplina();
-				
+
+				disciplina.setId(rs.getInt("idDisciplina"));
 				disciplina.setNome(rs.getString("nome"));
 				disciplina.setDescricao(rs.getString("descricao"));
-				//disciplina.setDtCriacao();
+				disciplina.setDtCriacao(LocalDate.of(Integer.parseInt(rs.getString("dtCriacao").substring(0, 4)), Integer.parseInt(rs.getString("dtCriacao").substring(5, 7)), Integer.parseInt(rs.getString("dtCriacao").substring(8, 10))));
 				disciplina.setSituacao(rs.getString("situacao"));
 				disciplina.setSemestre(rs.getString("semestre"));
 				disciplina.setObservacao(rs.getString("observacao"));

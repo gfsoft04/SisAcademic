@@ -1,22 +1,23 @@
 package br.com.gfsoft.sisacademic.model;
 
-import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.table.AbstractTableModel;
 
 
 public class TabelaConsulta extends AbstractTableModel{
-    private ArrayList linhas = null;
+    private List<Object> linhas = null;
     private String[] colunas = null;
 
-    public TabelaConsulta(ArrayList lin, String[] col){
+    public TabelaConsulta(List<Object> lin, String[] col){
         setLinhas(lin);
         setColunas(col);
     }
     
-    public ArrayList getLinhas() {
+    public List<Object> getLinhas() {
         return linhas;
     }
-    public void setLinhas(ArrayList linhas) {
+    public void setLinhas(List<Object> linhas) {
         this.linhas = linhas;
     }
     public String[] getColunas() {

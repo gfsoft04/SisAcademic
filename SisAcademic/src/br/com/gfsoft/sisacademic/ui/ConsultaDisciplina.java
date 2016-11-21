@@ -4,29 +4,26 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 
-import br.com.gfsoft.sisacademic.model.Aluno;
+import br.com.gfsoft.sisacademic.model.Disciplina;
 import br.com.gfsoft.sisacademic.model.TabelaConsulta;
-import br.com.gfsoft.sisacademic.persistence.Conexao;
+import br.com.gfsoft.sisacademic.persistence.PersistenceDisciplina;
 
-public class ConsultaPessoa extends JInternalFrame {
+public class ConsultaDisciplina extends JInternalFrame {
 	private JTextField textField;
+	private JButton btnBuscar;
 	private JTable table;
 
 	/**
@@ -36,7 +33,7 @@ public class ConsultaPessoa extends JInternalFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ConsultaPessoa frame = new ConsultaPessoa();
+					ConsultaDisciplina frame = new ConsultaDisciplina();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -48,10 +45,10 @@ public class ConsultaPessoa extends JInternalFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ConsultaPessoa() {
+	public ConsultaDisciplina() {
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setClosable(true);
-		setTitle("Consulta de Pessoas");
+		setTitle("Consulta Disciplinas");
 		setBounds(100, 100, 1000, 670);
 		setLocation(0, 0);
 		
@@ -68,7 +65,7 @@ public class ConsultaPessoa extends JInternalFrame {
 		lblNewLabel.setBounds(30, 30, 75, 14);
 		panel.add(lblNewLabel);
 		
-		JButton btnBuscar = new JButton("Ok");
+		btnBuscar = new JButton("Ok");
 		btnBuscar.setBounds(500, 26, 91, 23);
 		panel.add(btnBuscar);
 		
@@ -83,17 +80,17 @@ public class ConsultaPessoa extends JInternalFrame {
 			public void mouseClicked(MouseEvent e) {
 				
 				if(e.getClickCount() == 2){
-					Aluno aluno = new Aluno();
-					aluno.setNome("Bruno Cesar Alves Ramos");
-					aluno.setRg("1234567");
-					aluno.setCpf("012.345.678-91");
-					aluno.setDtNascimento(LocalDate.now());
-					
-					Principal.ALUNO.preencheCampos(aluno);
-					Principal.ALUNO.setEditable(false);
-					Principal.ALUNO.alternaBotoes(true);
-					Principal.ALUNO.setVisible(true);
-					Principal.ALUNO.setTitle("Editar");
+//					Aluno aluno = new Aluno();
+//					aluno.setNome("Bruno Cesar Alves Ramos");
+//					aluno.setRg("1234567");
+//					aluno.setCpf("012.345.678-91");
+//					aluno.setDtNascimento(LocalDate.now());
+//					
+//					Principal.ALUNO.preencheCampos(aluno);
+//					Principal.ALUNO.setEditable(false);
+//					Principal.ALUNO.alternaBotoes(true);
+//					Principal.ALUNO.setVisible(true);
+//					Principal.ALUNO.setTitle("Editar");
 					
 				}
 				
@@ -101,33 +98,30 @@ public class ConsultaPessoa extends JInternalFrame {
 		});
 		scrollPane.setViewportView(table);
 		
-		preencherTabela("SELECT * FROM tb_Pessoa");
+		preencherTabela();
 
 	}
 	
-	
-	public void preencherTabela(String sql){
-        ArrayList dados = new ArrayList();
-        String[] colunas = new String[]{"Matricula","Nome","cpf","rg","email","Data Nascimento"};
+	/**
+	 * Metodo para preencher a tabela
+	 * 
+	 */
+	public void preencherTabela(){
+        List<Object> dados = new ArrayList<>();
+        List<Disciplina> disciplinas = new ArrayList<>();
+        String[] colunas = new String[]{"Id", "Nome", "Descrição", "Data de Criação", "Situação", "Semestre", "Observação"};
+        PersistenceDisciplina pPersistenceDisc = new PersistenceDisciplina();
         
-        Conexao con = new Conexao();
-        try{
-            PreparedStatement stmt = con.getConnection().prepareStatement(sql);
-            ResultSet rs = stmt.executeQuery();
-            //rs.first();
-            while(rs.next()){
-                dados.add(new Object[]{rs.getString("matricula"), rs.getString("nome"), rs.getString("cpf"), rs.getString("rg"), rs.getString("email"), rs.getDate("dtNascimento")});
-            }
-            //stmt.close();
-            //con.getConnection().close();
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "ERRO AO PREENCHER O ARRAYLIST!: " + e);
+        disciplinas.addAll(pPersistenceDisc.selectDisciplinas());
+        
+        for(Disciplina disc : disciplinas){
+        	dados.add(new Object[]{disc.getId(), disc.getNome(), disc.getDescricao(), disc.getDtCriacao(), disc.getSituacao(), disc.getSemestre(), disc.getObservacao()});
         }
-        
+
         TabelaConsulta modelo = new TabelaConsulta(dados, colunas);
         table.setModel(modelo);
         
-        table.getColumnModel().getColumn(0).setPreferredWidth(80);
+        table.getColumnModel().getColumn(0).setPreferredWidth(30);
         table.getColumnModel().getColumn(0).setResizable(true);
         table.getColumnModel().getColumn(1).setPreferredWidth(80);
         table.getColumnModel().getColumn(1).setResizable(true);
@@ -139,10 +133,8 @@ public class ConsultaPessoa extends JInternalFrame {
         table.getColumnModel().getColumn(4).setResizable(true);
         table.getColumnModel().getColumn(5).setPreferredWidth(80);
         table.getColumnModel().getColumn(5).setResizable(true);
-//        table.getColumnModel().getColumn(6).setPreferredWidth(80);
-//        table.getColumnModel().getColumn(6).setResizable(true);
-//        table.getColumnModel().getColumn(7).setPreferredWidth(80);
-//        table.getColumnModel().getColumn(7).setResizable(true);
+        table.getColumnModel().getColumn(6).setPreferredWidth(80);
+        table.getColumnModel().getColumn(6).setResizable(true);
         
         table.getTableHeader().setReorderingAllowed(true);
         //jTableConsulta.getAutoResizeMode(jTableConsulta.AUTO_RESIZE_OFF);
@@ -150,5 +142,5 @@ public class ConsultaPessoa extends JInternalFrame {
         table.setAutoCreateRowSorter(true);
         
     } //Fim do Metodo preencherTabela
-	
+
 }
