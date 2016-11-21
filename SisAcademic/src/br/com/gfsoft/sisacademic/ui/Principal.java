@@ -23,7 +23,9 @@ public class Principal extends JFrame {
 	public static CadFuncionario FUNCIONARIO;
 	public static CadProfessor PROFESSOR;
 	public static CadDisciplina DISCIPLINA;
-	public static ConsultaAluno CONSULTAPESSOA;
+	public static ConsultaAluno CONSULTAALUNO;
+	public static ConsultaFuncionario CONSULTAFUNCIONARIO;
+	public static ConsultaProfessor CONSULTAPROFESSOR;
 	public static ConsultaDisciplina CONSULTADISCIPLINA;
 
 	
@@ -122,16 +124,16 @@ public class Principal extends JFrame {
 		JMenu mnConsulta = new JMenu("Consulta");
 		menuBar.add(mnConsulta);
 
-		JMenuItem mntmConsultaPessoa = new JMenuItem("Pessoa");
-		mntmConsultaPessoa.addActionListener(new ActionListener() {
+		JMenuItem mntmConsultaAluno = new JMenuItem("Aluno");
+		mntmConsultaAluno.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				CONSULTAPESSOA.setVisible(true);
-				CONSULTAPESSOA.setTitle("Consulta");
-				CONSULTAPESSOA.preencherTabela();
-				desktopPane.moveToFront(CONSULTAPESSOA);
+				CONSULTAALUNO.setVisible(true);
+				CONSULTAALUNO.setTitle("Consulta Alunos");
+				CONSULTAALUNO.preencherTabela();
+				desktopPane.moveToFront(CONSULTAALUNO);
 			}
 		});
-		mnConsulta.add(mntmConsultaPessoa);
+		mnConsulta.add(mntmConsultaAluno);
 
 		JMenuItem mntmConsultaDisciplina = new JMenuItem("Disciplina");
 		mntmConsultaDisciplina.addActionListener(new ActionListener() {
@@ -143,7 +145,29 @@ public class Principal extends JFrame {
 			}
 		});
 		mnConsulta.add(mntmConsultaDisciplina);
-
+		
+		JMenuItem mntmFuncionario = new JMenuItem("Funcionario");
+		mntmFuncionario.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CONSULTAFUNCIONARIO.setVisible(true);
+				CONSULTAFUNCIONARIO.setTitle("Consulta Funcionários");
+				CONSULTAFUNCIONARIO.preencherTabela();
+				desktopPane.moveToFront(CONSULTAFUNCIONARIO);
+			}
+		});
+		mnConsulta.add(mntmFuncionario);
+		
+		JMenuItem mntmProfessor = new JMenuItem("Professor");
+		mntmProfessor.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CONSULTAPROFESSOR.setVisible(true);
+				CONSULTAPROFESSOR.setTitle("Consulta Professores");
+				CONSULTAPROFESSOR.preencherTabela();
+				desktopPane.moveToFront(CONSULTAPROFESSOR);
+			}
+		});
+		mnConsulta.add(mntmProfessor);
+		
 		JMenu mnAjuda = new JMenu("Ajuda");
 		menuBar.add(mnAjuda);
 
@@ -161,14 +185,18 @@ public class Principal extends JFrame {
 		FUNCIONARIO = new CadFuncionario();
 		PROFESSOR = new CadProfessor();
 		DISCIPLINA = new CadDisciplina();
-		CONSULTAPESSOA = new ConsultaAluno();
+		CONSULTAALUNO = new ConsultaAluno();
+		CONSULTAFUNCIONARIO = new ConsultaFuncionario();
+		CONSULTAPROFESSOR = new ConsultaProfessor();
 		CONSULTADISCIPLINA = new ConsultaDisciplina();
 		
 		desktopPane.add(ALUNO);
 		desktopPane.add(FUNCIONARIO);
 		desktopPane.add(PROFESSOR);
 		desktopPane.add(DISCIPLINA);
-		desktopPane.add(CONSULTAPESSOA);
+		desktopPane.add(CONSULTAALUNO);
+		desktopPane.add(CONSULTAFUNCIONARIO);
+		desktopPane.add(CONSULTAPROFESSOR);
 		desktopPane.add(CONSULTADISCIPLINA);
 		
 		try {
@@ -176,7 +204,9 @@ public class Principal extends JFrame {
 			FUNCIONARIO.setMaximum(true);
 			PROFESSOR.setMaximum(true);
 			DISCIPLINA.setMaximum(true);
-			CONSULTAPESSOA.setMaximum(true);
+			CONSULTAALUNO.setMaximum(true);
+			CONSULTAFUNCIONARIO.setMaximum(true);
+			CONSULTAPROFESSOR.setMaximum(true);
 			CONSULTADISCIPLINA.setMaximum(true);
 		} catch (PropertyVetoException e1) {
 			// TODO Auto-generated catch block
@@ -187,7 +217,9 @@ public class Principal extends JFrame {
 		FUNCIONARIO.setVisible(false);
 		PROFESSOR.setVisible(false);
 		DISCIPLINA.setVisible(false);
-		CONSULTAPESSOA.setVisible(false);
+		CONSULTAALUNO.setVisible(false);
+		CONSULTAFUNCIONARIO.setVisible(false);
+		CONSULTAPROFESSOR.setVisible(false);
 		CONSULTADISCIPLINA.setVisible(false);
 		// =======================================================
 		
