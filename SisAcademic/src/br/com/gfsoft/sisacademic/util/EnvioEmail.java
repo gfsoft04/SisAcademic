@@ -53,10 +53,10 @@ public class EnvioEmail {
 
 		} catch (MessagingException e) {
 			JOptionPane.showMessageDialog(null, "Falha ao enviar email!", "Erro", JOptionPane.ERROR_MESSAGE);
-			throw new RuntimeException(e);
+			//throw new RuntimeException(e);
 		}
 
-		//return false;
+		return false;
 	}
 
 }

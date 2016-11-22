@@ -230,6 +230,7 @@ public class CadDisciplina extends JInternalFrame {
 						if(pDisciplina.delete(disciplina)){
 							JOptionPane.showMessageDialog(null, "Exclusão efetuada com sucesso!", "Exclusão", JOptionPane.INFORMATION_MESSAGE);
 							limparCampos();
+							Principal.CONSULTADISCIPLINA.preencherTabela();
 						}
 					} 
 					
@@ -278,6 +279,7 @@ public class CadDisciplina extends JInternalFrame {
 					if(pDisciplina.insert(disciplina)){
 						JOptionPane.showMessageDialog(null, "Cadastro eferuado com sucesso!", "Cadastrado", JOptionPane.INFORMATION_MESSAGE);
 						limparCampos();
+						Principal.CONSULTADISCIPLINA.preencherTabela();
 					} /*else {
 						JOptionPane.showMessageDialog(null, "Error!", "Erro", JOptionPane.ERROR_MESSAGE);
 					}*/
@@ -347,8 +349,8 @@ public class CadDisciplina extends JInternalFrame {
 		txtNome.setText("");
 		txtDescricao.setText("");
 		textPaneObservacao.setText("");
-		formattedTextSemestre.setValue(null);
-		formattedTxtDtCriacao.setValue(null);
+		formattedTextSemestre.setValue("");
+		formattedTxtDtCriacao.setValue("");
 		comboBoxSituacao.setSelectedIndex(0);
 	}
 	

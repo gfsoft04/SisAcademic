@@ -443,8 +443,8 @@ public class CadAluno extends JInternalFrame {
 							String mensagem = "Bem vindo "+aluno.getNome()+", seu cadastro foi efetuado com sucesso!"
 											+ "\n\n\tSua Matricula é: " + aluno.getMatricula();
 							
-							JOptionPane.showMessageDialog(null, "Cadastro efetuado com sucesso!", "Cadastrado", JOptionPane.INFORMATION_MESSAGE);
 							email.enviar(aluno.getEmail(), assunto, mensagem);
+							JOptionPane.showMessageDialog(null, "Cadastro efetuado com sucesso!", "Cadastrado", JOptionPane.INFORMATION_MESSAGE);
 							limparCampos();
 						}
 					}
@@ -480,6 +480,7 @@ public class CadAluno extends JInternalFrame {
 						if(pAluno.delete(aluno)){
 							JOptionPane.showMessageDialog(null, "Exclusão efetuada com sucesso!", "Exclusão", JOptionPane.INFORMATION_MESSAGE);
 							limparCampos();
+							Principal.CONSULTAALUNO.preencherTabela();
 						}
 					} 
 					
@@ -560,6 +561,7 @@ public class CadAluno extends JInternalFrame {
 						if(pAluno.update(aluno)){
 							JOptionPane.showMessageDialog(null, "Cadastro efetuado com sucesso!", "Cadastrado", JOptionPane.INFORMATION_MESSAGE);
 							limparCampos();
+							Principal.CONSULTAALUNO.preencherTabela();
 						}
 					}
 					
@@ -598,7 +600,8 @@ public class CadAluno extends JInternalFrame {
 		formattedTxtCpf.setText(aluno.getCpf());
 		txtEmail.setText(aluno.getEmail());
 		txtProfissao.setText(aluno.getProfissao());
-		formattedTxtDtNascimento.setText(aluno.getDtNascimento().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT)));
+		formattedTxtDtNascimento.setText(aluno.getDtNascimento().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)));
+		formattedTxtDtMatricula.setText(aluno.getDtMatricula().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)));
 		formattedTxtTelefone.setText(aluno.getTelefone());
 		//comboBoxEstadoCivil.setSelectedIndex(0);
 		//comboBoxSexo.setSelectedIndex(0);
@@ -640,20 +643,20 @@ public class CadAluno extends JInternalFrame {
 	
 	/**
 	 * Metodo para limpar campos
-	 */
+	 */	
 	public void limparCampos(){
 		txtNome.setText("");
 		txtRg.setText("");
 		txtEmail.setText("");
 		txtProfissao.setText("");
-		formattedTxtDtNascimento.setValue(null);
-		formattedTxtDtMatricula.setValue(null);
-		formattedTxtCpf.setValue(null);
-		formattedTxtTelefone.setValue(null);
+		formattedTxtDtNascimento.setValue("");
+		formattedTxtDtMatricula.setValue("");
+		formattedTxtCpf.setValue("");
+		formattedTxtTelefone.setValue("");
 		comboBoxEstadoCivil.setSelectedIndex(0);
 		comboBoxSituacao.setSelectedIndex(0);
 		comboBoxSexo.setSelectedIndex(0);
-		formattedTxtCep.setValue(null);
+		formattedTxtCep.setValue("");
 		txtRua.setText("");
 		txtNumero.setText("");
 		txtBairro.setText("");

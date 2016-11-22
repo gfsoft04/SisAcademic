@@ -120,7 +120,7 @@ public class ConsultaDisciplina extends JInternalFrame {
         TabelaConsulta modelo = new TabelaConsulta(dados, colunas);
         table.setModel(modelo);
         
-        table.getColumnModel().getColumn(0).setPreferredWidth(30);
+        table.getColumnModel().getColumn(0).setPreferredWidth(15);
         table.getColumnModel().getColumn(0).setResizable(true);
         table.getColumnModel().getColumn(1).setPreferredWidth(80);
         table.getColumnModel().getColumn(1).setResizable(true);
