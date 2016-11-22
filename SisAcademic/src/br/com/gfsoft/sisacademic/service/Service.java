@@ -2,12 +2,26 @@ package br.com.gfsoft.sisacademic.service;
 
 public class Service {
 	
-	/*private Service(){
-		
-	}*/
+	private static final Service SERVICE = new Service();
 	
-	public Service getService(){
-		return this;
+
+	public Service getInstancia(){
+		return SERVICE;
 	}
+	
+	/* OU */
+	
+//	private static Service instancia;
+//	
+//	private Service(){
+//		
+//	}
+//	
+//	public static Service getInstance(){
+//		if(instancia == null){
+//			instancia = new Service();
+//		}
+//		return instancia;
+//	}
 
 }
