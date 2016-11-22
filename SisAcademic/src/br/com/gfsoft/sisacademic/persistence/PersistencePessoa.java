@@ -113,9 +113,9 @@ public class PersistencePessoa implements IPersistencePessoa {
 	}
 
 	@Override
-	public int selectPessoa(String matricula) {
+	public long selectPessoa(String matricula) {
 		
-		int id = 0;
+		long id = 0;
 		String sql = "SELECT * FROM tb_Pessoa WHERE matricula='" + matricula + "'";
 		
 		try {
@@ -123,7 +123,7 @@ public class PersistencePessoa implements IPersistencePessoa {
 			rs = stmt.executeQuery();
 
 			while (rs.next()) {
-				id = rs.getInt("idPessoa");
+				id = rs.getLong("idPessoa");
 			}
 			
 			return id;

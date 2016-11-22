@@ -9,7 +9,7 @@ public interface IPersistencePessoa {
 	public boolean insert(Pessoa pessoa);
 	public boolean delete(Pessoa pessoa);
 	public boolean update(Pessoa pessoa);
-	public int selectPessoa(String matricula);
+	public long selectPessoa(String matricula);
 	public Set<Pessoa> selectPessoas();
 
 }

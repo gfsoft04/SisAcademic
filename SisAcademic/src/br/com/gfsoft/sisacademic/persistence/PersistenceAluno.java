@@ -22,7 +22,7 @@ public class PersistenceAluno implements IPersistenceAluno {
 		
 		PersistencePessoa pPessoa = new PersistencePessoa();
 		String sql;
-		int id;
+		long id;
 		
 		if(pPessoa.insert(aluno)){
 			id = pPessoa.selectPessoa(aluno.getMatricula());
