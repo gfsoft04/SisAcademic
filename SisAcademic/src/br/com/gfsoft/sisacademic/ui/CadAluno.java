@@ -31,8 +31,8 @@ import javax.swing.border.TitledBorder;
 import br.com.gfsoft.sisacademic.model.Aluno;
 import br.com.gfsoft.sisacademic.model.Endereco;
 import br.com.gfsoft.sisacademic.persistence.PersistenceAluno;
-import br.com.gfsoft.sisacademic.persistence.PersistencePessoa;
 import br.com.gfsoft.sisacademic.util.BuscaCep;
+import br.com.gfsoft.sisacademic.util.EnvioEmail;
 import br.com.gfsoft.sisacademic.util.GeraMatricula;
 import br.com.gfsoft.sisacademic.util.VerificaCamposUnique;
 
@@ -57,9 +57,9 @@ public class CadAluno extends JInternalFrame {
 	private JTextField txtEstado;
 	private JTextField txtComplemento;
 	private JButton btnCadastrar;
-	private JButton btnCancelar;
 	private JButton btnDeletar;
 	private JButton btnAlterar;
+	private JButton btnCancelar;
 	
 	/**
 	 * Launch the application.
@@ -204,100 +204,7 @@ public class CadAluno extends JInternalFrame {
 		panel_4.setBounds(339, 484, 621, 50);
 		panel.add(panel_4);
 		panel_4.setLayout(null);
-
-		btnCancelar = new JButton("Cancelar");
-		btnCancelar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				limparCampos();
-				setVisible(false);
-			}
-		});
-		btnCancelar.setBounds(12, 11, 100, 30);
-		panel_4.add(btnCancelar);
-		btnCancelar.setFont(new Font("Tahoma", Font.BOLD, 11));
-
-		btnCadastrar = new JButton("Cadastrar");
-		btnCadastrar.setBounds(163, 11, 100, 30);
-		panel_4.add(btnCadastrar);
-		btnCadastrar.setFont(new Font("Tahoma", Font.BOLD, 11));
 		
-		btnDeletar = new JButton("Deletar");
-		btnDeletar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				//VERIFICAR OS CAMPOS OBRIGATORIOS PREENCHIDOS
-				//if(campo.getText.equals("")){}
-				
-				try {
-					Aluno aluno = new Aluno();
-					PersistenceAluno pAluno = new PersistenceAluno();
-					GeraMatricula geraMat = new GeraMatricula();
-					
-					String cpf = formattedTxtCpf.getText().replace(".", "").replace("-", "");
-					String telefone = formattedTxtTelefone.getText().replace("(", "").replace(")", "").replace("-", "");
-					String cep = formattedTxtCep.getText().replace("-", "");
-					String estadoCivil = comboBoxEstadoCivil.getSelectedItem().toString().substring(0, 2).trim();
-					String sexo = comboBoxSexo.getSelectedItem().toString().substring(0, 2).trim();
-					String situacao = comboBoxSituacao.getSelectedItem().toString().substring(0, 2).trim();
-					
-					String dia = formattedTxtDtNascimento.getText().substring(0, 2);
-					String mes = formattedTxtDtNascimento.getText().substring(3, 5);
-					String ano = formattedTxtDtNascimento.getText().substring(6, 10);
-					LocalDate dtNascimento = LocalDate.of(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
-					dia = formattedTxtDtMatricula.getText().substring(0, 2);
-					mes = formattedTxtDtMatricula.getText().substring(3, 5);
-					ano = formattedTxtDtMatricula.getText().substring(6, 10);
-					LocalDate dtMatricula = LocalDate.of(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
-					
-					//aluno.setId();
-					aluno.setMatricula(geraMat.gerarMatricula(1, dtMatricula.getYear()));
-					aluno.setNome(txtNome.getText());
-					aluno.setCpf(cpf);
-					aluno.setRg(txtRg.getText());
-					aluno.setDtNascimento(dtNascimento);
-					aluno.setEstadoCivil(estadoCivil);
-					aluno.setSexo(sexo);
-					aluno.setSituacao(situacao);
-					aluno.setEmail(txtEmail.getText());
-					aluno.setTelefone(telefone);
-					aluno.setProfissao(txtProfissao.getText());
-					aluno.setCep(cep);
-					aluno.setRua(txtRua.getText());
-					aluno.setNumero(Integer.parseInt(txtNumero.getText()));
-					aluno.setBairro(txtBairro.getText());
-					aluno.setCidade(txtCidade.getText());
-					aluno.setEstado(txtEstado.getText());
-					aluno.setComplemento(txtComplemento.getText());
-					aluno.setObservacao(txtPaneObservacao.getText());
-					
-					//Confirmacao do usuario
-					if(JOptionPane.showConfirmDialog(null, "Tem certeza que deseja excluir?", "Confirmação", JOptionPane.WARNING_MESSAGE) == 0){
-						if(pAluno.delete(aluno)){
-							JOptionPane.showMessageDialog(null, "Exclusão eferuada com sucesso!", "Cadastrado", JOptionPane.INFORMATION_MESSAGE);
-							limparCampos();
-						}
-					} 
-					
-				} catch (DateTimeException ex) {
-					// Excesao para data invalida
-					JOptionPane.showMessageDialog(null, "Data Invalida!", "Erro", JOptionPane.ERROR_MESSAGE);
-					System.out.println(ex);
-				} catch (NumberFormatException ex) {
-					// Excecao para conversao de texto em numero
-					JOptionPane.showMessageDialog(null, "Campo numero só aceita digitos", "Erro", JOptionPane.ERROR_MESSAGE);
-					System.out.println(ex);
-				}
-				
-			}
-		});
-		btnDeletar.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnDeletar.setBounds(314, 10, 98, 30);
-		panel_4.add(btnDeletar);
-		
-		btnAlterar = new JButton("Alterar");
-		btnAlterar.setBounds(163, 10, 98, 30);
-		panel_4.add(btnAlterar);
-
 		JPanel pane_1 = new JPanel();
 		pane_1.setBounds(10, 12, 962, 196);
 		panel.add(pane_1);
@@ -453,6 +360,13 @@ public class CadAluno extends JInternalFrame {
 				}
 			}
 		});
+		
+		/** BOTAO CADASTRAR **/
+		btnCadastrar = new JButton("Cadastrar");
+		btnCadastrar.setBounds(163, 11, 100, 30);
+		btnCadastrar.setFont(new Font("Tahoma", Font.BOLD, 11));
+		panel_4.add(btnCadastrar);
+		
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -461,6 +375,7 @@ public class CadAluno extends JInternalFrame {
 				
 				try {
 					Aluno aluno = new Aluno();
+					EnvioEmail email = new EnvioEmail();
 					GeraMatricula geraMatricula = new GeraMatricula();
 					VerificaCamposUnique verificaCamposUnique = new VerificaCamposUnique();
 					PersistenceAluno pAluno = new PersistenceAluno();
@@ -492,6 +407,7 @@ public class CadAluno extends JInternalFrame {
 					aluno.setEmail(txtEmail.getText());
 					aluno.setTelefone(telefone);
 					aluno.setProfissao(txtProfissao.getText());
+					aluno.setDtMatricula(dtMatricula);
 					aluno.setCep(cep);
 					aluno.setRua(txtRua.getText());
 					aluno.setNumero(Integer.parseInt(txtNumero.getText()));
@@ -504,7 +420,12 @@ public class CadAluno extends JInternalFrame {
 					//Verifica se o cpf ou rg esta cadastrado na base
 					if(verificaCamposUnique.validaCpfRg(cpf, txtRg.getText())){
 						if(pAluno.insert(aluno)){
+							String assunto = "Cadastro";
+							String mensagem = "Bem vindo "+aluno.getNome()+", seu cadastro foi efetuado com sucesso!"
+											+ "\n\n\tSua Matricula é: " + aluno.getMatricula();
+							
 							JOptionPane.showMessageDialog(null, "Cadastro eferuado com sucesso!", "Cadastrado", JOptionPane.INFORMATION_MESSAGE);
+							email.enviar(aluno.getEmail(), assunto, mensagem);
 							limparCampos();
 						}
 					}
@@ -518,6 +439,106 @@ public class CadAluno extends JInternalFrame {
 				}
 			}
 		});
+		
+		/** BOTAO DELETAR **/
+		btnDeletar = new JButton("Deletar");
+		btnDeletar.setBounds(314, 10, 98, 30);
+		btnDeletar.setFont(new Font("Tahoma", Font.BOLD, 11));
+		panel_4.add(btnDeletar);
+		
+		btnDeletar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//VERIFICAR OS CAMPOS OBRIGATORIOS PREENCHIDOS
+				//if(campo.getText.equals("")){}
+				
+				try {
+					Aluno aluno = new Aluno();
+					PersistenceAluno pAluno = new PersistenceAluno();
+					GeraMatricula geraMat = new GeraMatricula();
+					
+					String cpf = formattedTxtCpf.getText().replace(".", "").replace("-", "");
+					String telefone = formattedTxtTelefone.getText().replace("(", "").replace(")", "").replace("-", "");
+					String cep = formattedTxtCep.getText().replace("-", "");
+					String estadoCivil = comboBoxEstadoCivil.getSelectedItem().toString().substring(0, 2).trim();
+					String sexo = comboBoxSexo.getSelectedItem().toString().substring(0, 2).trim();
+					String situacao = comboBoxSituacao.getSelectedItem().toString().substring(0, 2).trim();
+					
+					String dia = formattedTxtDtNascimento.getText().substring(0, 2);
+					String mes = formattedTxtDtNascimento.getText().substring(3, 5);
+					String ano = formattedTxtDtNascimento.getText().substring(6, 10);
+					LocalDate dtNascimento = LocalDate.of(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
+					dia = formattedTxtDtMatricula.getText().substring(0, 2);
+					mes = formattedTxtDtMatricula.getText().substring(3, 5);
+					ano = formattedTxtDtMatricula.getText().substring(6, 10);
+					LocalDate dtMatricula = LocalDate.of(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
+					
+					//aluno.setId();
+					aluno.setMatricula(geraMat.gerarMatricula(1, dtMatricula.getYear()));
+					aluno.setNome(txtNome.getText());
+					aluno.setCpf(cpf);
+					aluno.setRg(txtRg.getText());
+					aluno.setDtNascimento(dtNascimento);
+					aluno.setEstadoCivil(estadoCivil);
+					aluno.setSexo(sexo);
+					aluno.setSituacao(situacao);
+					aluno.setEmail(txtEmail.getText());
+					aluno.setTelefone(telefone);
+					aluno.setProfissao(txtProfissao.getText());
+					aluno.setCep(cep);
+					aluno.setRua(txtRua.getText());
+					aluno.setNumero(Integer.parseInt(txtNumero.getText()));
+					aluno.setBairro(txtBairro.getText());
+					aluno.setCidade(txtCidade.getText());
+					aluno.setEstado(txtEstado.getText());
+					aluno.setComplemento(txtComplemento.getText());
+					aluno.setObservacao(txtPaneObservacao.getText());
+					
+					//Confirmacao do usuario
+					if(JOptionPane.showConfirmDialog(null, "Tem certeza que deseja excluir?", "Confirmação", JOptionPane.WARNING_MESSAGE) == 0){
+						if(pAluno.delete(aluno)){
+							JOptionPane.showMessageDialog(null, "Exclusão eferuada com sucesso!", "Cadastrado", JOptionPane.INFORMATION_MESSAGE);
+							limparCampos();
+						}
+					} 
+					
+				} catch (DateTimeException ex) {
+					// Excesao para data invalida
+					JOptionPane.showMessageDialog(null, "Data Invalida!", "Erro", JOptionPane.ERROR_MESSAGE);
+					System.out.println(ex);
+				} catch (NumberFormatException ex) {
+					// Excecao para conversao de texto em numero
+					JOptionPane.showMessageDialog(null, "Campo numero só aceita digitos", "Erro", JOptionPane.ERROR_MESSAGE);
+					System.out.println(ex);
+				}
+				
+			}
+		});
+		
+		/** BOTAO ALTERAR **/
+		btnAlterar = new JButton("Alterar");
+		btnAlterar.setBounds(163, 10, 98, 30);
+		panel_4.add(btnAlterar);
+		
+		btnAlterar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//VERIFICAR OS CAMPOS OBRIGATORIOS PREENCHIDOS
+				//if(campo.getText.equals("")){}
+			}
+		});
+		
+		/** BOTAO CANCELAR **/
+		btnCancelar = new JButton("Cancelar");
+		btnCancelar.setBounds(12, 11, 100, 30);
+		btnCancelar.setFont(new Font("Tahoma", Font.BOLD, 11));
+		panel_4.add(btnCancelar);
+		
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				limparCampos();
+				setVisible(false);
+			}
+		});
+		
 	}
 	
 	/**
