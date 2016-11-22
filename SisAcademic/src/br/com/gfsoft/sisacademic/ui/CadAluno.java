@@ -38,6 +38,8 @@ import br.com.gfsoft.sisacademic.util.VerificaCamposUnique;
 
 public class CadAluno extends JInternalFrame {
 
+	private JTextField txtMatricula;
+	private JLabel labelMatricula;
 	private JTextField txtNome;
 	private JTextField txtRg;
 	private JTextField txtEmail;
@@ -60,6 +62,8 @@ public class CadAluno extends JInternalFrame {
 	private JButton btnDeletar;
 	private JButton btnAlterar;
 	private JButton btnCancelar;
+	
+	private PersistenceAluno pAluno;
 	
 	/**
 	 * Launch the application.
@@ -95,7 +99,7 @@ public class CadAluno extends JInternalFrame {
 		JPanel pane_2 = new JPanel();
 		pane_2.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Endere\u00E7o",
 				TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		pane_2.setBounds(10, 223, 974, 196);
+		pane_2.setBounds(10, 259, 974, 196);
 		panel.add(pane_2);
 		pane_2.setLayout(null);
 
@@ -191,7 +195,7 @@ public class CadAluno extends JInternalFrame {
 		JPanel panel_3 = new JPanel();
 		panel_3.setBorder(
 				new TitledBorder(null, "Observa\u00E7\u00E3o", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_3.setBounds(10, 432, 296, 127);
+		panel_3.setBounds(10, 468, 296, 127);
 		panel.add(panel_3);
 		panel_3.setLayout(null);
 
@@ -201,12 +205,12 @@ public class CadAluno extends JInternalFrame {
 
 		JPanel panel_4 = new JPanel();
 		panel_4.setBorder(null);
-		panel_4.setBounds(339, 484, 621, 50);
+		panel_4.setBounds(339, 520, 621, 50);
 		panel.add(panel_4);
 		panel_4.setLayout(null);
 		
 		JPanel pane_1 = new JPanel();
-		pane_1.setBounds(10, 12, 962, 196);
+		pane_1.setBounds(10, 12, 962, 236);
 		panel.add(pane_1);
 		pane_1.setBorder(new TitledBorder(null, "Dados Pessoais", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		pane_1.setLayout(null);
@@ -349,6 +353,15 @@ public class CadAluno extends JInternalFrame {
 		});
 		formattedTxtDtMatricula.setBounds(496, 66, 140, 20);
 		pane_1.add(formattedTxtDtMatricula);
+		
+		labelMatricula = new JLabel("Matricula:");
+		labelMatricula.setBounds(10, 196, 66, 14);
+		pane_1.add(labelMatricula);
+		
+		txtMatricula = new JTextField();
+		txtMatricula.setColumns(10);
+		txtMatricula.setBounds(86, 193, 250, 20);
+		pane_1.add(txtMatricula);
 		formattedTxtDtNascimento.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
@@ -369,16 +382,22 @@ public class CadAluno extends JInternalFrame {
 		
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
 				//VERIFICAR OS CAMPOS OBRIGATORIOS PREENCHIDOS
-				//if(campo.getText.equals("")){}
+				if(txtNome.getText().equals("") || txtRg.getText().equals("") || txtEmail.getText().equals("")
+						|| txtRua.getText().equals("") || txtNumero.getText().equals("") || txtBairro.getText().equals("")
+						|| txtCidade.getText().equals("") || txtEstado.getText().equals("") || formattedTxtCpf.getText().equals("")
+						|| formattedTxtCep.getText().equals("") || formattedTxtTelefone.getText().equals("")) {
+					
+					JOptionPane.showMessageDialog(null, "Campos Obrigatórios em Branco!", "Erro", JOptionPane.ERROR_MESSAGE);
+					return ;					
+				}
 				
 				try {
 					Aluno aluno = new Aluno();
 					EnvioEmail email = new EnvioEmail();
 					GeraMatricula geraMatricula = new GeraMatricula();
 					VerificaCamposUnique verificaCamposUnique = new VerificaCamposUnique();
-					PersistenceAluno pAluno = new PersistenceAluno();
+					pAluno = new PersistenceAluno();
 					
 					String cpf = formattedTxtCpf.getText().replace(".", "").replace("-", "");
 					String telefone = formattedTxtTelefone.getText().replace("(", "").replace(")", "").replace("-", "");
@@ -396,7 +415,7 @@ public class CadAluno extends JInternalFrame {
 					ano = formattedTxtDtMatricula.getText().substring(6, 10);
 					LocalDate dtMatricula = LocalDate.of(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
 					
-					aluno.setMatricula(geraMatricula.gerarMatricula(1, Integer.parseInt(ano)));
+					aluno.setMatricula(geraMatricula.gerarMatricula(1, dtMatricula.getYear()));
 					aluno.setNome(txtNome.getText());
 					aluno.setCpf(cpf);
 					aluno.setRg(txtRg.getText());
@@ -424,7 +443,7 @@ public class CadAluno extends JInternalFrame {
 							String mensagem = "Bem vindo "+aluno.getNome()+", seu cadastro foi efetuado com sucesso!"
 											+ "\n\n\tSua Matricula é: " + aluno.getMatricula();
 							
-							JOptionPane.showMessageDialog(null, "Cadastro eferuado com sucesso!", "Cadastrado", JOptionPane.INFORMATION_MESSAGE);
+							JOptionPane.showMessageDialog(null, "Cadastro efetuado com sucesso!", "Cadastrado", JOptionPane.INFORMATION_MESSAGE);
 							email.enviar(aluno.getEmail(), assunto, mensagem);
 							limparCampos();
 						}
@@ -448,55 +467,18 @@ public class CadAluno extends JInternalFrame {
 		
 		btnDeletar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//VERIFICAR OS CAMPOS OBRIGATORIOS PREENCHIDOS
-				//if(campo.getText.equals("")){}
 				
 				try {
 					Aluno aluno = new Aluno();
-					PersistenceAluno pAluno = new PersistenceAluno();
-					GeraMatricula geraMat = new GeraMatricula();
+					pAluno = new PersistenceAluno();
+					String matricula = txtMatricula.getText();
 					
-					String cpf = formattedTxtCpf.getText().replace(".", "").replace("-", "");
-					String telefone = formattedTxtTelefone.getText().replace("(", "").replace(")", "").replace("-", "");
-					String cep = formattedTxtCep.getText().replace("-", "");
-					String estadoCivil = comboBoxEstadoCivil.getSelectedItem().toString().substring(0, 2).trim();
-					String sexo = comboBoxSexo.getSelectedItem().toString().substring(0, 2).trim();
-					String situacao = comboBoxSituacao.getSelectedItem().toString().substring(0, 2).trim();
-					
-					String dia = formattedTxtDtNascimento.getText().substring(0, 2);
-					String mes = formattedTxtDtNascimento.getText().substring(3, 5);
-					String ano = formattedTxtDtNascimento.getText().substring(6, 10);
-					LocalDate dtNascimento = LocalDate.of(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
-					dia = formattedTxtDtMatricula.getText().substring(0, 2);
-					mes = formattedTxtDtMatricula.getText().substring(3, 5);
-					ano = formattedTxtDtMatricula.getText().substring(6, 10);
-					LocalDate dtMatricula = LocalDate.of(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
-					
-					//aluno.setId();
-					aluno.setMatricula(geraMat.gerarMatricula(1, dtMatricula.getYear()));
-					aluno.setNome(txtNome.getText());
-					aluno.setCpf(cpf);
-					aluno.setRg(txtRg.getText());
-					aluno.setDtNascimento(dtNascimento);
-					aluno.setEstadoCivil(estadoCivil);
-					aluno.setSexo(sexo);
-					aluno.setSituacao(situacao);
-					aluno.setEmail(txtEmail.getText());
-					aluno.setTelefone(telefone);
-					aluno.setProfissao(txtProfissao.getText());
-					aluno.setCep(cep);
-					aluno.setRua(txtRua.getText());
-					aluno.setNumero(Integer.parseInt(txtNumero.getText()));
-					aluno.setBairro(txtBairro.getText());
-					aluno.setCidade(txtCidade.getText());
-					aluno.setEstado(txtEstado.getText());
-					aluno.setComplemento(txtComplemento.getText());
-					aluno.setObservacao(txtPaneObservacao.getText());
+					aluno = pAluno.selectAluno(matricula);
 					
 					//Confirmacao do usuario
 					if(JOptionPane.showConfirmDialog(null, "Tem certeza que deseja excluir?", "Confirmação", JOptionPane.WARNING_MESSAGE) == 0){
 						if(pAluno.delete(aluno)){
-							JOptionPane.showMessageDialog(null, "Exclusão eferuada com sucesso!", "Cadastrado", JOptionPane.INFORMATION_MESSAGE);
+							JOptionPane.showMessageDialog(null, "Exclusão efetuada com sucesso!", "Exclusão", JOptionPane.INFORMATION_MESSAGE);
 							limparCampos();
 						}
 					} 
@@ -522,7 +504,72 @@ public class CadAluno extends JInternalFrame {
 		btnAlterar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//VERIFICAR OS CAMPOS OBRIGATORIOS PREENCHIDOS
-				//if(campo.getText.equals("")){}
+				if(txtNome.getText().equals("") || txtRg.getText().equals("") || txtEmail.getText().equals("")
+						|| txtRua.getText().equals("") || txtNumero.getText().equals("") || txtBairro.getText().equals("")
+						|| txtCidade.getText().equals("") || txtEstado.getText().equals("") || formattedTxtCpf.getText().equals("")
+						|| formattedTxtCep.getText().equals("") || formattedTxtTelefone.getText().equals("")) {
+					
+					JOptionPane.showMessageDialog(null, "Campos Obrigatórios em Branco!", "Erro", JOptionPane.ERROR_MESSAGE);
+					return ;					
+				}
+				
+				try {
+					Aluno aluno = new Aluno();
+					VerificaCamposUnique verificaCamposUnique = new VerificaCamposUnique();
+					pAluno = new PersistenceAluno();
+					
+					String cpf = formattedTxtCpf.getText().replace(".", "").replace("-", "");
+					String telefone = formattedTxtTelefone.getText().replace("(", "").replace(")", "").replace("-", "");
+					String cep = formattedTxtCep.getText().replace("-", "");
+					String estadoCivil = comboBoxEstadoCivil.getSelectedItem().toString().substring(0, 2).trim();
+					String sexo = comboBoxSexo.getSelectedItem().toString().substring(0, 2).trim();
+					String situacao = comboBoxSituacao.getSelectedItem().toString().substring(0, 2).trim();
+					
+					String dia = formattedTxtDtNascimento.getText().substring(0, 2);
+					String mes = formattedTxtDtNascimento.getText().substring(3, 5);
+					String ano = formattedTxtDtNascimento.getText().substring(6, 10);
+					LocalDate dtNascimento = LocalDate.of(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
+					dia = formattedTxtDtMatricula.getText().substring(0, 2);
+					mes = formattedTxtDtMatricula.getText().substring(3, 5);
+					ano = formattedTxtDtMatricula.getText().substring(6, 10);
+					LocalDate dtMatricula = LocalDate.of(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
+					
+					aluno.setMatricula(txtMatricula.getText());
+					aluno.setNome(txtNome.getText());
+					aluno.setCpf(cpf);
+					aluno.setRg(txtRg.getText());
+					aluno.setDtNascimento(dtNascimento);
+					aluno.setEstadoCivil(estadoCivil);
+					aluno.setSexo(sexo);
+					aluno.setSituacao(situacao);
+					aluno.setEmail(txtEmail.getText());
+					aluno.setTelefone(telefone);
+					aluno.setProfissao(txtProfissao.getText());
+					aluno.setDtMatricula(dtMatricula);
+					aluno.setCep(cep);
+					aluno.setRua(txtRua.getText());
+					aluno.setNumero(Integer.parseInt(txtNumero.getText()));
+					aluno.setBairro(txtBairro.getText());
+					aluno.setCidade(txtCidade.getText());
+					aluno.setEstado(txtEstado.getText());
+					aluno.setComplemento(txtComplemento.getText());
+					aluno.setObservacao(txtPaneObservacao.getText());
+					
+					//Verifica se o cpf ou rg esta cadastrado na base
+					if(verificaCamposUnique.validaCpfRg(cpf, txtRg.getText())){
+						if(pAluno.update(aluno)){
+							JOptionPane.showMessageDialog(null, "Cadastro efetuado com sucesso!", "Cadastrado", JOptionPane.INFORMATION_MESSAGE);
+							limparCampos();
+						}
+					}
+					
+				} catch (DateTimeException ex) {
+					// Excesao para data invalida
+					JOptionPane.showMessageDialog(null, "Data Invalida!", "Erro", JOptionPane.ERROR_MESSAGE);
+				} catch (NumberFormatException ex) {
+					// Excecao para conversao de texto em numero
+					JOptionPane.showMessageDialog(null, "Campo numero só aceita digitos", "Erro", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 		
@@ -545,6 +592,7 @@ public class CadAluno extends JInternalFrame {
 	 * Metodo que recebe um objeto e preenche os campos
 	 */
 	public void preencheCampos(Aluno aluno){
+		txtMatricula.setText(aluno.getMatricula());
 		txtNome.setText(aluno.getNome());
 		txtRg.setText(aluno.getRg());
 		formattedTxtCpf.setText(aluno.getCpf());
@@ -574,12 +622,15 @@ public class CadAluno extends JInternalFrame {
 		btnCadastrar.setVisible(!flag);
 		btnAlterar.setVisible(flag);
 		btnDeletar.setVisible(flag);
+		txtMatricula.setVisible(flag);
+		labelMatricula.setVisible(flag);	
 	}
 	
 	/**
 	 * Metodo para desabilitar alguns campos para edicao
 	 */
 	public void setEditable(boolean flag){
+		txtMatricula.setEditable(flag);
 		txtNome.setEditable(flag);
 		formattedTxtCpf.setEditable(flag);
 		formattedTxtCpf.setFocusable(flag);
@@ -610,5 +661,4 @@ public class CadAluno extends JInternalFrame {
 		txtEstado.setText("");
 		txtComplemento.setText("");
 	}
-	
 }

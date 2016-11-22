@@ -26,10 +26,6 @@ import javax.swing.JTextPane;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
-import com.sun.mail.handlers.text_html;
-import com.sun.mail.handlers.text_plain;
-
-import br.com.gfsoft.sisacademic.model.Aluno;
 import br.com.gfsoft.sisacademic.model.Disciplina;
 import br.com.gfsoft.sisacademic.persistence.PersistenceDisciplina;
 
@@ -40,10 +36,14 @@ public class CadDisciplina extends JInternalFrame {
 	private JTextPane textPaneObservacao;
 	private JFormattedTextField formattedTxtDtCriacao;
 	private JFormattedTextField formattedTextSemestre;
+	private JLabel labelId;
+	private JTextField txtId;
 	private JButton btnCadastrar;
 	private JButton btnCancelar;
 	private JButton btnAlterar;
 	private JButton btnDeletar;
+	
+	private PersistenceDisciplina pDisciplina;
 
 	/**
 	 * Launch the application.
@@ -155,32 +155,33 @@ public class CadDisciplina extends JInternalFrame {
 		formattedTextSemestre.setBounds(421, 80, 103, 20);
 		panel_1.add(formattedTextSemestre);
 		
+		labelId = new JLabel("ID:");
+		labelId.setBounds(253, 132, 42, 14);
+		panel_1.add(labelId);
+		
+		txtId = new JTextField();
+		txtId.setColumns(10);
+		txtId.setBounds(291, 129, 101, 20);
+		panel_1.add(txtId);
+		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBounds(20, 365, 612, 54);
 		panel.add(panel_2);
 		panel_2.setLayout(null);
 		
-		btnCancelar = new JButton("Cancelar");
-		btnCancelar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				limparCampos();
-				setVisible(false);
-				
-			}
-		});
-		btnCancelar.setBounds(10, 11, 100, 30);
-		panel_2.add(btnCancelar);
-		
+		/* BOTAO CADASTRAR */
 		btnCadastrar = new JButton("Cadastrar");
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
 				//VERIFICAR OS CAMPOS OBRIGATORIOS PREENCHIDOS
-				//if(campo.getText.equals("")){}
+				if(txtNome.getText().equals("") || txtDescricao.getText().equals("")){
+					JOptionPane.showMessageDialog(null, "Campos Obrigatórios em Branco!", "Erro", JOptionPane.ERROR_MESSAGE);
+					return ;
+				}
 				
 				try {
 					Disciplina disciplina = new Disciplina();
-					PersistenceDisciplina pDisciplina = new PersistenceDisciplina();
+					pDisciplina = new PersistenceDisciplina();
 					
 					String situacao = comboBoxSituacao.getSelectedItem().toString().substring(0, 1);
 					
@@ -196,29 +197,111 @@ public class CadDisciplina extends JInternalFrame {
 					disciplina.setDtCriacao(dtCriacao);
 					disciplina.setObservacao(textPaneObservacao.getText());
 					
-					pDisciplina.insert(disciplina);
-					JOptionPane.showMessageDialog(null, "Cadastro eferuado com sucesso!", "Cadastrado", JOptionPane.INFORMATION_MESSAGE);
+					if(pDisciplina.insert(disciplina)){
+						JOptionPane.showMessageDialog(null, "Cadastro eferuado com sucesso!", "Cadastrado", JOptionPane.INFORMATION_MESSAGE);
+						limparCampos();
+					} /*else {
+						JOptionPane.showMessageDialog(null, "Error!", "Erro", JOptionPane.ERROR_MESSAGE);
+					}*/
 					
 				} catch (DateTimeException ex) {
 					// Excesao para data invalida
 					JOptionPane.showMessageDialog(null, "Data Invalida!", "Erro", JOptionPane.ERROR_MESSAGE);
-				} /*catch (NumberFormatException ex) {
-					// Excecao para conversao de texto em numero
-					JOptionPane.showMessageDialog(null, "Campo numero só aceita digitos", "Erro", JOptionPane.ERROR_MESSAGE);
-				}*/
+				} 
 				
 			}
 		});
 		btnCadastrar.setBounds(159, 11, 100, 30);
 		panel_2.add(btnCadastrar);
 		
+		/* BOTAO DELETAR */
 		btnDeletar = new JButton("Deletar");
+		btnDeletar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					Disciplina disciplina = new Disciplina();
+					pDisciplina = new PersistenceDisciplina();
+					long id = Long.parseLong(txtId.getText());
+					
+					disciplina = pDisciplina.selectDisciplina(id);
+					
+					//Confirmacao do usuario
+					if(JOptionPane.showConfirmDialog(null, "Tem certeza que deseja excluir?", "Confirmação", JOptionPane.WARNING_MESSAGE) == 0){
+						if(pDisciplina.delete(disciplina)){
+							JOptionPane.showMessageDialog(null, "Exclusão efetuada com sucesso!", "Exclusão", JOptionPane.INFORMATION_MESSAGE);
+							limparCampos();
+						}
+					} 
+					
+				} catch (DateTimeException ex) {
+					// Excesao para data invalida
+					JOptionPane.showMessageDialog(null, "Data Invalida!", "Erro", JOptionPane.ERROR_MESSAGE);
+					System.out.println(ex);
+				} catch (NumberFormatException ex) {
+					// Excecao para conversao de texto em numero
+					JOptionPane.showMessageDialog(null, "Campo numero só aceita digitos", "Erro", JOptionPane.ERROR_MESSAGE);
+					System.out.println(ex);
+				}
+			}
+		});
 		btnDeletar.setBounds(317, 11, 100, 30);
 		panel_2.add(btnDeletar);
 		
+		/* BOTAO ALTERAR */
 		btnAlterar = new JButton("Alterar");
+		btnAlterar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//VERIFICAR OS CAMPOS OBRIGATORIOS PREENCHIDOS
+				if(txtNome.getText().equals("") || txtDescricao.getText().equals("")){
+					JOptionPane.showMessageDialog(null, "Campos Obrigatórios em Branco!", "Erro", JOptionPane.ERROR_MESSAGE);
+					return ;
+				}
+				
+				try {
+					Disciplina disciplina = new Disciplina();
+					pDisciplina = new PersistenceDisciplina();
+					
+					String situacao = comboBoxSituacao.getSelectedItem().toString().substring(0, 1);
+					
+					String dia = formattedTxtDtCriacao.getText().substring(0, 2);
+					String mes = formattedTxtDtCriacao.getText().substring(3, 5);
+					String ano = formattedTxtDtCriacao.getText().substring(6, 10);
+					LocalDate dtCriacao = LocalDate.of(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
+					
+					disciplina.setNome(txtNome.getText());
+					disciplina.setSituacao(situacao);
+					disciplina.setDescricao(txtDescricao.getText());
+					disciplina.setSemestre(formattedTextSemestre.getText());
+					disciplina.setDtCriacao(dtCriacao);
+					disciplina.setObservacao(textPaneObservacao.getText());
+					
+					if(pDisciplina.insert(disciplina)){
+						JOptionPane.showMessageDialog(null, "Cadastro eferuado com sucesso!", "Cadastrado", JOptionPane.INFORMATION_MESSAGE);
+						limparCampos();
+					} /*else {
+						JOptionPane.showMessageDialog(null, "Error!", "Erro", JOptionPane.ERROR_MESSAGE);
+					}*/
+					
+				} catch (DateTimeException ex) {
+					// Excesao para data invalida
+					JOptionPane.showMessageDialog(null, "Data Invalida!", "Erro", JOptionPane.ERROR_MESSAGE);
+				} 
+			}
+		});
 		btnAlterar.setBounds(159, 11, 100, 30);
 		panel_2.add(btnAlterar);
+		
+		/* BOTAO CANCELAR */
+		btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				limparCampos();
+				setVisible(false);
+				
+			}
+		});
+		btnCancelar.setBounds(10, 11, 100, 30);
+		panel_2.add(btnCancelar);
 
 	}
 	
@@ -244,16 +327,17 @@ public class CadDisciplina extends JInternalFrame {
 		btnCadastrar.setVisible(!flag);
 		btnAlterar.setVisible(flag);
 		btnDeletar.setVisible(flag);
+		txtId.setVisible(flag);
+		labelId.setVisible(flag);
 	}
 	
 	/**
 	 * Metodo para desabilitar alguns campos para edicao
 	 */
 	public void setEditable(boolean flag){
-//		txtNome.setEditable(flag);
-//		formattedTxtCpf.setEditable(flag);
-//		formattedTxtCpf.setFocusable(flag);
-		
+		txtId.setEditable(flag);
+		txtNome.setEditable(flag);	
+//		formattedTxtDtCriacao.setEditable(flag);
 	}
 	
 	/**

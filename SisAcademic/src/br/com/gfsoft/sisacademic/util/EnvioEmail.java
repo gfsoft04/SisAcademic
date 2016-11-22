@@ -9,6 +9,7 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.swing.JOptionPane;
 
 public class EnvioEmail {
 
@@ -51,6 +52,7 @@ public class EnvioEmail {
 			return true;
 
 		} catch (MessagingException e) {
+			JOptionPane.showMessageDialog(null, "Falha ao enviar email!", "Erro", JOptionPane.ERROR_MESSAGE);
 			throw new RuntimeException(e);
 		}
 

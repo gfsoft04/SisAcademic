@@ -85,7 +85,7 @@ public class ConsultaDisciplina extends JInternalFrame {
 					Disciplina disciplina = new Disciplina();
 					disciplina = pPersistenceDisciplina.selectDisciplina(id);
 					
-					//Principal.ALUNO.preencheCampos(disciplina);
+					Principal.DISCIPLINA.preencheCampos(disciplina);
 					Principal.DISCIPLINA.setEditable(false);
 					Principal.DISCIPLINA.alternaBotoes(true);
 					Principal.DISCIPLINA.setVisible(true);

@@ -64,6 +64,10 @@ public class Login extends JDialog {
 		panel_1.add(textField);
 		textField.setColumns(10);
 		
+		passwordField = new JPasswordField();
+		passwordField.setBounds(107, 80, 170, 28);
+		panel_1.add(passwordField);
+		
 		JButton btnOk = new JButton("OK");
 		btnOk.setBounds(187, 142, 90, 30);
 		panel_1.add(btnOk);
@@ -72,8 +76,5 @@ public class Login extends JDialog {
 		btnCancelar.setBounds(49, 142, 90, 30);
 		panel_1.add(btnCancelar);
 		
-		passwordField = new JPasswordField();
-		passwordField.setBounds(107, 80, 170, 28);
-		panel_1.add(passwordField);
 	}
 }

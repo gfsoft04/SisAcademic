@@ -27,6 +27,7 @@ public class Principal extends JFrame {
 	public static ConsultaFuncionario CONSULTAFUNCIONARIO;
 	public static ConsultaProfessor CONSULTAPROFESSOR;
 	public static ConsultaDisciplina CONSULTADISCIPLINA;
+	private JDesktopPane desktopPane;
 
 	
 	/**
@@ -58,7 +59,7 @@ public class Principal extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 
-		JDesktopPane desktopPane = new JDesktopPane();
+		desktopPane = new JDesktopPane();
 		desktopPane.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		desktopPane.setBackground(SystemColor.desktop);
 		contentPane.add(desktopPane, BorderLayout.CENTER);

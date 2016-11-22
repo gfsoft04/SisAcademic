@@ -6,6 +6,8 @@ import java.io.Reader;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import javax.swing.JOptionPane;
+
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -41,7 +43,7 @@ public class BuscaCep {
 			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			System.out.println("Cep nao encontrado!");
+			JOptionPane.showMessageDialog(null, "CEP Não Localizado!", "Erro", JOptionPane.ERROR_MESSAGE);
 			e.printStackTrace();
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
