@@ -6,12 +6,18 @@ import br.com.gfsoft.sisacademic.model.Aluno;
 import br.com.gfsoft.sisacademic.persistence.IPersistenceAluno;
 import br.com.gfsoft.sisacademic.persistence.PersistenceAluno;
 
-public class AlunoService {
+public class AlunoService extends Service{
 	
 	private IPersistenceAluno persistencia;
 	
 	public AlunoService(){
+		
 		persistencia = new PersistenceAluno();
+		
+	}
+	
+	public Service getService(){
+		return new AlunoService();
 	}
 
 	public boolean cadastrar(Aluno aluno){
