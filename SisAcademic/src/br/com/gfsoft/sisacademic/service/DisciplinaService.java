@@ -26,8 +26,8 @@ public class DisciplinaService {
 		return this.persistencia.update(disciplina);
 	}
 	
-	public Disciplina buscar(String nome){
-		return this.persistencia.selectDisciplina(nome);
+	public Disciplina buscar(long id){
+		return this.persistencia.selectDisciplina(id);
 	}
 	
 	public List<Disciplina> listar(){

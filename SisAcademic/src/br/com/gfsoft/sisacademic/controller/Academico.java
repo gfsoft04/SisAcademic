@@ -26,8 +26,8 @@ public class Academico {
 		return disciplinaService.atualizar(disciplina);
 	}
 	
-	public Disciplina buscarDisciplina(String nome){
-		return disciplinaService.buscar(nome);
+	public Disciplina buscarDisciplina(long id){
+		return disciplinaService.buscar(id);
 	}
 	
 	public List<Disciplina> listarDisciplina(){

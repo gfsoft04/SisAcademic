@@ -231,6 +231,7 @@ public class CadAluno extends JInternalFrame {
 				try {
 					Aluno aluno = new Aluno();
 					PersistenceAluno pAluno = new PersistenceAluno();
+					GeraMatricula geraMat = new GeraMatricula();
 					
 					String cpf = formattedTxtCpf.getText().replace(".", "").replace("-", "");
 					String telefone = formattedTxtTelefone.getText().replace("(", "").replace(")", "").replace("-", "");
@@ -249,7 +250,7 @@ public class CadAluno extends JInternalFrame {
 					LocalDate dtMatricula = LocalDate.of(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
 					
 					//aluno.setId();
-					//aluno.setMatricula();
+					aluno.setMatricula(geraMat.gerarMatricula(1, dtMatricula.getYear()));
 					aluno.setNome(txtNome.getText());
 					aluno.setCpf(cpf);
 					aluno.setRg(txtRg.getText());
@@ -280,9 +281,11 @@ public class CadAluno extends JInternalFrame {
 				} catch (DateTimeException ex) {
 					// Excesao para data invalida
 					JOptionPane.showMessageDialog(null, "Data Invalida!", "Erro", JOptionPane.ERROR_MESSAGE);
+					System.out.println(ex);
 				} catch (NumberFormatException ex) {
 					// Excecao para conversao de texto em numero
 					JOptionPane.showMessageDialog(null, "Campo numero só aceita digitos", "Erro", JOptionPane.ERROR_MESSAGE);
+					System.out.println(ex);
 				}
 				
 			}

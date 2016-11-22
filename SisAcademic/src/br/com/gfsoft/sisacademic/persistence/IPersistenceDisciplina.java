@@ -9,7 +9,7 @@ public interface IPersistenceDisciplina {
 	public boolean insert(Disciplina disciplina);
 	public boolean delete(Disciplina disciplina);
 	public boolean update(Disciplina disciplina);
-	public Disciplina selectDisciplina(String nome); 
+	public Disciplina selectDisciplina(long id); 
 	public List<Disciplina> selectDisciplinas();
 
 }

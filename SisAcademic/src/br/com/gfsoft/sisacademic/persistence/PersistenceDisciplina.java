@@ -93,10 +93,10 @@ public class PersistenceDisciplina implements IPersistenceDisciplina {
 	}
 
 	@Override
-	public Disciplina selectDisciplina(String nome) {
+	public Disciplina selectDisciplina(long id) {
 		
 		Disciplina disciplina = new Disciplina();
-		String sql = "SELECT * FROM tb_Disciplina WHERE nome = '"+nome+"'";
+		String sql = "SELECT * FROM tb_Disciplina WHERE idDisciplina = '"+id+"'";
 		
 		try {
 			stmt = con.getConnection().createStatement();
