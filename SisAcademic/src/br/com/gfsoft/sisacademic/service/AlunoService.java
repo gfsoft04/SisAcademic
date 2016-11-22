@@ -15,10 +15,6 @@ public class AlunoService extends Service{
 		persistencia = new PersistenceAluno();
 		
 	}
-	
-	public Service getService(){
-		return new AlunoService();
-	}
 
 	public boolean cadastrar(Aluno aluno){
 		return persistencia.insert(aluno);

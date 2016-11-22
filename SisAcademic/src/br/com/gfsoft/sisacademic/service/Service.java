@@ -12,11 +12,11 @@ public class Service {
 	/* OU */
 	
 //	private static Service instancia;
-//	
+	
 //	private Service(){
-//		
+		
 //	}
-//	
+	
 //	public static Service getInstance(){
 //		if(instancia == null){
 //			instancia = new Service();
