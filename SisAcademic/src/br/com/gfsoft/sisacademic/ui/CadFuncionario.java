@@ -38,6 +38,19 @@ public class CadFuncionario extends JInternalFrame {
 	private JTextField txtCidade;
 	private JTextField txtEstado;
 	private JTextField txtComplemento;
+	private JFormattedTextField formattedTxtCep;
+	private JFormattedTextField formattedTxtDtNascimento;
+	private JFormattedTextField formattedTxtCpf;
+	private JFormattedTextField formattedTxtTelefone;
+	private JFormattedTextField formattedtxtDtContratacao;
+	private JComboBox comboBoxEstadoCivil;
+	private JComboBox comboBoxSexo;
+	private JComboBox comboBoxSituacao;
+	private JComboBox comboBoxEscolaridade;
+	private JButton btnCancelar;
+	private JButton btnCadastrar;
+	private JButton btnDeletar;
+	private JButton btnAlterar;
 
 
 	/**
@@ -90,7 +103,7 @@ public class CadFuncionario extends JInternalFrame {
 		lblDataDeNascimento.setBounds(10, 59, 107, 14);
 		pane_1.add(lblDataDeNascimento);
 
-		JFormattedTextField formattedTxtDtNascimento = new JFormattedTextField();
+		formattedTxtDtNascimento = new JFormattedTextField();
 		formattedTxtDtNascimento.setBounds(127, 56, 139, 20);
 		pane_1.add(formattedTxtDtNascimento);
 
@@ -111,7 +124,7 @@ public class CadFuncionario extends JInternalFrame {
 		lblEstadoCivil.setBounds(276, 59, 62, 14);
 		pane_1.add(lblEstadoCivil);
 
-		JComboBox comboBoxEstadoCivil = new JComboBox();
+		comboBoxEstadoCivil = new JComboBox();
 		comboBoxEstadoCivil.setBounds(348, 55, 151, 22);
 		pane_1.add(comboBoxEstadoCivil);
 		comboBoxEstadoCivil.setModel(new DefaultComboBoxModel(
@@ -126,7 +139,7 @@ public class CadFuncionario extends JInternalFrame {
 		lblRg.setBounds(380, 26, 20, 14);
 		pane_1.add(lblRg);
 
-		JFormattedTextField formattedTxtCpf = new JFormattedTextField();
+		formattedTxtCpf = new JFormattedTextField();
 		formattedTxtCpf.setBounds(585, 23, 139, 20);
 		pane_1.add(formattedTxtCpf);
 		formattedTxtCpf.addFocusListener(new FocusAdapter() {
@@ -149,12 +162,12 @@ public class CadFuncionario extends JInternalFrame {
 		lblSexo.setBounds(505, 59, 35, 14);
 		pane_1.add(lblSexo);
 
-		JComboBox comboBoxSexo = new JComboBox();
+		comboBoxSexo = new JComboBox();
 		comboBoxSexo.setBounds(550, 55, 151, 22);
 		pane_1.add(comboBoxSexo);
 		comboBoxSexo.setModel(new DefaultComboBoxModel(new String[] { "Masculino", "Feminino" }));
 
-		JFormattedTextField formattedTxtTelefone = new JFormattedTextField();
+		formattedTxtTelefone = new JFormattedTextField();
 		formattedTxtTelefone.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
@@ -173,7 +186,7 @@ public class CadFuncionario extends JInternalFrame {
 		lblSituao.setBounds(715, 59, 46, 14);
 		pane_1.add(lblSituao);
 		
-		JComboBox comboBoxSituacao = new JComboBox();
+		comboBoxSituacao = new JComboBox();
 		comboBoxSituacao.setModel(new DefaultComboBoxModel(new String[] {"Matriculado (M)", "N\u00E3o Matriculado (N)", "Ativo (A)", "Inativo (I)"}));
 		comboBoxSituacao.setBounds(771, 55, 118, 22);
 		pane_1.add(comboBoxSituacao);
@@ -189,7 +202,7 @@ public class CadFuncionario extends JInternalFrame {
 		lblCep.setBounds(40, 43, 30, 14);
 		pane_2.add(lblCep);
 
-		JFormattedTextField formattedTxtCep = new JFormattedTextField();
+		formattedTxtCep = new JFormattedTextField();
 		formattedTxtCep.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
@@ -304,7 +317,7 @@ public class CadFuncionario extends JInternalFrame {
 		txtSalario.setBounds(99, 93, 120, 20);
 		panel_2.add(txtSalario);
 		
-		JComboBox comboBoxEscolaridade = new JComboBox();
+		comboBoxEscolaridade = new JComboBox();
 		comboBoxEscolaridade.setBounds(105, 29, 180, 22);
 		panel_2.add(comboBoxEscolaridade);
 		
@@ -312,7 +325,7 @@ public class CadFuncionario extends JInternalFrame {
 		label_2.setBounds(30, 124, 120, 14);
 		panel_2.add(label_2);
 		
-		JFormattedTextField formattedtxtDtContratacao = new JFormattedTextField();
+		formattedtxtDtContratacao = new JFormattedTextField();
 		formattedtxtDtContratacao.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
@@ -342,30 +355,6 @@ public class CadFuncionario extends JInternalFrame {
 		panel.add(panel_4);
 		panel_4.setLayout(null);
 		
-				JButton btnCancelar = new JButton("Cancelar");
-				btnCancelar.setBounds(10, 11, 100, 30);
-				panel_4.add(btnCancelar);
-				btnCancelar.setFont(new Font("Tahoma", Font.PLAIN, 11));
-				
-						JButton btnCadastrar = new JButton("Cadastrar");
-						btnCadastrar.setBounds(180, 11, 100, 30);
-						panel_4.add(btnCadastrar);
-						btnCadastrar.setFont(new Font("Tahoma", Font.PLAIN, 11));
-						
-						JButton btnDeletar = new JButton("Deletar");
-						btnDeletar.setBounds(10, 99, 100, 30);
-						panel_4.add(btnDeletar);
-						
-						JButton btnAlterar = new JButton("Alterar");
-						btnAlterar.setBounds(180, 99, 100, 30);
-						panel_4.add(btnAlterar);
-						btnCadastrar.addActionListener(new ActionListener() {
-							public void actionPerformed(ActionEvent e) {
-
-								setVisible(false);
-
-							}
-						});
 		formattedTxtDtNascimento.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
@@ -377,6 +366,35 @@ public class CadFuncionario extends JInternalFrame {
 				}
 			}
 		});
+		
+		/* BOTAO CADASTRAR */
+		btnCadastrar = new JButton("Cadastrar");
+		btnCadastrar.setBounds(180, 11, 100, 30);
+		panel_4.add(btnCadastrar);
+		btnCadastrar.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		
+		/* BOTAO ALTERAR */
+		btnAlterar = new JButton("Alterar");
+		btnAlterar.setBounds(180, 99, 100, 30);
+		panel_4.add(btnAlterar);
+		btnCadastrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				setVisible(false);
+
+			}
+		});
+		
+		/* BOTAO DELETAR */
+		btnDeletar = new JButton("Deletar");
+		btnDeletar.setBounds(10, 99, 100, 30);
+		panel_4.add(btnDeletar);
+		
+		/* BOTAO CANCELAR */
+		btnCancelar = new JButton("Cancelar");
+		btnCancelar.setBounds(10, 11, 100, 30);
+		panel_4.add(btnCancelar);
+		btnCancelar.setFont(new Font("Tahoma", Font.PLAIN, 11));
 
 	}
 }
