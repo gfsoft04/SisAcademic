@@ -7,6 +7,7 @@ import java.util.Set;
 
 import javax.swing.JOptionPane;
 
+import br.com.gfsoft.sisacademic.model.Funcionario;
 import br.com.gfsoft.sisacademic.model.Professor;
 
 public class PersistenceProfessor implements IPersistenceProfessor {
@@ -18,27 +19,30 @@ public class PersistenceProfessor implements IPersistenceProfessor {
 	@Override
 	public boolean insert(Professor professor) {
 		
-//		PersistenceFuncionario pFuncionario = new PersistenceFuncionario();
-//		
-//		String sql;
-//		long id;
-//		
-//		if(pFuncionario.insert(professor)){
-//			
-//			id = pFuncionario.selectFuncionario(professor.getMatricula());
-//			
-//			sql = "INSERT INTO tb_Professor(tb_Funcionario_idPessoa, titularidade) VALUES "
-//					+ "("+id+", '"+professor.getTitularidade()+"')";
-//			
-//			try {
-//				con.getConnection().createStatement().executeUpdate(sql);
-//				return true;
-//			} catch (SQLException ex) {
-//				// Excecao para banco de dados
-//				ex.printStackTrace();
-//				JOptionPane.showMessageDialog(null, "Erro na insercao do aluno na base!", "Erro", JOptionPane.ERROR_MESSAGE);
-//			}
-//		}//if inseriu corretamente em pessoa
+		PersistenceFuncionario pFuncionario = new PersistenceFuncionario();
+		Funcionario funcionario = new Funcionario();
+		
+		String sql;
+		long id;
+		
+		if(pFuncionario.insert(professor)){
+			
+			funcionario = pFuncionario.selectFuncionario(professor.getMatricula());		
+			
+			id = funcionario.getId();
+			
+			sql = "INSERT INTO tb_Professor(tb_Funcionario_idPessoa, titularidade) VALUES "
+					+ "("+id+", '"+professor.getTitularidade()+"')";
+			
+			try {
+				con.getConnection().createStatement().executeUpdate(sql);
+				return true;
+			} catch (SQLException ex) {
+				// Excecao para banco de dados
+				ex.printStackTrace();
+				JOptionPane.showMessageDialog(null, "Erro na insercao do aluno na base!", "Erro", JOptionPane.ERROR_MESSAGE);
+			}
+		}//if inseriu corretamente em pessoa
 		
 		return false;
 	}
