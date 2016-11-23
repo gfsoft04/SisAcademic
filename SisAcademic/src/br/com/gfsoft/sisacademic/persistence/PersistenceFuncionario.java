@@ -9,7 +9,6 @@ import java.util.Set;
 
 import javax.swing.JOptionPane;
 
-import br.com.gfsoft.sisacademic.model.Aluno;
 import br.com.gfsoft.sisacademic.model.Funcionario;
 
 public class PersistenceFuncionario implements IPersistenceFuncionario {
