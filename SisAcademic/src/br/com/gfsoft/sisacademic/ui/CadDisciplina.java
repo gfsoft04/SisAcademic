@@ -312,6 +312,7 @@ public class CadDisciplina extends JInternalFrame {
 	 * Metodo que recebe um objeto e preenche os campos
 	 */
 	public void preencheCampos(Disciplina disciplina){
+		txtId.setText(""+disciplina.getId());
 		txtNome.setText(disciplina.getNome());
 		txtDescricao.setText(disciplina.getDescricao());
 		//comboBoxSituacao.setSelectedIndex(0);
