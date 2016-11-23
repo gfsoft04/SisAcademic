@@ -80,7 +80,7 @@ public class ConsultaDisciplina extends JInternalFrame {
 			public void mouseClicked(MouseEvent e) {
 				
 				if(e.getClickCount() == 2){
-					long id = Long.parseLong((String) table.getValueAt(table.getSelectedRow(), 0));
+					long id = Long.parseLong(table.getValueAt(table.getSelectedRow(),0).toString());
 					PersistenceDisciplina pPersistenceDisciplina = new PersistenceDisciplina();
 					Disciplina disciplina = new Disciplina();
 					disciplina = pPersistenceDisciplina.selectDisciplina(id);
