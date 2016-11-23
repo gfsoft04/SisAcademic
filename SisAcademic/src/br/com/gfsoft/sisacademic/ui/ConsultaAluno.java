@@ -20,11 +20,14 @@ import javax.swing.ListSelectionModel;
 import br.com.gfsoft.sisacademic.model.Aluno;
 import br.com.gfsoft.sisacademic.model.TabelaConsulta;
 import br.com.gfsoft.sisacademic.persistence.PersistenceAluno;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ConsultaAluno extends JInternalFrame {
-	private JTextField textField;
-	private JButton btnBuscar;
+	private JTextField txtNome;
+	private JButton btnFiltrar;
 	private JTable table;
+	private JTextField txtMatricula;
 
 	/**
 	 * Launch the application.
@@ -48,29 +51,38 @@ public class ConsultaAluno extends JInternalFrame {
 	public ConsultaAluno() {
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setClosable(true);
-		setTitle("Consulta de Pessoas");
-		setBounds(100, 100, 1000, 670);
+		setTitle("Consulta de Alunos");
+		setBounds(100, 100, 1200, 670);
 		setLocation(0, 0);
 		
 		JPanel panel = new JPanel();
 		getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
 		
-		textField = new JTextField();
-		textField.setBounds(115, 27, 350, 20);
-		panel.add(textField);
-		textField.setColumns(10);
+		txtNome = new JTextField();
+		txtNome.setBounds(115, 27, 350, 20);
+		panel.add(txtNome);
+		txtNome.setColumns(10);
 		
-		JLabel lblNewLabel = new JLabel("Pesquisar:");
+		JLabel lblNewLabel = new JLabel("Nome:");
 		lblNewLabel.setBounds(30, 30, 75, 14);
 		panel.add(lblNewLabel);
 		
-		btnBuscar = new JButton("Ok");
-		btnBuscar.setBounds(500, 26, 91, 23);
-		panel.add(btnBuscar);
+		btnFiltrar = new JButton("Filtrar");
+		btnFiltrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String matricula = txtMatricula.getText();
+				String nome = txtNome.getText();
+				
+				
+				
+			}
+		});
+		btnFiltrar.setBounds(500, 48, 100, 30);
+		panel.add(btnFiltrar);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 79, 974, 554);
+		scrollPane.setBounds(10, 89, 1174, 544);
 		panel.add(scrollPane);
 		
 		table = new JTable();
@@ -97,6 +109,19 @@ public class ConsultaAluno extends JInternalFrame {
 		});
 		scrollPane.setViewportView(table);
 		
+		txtMatricula = new JTextField();
+		txtMatricula.setColumns(10);
+		txtMatricula.setBounds(115, 58, 350, 20);
+		panel.add(txtMatricula);
+		
+		JLabel lblMatricula = new JLabel("Matricula:");
+		lblMatricula.setBounds(30, 61, 75, 14);
+		panel.add(lblMatricula);
+		
+		JButton btnImprimir = new JButton("Imprimir");
+		btnImprimir.setBounds(650, 48, 100, 30);
+		panel.add(btnImprimir);
+		
 		preencherTabela();
 
 	}
@@ -105,13 +130,13 @@ public class ConsultaAluno extends JInternalFrame {
 	public void preencherTabela(){
         List<Object> dados = new ArrayList<>();
         List<Aluno> alunos = new ArrayList<>();
-        String[] colunas = new String[]{"Matricula","Nome","cpf","rg","email","Data Nascimento"};
+        String[] colunas = new String[]{"Matricula","Nome","cpf","rg","email","Data Nascimento", "Data de Matricula"};
         PersistenceAluno pPersistenceAluno = new PersistenceAluno();
         
         alunos.addAll(pPersistenceAluno.selectAlunos());
         
         for(Aluno a : alunos){
-        	dados.add(new Object[]{a.getMatricula(), a.getNome(), a.getCpf(), a.getRg(), a.getEmail(), a.getDtNascimento()});
+        	dados.add(new Object[]{a.getMatricula(), a.getNome(), a.getCpf(), a.getRg(), a.getEmail(), a.getDtNascimento(), a.getDtMatricula()});
         }
         
         TabelaConsulta modelo = new TabelaConsulta(dados, colunas);
@@ -129,6 +154,8 @@ public class ConsultaAluno extends JInternalFrame {
         table.getColumnModel().getColumn(4).setResizable(true);
         table.getColumnModel().getColumn(5).setPreferredWidth(80);
         table.getColumnModel().getColumn(5).setResizable(true);
+        table.getColumnModel().getColumn(6).setPreferredWidth(80);
+        table.getColumnModel().getColumn(6).setResizable(true);
         
         table.getTableHeader().setReorderingAllowed(true);
         //jTableConsulta.getAutoResizeMode(jTableConsulta.AUTO_RESIZE_OFF);
@@ -136,5 +163,4 @@ public class ConsultaAluno extends JInternalFrame {
         table.setAutoCreateRowSorter(true);
         
     } //Fim do Metodo preencherTabela
-	
 }

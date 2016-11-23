@@ -23,9 +23,10 @@ import br.com.gfsoft.sisacademic.model.TabelaConsulta;
 import br.com.gfsoft.sisacademic.persistence.PersistenceFuncionario;
 
 public class ConsultaFuncionario extends JInternalFrame {
-	private JTextField textField;
-	private JButton btnBuscar;
+	private JTextField txtNome;
+	private JButton btnFiltrar;
 	private JTable table;
+	private JTextField textField;
 
 	/**
 	 * Launch the application.
@@ -50,28 +51,28 @@ public class ConsultaFuncionario extends JInternalFrame {
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setClosable(true);
 		setTitle("Consulta de Funcionários");
-		setBounds(100, 100, 1000, 670);
+		setBounds(100, 100, 1200, 670);
 		setLocation(0, 0);
 		
 		JPanel panel = new JPanel();
 		getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
 		
-		textField = new JTextField();
-		textField.setBounds(115, 27, 350, 20);
-		panel.add(textField);
-		textField.setColumns(10);
+		txtNome = new JTextField();
+		txtNome.setBounds(115, 27, 350, 20);
+		panel.add(txtNome);
+		txtNome.setColumns(10);
 		
-		JLabel lblNewLabel = new JLabel("Pesquisar:");
+		JLabel lblNewLabel = new JLabel("Nome:");
 		lblNewLabel.setBounds(30, 30, 75, 14);
 		panel.add(lblNewLabel);
 		
-		btnBuscar = new JButton("Ok");
-		btnBuscar.setBounds(500, 26, 91, 23);
-		panel.add(btnBuscar);
+		btnFiltrar = new JButton("Filtrar");
+		btnFiltrar.setBounds(510, 48, 100, 30);
+		panel.add(btnFiltrar);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 79, 974, 554);
+		scrollPane.setBounds(10, 89, 1174, 544);
 		panel.add(scrollPane);
 		
 		table = new JTable();
@@ -98,6 +99,19 @@ public class ConsultaFuncionario extends JInternalFrame {
 			}
 		});
 		scrollPane.setViewportView(table);
+		
+		textField = new JTextField();
+		textField.setColumns(10);
+		textField.setBounds(115, 58, 350, 20);
+		panel.add(textField);
+		
+		JLabel lblMatricula = new JLabel("Matricula:");
+		lblMatricula.setBounds(30, 61, 75, 14);
+		panel.add(lblMatricula);
+		
+		JButton btnImprimir = new JButton("Imprimir");
+		btnImprimir.setBounds(650, 48, 100, 30);
+		panel.add(btnImprimir);
 		
 		//preencherTabela();
 
@@ -138,5 +152,4 @@ public class ConsultaFuncionario extends JInternalFrame {
         table.setAutoCreateRowSorter(true);
         
     } //Fim do Metodo preencherTabela
-	
 }

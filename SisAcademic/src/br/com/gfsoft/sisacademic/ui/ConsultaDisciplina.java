@@ -20,10 +20,12 @@ import javax.swing.ListSelectionModel;
 import br.com.gfsoft.sisacademic.model.Disciplina;
 import br.com.gfsoft.sisacademic.model.TabelaConsulta;
 import br.com.gfsoft.sisacademic.persistence.PersistenceDisciplina;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ConsultaDisciplina extends JInternalFrame {
-	private JTextField textField;
-	private JButton btnBuscar;
+	private JTextField txtNome;
+	private JButton btnFiltrar;
 	private JTable table;
 
 	/**
@@ -48,29 +50,35 @@ public class ConsultaDisciplina extends JInternalFrame {
 	public ConsultaDisciplina() {
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setClosable(true);
-		setTitle("Consulta Disciplinas");
-		setBounds(100, 100, 1000, 670);
+		setTitle("Consulta de Disciplinas");
+		setBounds(100, 100, 1200, 670);
 		setLocation(0, 0);
 		
 		JPanel panel = new JPanel();
 		getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
 		
-		textField = new JTextField();
-		textField.setBounds(115, 27, 350, 20);
-		panel.add(textField);
-		textField.setColumns(10);
+		txtNome = new JTextField();
+		txtNome.setBounds(72, 27, 350, 20);
+		panel.add(txtNome);
+		txtNome.setColumns(10);
 		
-		JLabel lblNewLabel = new JLabel("Pesquisar:");
-		lblNewLabel.setBounds(30, 30, 75, 14);
+		JLabel lblNewLabel = new JLabel("Nome:");
+		lblNewLabel.setBounds(10, 30, 75, 14);
 		panel.add(lblNewLabel);
 		
-		btnBuscar = new JButton("Ok");
-		btnBuscar.setBounds(500, 26, 91, 23);
-		panel.add(btnBuscar);
+		btnFiltrar = new JButton("Filtrar");
+		btnFiltrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String nome = txtNome.getText();
+				
+			}
+		});
+		btnFiltrar.setBounds(475, 26, 100, 30);
+		panel.add(btnFiltrar);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 79, 974, 554);
+		scrollPane.setBounds(10, 67, 1174, 566);
 		panel.add(scrollPane);
 		
 		table = new JTable();
@@ -96,6 +104,10 @@ public class ConsultaDisciplina extends JInternalFrame {
 			}
 		});
 		scrollPane.setViewportView(table);
+		
+		JButton btnImprimir = new JButton("Imprimir");
+		btnImprimir.setBounds(625, 26, 100, 30);
+		panel.add(btnImprimir);
 		
 		preencherTabela();
 
