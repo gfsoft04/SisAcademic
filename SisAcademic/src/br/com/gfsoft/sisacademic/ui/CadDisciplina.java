@@ -30,20 +30,21 @@ import br.com.gfsoft.sisacademic.model.Disciplina;
 import br.com.gfsoft.sisacademic.persistence.PersistenceDisciplina;
 
 public class CadDisciplina extends JInternalFrame {
+	private JLabel labelId;
+	private JTextField txtId;
 	private JTextField txtNome;
 	private JTextField txtDescricao;
 	private JComboBox comboBoxSituacao;
 	private JTextPane textPaneObservacao;
 	private JFormattedTextField formattedTxtDtCriacao;
 	private JFormattedTextField formattedTextSemestre;
-	private JLabel labelId;
-	private JTextField txtId;
 	private JButton btnCadastrar;
 	private JButton btnCancelar;
 	private JButton btnAlterar;
 	private JButton btnDeletar;
 	
 	private PersistenceDisciplina pDisciplina;
+	private Disciplina disciplina;
 
 	/**
 	 * Launch the application.
@@ -180,8 +181,8 @@ public class CadDisciplina extends JInternalFrame {
 				}
 				
 				try {
-					Disciplina disciplina = new Disciplina();
 					pDisciplina = new PersistenceDisciplina();
+					disciplina = new Disciplina();
 					
 					String situacao = comboBoxSituacao.getSelectedItem().toString().substring(0, 1);
 					
@@ -219,8 +220,9 @@ public class CadDisciplina extends JInternalFrame {
 		btnDeletar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					Disciplina disciplina = new Disciplina();
 					pDisciplina = new PersistenceDisciplina();
+					disciplina = new Disciplina();
+					
 					long id = Long.parseLong(txtId.getText());
 					
 					disciplina = pDisciplina.selectDisciplina(id);
@@ -259,8 +261,8 @@ public class CadDisciplina extends JInternalFrame {
 				}
 				
 				try {
-					Disciplina disciplina = new Disciplina();
 					pDisciplina = new PersistenceDisciplina();
+					disciplina = new Disciplina();
 					
 					String situacao = comboBoxSituacao.getSelectedItem().toString().substring(0, 1);
 					
@@ -316,9 +318,9 @@ public class CadDisciplina extends JInternalFrame {
 		txtNome.setText(disciplina.getNome());
 		txtDescricao.setText(disciplina.getDescricao());
 		//comboBoxSituacao.setSelectedIndex(0);
-		textPaneObservacao.setText(disciplina.getObservacao());
 		formattedTxtDtCriacao.setText(disciplina.getDtCriacao().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT)));
 		formattedTextSemestre.setText(disciplina.getSemestre());
+		textPaneObservacao.setText(disciplina.getObservacao());
 	}	
 	
 	/**

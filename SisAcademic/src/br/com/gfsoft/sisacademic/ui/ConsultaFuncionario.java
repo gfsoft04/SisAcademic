@@ -23,10 +23,14 @@ import br.com.gfsoft.sisacademic.persistence.PersistenceFuncionario;
 
 public class ConsultaFuncionario extends JInternalFrame {
 	private JTextField txtNome;
-	private JButton btnFiltrar;
+	private JTextField txtMatricula;
 	private JTable table;
-	private JTextField textField;
-
+	private JButton btnFiltrar;
+	private JButton btnImprimir;
+	
+	private Funcionario funcionario;
+	private PersistenceFuncionario pFuncionario;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -66,10 +70,6 @@ public class ConsultaFuncionario extends JInternalFrame {
 		lblNewLabel.setBounds(30, 30, 75, 14);
 		panel.add(lblNewLabel);
 		
-		btnFiltrar = new JButton("Filtrar");
-		btnFiltrar.setBounds(510, 48, 100, 30);
-		panel.add(btnFiltrar);
-		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 89, 1174, 544);
 		panel.add(scrollPane);
@@ -80,53 +80,57 @@ public class ConsultaFuncionario extends JInternalFrame {
 			//DUPLO CLICK SOBRE LINHA DA TABELA
 			public void mouseClicked(MouseEvent e) {
 				
-//				if(e.getClickCount() == 2){
-//					Aluno aluno = new Aluno();
-//					aluno.setNome("Bruno Cesar Alves Ramos");
-//					aluno.setRg("1234567");
-//					aluno.setCpf("012.345.678-91");
-//					aluno.setDtNascimento(LocalDate.now());
-//					
-//					Principal.ALUNO.preencheCampos(aluno);
-//					Principal.ALUNO.setEditable(false);
-//					Principal.ALUNO.alternaBotoes(true);
-//					Principal.ALUNO.setVisible(true);
-//					Principal.ALUNO.setTitle("Editar");
-//					
-//				}
+				if(e.getClickCount() == 2){
+					String matricula = (String) table.getValueAt(table.getSelectedRow(), 0);
+					funcionario = new Funcionario();
+					pFuncionario = new PersistenceFuncionario();
+					funcionario = pFuncionario.selectFuncionario(matricula);
+					
+					Principal.FUNCIONARIO.preencheCampos(funcionario);
+					Principal.FUNCIONARIO.setEditable(false);
+					Principal.FUNCIONARIO.alternaBotoes(true);
+					Principal.FUNCIONARIO.setVisible(true);
+					Principal.FUNCIONARIO.setTitle("Editar");
+				}
 				
 			}
 		});
 		scrollPane.setViewportView(table);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(115, 58, 350, 20);
-		panel.add(textField);
+		txtMatricula = new JTextField();
+		txtMatricula.setColumns(10);
+		txtMatricula.setBounds(115, 58, 350, 20);
+		panel.add(txtMatricula);
 		
 		JLabel lblMatricula = new JLabel("Matricula:");
 		lblMatricula.setBounds(30, 61, 75, 14);
 		panel.add(lblMatricula);
 		
-		JButton btnImprimir = new JButton("Imprimir");
+		/* BOTAO FILTRAR */
+		btnFiltrar = new JButton("Filtrar");
+		btnFiltrar.setBounds(510, 48, 100, 30);
+		panel.add(btnFiltrar);
+		
+		/* BOTAO IMPRIMIR */
+		btnImprimir = new JButton("Imprimir");
 		btnImprimir.setBounds(650, 48, 100, 30);
 		panel.add(btnImprimir);
 		
-		//preencherTabela();
-
+		
+		preencherTabela();
 	}
 	
 	
 	public void preencherTabela(){
         List<Object> dados = new ArrayList<>();
         List<Funcionario> funcionario = new ArrayList<>();
-        String[] colunas = new String[]{"Matricula","Nome","cpf","rg","email","Data Nascimento"};
-        PersistenceFuncionario pPersistenceFuncionario = new PersistenceFuncionario();
+        String[] colunas = new String[]{"Matricula","Nome","cpf","rg","email","Data Nascimento", "Data de Contratação"};
+        pFuncionario = new PersistenceFuncionario();
         
-        funcionario.addAll(pPersistenceFuncionario.selectFuncionarios());
+        funcionario.addAll(pFuncionario.selectFuncionarios());
         
         for(Funcionario f : funcionario){
-        	dados.add(new Object[]{f.getMatricula(), f.getNome(), f.getCpf(), f.getRg(), f.getEmail(), f.getDtNascimento()});
+        	dados.add(new Object[]{f.getMatricula(), f.getNome(), f.getCpf(), f.getRg(), f.getEmail(), f.getDtNascimento(), f.getDtContratacao()});
         }
         
         TabelaConsulta modelo = new TabelaConsulta(dados, colunas);
@@ -144,6 +148,8 @@ public class ConsultaFuncionario extends JInternalFrame {
         table.getColumnModel().getColumn(4).setResizable(true);
         table.getColumnModel().getColumn(5).setPreferredWidth(80);
         table.getColumnModel().getColumn(5).setResizable(true);
+        table.getColumnModel().getColumn(6).setPreferredWidth(80);
+        table.getColumnModel().getColumn(6).setResizable(true);
         
         table.getTableHeader().setReorderingAllowed(true);
         //jTableConsulta.getAutoResizeMode(jTableConsulta.AUTO_RESIZE_OFF);

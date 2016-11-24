@@ -25,8 +25,12 @@ import java.awt.event.ActionEvent;
 
 public class ConsultaDisciplina extends JInternalFrame {
 	private JTextField txtNome;
-	private JButton btnFiltrar;
 	private JTable table;
+	private JButton btnFiltrar;
+	private JButton btnImprimir;
+	
+	private PersistenceDisciplina pDisciplina;
+	private Disciplina disciplina;
 
 	/**
 	 * Launch the application.
@@ -59,26 +63,16 @@ public class ConsultaDisciplina extends JInternalFrame {
 		panel.setLayout(null);
 		
 		txtNome = new JTextField();
-		txtNome.setBounds(72, 27, 350, 20);
+		txtNome.setBounds(115, 27, 350, 20);
 		panel.add(txtNome);
 		txtNome.setColumns(10);
 		
 		JLabel lblNewLabel = new JLabel("Nome:");
-		lblNewLabel.setBounds(10, 30, 75, 14);
+		lblNewLabel.setBounds(30, 30, 75, 14);
 		panel.add(lblNewLabel);
 		
-		btnFiltrar = new JButton("Filtrar");
-		btnFiltrar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String nome = txtNome.getText();
-				
-			}
-		});
-		btnFiltrar.setBounds(475, 26, 100, 30);
-		panel.add(btnFiltrar);
-		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 67, 1174, 566);
+		scrollPane.setBounds(10, 58, 1174, 575);
 		panel.add(scrollPane);
 		
 		table = new JTable();
@@ -89,9 +83,9 @@ public class ConsultaDisciplina extends JInternalFrame {
 				
 				if(e.getClickCount() == 2){
 					long id = Long.parseLong(table.getValueAt(table.getSelectedRow(),0).toString());
-					PersistenceDisciplina pPersistenceDisciplina = new PersistenceDisciplina();
-					Disciplina disciplina = new Disciplina();
-					disciplina = pPersistenceDisciplina.selectDisciplina(id);
+					pDisciplina = new PersistenceDisciplina();
+					disciplina = new Disciplina();
+					disciplina = pDisciplina.selectDisciplina(id);
 					
 					Principal.DISCIPLINA.preencheCampos(disciplina);
 					Principal.DISCIPLINA.setEditable(false);
@@ -105,12 +99,24 @@ public class ConsultaDisciplina extends JInternalFrame {
 		});
 		scrollPane.setViewportView(table);
 		
-		JButton btnImprimir = new JButton("Imprimir");
-		btnImprimir.setBounds(625, 26, 100, 30);
+		/* BOTAO FILTRAR */
+		btnFiltrar = new JButton("Filtrar");
+		btnFiltrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String nome = txtNome.getText();
+				
+			}
+		});
+		btnFiltrar.setBounds(510, 17, 100, 30);
+		panel.add(btnFiltrar);
+		
+		/* BOTAO IMPRIMIR */
+		btnImprimir = new JButton("Imprimir");
+		btnImprimir.setBounds(650, 17, 100, 30);
 		panel.add(btnImprimir);
 		
+		
 		preencherTabela();
-
 	}
 	
 	/**
@@ -121,9 +127,9 @@ public class ConsultaDisciplina extends JInternalFrame {
         List<Object> dados = new ArrayList<>();
         List<Disciplina> disciplinas = new ArrayList<>();
         String[] colunas = new String[]{"Id", "Nome", "Descrição", "Data de Criação", "Situação", "Semestre", "Observação"};
-        PersistenceDisciplina pPersistenceDisc = new PersistenceDisciplina();
+        pDisciplina = new PersistenceDisciplina();
         
-        disciplinas.addAll(pPersistenceDisc.selectDisciplinas());
+        disciplinas.addAll(pDisciplina.selectDisciplinas());
         
         for(Disciplina disc : disciplinas){
         	dados.add(new Object[]{disc.getId(), disc.getNome(), disc.getDescricao(), disc.getDtCriacao(), disc.getSituacao(), disc.getSemestre(), disc.getObservacao()});

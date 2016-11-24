@@ -25,9 +25,13 @@ import java.awt.event.ActionEvent;
 
 public class ConsultaAluno extends JInternalFrame {
 	private JTextField txtNome;
-	private JButton btnFiltrar;
-	private JTable table;
 	private JTextField txtMatricula;
+	private JTable table;
+	private JButton btnFiltrar;
+	private JButton btnImprimir;
+	
+	private PersistenceAluno pAluno;
+	private Aluno aluno;
 
 	/**
 	 * Launch the application.
@@ -68,19 +72,6 @@ public class ConsultaAluno extends JInternalFrame {
 		lblNewLabel.setBounds(30, 30, 75, 14);
 		panel.add(lblNewLabel);
 		
-		btnFiltrar = new JButton("Filtrar");
-		btnFiltrar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String matricula = txtMatricula.getText();
-				String nome = txtNome.getText();
-				
-				
-				
-			}
-		});
-		btnFiltrar.setBounds(500, 48, 100, 30);
-		panel.add(btnFiltrar);
-		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 89, 1174, 544);
 		panel.add(scrollPane);
@@ -93,9 +84,9 @@ public class ConsultaAluno extends JInternalFrame {
 				
 				if(e.getClickCount() == 2){
 					String matricula = (String) table.getValueAt(table.getSelectedRow(), 0);
-					PersistenceAluno pPersistenceAluno = new PersistenceAluno();
-					Aluno aluno = new Aluno();
-					aluno = pPersistenceAluno.selectAluno(matricula);
+					pAluno = new PersistenceAluno();
+					aluno = new Aluno();
+					aluno = pAluno.selectAluno(matricula);
 					
 					Principal.ALUNO.preencheCampos(aluno);
 					Principal.ALUNO.setEditable(false);
@@ -118,22 +109,40 @@ public class ConsultaAluno extends JInternalFrame {
 		lblMatricula.setBounds(30, 61, 75, 14);
 		panel.add(lblMatricula);
 		
-		JButton btnImprimir = new JButton("Imprimir");
+		/* BOTAO FILTRAR */
+		btnFiltrar = new JButton("Filtrar");
+		btnFiltrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String matricula = txtMatricula.getText();
+				String nome = txtNome.getText();
+				
+				
+				
+			}
+		});
+		btnFiltrar.setBounds(510, 48, 100, 30);
+		panel.add(btnFiltrar);
+		
+		/* BOTAO IMPRIMIR */
+		btnImprimir = new JButton("Imprimir");
 		btnImprimir.setBounds(650, 48, 100, 30);
 		panel.add(btnImprimir);
 		
+		
 		preencherTabela();
-
 	}
 	
-	
+	/**
+	 * Metodo para preencher a tabela
+	 * 
+	 */
 	public void preencherTabela(){
         List<Object> dados = new ArrayList<>();
         List<Aluno> alunos = new ArrayList<>();
         String[] colunas = new String[]{"Matricula","Nome","cpf","rg","email","Data Nascimento", "Data de Matricula"};
-        PersistenceAluno pPersistenceAluno = new PersistenceAluno();
+        pAluno = new PersistenceAluno();
         
-        alunos.addAll(pPersistenceAluno.selectAlunos());
+        alunos.addAll(pAluno.selectAlunos());
         
         for(Aluno a : alunos){
         	dados.add(new Object[]{a.getMatricula(), a.getNome(), a.getCpf(), a.getRg(), a.getEmail(), a.getDtNascimento(), a.getDtMatricula()});

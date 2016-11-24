@@ -37,7 +37,6 @@ import br.com.gfsoft.sisacademic.util.GeraMatricula;
 import br.com.gfsoft.sisacademic.util.VerificaCamposUnique;
 
 public class CadAluno extends JInternalFrame {
-
 	private JTextField txtMatricula;
 	private JLabel labelMatricula;
 	private JTextField txtNome;
@@ -58,12 +57,14 @@ public class CadAluno extends JInternalFrame {
 	private JTextField txtCidade;
 	private JTextField txtEstado;
 	private JTextField txtComplemento;
+	private JTextPane txtPaneObservacao;
 	private JButton btnCadastrar;
 	private JButton btnDeletar;
 	private JButton btnAlterar;
 	private JButton btnCancelar;
 	
 	private PersistenceAluno pAluno;
+	private Aluno aluno = new Aluno();
 	
 	/**
 	 * Launch the application.
@@ -199,7 +200,7 @@ public class CadAluno extends JInternalFrame {
 		panel.add(panel_3);
 		panel_3.setLayout(null);
 
-		JTextPane txtPaneObservacao = new JTextPane();
+		txtPaneObservacao = new JTextPane();
 		txtPaneObservacao.setBounds(12, 20, 276, 95);
 		panel_3.add(txtPaneObservacao);
 
@@ -351,7 +352,7 @@ public class CadAluno extends JInternalFrame {
 				}
 			}
 		});
-		formattedTxtDtMatricula.setBounds(496, 66, 140, 20);
+		formattedTxtDtMatricula.setBounds(476, 66, 140, 20);
 		pane_1.add(formattedTxtDtMatricula);
 		
 		labelMatricula = new JLabel("Matricula:");
@@ -393,11 +394,11 @@ public class CadAluno extends JInternalFrame {
 				}
 				
 				try {
-					Aluno aluno = new Aluno();
 					EnvioEmail email = new EnvioEmail();
 					GeraMatricula geraMatricula = new GeraMatricula();
 					VerificaCamposUnique verificaCamposUnique = new VerificaCamposUnique();
 					pAluno = new PersistenceAluno();
+					aluno = new Aluno();
 					
 					String cpf = formattedTxtCpf.getText().replace(".", "").replace("-", "");
 					String telefone = formattedTxtTelefone.getText().replace("(", "").replace(")", "").replace("-", "");
@@ -469,9 +470,9 @@ public class CadAluno extends JInternalFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				try {
-					Aluno aluno = new Aluno();
-					pAluno = new PersistenceAluno();
 					String matricula = txtMatricula.getText();
+					pAluno = new PersistenceAluno();
+					aluno = new Aluno();
 					
 					aluno = pAluno.selectAluno(matricula);
 					
@@ -515,9 +516,9 @@ public class CadAluno extends JInternalFrame {
 				}
 				
 				try {
-					Aluno aluno = new Aluno();
 					VerificaCamposUnique verificaCamposUnique = new VerificaCamposUnique();
 					pAluno = new PersistenceAluno();
+					aluno = new Aluno();
 					
 					String cpf = formattedTxtCpf.getText().replace(".", "").replace("-", "");
 					String telefone = formattedTxtTelefone.getText().replace("(", "").replace(")", "").replace("-", "");
@@ -613,7 +614,7 @@ public class CadAluno extends JInternalFrame {
 		txtCidade.setText(aluno.getCidade());
 		txtEstado.setText(aluno.getEstado());
 		txtComplemento.setText(aluno.getComplemento());
-		
+		txtPaneObservacao.setText(aluno.getObservacao());
 	}
 	
 	/**
@@ -663,5 +664,6 @@ public class CadAluno extends JInternalFrame {
 		txtCidade.setText("");
 		txtEstado.setText("");
 		txtComplemento.setText("");
+		txtPaneObservacao.setText("");
 	}
 }

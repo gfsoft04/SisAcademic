@@ -28,10 +28,8 @@ import javax.swing.JTextPane;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
-import br.com.gfsoft.sisacademic.model.Aluno;
 import br.com.gfsoft.sisacademic.model.Endereco;
 import br.com.gfsoft.sisacademic.model.Funcionario;
-import br.com.gfsoft.sisacademic.persistence.PersistenceAluno;
 import br.com.gfsoft.sisacademic.persistence.PersistenceFuncionario;
 import br.com.gfsoft.sisacademic.util.BuscaCep;
 import br.com.gfsoft.sisacademic.util.EnvioEmail;
@@ -44,23 +42,23 @@ public class CadFuncionario extends JInternalFrame {
 	private JTextField txtNome;
 	private JTextField txtRg;
 	private JTextField txtEmail;
-	private JTextField txtSalario;
-	private JTextField txtCargo;
+	private JFormattedTextField formattedTxtDtNascimento;
+	private JFormattedTextField formattedTxtCpf;
+	private JFormattedTextField formattedTxtTelefone;
+	private JFormattedTextField formattedTxtCep;
+	private JComboBox comboBoxEstadoCivil;
+	private JComboBox comboBoxSexo;
+	private JComboBox comboBoxSituacao;
 	private JTextField txtRua;
 	private JTextField txtNumero;
 	private JTextField txtBairro;
 	private JTextField txtCidade;
 	private JTextField txtEstado;
 	private JTextField txtComplemento;
-	private JFormattedTextField formattedTxtCep;
-	private JFormattedTextField formattedTxtDtNascimento;
-	private JFormattedTextField formattedTxtCpf;
-	private JFormattedTextField formattedTxtTelefone;
-	private JFormattedTextField formattedtxtDtContratacao;
-	private JComboBox comboBoxEstadoCivil;
-	private JComboBox comboBoxSexo;
-	private JComboBox comboBoxSituacao;
 	private JComboBox comboBoxEscolaridade;
+	private JTextField txtCargo;
+	private JTextField txtSalario;
+	private JFormattedTextField formattedtxtDtContratacao;
 	private JTextPane txtPaneObservacao;
 	private JButton btnCancelar;
 	private JButton btnCadastrar;
@@ -68,6 +66,7 @@ public class CadFuncionario extends JInternalFrame {
 	private JButton btnAlterar;
 	
 	private PersistenceFuncionario pFuncionario;
+	private Funcionario funcionario;
 
 
 	/**
@@ -102,7 +101,7 @@ public class CadFuncionario extends JInternalFrame {
 		panel.setLayout(null);
 
 		JPanel pane_1 = new JPanel();
-		pane_1.setBounds(10, 12, 962, 236);
+		pane_1.setBounds(10, 12, 974, 236);
 		panel.add(pane_1);
 		pane_1.setBorder(new TitledBorder(null, "Dados Pessoais", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		pane_1.setLayout(null);
@@ -242,12 +241,12 @@ public class CadFuncionario extends JInternalFrame {
 		JPanel pane_2 = new JPanel();
 		pane_2.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Endere\u00E7o",
 				TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		pane_2.setBounds(10, 223, 974, 196);
+		pane_2.setBounds(10, 259, 974, 177);
 		panel.add(pane_2);
 		pane_2.setLayout(null);
 
 		JLabel lblCep = new JLabel("CEP:");
-		lblCep.setBounds(40, 43, 30, 14);
+		lblCep.setBounds(39, 38, 30, 14);
 		pane_2.add(lblCep);
 
 		formattedTxtCep = new JFormattedTextField();
@@ -278,78 +277,78 @@ public class CadFuncionario extends JInternalFrame {
 				}
 			}
 		});
-		formattedTxtCep.setBounds(82, 40, 120, 20);
+		formattedTxtCep.setBounds(81, 35, 120, 20);
 		pane_2.add(formattedTxtCep);
 
 		JLabel lblRua = new JLabel("Rua:");
-		lblRua.setBounds(253, 43, 35, 14);
+		lblRua.setBounds(252, 38, 35, 14);
 		pane_2.add(lblRua);
 
 		txtRua = new JTextField();
-		txtRua.setBounds(300, 40, 250, 20);
+		txtRua.setBounds(299, 35, 250, 20);
 		pane_2.add(txtRua);
 		txtRua.setColumns(10);
 
 		JLabel lblNumero = new JLabel("Numero:");
-		lblNumero.setBounds(600, 43, 50, 14);
+		lblNumero.setBounds(599, 38, 50, 14);
 		pane_2.add(lblNumero);
 
 		txtNumero = new JTextField();
-		txtNumero.setBounds(667, 40, 59, 20);
+		txtNumero.setBounds(666, 35, 59, 20);
 		pane_2.add(txtNumero);
 		txtNumero.setColumns(10);
 
 		JLabel lblBairro = new JLabel("Bairro:");
-		lblBairro.setBounds(38, 93, 44, 14);
+		lblBairro.setBounds(37, 88, 44, 14);
 		pane_2.add(lblBairro);
 
 		txtBairro = new JTextField();
-		txtBairro.setBounds(94, 90, 248, 20);
+		txtBairro.setBounds(93, 85, 248, 20);
 		pane_2.add(txtBairro);
 		txtBairro.setColumns(10);
 
 		JLabel lblCidade = new JLabel("Cidade:");
-		lblCidade.setBounds(393, 93, 42, 14);
+		lblCidade.setBounds(392, 88, 42, 14);
 		pane_2.add(lblCidade);
 
 		txtCidade = new JTextField();
 		txtCidade.setColumns(10);
-		txtCidade.setBounds(447, 90, 250, 20);
+		txtCidade.setBounds(446, 85, 250, 20);
 		pane_2.add(txtCidade);
 
 		JLabel lblEstado = new JLabel("Estado:");
-		lblEstado.setBounds(40, 139, 42, 14);
+		lblEstado.setBounds(39, 134, 42, 14);
 		pane_2.add(lblEstado);
 
 		txtEstado = new JTextField();
 		txtEstado.setColumns(10);
-		txtEstado.setBounds(102, 136, 250, 20);
+		txtEstado.setBounds(101, 131, 250, 20);
 		pane_2.add(txtEstado);
 
 		JLabel lblComplemento = new JLabel("Complemento: ");
-		lblComplemento.setBounds(386, 139, 98, 14);
+		lblComplemento.setBounds(385, 134, 98, 14);
 		pane_2.add(lblComplemento);
 
 		txtComplemento = new JTextField();
-		txtComplemento.setBounds(488, 136, 238, 20);
+		txtComplemento.setBounds(487, 131, 238, 20);
 		pane_2.add(txtComplemento);
 		txtComplemento.setColumns(10);
 
 		JPanel panel_3 = new JPanel();
 		panel_3.setBorder(
 				new TitledBorder(null, "Observa\u00E7\u00E3o", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_3.setBounds(360, 447, 296, 162);
+		panel_3.setBounds(360, 447, 296, 186);
 		panel.add(panel_3);
 		panel_3.setLayout(null);
 		
 		txtPaneObservacao = new JTextPane();
-		txtPaneObservacao.setBounds(10, 21, 276, 130);
+		txtPaneObservacao.setBounds(10, 21, 276, 154);
 		panel_3.add(txtPaneObservacao);
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setLayout(null);
 		panel_2.setBorder(new TitledBorder(null, "Dados Profissionais", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_2.setBounds(10, 447, 340, 162);
+		panel_2.setBounds(10, 447, 340, 186);
 		panel.add(panel_2);
 		
 		JLabel lblEscolaridade = new JLabel("Escolaridade:");
@@ -357,20 +356,21 @@ public class CadFuncionario extends JInternalFrame {
 		panel_2.add(lblEscolaridade);
 		
 		JLabel label_1 = new JLabel("Sal\u00E1rio: R$");
-		label_1.setBounds(30, 96, 65, 14);
+		label_1.setBounds(29, 110, 65, 14);
 		panel_2.add(label_1);
 		
 		txtSalario = new JTextField();
 		txtSalario.setColumns(10);
-		txtSalario.setBounds(99, 93, 120, 20);
+		txtSalario.setBounds(98, 107, 120, 20);
 		panel_2.add(txtSalario);
 		
 		comboBoxEscolaridade = new JComboBox();
+		comboBoxEscolaridade.setModel(new DefaultComboBoxModel(new String[] {"Fundamental", "M\u00E9dio", "Superior", "P\u00F3s Gradua\u00E7\u00E3o"}));
 		comboBoxEscolaridade.setBounds(105, 29, 180, 22);
 		panel_2.add(comboBoxEscolaridade);
 		
 		JLabel label_2 = new JLabel("Data de Contrata\u00E7\u00E3o:");
-		label_2.setBounds(30, 124, 120, 14);
+		label_2.setBounds(30, 145, 120, 14);
 		panel_2.add(label_2);
 		
 		formattedtxtDtContratacao = new JFormattedTextField();
@@ -385,21 +385,21 @@ public class CadFuncionario extends JInternalFrame {
 				}
 			}
 		});
-		formattedtxtDtContratacao.setBounds(160, 121, 139, 20);
+		formattedtxtDtContratacao.setBounds(160, 142, 139, 20);
 		panel_2.add(formattedtxtDtContratacao);
 		
 		txtCargo = new JTextField();
 		txtCargo.setColumns(10);
-		txtCargo.setBounds(84, 62, 186, 20);
+		txtCargo.setBounds(84, 74, 186, 20);
 		panel_2.add(txtCargo);
 		
 		JLabel lblCargo = new JLabel("Cargo:");
-		lblCargo.setBounds(30, 65, 52, 14);
+		lblCargo.setBounds(30, 77, 52, 14);
 		panel_2.add(lblCargo);
 		
 		JPanel panel_4 = new JPanel();
 		panel_4.setBorder(null);
-		panel_4.setBounds(666, 455, 290, 154);
+		panel_4.setBounds(666, 455, 290, 178);
 		panel.add(panel_4);
 		panel_4.setLayout(null);
 		
@@ -432,11 +432,11 @@ public class CadFuncionario extends JInternalFrame {
 				}
 				
 				try {
-					Funcionario funcionario = new Funcionario();
 					EnvioEmail email = new EnvioEmail();
 					GeraMatricula geraMatricula = new GeraMatricula();
 					VerificaCamposUnique verificaCamposUnique = new VerificaCamposUnique();
 					pFuncionario = new PersistenceFuncionario();
+					funcionario = new Funcionario();
 					
 					String cpf = formattedTxtCpf.getText().replace(".", "").replace("-", "");
 					String telefone = formattedTxtTelefone.getText().replace("(", "").replace(")", "").replace("-", "");
@@ -444,6 +444,7 @@ public class CadFuncionario extends JInternalFrame {
 					String estadoCivil = comboBoxEstadoCivil.getSelectedItem().toString().substring(0, 2).trim();
 					String sexo = comboBoxSexo.getSelectedItem().toString().substring(0, 2).trim();
 					String situacao = comboBoxSituacao.getSelectedItem().toString().substring(0, 2).trim();
+					String escolaridade = comboBoxEscolaridade.getSelectedItem().toString();
 					
 					String dia = formattedTxtDtNascimento.getText().substring(0, 2);
 					String mes = formattedTxtDtNascimento.getText().substring(3, 5);
@@ -464,7 +465,6 @@ public class CadFuncionario extends JInternalFrame {
 					funcionario.setSituacao(situacao);
 					funcionario.setEmail(txtEmail.getText());
 					funcionario.setTelefone(telefone);
-					funcionario.setDtContratacao(dtContratacao);
 					funcionario.setCep(cep);
 					funcionario.setRua(txtRua.getText());
 					funcionario.setNumero(Integer.parseInt(txtNumero.getText()));
@@ -472,6 +472,10 @@ public class CadFuncionario extends JInternalFrame {
 					funcionario.setCidade(txtCidade.getText());
 					funcionario.setEstado(txtEstado.getText());
 					funcionario.setComplemento(txtComplemento.getText());
+					funcionario.setEscolaridade(escolaridade);
+					funcionario.setCargo(txtCargo.getText());
+					funcionario.setSalario(Double.parseDouble(txtSalario.getText()));
+					funcionario.setDtContratacao(dtContratacao);
 					funcionario.setObservacao(txtPaneObservacao.getText());
 					
 					//Verifica se o cpf ou rg esta cadastrado na base
@@ -515,9 +519,9 @@ public class CadFuncionario extends JInternalFrame {
 				}
 				
 				try {
-					Funcionario funcionario = new Funcionario();
 					VerificaCamposUnique verificaCamposUnique = new VerificaCamposUnique();
 					pFuncionario = new PersistenceFuncionario();
+					funcionario = new Funcionario();
 					
 					String cpf = formattedTxtCpf.getText().replace(".", "").replace("-", "");
 					String telefone = formattedTxtTelefone.getText().replace("(", "").replace(")", "").replace("-", "");
@@ -525,6 +529,7 @@ public class CadFuncionario extends JInternalFrame {
 					String estadoCivil = comboBoxEstadoCivil.getSelectedItem().toString().substring(0, 2).trim();
 					String sexo = comboBoxSexo.getSelectedItem().toString().substring(0, 2).trim();
 					String situacao = comboBoxSituacao.getSelectedItem().toString().substring(0, 2).trim();
+					String escolaridade = comboBoxEscolaridade.getSelectedItem().toString();
 					
 					String dia = formattedTxtDtNascimento.getText().substring(0, 2);
 					String mes = formattedTxtDtNascimento.getText().substring(3, 5);
@@ -545,7 +550,6 @@ public class CadFuncionario extends JInternalFrame {
 					funcionario.setSituacao(situacao);
 					funcionario.setEmail(txtEmail.getText());
 					funcionario.setTelefone(telefone);
-					funcionario.setDtContratacao(dtContratacao);
 					funcionario.setCep(cep);
 					funcionario.setRua(txtRua.getText());
 					funcionario.setNumero(Integer.parseInt(txtNumero.getText()));
@@ -553,6 +557,10 @@ public class CadFuncionario extends JInternalFrame {
 					funcionario.setCidade(txtCidade.getText());
 					funcionario.setEstado(txtEstado.getText());
 					funcionario.setComplemento(txtComplemento.getText());
+					funcionario.setEscolaridade(escolaridade);
+					funcionario.setCargo(txtCargo.getText());
+					funcionario.setSalario(Double.parseDouble(txtSalario.getText()));
+					funcionario.setDtContratacao(dtContratacao);
 					funcionario.setObservacao(txtPaneObservacao.getText());
 					
 					//Verifica se o cpf ou rg esta cadastrado na base
@@ -580,9 +588,9 @@ public class CadFuncionario extends JInternalFrame {
 		btnDeletar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					Funcionario funcionario = new Funcionario();
-					pFuncionario = new PersistenceFuncionario();
 					String matricula = txtMatricula.getText();
+					pFuncionario = new PersistenceFuncionario();
+					funcionario = new Funcionario();
 					
 					funcionario = pFuncionario.selectFuncionario(matricula);
 					
@@ -634,12 +642,10 @@ public class CadFuncionario extends JInternalFrame {
 		formattedTxtCpf.setText(funcionario.getCpf());
 		txtEmail.setText(funcionario.getEmail());
 		formattedTxtDtNascimento.setText(funcionario.getDtNascimento().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)));
-		formattedtxtDtContratacao.setText(funcionario.getDtContratacao().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)));
 		formattedTxtTelefone.setText(funcionario.getTelefone());
 		//comboBoxEstadoCivil.setSelectedIndex(0);
 		//comboBoxSexo.setSelectedIndex(0);
 		//comboBoxSituacao.setSelectedIndex(0);
-		//comboBoxEscolaridade.setSelectedIndex(0);
 		formattedTxtCep.setText(funcionario.getCep());
 		txtRua.setText(funcionario.getRua());
 		txtNumero.setText(Integer.toString(funcionario.getNumero()));
@@ -647,9 +653,11 @@ public class CadFuncionario extends JInternalFrame {
 		txtCidade.setText(funcionario.getCidade());
 		txtEstado.setText(funcionario.getEstado());
 		txtComplemento.setText(funcionario.getComplemento());
+		//comboBoxEscolaridade.setSelectedIndex(0);
 		txtCargo.setText(funcionario.getCargo());
 		txtSalario.setText(funcionario.getSalario() + "");
-		
+		formattedtxtDtContratacao.setText(funcionario.getDtContratacao().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)));
+		txtPaneObservacao.setText(funcionario.getObservacao());
 	}
 	
 	/**
@@ -662,7 +670,7 @@ public class CadFuncionario extends JInternalFrame {
 		btnAlterar.setVisible(flag);
 		btnDeletar.setVisible(flag);
 		txtMatricula.setVisible(flag);
-		labelMatricula.setVisible(flag);	
+		labelMatricula.setVisible(flag);
 	}
 	
 	/**
@@ -691,7 +699,6 @@ public class CadFuncionario extends JInternalFrame {
 		comboBoxEstadoCivil.setSelectedIndex(0);
 		comboBoxSituacao.setSelectedIndex(0);
 		comboBoxSexo.setSelectedIndex(0);
-		comboBoxEscolaridade.setSelectedIndex(0);
 		formattedTxtCep.setValue("");
 		txtRua.setText("");
 		txtNumero.setText("");
@@ -699,6 +706,7 @@ public class CadFuncionario extends JInternalFrame {
 		txtCidade.setText("");
 		txtEstado.setText("");
 		txtComplemento.setText("");
+		comboBoxEscolaridade.setSelectedIndex(0);
 		txtCargo.setText("");
 		txtSalario.setText("");
 		txtPaneObservacao.setText("");

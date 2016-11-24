@@ -27,6 +27,7 @@ public class Principal extends JFrame {
 	public static ConsultaFuncionario CONSULTAFUNCIONARIO;
 	public static ConsultaProfessor CONSULTAPROFESSOR;
 	public static ConsultaDisciplina CONSULTADISCIPLINA;
+	
 	private JDesktopPane desktopPane;
 
 	
@@ -86,6 +87,8 @@ public class Principal extends JFrame {
 		mntmCadProfessor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				PROFESSOR.setVisible(true);
+				PROFESSOR.alternaBotoes(false);
+				PROFESSOR.setEditable(true);
 				PROFESSOR.setTitle("Cadastro de Professor");
 				desktopPane.moveToFront(PROFESSOR);
 			}
@@ -96,6 +99,8 @@ public class Principal extends JFrame {
 		mntmCadFuncinario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				FUNCIONARIO.setVisible(true);
+				FUNCIONARIO.alternaBotoes(false);
+				FUNCIONARIO.setEditable(true);
 				FUNCIONARIO.setTitle("Cadastro de Funcionário");
 				desktopPane.moveToFront(FUNCIONARIO);
 			}
@@ -129,7 +134,7 @@ public class Principal extends JFrame {
 		mntmConsultaAluno.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				CONSULTAALUNO.setVisible(true);
-				CONSULTAALUNO.setTitle("Consulta Alunos");
+				CONSULTAALUNO.setTitle("Consulta de Alunos");
 				CONSULTAALUNO.preencherTabela();
 				desktopPane.moveToFront(CONSULTAALUNO);
 			}
@@ -140,7 +145,7 @@ public class Principal extends JFrame {
 		mntmConsultaDisciplina.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				CONSULTADISCIPLINA.setVisible(true);
-				CONSULTADISCIPLINA.setTitle("Consulta Disciplinas");
+				CONSULTADISCIPLINA.setTitle("Consulta de Disciplinas");
 				CONSULTADISCIPLINA.preencherTabela();
 				desktopPane.moveToFront(CONSULTADISCIPLINA);
 			}
@@ -151,7 +156,7 @@ public class Principal extends JFrame {
 		mntmFuncionario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				CONSULTAFUNCIONARIO.setVisible(true);
-				CONSULTAFUNCIONARIO.setTitle("Consulta Funcionários");
+				CONSULTAFUNCIONARIO.setTitle("Consulta de Funcionários");
 				CONSULTAFUNCIONARIO.preencherTabela();
 				desktopPane.moveToFront(CONSULTAFUNCIONARIO);
 			}
@@ -162,7 +167,7 @@ public class Principal extends JFrame {
 		mntmProfessor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				CONSULTAPROFESSOR.setVisible(true);
-				CONSULTAPROFESSOR.setTitle("Consulta Professores");
+				CONSULTAPROFESSOR.setTitle("Consulta de Professores");
 				CONSULTAPROFESSOR.preencherTabela();
 				desktopPane.moveToFront(CONSULTAPROFESSOR);
 			}
