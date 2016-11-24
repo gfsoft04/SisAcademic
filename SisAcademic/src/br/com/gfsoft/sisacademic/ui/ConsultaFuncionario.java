@@ -18,7 +18,6 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 
 import br.com.gfsoft.sisacademic.model.Funcionario;
-import br.com.gfsoft.sisacademic.model.Professor;
 import br.com.gfsoft.sisacademic.model.TabelaConsulta;
 import br.com.gfsoft.sisacademic.persistence.PersistenceFuncionario;
 
