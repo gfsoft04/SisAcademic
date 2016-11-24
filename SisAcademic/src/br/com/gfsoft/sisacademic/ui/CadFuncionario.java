@@ -501,16 +501,122 @@ public class CadFuncionario extends JInternalFrame {
 		
 		/* BOTAO ALTERAR */
 		btnAlterar = new JButton("Alterar");
+		btnAlterar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//VERIFICAR OS CAMPOS OBRIGATORIOS PREENCHIDOS
+				if(txtNome.getText().equals("") || txtRg.getText().equals("") || txtEmail.getText().equals("")
+						|| txtRua.getText().equals("") || txtNumero.getText().equals("") || txtBairro.getText().equals("")
+						|| txtCidade.getText().equals("") || txtEstado.getText().equals("") || formattedTxtCpf.getText().equals("")
+						|| formattedTxtCep.getText().equals("") || formattedTxtTelefone.getText().equals("")
+						|| txtCargo.getText().equals("") || txtSalario.getText().equals("")) {
+					
+					JOptionPane.showMessageDialog(null, "Campos Obrigatórios em Branco!", "Erro", JOptionPane.ERROR_MESSAGE);
+					return ;					
+				}
+				
+				try {
+					Funcionario funcionario = new Funcionario();
+					VerificaCamposUnique verificaCamposUnique = new VerificaCamposUnique();
+					pFuncionario = new PersistenceFuncionario();
+					
+					String cpf = formattedTxtCpf.getText().replace(".", "").replace("-", "");
+					String telefone = formattedTxtTelefone.getText().replace("(", "").replace(")", "").replace("-", "");
+					String cep = formattedTxtCep.getText().replace("-", "");
+					String estadoCivil = comboBoxEstadoCivil.getSelectedItem().toString().substring(0, 2).trim();
+					String sexo = comboBoxSexo.getSelectedItem().toString().substring(0, 2).trim();
+					String situacao = comboBoxSituacao.getSelectedItem().toString().substring(0, 2).trim();
+					
+					String dia = formattedTxtDtNascimento.getText().substring(0, 2);
+					String mes = formattedTxtDtNascimento.getText().substring(3, 5);
+					String ano = formattedTxtDtNascimento.getText().substring(6, 10);
+					LocalDate dtNascimento = LocalDate.of(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
+					dia = formattedtxtDtContratacao.getText().substring(0, 2);
+					mes = formattedtxtDtContratacao.getText().substring(3, 5);
+					ano = formattedtxtDtContratacao.getText().substring(6, 10);
+					LocalDate dtContratacao = LocalDate.of(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
+					
+					funcionario.setMatricula(txtMatricula.getText());
+					funcionario.setNome(txtNome.getText());
+					funcionario.setCpf(cpf);
+					funcionario.setRg(txtRg.getText());
+					funcionario.setDtNascimento(dtNascimento);
+					funcionario.setEstadoCivil(estadoCivil);
+					funcionario.setSexo(sexo);
+					funcionario.setSituacao(situacao);
+					funcionario.setEmail(txtEmail.getText());
+					funcionario.setTelefone(telefone);
+					funcionario.setDtContratacao(dtContratacao);
+					funcionario.setCep(cep);
+					funcionario.setRua(txtRua.getText());
+					funcionario.setNumero(Integer.parseInt(txtNumero.getText()));
+					funcionario.setBairro(txtBairro.getText());
+					funcionario.setCidade(txtCidade.getText());
+					funcionario.setEstado(txtEstado.getText());
+					funcionario.setComplemento(txtComplemento.getText());
+					funcionario.setObservacao(txtPaneObservacao.getText());
+					
+					//Verifica se o cpf ou rg esta cadastrado na base
+					if(verificaCamposUnique.validaCpfRg(cpf, txtRg.getText())){
+						if(pFuncionario.update(funcionario)){
+							JOptionPane.showMessageDialog(null, "Cadastro efetuado com sucesso!", "Cadastrado", JOptionPane.INFORMATION_MESSAGE);
+							limparCampos();
+						}
+					}
+					
+				} catch (DateTimeException ex) {
+					// Excesao para data invalida
+					JOptionPane.showMessageDialog(null, "Data Invalida!", "Erro", JOptionPane.ERROR_MESSAGE);
+				} catch (NumberFormatException ex) {
+					// Excecao para conversao de texto em numero
+					JOptionPane.showMessageDialog(null, "Campo numero só aceita digitos", "Erro", JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
 		btnAlterar.setBounds(180, 99, 100, 30);
 		panel_4.add(btnAlterar);
 		
 		/* BOTAO DELETAR */
 		btnDeletar = new JButton("Deletar");
+		btnDeletar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					Funcionario funcionario = new Funcionario();
+					pFuncionario = new PersistenceFuncionario();
+					String matricula = txtMatricula.getText();
+					
+					funcionario = pFuncionario.selectFuncionario(matricula);
+					
+					//Confirmacao do usuario
+					if(JOptionPane.showConfirmDialog(null, "Tem certeza que deseja excluir?", "Confirmação", JOptionPane.WARNING_MESSAGE) == 0){
+						if(pFuncionario.delete(funcionario)){
+							JOptionPane.showMessageDialog(null, "Exclusão efetuada com sucesso!", "Exclusão", JOptionPane.INFORMATION_MESSAGE);
+							limparCampos();
+							Principal.CONSULTAALUNO.preencherTabela();
+						}
+					} 
+					
+				} catch (DateTimeException ex) {
+					// Excesao para data invalida
+					JOptionPane.showMessageDialog(null, "Data Invalida!", "Erro", JOptionPane.ERROR_MESSAGE);
+					System.out.println(ex);
+				} catch (NumberFormatException ex) {
+					// Excecao para conversao de texto em numero
+					JOptionPane.showMessageDialog(null, "Campo numero só aceita digitos", "Erro", JOptionPane.ERROR_MESSAGE);
+					System.out.println(ex);
+				}
+			}
+		});
 		btnDeletar.setBounds(10, 99, 100, 30);
 		panel_4.add(btnDeletar);
 		
 		/* BOTAO CANCELAR */
 		btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				limparCampos();
+				setVisible(false);
+			}
+		});
 		btnCancelar.setBounds(10, 11, 100, 30);
 		panel_4.add(btnCancelar);
 		btnCancelar.setFont(new Font("Tahoma", Font.PLAIN, 11));
