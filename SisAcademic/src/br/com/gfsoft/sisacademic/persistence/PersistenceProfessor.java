@@ -9,7 +9,6 @@ import java.util.Set;
 
 import javax.swing.JOptionPane;
 
-import br.com.gfsoft.sisacademic.model.Aluno;
 import br.com.gfsoft.sisacademic.model.Funcionario;
 import br.com.gfsoft.sisacademic.model.Professor;
 
@@ -57,9 +56,9 @@ public class PersistenceProfessor implements IPersistenceProfessor {
 		String sqlFuncionario;
 		String sqlPessoa;
 		
-		sqlProfessor = "DELETE FROM tb_Professor WHERE tb_Funcionario_idPessoa = "+professor.getId()+"";
-		sqlFuncionario = "DELETE FROM tb_Funcionario WHERE tb_Pessoa_idPessoa = "+professor.getId()+"";
-		sqlPessoa = "DELETE FROM tb_Professor WHERE idPessoa = "+professor.getId()+"";
+		sqlProfessor = "DELETE FROM tb_Professor WHERE tb_Funcionario_idPessoa = "+professor.getId();
+		sqlFuncionario = "DELETE FROM tb_Funcionario WHERE tb_Pessoa_idPessoa = "+professor.getId();
+		sqlPessoa = "DELETE FROM tb_Pessoa WHERE idPessoa = "+professor.getId();
 		
 		try {
 			con.getConnection().createStatement().executeUpdate(sqlProfessor);
@@ -77,7 +76,6 @@ public class PersistenceProfessor implements IPersistenceProfessor {
 	@Override
 	public boolean update(Professor professor) {
 		
-		PersistencePessoa pPessoa = new PersistencePessoa();
 		PersistenceFuncionario pFuncionario = new PersistenceFuncionario();
 		
 		if(pFuncionario.update(professor)){
@@ -145,7 +143,9 @@ public class PersistenceProfessor implements IPersistenceProfessor {
 				professor.setEstado(rs.getString("estado"));
 				professor.setComplemento(rs.getString("complemento"));
 				professor.setObservacao(rs.getString("observacao"));
-				//professor.setDtContratacao(dtContratacao);
+				professor.setDtContratacao(LocalDate.of(Integer.parseInt(rs.getString("dtContratacao").substring(0, 4)),
+						Integer.parseInt(rs.getString("dtContratacao").substring(5, 7)),
+						Integer.parseInt(rs.getString("dtContratacao").substring(8, 10))));
 				professor.setCargo(rs.getString("cargo"));
 				professor.setSalario(rs.getDouble("salario"));
 				professor.setEscolaridade(rs.getString("escolaridade"));
@@ -198,7 +198,9 @@ public class PersistenceProfessor implements IPersistenceProfessor {
 				professor.setCidade(rs.getString("cidade"));
 				professor.setEstado(rs.getString("estado"));
 				professor.setComplemento(rs.getString("complemento"));
-				//professor.setDtContratacao(dtContratacao);
+				professor.setDtContratacao(LocalDate.of(Integer.parseInt(rs.getString("dtContratacao").substring(0, 4)),
+						Integer.parseInt(rs.getString("dtContratacao").substring(5, 7)),
+						Integer.parseInt(rs.getString("dtContratacao").substring(8, 10))));
 				professor.setCargo(rs.getString("cargo"));
 				professor.setSalario(rs.getDouble("salario"));
 				professor.setEscolaridade(rs.getString("escolaridade"));

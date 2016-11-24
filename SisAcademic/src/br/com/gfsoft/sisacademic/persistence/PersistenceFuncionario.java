@@ -51,8 +51,8 @@ public class PersistenceFuncionario implements IPersistenceFuncionario {
 		String sqlPessoa;
 		String sqlFuncionario;
 		
-		sqlFuncionario= "DELETE FROM tb_Funcionario WHERE tb_Pessoa_idPessoa = "+funcionario.getId()+"";
-		sqlPessoa = "DELETE FROM  tb_Pessoa WHERE idPessoa = "+funcionario.getId()+"";
+		sqlFuncionario= "DELETE FROM tb_Funcionario WHERE tb_Pessoa_idPessoa = "+funcionario.getId();
+		sqlPessoa = "DELETE FROM  tb_Pessoa WHERE idPessoa = "+funcionario.getId();
 		
 		try{
 			con.getConnection().createStatement().executeUpdate(sqlFuncionario);
@@ -76,7 +76,7 @@ public class PersistenceFuncionario implements IPersistenceFuncionario {
 			String sql = "UPDATE tb_Funcionario SET "
 					+ "dtContratacao= '"+ funcionario.getDtContratacao().getDayOfMonth() + "/" + funcionario.getDtNascimento().getMonthValue() + "/" + funcionario.getDtNascimento().getYear() +"',"
 					+ "cargo = '" + funcionario.getCargo() + "'"
-					+ "salario = '"+ funcionario.getSalario() + "'"
+					+ "salario = "+ funcionario.getSalario()
 					+ "escolaridade = '" + funcionario.getEscolaridade() + "'"
 					+ "WHERE tb_Pessoa_idPessoa = " + funcionario.getId();
 			
@@ -96,7 +96,7 @@ public class PersistenceFuncionario implements IPersistenceFuncionario {
 	@Override
 	public Funcionario selectFuncionario(String matricula) {
 		Funcionario funcionario = new Funcionario();
-		String sql = "SELECT * FROM tb_Funcionario JOIN tb_Pessoa"
+		String sql = "SELECT * FROM tb_Funcionario INNER JOIN tb_Pessoa"
 		+ "	ON tb_Funcinario.tb_Pessoa_idPessoa = tb_Pessoa.idPessoa WHERE matricula='" + matricula + "'";
 		
 		try{
@@ -124,6 +124,12 @@ public class PersistenceFuncionario implements IPersistenceFuncionario {
 				funcionario.setCidade(rs.getString("cidade"));
 				funcionario.setEstado(rs.getString("estado"));
 				funcionario.setComplemento(rs.getString("complemento"));
+				funcionario.setDtContratacao(LocalDate.of(Integer.parseInt(rs.getString("dtContratacao").substring(0, 4)),
+						Integer.parseInt(rs.getString("dtContratacao").substring(5, 7)),
+						Integer.parseInt(rs.getString("dtContratacao").substring(8, 10))));
+				funcionario.setCargo(rs.getString("cargo"));
+				funcionario.setSalario(rs.getDouble("salario"));
+				funcionario.setEscolaridade(rs.getString("escolaridade"));
 			}
 			return funcionario;
 		}catch(SQLException ex){
@@ -166,6 +172,12 @@ public class PersistenceFuncionario implements IPersistenceFuncionario {
 				funcionario.setCidade(rs.getString("cidade"));
 				funcionario.setEstado(rs.getString("estado"));
 				funcionario.setComplemento(rs.getString("complemento"));
+				funcionario.setDtContratacao(LocalDate.of(Integer.parseInt(rs.getString("dtContratacao").substring(0, 4)),
+						Integer.parseInt(rs.getString("dtContratacao").substring(5, 7)),
+						Integer.parseInt(rs.getString("dtContratacao").substring(8, 10))));
+				funcionario.setCargo(rs.getString("cargo"));
+				funcionario.setSalario(rs.getDouble("salario"));
+				funcionario.setEscolaridade(rs.getString("escolaridade"));
 				
 				funcionarios.add(funcionario);
 			}
