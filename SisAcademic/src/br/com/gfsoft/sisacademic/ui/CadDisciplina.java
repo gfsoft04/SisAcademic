@@ -278,8 +278,8 @@ public class CadDisciplina extends JInternalFrame {
 					disciplina.setDtCriacao(dtCriacao);
 					disciplina.setObservacao(textPaneObservacao.getText());
 					
-					if(pDisciplina.insert(disciplina)){
-						JOptionPane.showMessageDialog(null, "Cadastro eferuado com sucesso!", "Cadastrado", JOptionPane.INFORMATION_MESSAGE);
+					if(pDisciplina.update(disciplina)){
+						JOptionPane.showMessageDialog(null, "Cadastro alterado com sucesso!", "Atenção", JOptionPane.INFORMATION_MESSAGE);
 						limparCampos();
 						Principal.CONSULTADISCIPLINA.preencherTabela();
 					} /*else {
@@ -318,7 +318,7 @@ public class CadDisciplina extends JInternalFrame {
 		txtNome.setText(disciplina.getNome());
 		txtDescricao.setText(disciplina.getDescricao());
 		//comboBoxSituacao.setSelectedIndex(0);
-		formattedTxtDtCriacao.setText(disciplina.getDtCriacao().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT)));
+		formattedTxtDtCriacao.setText(disciplina.getDtCriacao().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)));
 		formattedTextSemestre.setText(disciplina.getSemestre());
 		textPaneObservacao.setText(disciplina.getObservacao());
 	}	

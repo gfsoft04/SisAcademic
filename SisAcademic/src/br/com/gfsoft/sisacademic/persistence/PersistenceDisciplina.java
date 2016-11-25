@@ -46,7 +46,7 @@ public class PersistenceDisciplina implements IPersistenceDisciplina {
 		
 		String sql;
 		
-		sql = "DELETE FROM tb_Disciplina WHERE id = "+disciplina.getId()+"";
+		sql = "DELETE FROM tb_Disciplina WHERE idDisciplina = "+disciplina.getId();
 		
 		try {
 			con.getConnection().createStatement().executeUpdate(sql);
@@ -68,7 +68,7 @@ public class PersistenceDisciplina implements IPersistenceDisciplina {
 				+ " situacao = '"+disciplina.getSituacao()+"',"
 				+ " semestre = '"+disciplina.getSemestre()+"',"
 				+ " observacao = '"+disciplina.getObservacao()+"'"
-				+ " WHERE idDisciplina = "+disciplina.getId()+"";
+				+ " WHERE idDisciplina = "+disciplina.getId();
 		
 		try {
 			//Nao tenho certeza se e a mesma linha para alterar
