@@ -89,7 +89,7 @@ public class PersistencePessoa implements IPersistencePessoa {
 				+ " estado = '"+pessoa.getEstado()+"',"
 				+ " observacao = '"+pessoa.getObservacao()+"'"
 																				
-				+ " WHERE idPessoa = "+pessoa.getId()+"";
+				+ " WHERE idPessoa = "+pessoa.getId();
 		
 		try {
 			con.getConnection().createStatement().executeUpdate(sql);

@@ -72,6 +72,8 @@ public class PersistenceAluno implements IPersistenceAluno {
 		
 		PersistencePessoa pPessoa = new PersistencePessoa();
 		
+		aluno.setId(pPessoa.selectPessoa(aluno.getMatricula()));
+		
 		if(pPessoa.update(aluno)){
 			
 			String sql = "UPDATE tb_Aluno SET "
@@ -79,7 +81,6 @@ public class PersistenceAluno implements IPersistenceAluno {
 					+ "WHERE tb_Pessoa_idPessoa = " + aluno.getId();
 			
 			try {
-				//Nao tenho certeza se e a mesma linha para alterar(executeUpdate)
 				con.getConnection().createStatement().executeUpdate(sql);
 				return true;
 			} catch (SQLException e) {

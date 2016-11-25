@@ -82,6 +82,7 @@ public class ConsultaFuncionario extends JInternalFrame {
 				
 				if(e.getClickCount() == 2){
 					String matricula = (String) table.getValueAt(table.getSelectedRow(), 0);
+					
 					funcionario = new Funcionario();
 					pFuncionario = new PersistenceFuncionario();
 					funcionario = pFuncionario.selectFuncionario(matricula);

@@ -26,13 +26,14 @@ public class PersistenceFuncionario implements IPersistenceFuncionario {
 		if(pPessoa.insert(funcionario)){
 			id = pPessoa.selectPessoa(funcionario.getMatricula());
 			
-			sql = "INSERT INTO tb_Funcionario (tb_Pessoa_idPessoa, dtContratacao, cargo, salario, escolaridade)"
-					+"VALUES("+id+","+
-					"'"+funcionario.getDtContratacao().getDayOfMonth()+ "/"
-					+ funcionario.getDtContratacao().getMonth()+ "/" 
-					+ funcionario.getDtContratacao().getYear()+"'"+
-					"," +"'" +funcionario.getCargo()+"'" + "," + funcionario.getSalario()+","+
-					"'"+ funcionario.getEscolaridade()+"'";
+			sql = "INSERT INTO tb_Funcionario (tb_Pessoa_idPessoa, dtContratacao, cargo, salario, escolaridade) "
+					+"VALUES("+id+","
+					+"'"+ funcionario.getDtContratacao().getDayOfMonth()+ "/"
+						+ funcionario.getDtContratacao().getMonthValue()+ "/" 
+						+ funcionario.getDtContratacao().getYear()+"',"
+					+"'" +funcionario.getCargo()+"',"
+					+ funcionario.getSalario()+","
+					+"'"+ funcionario.getEscolaridade()+"')";
 			try{
 				con.getConnection().createStatement().executeUpdate(sql);
 				return true;
@@ -50,6 +51,8 @@ public class PersistenceFuncionario implements IPersistenceFuncionario {
 	public boolean delete(Funcionario funcionario) {
 		String sqlPessoa;
 		String sqlFuncionario;
+		
+		//
 		
 		sqlFuncionario= "DELETE FROM tb_Funcionario WHERE tb_Pessoa_idPessoa = "+funcionario.getId();
 		sqlPessoa = "DELETE FROM  tb_Pessoa WHERE idPessoa = "+funcionario.getId();
@@ -71,17 +74,18 @@ public class PersistenceFuncionario implements IPersistenceFuncionario {
 	public boolean update(Funcionario funcionario) {
 		PersistencePessoa pPessoa = new PersistencePessoa();
 		
+		funcionario.setId(pPessoa.selectPessoa(funcionario.getMatricula()));
+		
 		if(pPessoa.update(funcionario)){
 			
 			String sql = "UPDATE tb_Funcionario SET "
 					+ "dtContratacao= '"+ funcionario.getDtContratacao().getDayOfMonth() + "/" + funcionario.getDtNascimento().getMonthValue() + "/" + funcionario.getDtNascimento().getYear() +"',"
-					+ "cargo = '" + funcionario.getCargo() + "'"
-					+ "salario = "+ funcionario.getSalario()
-					+ "escolaridade = '" + funcionario.getEscolaridade() + "'"
+					+ "cargo = '" + funcionario.getCargo() + "',"
+					+ "salario = "+ funcionario.getSalario() +","
+					+ "escolaridade = '" + funcionario.getEscolaridade() + "' "
 					+ "WHERE tb_Pessoa_idPessoa = " + funcionario.getId();
 			
 			try {
-				//Nao tenho certeza se e a mesma linha para alterar(executeUpdate)
 				con.getConnection().createStatement().executeUpdate(sql);
 				return true;
 			} catch (SQLException e) {
@@ -97,11 +101,11 @@ public class PersistenceFuncionario implements IPersistenceFuncionario {
 	public Funcionario selectFuncionario(String matricula) {
 		Funcionario funcionario = new Funcionario();
 		String sql = "SELECT * FROM tb_Funcionario INNER JOIN tb_Pessoa"
-		+ "	ON tb_Funcinario.tb_Pessoa_idPessoa = tb_Pessoa.idPessoa WHERE matricula='" + matricula + "'";
+		+ "	ON tb_Funcionario.tb_Pessoa_idPessoa = tb_Pessoa.idPessoa WHERE matricula='" + matricula + "'";
 		
 		try{
 			stmt = con.getConnection().createStatement();
-			rs = stmt.executeQuery(sql)	;
+			rs = stmt.executeQuery(sql);
 			
 			while(rs.next()){
 				funcionario.setId(rs.getInt("idPessoa"));
@@ -148,7 +152,7 @@ public class PersistenceFuncionario implements IPersistenceFuncionario {
 
 		try {
 			stmt = con.getConnection().createStatement();
-			String sql = "SELECT * FROM tb_Aluno JOIN tb_Pessoa	ON tb_Aluno.tb_Pessoa_idPessoa = tb_Pessoa.idPessoa";
+			String sql = "SELECT * FROM tb_Funcionario JOIN tb_Pessoa ON tb_Funcionario.tb_Pessoa_idPessoa = tb_Pessoa.idPessoa";
 			rs = stmt.executeQuery(sql);
 
 			while (rs.next()) {

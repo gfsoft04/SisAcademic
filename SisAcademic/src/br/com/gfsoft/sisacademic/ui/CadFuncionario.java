@@ -564,12 +564,12 @@ public class CadFuncionario extends JInternalFrame {
 					funcionario.setObservacao(txtPaneObservacao.getText());
 					
 					//Verifica se o cpf ou rg esta cadastrado na base
-					if(verificaCamposUnique.validaCpfRg(cpf, txtRg.getText())){
+					//if(verificaCamposUnique.validaCpfRg(cpf, txtRg.getText())){
 						if(pFuncionario.update(funcionario)){
-							JOptionPane.showMessageDialog(null, "Cadastro efetuado com sucesso!", "Cadastrado", JOptionPane.INFORMATION_MESSAGE);
+							JOptionPane.showMessageDialog(null, "Cadastro alterado com sucesso!", "Atenção", JOptionPane.INFORMATION_MESSAGE);
 							limparCampos();
 						}
-					}
+					//}
 					
 				} catch (DateTimeException ex) {
 					// Excesao para data invalida
@@ -599,7 +599,7 @@ public class CadFuncionario extends JInternalFrame {
 						if(pFuncionario.delete(funcionario)){
 							JOptionPane.showMessageDialog(null, "Exclusão efetuada com sucesso!", "Exclusão", JOptionPane.INFORMATION_MESSAGE);
 							limparCampos();
-							Principal.CONSULTAALUNO.preencherTabela();
+							Principal.CONSULTAFUNCIONARIO.preencherTabela();
 						}
 					} 
 					

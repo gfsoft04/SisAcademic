@@ -76,7 +76,13 @@ public class PersistenceProfessor implements IPersistenceProfessor {
 	@Override
 	public boolean update(Professor professor) {
 		
+		PersistencePessoa pPessoa = new PersistencePessoa();
 		PersistenceFuncionario pFuncionario = new PersistenceFuncionario();
+		
+		professor.setId(pPessoa.selectPessoa(professor.getMatricula()));
+		
+		System.out.println(professor.getMatricula());
+		System.out.println(professor.getId());
 		
 		if(pFuncionario.update(professor)){
 			

@@ -522,7 +522,7 @@ public class CadProfessor extends JInternalFrame {
 						if(pProfessor.delete(professor)){
 							JOptionPane.showMessageDialog(null, "Exclusão efetuada com sucesso!", "Exclusão", JOptionPane.INFORMATION_MESSAGE);
 							limparCampos();
-							Principal.CONSULTAALUNO.preencherTabela();
+							Principal.CONSULTAPROFESSOR.preencherTabela();
 						}
 					} 
 					
@@ -597,19 +597,18 @@ public class CadProfessor extends JInternalFrame {
 					professor.setComplemento(txtComplemento.getText());
 					professor.setEscolaridade(escolaridade);
 					professor.setTitularidade(titularidade);
-					//Duvida se deve colocar cargo
-					//professor.setCargo(cargo);
+					professor.setCargo("Professor");
 					professor.setSalario(Double.parseDouble(txtSalario.getText()));
 					professor.setDtContratacao(dtContratacao);
 					professor.setObservacao(txtPaneObservacao.getText());
 					
 					//Verifica se o cpf ou rg esta cadastrado na base
-					if(verificaCamposUnique.validaCpfRg(cpf, txtRg.getText())){
+					//if(verificaCamposUnique.validaCpfRg(cpf, txtRg.getText())){
 						if(pProfessor.update(professor)){
-							JOptionPane.showMessageDialog(null, "Cadastro efetuado com sucesso!", "Cadastrado", JOptionPane.INFORMATION_MESSAGE);
+							JOptionPane.showMessageDialog(null, "Cadastro alterado com sucesso!", "Atenção", JOptionPane.INFORMATION_MESSAGE);
 							limparCampos();
 						}
-					}
+					//}
 					
 				} catch (DateTimeException ex) {
 					// Excesao para data invalida
@@ -641,11 +640,12 @@ public class CadProfessor extends JInternalFrame {
 	 * Metodo que recebe um objeto e preenche os campos
 	 */
 	public void preencheCampos(Professor professor){
+		txtMatricula.setText(professor.getMatricula());
 		txtNome.setText(professor.getNome());
 		txtRg.setText(professor.getRg());
 		formattedTxtCpf.setText(professor.getCpf());
 		txtEmail.setText(professor.getEmail());
-		formattedTxtDtNascimento.setText(professor.getDtNascimento().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT)));
+		formattedTxtDtNascimento.setText(professor.getDtNascimento().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)));
 		formattedTxtTelefone.setText(professor.getTelefone());
 		//comboBoxEstadoCivil.setSelectedIndex(0);
 		//comboBoxSexo.setSelectedIndex(0);
@@ -660,7 +660,7 @@ public class CadProfessor extends JInternalFrame {
 		//comboBoxEscolaridade.setSelectedIndex(0);
 		//comboBoxEstadoTitularidade.setSelectedIndex(0);
 		txtSalario.setText(professor.getSalario() + "");
-		formattedTxtDtContratacao.setText(professor.getDtContratacao().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT)));
+		formattedTxtDtContratacao.setText(professor.getDtContratacao().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)));
 		txtPaneObservacao.setText(professor.getObservacao());
 	}
 	
@@ -693,16 +693,17 @@ public class CadProfessor extends JInternalFrame {
 	 * Metodo para limpar campos
 	 */
 	public void limparCampos(){
+		txtMatricula.setText("");
 		txtNome.setText("");
 		txtRg.setText("");
 		txtEmail.setText("");
-		formattedTxtDtNascimento.setValue(null);
-		formattedTxtCpf.setValue(null);
-		formattedTxtTelefone.setValue(null);
+		formattedTxtDtNascimento.setValue("");
+		formattedTxtCpf.setValue("");
+		formattedTxtTelefone.setValue("");
 		comboBoxEstadoCivil.setSelectedIndex(0);
 		comboBoxSituacao.setSelectedIndex(0);
 		comboBoxSexo.setSelectedIndex(0);
-		formattedTxtCep.setValue(null);
+		formattedTxtCep.setValue("");
 		txtRua.setText("");
 		txtNumero.setText("");
 		txtBairro.setText("");

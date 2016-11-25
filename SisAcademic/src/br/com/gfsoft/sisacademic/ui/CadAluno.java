@@ -558,13 +558,13 @@ public class CadAluno extends JInternalFrame {
 					aluno.setObservacao(txtPaneObservacao.getText());
 					
 					//Verifica se o cpf ou rg esta cadastrado na base
-					if(verificaCamposUnique.validaCpfRg(cpf, txtRg.getText())){
+					//if(verificaCamposUnique.validaCpfRg(cpf, txtRg.getText())){
 						if(pAluno.update(aluno)){
-							JOptionPane.showMessageDialog(null, "Cadastro efetuado com sucesso!", "Cadastrado", JOptionPane.INFORMATION_MESSAGE);
+							JOptionPane.showMessageDialog(null, "Cadastro alterado com sucesso!", "Atenção", JOptionPane.INFORMATION_MESSAGE);
 							limparCampos();
 							Principal.CONSULTAALUNO.preencherTabela();
 						}
-					}
+					//}
 					
 				} catch (DateTimeException ex) {
 					// Excesao para data invalida
