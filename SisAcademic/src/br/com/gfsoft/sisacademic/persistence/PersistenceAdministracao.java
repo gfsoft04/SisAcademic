@@ -3,6 +3,7 @@ package br.com.gfsoft.sisacademic.persistence;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.Set;
 
 import javax.swing.JOptionPane;
@@ -86,13 +87,60 @@ public class PersistenceAdministracao implements IPersistenceAdministracao {
 
 	@Override
 	public boolean update(Administracao administracao) {
-		// TODO Auto-generated method stub
+		PersistencePessoa pPessoa = new PersistencePessoa();
+		
+		if(pPessoa.update(administracao)){
+			String sql = "UPDATE tb_Administracao SET"
+			+"senha = ' " + administracao.getSenha()
+			+"WHERE tb_Funcionario_tb_Pessoa_idPessoa = " + administracao.getId();
+		
+			try{
+				con.getConnection().createStatement().executeQuery(sql);
+			}catch(SQLException ex){
+				ex.printStackTrace();
+			}
+		}
 		return false;
 	}
 
 	@Override
 	public Administracao selectAdministracao(String matricula) {
-		// TODO Auto-generated method stub
+		Administracao administracao = new Administracao();
+		String sql =  "SELECT * FROM tb_Administracao JOIN tb_Pessoa " 
+		+ " on tb_Administracao.tb_Funcionario_tb_Pessoa_id_Pessoa = tb_Funcionario.tb_pessoa_idPessoa"
+		+ "WHERE matricula ' "+ matricula + "'";//>>>>>>>>>>>>>>>>>>NÃO SEI SE ESTA CORRETO!!<<<<<<<<<<<<<<<<<<<<
+		
+		try{
+			stmt = con.getConnection().createStatement();
+			rs = stmt.executeQuery(sql);
+			
+			while(rs.next()){
+			administracao.setId(rs.getInt("idPessoa"));
+			administracao.setMatricula(rs.getString("matricula"));
+			administracao.setNome(rs.getString("nome"));
+			administracao.setRg(rs.getString("rg"));
+			administracao.setCpf(rs.getString("cpf"));
+			administracao.setEmail(rs.getString("email"));
+			administracao.setEstadoCivil(rs.getString("estadoCivil"));
+			administracao.setSexo(rs.getString("sexo"));
+			administracao.setSituacao(rs.getString("situacao"));
+			administracao.setTelefone(rs.getString("telefone"));
+			administracao.setDtNascimento(LocalDate.of(Integer.parseInt(rs.getString("dtNascimento").substring(0, 4)),
+				Integer.parseInt(rs.getString("dtNascimento").substring(5, 7)),
+				Integer.parseInt(rs.getString("dtNascimento").substring(8, 10))));
+			administracao.setCep(rs.getString("cep"));
+			administracao.setRua(rs.getString("rua"));
+			administracao.setNumero(rs.getInt("numero"));
+			administracao.setBairro(rs.getString("bairro"));
+			administracao.setCidade(rs.getString("cidade"));
+			administracao.setEstado(rs.getString("estado"));
+			administracao.setComplemento(rs.getString("complemento"));
+			}
+		return administracao;	
+		}catch (SQLException ex){
+			ex.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Erro na busca do administrador na base!", "Erro", JOptionPane.ERROR_MESSAGE);
+		}
 		return null;
 	}
 
