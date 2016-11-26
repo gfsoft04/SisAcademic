@@ -30,7 +30,9 @@ import javax.swing.border.TitledBorder;
 
 import br.com.gfsoft.sisacademic.model.Endereco;
 import br.com.gfsoft.sisacademic.model.Funcionario;
+import br.com.gfsoft.sisacademic.model.Professor;
 import br.com.gfsoft.sisacademic.persistence.PersistenceFuncionario;
+import br.com.gfsoft.sisacademic.persistence.PersistenceProfessor;
 import br.com.gfsoft.sisacademic.util.BuscaCep;
 import br.com.gfsoft.sisacademic.util.EnvioEmail;
 import br.com.gfsoft.sisacademic.util.GeraMatricula;
@@ -66,6 +68,7 @@ public class CadFuncionario extends JInternalFrame {
 	private JButton btnAlterar;
 	
 	private PersistenceFuncionario pFuncionario;
+	private PersistenceProfessor pProfessor;
 	private Funcionario funcionario;
 
 
@@ -455,7 +458,7 @@ public class CadFuncionario extends JInternalFrame {
 					ano = formattedtxtDtContratacao.getText().substring(6, 10);
 					LocalDate dtContratacao = LocalDate.of(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
 					
-					funcionario.setMatricula(geraMatricula.gerarMatricula(1, dtContratacao.getYear()));
+					funcionario.setMatricula(geraMatricula.gerarMatricula(2, dtContratacao.getYear()));
 					funcionario.setNome(txtNome.getText());
 					funcionario.setCpf(cpf);
 					funcionario.setRg(txtRg.getText());
@@ -590,18 +593,28 @@ public class CadFuncionario extends JInternalFrame {
 				try {
 					String matricula = txtMatricula.getText();
 					pFuncionario = new PersistenceFuncionario();
+					pProfessor = new PersistenceProfessor();
 					funcionario = new Funcionario();
 					
 					funcionario = pFuncionario.selectFuncionario(matricula);
 					
 					//Confirmacao do usuario
 					if(JOptionPane.showConfirmDialog(null, "Tem certeza que deseja excluir?", "Confirmação", JOptionPane.WARNING_MESSAGE) == 0){
-						if(pFuncionario.delete(funcionario)){
-							JOptionPane.showMessageDialog(null, "Exclusão efetuada com sucesso!", "Exclusão", JOptionPane.INFORMATION_MESSAGE);
-							limparCampos();
-							Principal.CONSULTAFUNCIONARIO.preencherTabela();
+						
+						if(matricula.substring(0,1).equals("3")){
+							if(pProfessor.delete((Professor) funcionario)){
+								JOptionPane.showMessageDialog(null, "Exclusão efetuada com sucesso!", "Exclusão", JOptionPane.INFORMATION_MESSAGE);
+								limparCampos();
+								Principal.CONSULTAFUNCIONARIO.preencherTabela();
+							}
+						} else {
+							if(pFuncionario.delete(funcionario)){
+								JOptionPane.showMessageDialog(null, "Exclusão efetuada com sucesso!", "Exclusão", JOptionPane.INFORMATION_MESSAGE);
+								limparCampos();
+								Principal.CONSULTAFUNCIONARIO.preencherTabela();
+							}
 						}
-					} 
+					}
 					
 				} catch (DateTimeException ex) {
 					// Excesao para data invalida

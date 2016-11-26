@@ -271,6 +271,7 @@ public class CadDisciplina extends JInternalFrame {
 					String ano = formattedTxtDtCriacao.getText().substring(6, 10);
 					LocalDate dtCriacao = LocalDate.of(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
 					
+					disciplina.setId(Long.parseLong(txtId.getText()));
 					disciplina.setNome(txtNome.getText());
 					disciplina.setSituacao(situacao);
 					disciplina.setDescricao(txtDescricao.getText());

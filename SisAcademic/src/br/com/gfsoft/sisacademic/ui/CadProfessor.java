@@ -455,7 +455,7 @@ public class CadProfessor extends JInternalFrame {
 					ano = formattedTxtDtContratacao.getText().substring(6, 10);
 					LocalDate dtContratacao = LocalDate.of(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
 					
-					professor.setMatricula(geraMatricula.gerarMatricula(1, dtContratacao.getYear()));
+					professor.setMatricula(geraMatricula.gerarMatricula(3, dtContratacao.getYear()));
 					professor.setNome(txtNome.getText());
 					professor.setCpf(cpf);
 					professor.setRg(txtRg.getText());
