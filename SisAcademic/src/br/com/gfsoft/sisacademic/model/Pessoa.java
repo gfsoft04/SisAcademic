@@ -26,7 +26,7 @@ public abstract class Pessoa{
 	private String cidade;
 	private String estado; 			//sigla do estado 'PB'
 	private String observacao;
-	private String tipoPessoa;
+	private String urlFoto;
 	
 	public abstract Pessoa getInstance();
 	
@@ -185,12 +185,12 @@ public abstract class Pessoa{
 		this.observacao = observacao;
 	}
 	
-	public String getTipoPessoa() {
-		return tipoPessoa;
+	public String getUrlFoto() {
+		return urlFoto;
 	}
 
-	public void setTipoPessoa(String tipoPessoa) {
-		this.tipoPessoa = tipoPessoa;
+	public void setUrlFoto(String urlFoto) {
+		this.urlFoto = urlFoto;
 	}
 	
 	/**

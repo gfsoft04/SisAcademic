@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.io.File;
 import java.text.ParseException;
 import java.time.DateTimeException;
 import java.time.LocalDate;
@@ -15,6 +16,8 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
@@ -35,6 +38,9 @@ import br.com.gfsoft.sisacademic.util.BuscaCep;
 import br.com.gfsoft.sisacademic.util.EnvioEmail;
 import br.com.gfsoft.sisacademic.util.GeraMatricula;
 import br.com.gfsoft.sisacademic.util.VerificaCamposUnique;
+import br.com.gfsoft.sisacademic.util.WebCamView;
+import java.awt.FlowLayout;
+import javax.swing.BoxLayout;
 
 public class CadAluno extends JInternalFrame {
 	private JTextField txtMatricula;
@@ -58,13 +64,21 @@ public class CadAluno extends JInternalFrame {
 	private JTextField txtEstado;
 	private JTextField txtComplemento;
 	private JTextPane txtPaneObservacao;
+	private JPanel panelFoto;
+	private JLabel labelImagem;
+	private ImageIcon imagem;
 	private JButton btnCadastrar;
 	private JButton btnDeletar;
 	private JButton btnAlterar;
 	private JButton btnCancelar;
+	private JButton btnVisualizar;
+	private JButton btnCapturaFoto;
 	
 	private PersistenceAluno pAluno;
-	private Aluno aluno = new Aluno();
+	private Aluno aluno;
+	private WebCamView webView;
+	private String path = ""; //path da imagem
+	
 	
 	/**
 	 * Launch the application.
@@ -89,7 +103,7 @@ public class CadAluno extends JInternalFrame {
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setClosable(true);
 		setTitle("Cadastro de Aluno");
-		setBounds(100, 100, 1000, 670);
+		setBounds(100, 100, 1205, 670);
 		setLocation(0, 0);
 
 		JPanel panel = new JPanel();
@@ -100,7 +114,7 @@ public class CadAluno extends JInternalFrame {
 		JPanel pane_2 = new JPanel();
 		pane_2.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Endere\u00E7o",
 				TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		pane_2.setBounds(10, 259, 974, 196);
+		pane_2.setBounds(10, 259, 804, 196);
 		panel.add(pane_2);
 		pane_2.setLayout(null);
 
@@ -211,7 +225,7 @@ public class CadAluno extends JInternalFrame {
 		panel_4.setLayout(null);
 		
 		JPanel pane_1 = new JPanel();
-		pane_1.setBounds(10, 12, 962, 236);
+		pane_1.setBounds(10, 11, 804, 236);
 		panel.add(pane_1);
 		pane_1.setBorder(new TitledBorder(null, "Dados Pessoais", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		pane_1.setLayout(null);
@@ -319,12 +333,12 @@ public class CadAluno extends JInternalFrame {
 		pane_1.add(formattedTxtTelefone);
 
 		JLabel lblProfisso = new JLabel("Profiss\u00E3o:");
-		lblProfisso.setBounds(580, 155, 58, 14);
+		lblProfisso.setBounds(12, 194, 58, 14);
 		pane_1.add(lblProfisso);
 
 		txtProfissao = new JTextField();
 		txtProfissao.setColumns(10);
-		txtProfissao.setBounds(656, 152, 180, 20);
+		txtProfissao.setBounds(88, 191, 180, 20);
 		pane_1.add(txtProfissao);
 
 		JLabel lblNewLabel_1 = new JLabel("Situa\u00E7\u00E3o:");
@@ -356,12 +370,12 @@ public class CadAluno extends JInternalFrame {
 		pane_1.add(formattedTxtDtMatricula);
 		
 		labelMatricula = new JLabel("Matricula:");
-		labelMatricula.setBounds(10, 196, 66, 14);
+		labelMatricula.setBounds(314, 194, 66, 14);
 		pane_1.add(labelMatricula);
 		
 		txtMatricula = new JTextField();
 		txtMatricula.setColumns(10);
-		txtMatricula.setBounds(86, 193, 250, 20);
+		txtMatricula.setBounds(390, 191, 250, 20);
 		pane_1.add(txtMatricula);
 		formattedTxtDtNascimento.addFocusListener(new FocusAdapter() {
 			@Override
@@ -374,6 +388,17 @@ public class CadAluno extends JInternalFrame {
 				}
 			}
 		});
+		
+		panelFoto = new JPanel();
+		panelFoto.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		panelFoto.setBounds(824, 11, 360, 270);
+		panel.add(panelFoto);
+		
+		labelImagem = new JLabel("");
+		labelImagem.setBounds(2, 2, 360, 270);
+		labelImagem.setVisible(false);
+		panelFoto.setLayout(null);
+		panelFoto.add(labelImagem);
 		
 		/** BOTAO CADASTRAR **/
 		btnCadastrar = new JButton("Cadastrar");
@@ -436,6 +461,7 @@ public class CadAluno extends JInternalFrame {
 					aluno.setEstado(txtEstado.getText());
 					aluno.setComplemento(txtComplemento.getText());
 					aluno.setObservacao(txtPaneObservacao.getText());
+					aluno.setUrlFoto(path);
 					
 					//Verifica se o cpf ou rg esta cadastrado na base
 					if(verificaCamposUnique.validaCpfRg(cpf, txtRg.getText())){
@@ -578,16 +604,58 @@ public class CadAluno extends JInternalFrame {
 		
 		/** BOTAO CANCELAR **/
 		btnCancelar = new JButton("Cancelar");
-		btnCancelar.setBounds(12, 11, 100, 30);
-		btnCancelar.setFont(new Font("Tahoma", Font.BOLD, 11));
-		panel_4.add(btnCancelar);
-		
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				limparCampos();
 				setVisible(false);
 			}
 		});
+		btnCancelar.setBounds(12, 11, 100, 30);
+		btnCancelar.setFont(new Font("Tahoma", Font.BOLD, 11));
+		panel_4.add(btnCancelar);
+		
+		/** BOTAO CAPTURA FOTO **/
+		btnCapturaFoto = new JButton("Capturar");
+		btnCapturaFoto.setEnabled(false);
+		btnCapturaFoto.addActionListener(new ActionListener() {
+			//CAPTURA IMAGEM VIA WEB CAM E SALVA
+			public void actionPerformed(ActionEvent e) {
+				//VERIFICAR OS CAMPOS OBRIGATORIOS PREENCHIDOS
+				if(txtNome.getText().equals("") || txtRg.getText().equals("") || txtEmail.getText().equals("")
+						|| txtRua.getText().equals("") || txtNumero.getText().equals("") || txtBairro.getText().equals("")
+						|| txtCidade.getText().equals("") || txtEstado.getText().equals("") || formattedTxtCpf.getText().equals("")
+						|| formattedTxtCep.getText().equals("") || formattedTxtTelefone.getText().equals("")) {
+					
+					JOptionPane.showMessageDialog(null, "Preencha os campos antes de salvar a imagem!", "Erro", JOptionPane.ERROR_MESSAGE);
+					return ;
+				}
+				
+				GeraMatricula geraMatricula = new GeraMatricula();
+				String matricula = geraMatricula.gerarMatricula(1, Integer.parseInt(formattedTxtDtMatricula.getText().substring(6, 10)));
+				File file = new File("img\\"+matricula+".png");
+				
+				webView.salvarFoto(webView.getPlayer().getImage(), file);
+				webView.pararWebCam();
+				path = file.getPath();
+			}
+		});
+		btnCapturaFoto.setBounds(1017, 292, 100, 30);
+		panel.add(btnCapturaFoto);
+		
+		/** BOTAO VISUALIZAR **/
+		btnVisualizar = new JButton("Visualizar");
+		btnVisualizar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//VISUALIZAR IMAGEM VIA WEB CAM
+				webView = new WebCamView();
+				webView.iniciarWebCam();
+				panelFoto.add(webView.getPlayer().asComponent());
+				
+				btnCapturaFoto.setEnabled(true);
+			}
+		});
+		btnVisualizar.setBounds(896, 292, 100, 30);
+		panel.add(btnVisualizar);
 		
 	}
 	
@@ -595,6 +663,10 @@ public class CadAluno extends JInternalFrame {
 	 * Metodo que recebe um objeto e preenche os campos
 	 */
 	public void preencheCampos(Aluno aluno){
+		
+		File path = new File("img\\"+aluno.getMatricula()+".png");
+		imagem = new ImageIcon(path.getPath());
+		
 		txtMatricula.setText(aluno.getMatricula());
 		txtNome.setText(aluno.getNome());
 		txtRg.setText(aluno.getRg());
@@ -615,6 +687,8 @@ public class CadAluno extends JInternalFrame {
 		txtEstado.setText(aluno.getEstado());
 		txtComplemento.setText(aluno.getComplemento());
 		txtPaneObservacao.setText(aluno.getObservacao());
+		labelImagem.setIcon(imagem);
+		
 	}
 	
 	/**
@@ -627,7 +701,10 @@ public class CadAluno extends JInternalFrame {
 		btnAlterar.setVisible(flag);
 		btnDeletar.setVisible(flag);
 		txtMatricula.setVisible(flag);
-		labelMatricula.setVisible(flag);	
+		labelMatricula.setVisible(flag);
+		btnVisualizar.setVisible(!flag);
+		btnCapturaFoto.setVisible(!flag);
+		labelImagem.setVisible(flag);
 	}
 	
 	/**

@@ -19,7 +19,7 @@ public class PersistencePessoa implements IPersistencePessoa {
 	@Override
 	public boolean insert(Pessoa pessoa) {
 		
-		String sql = "INSERT INTO tb_Pessoa(matricula, nome, cpf, rg, estadoCivil, sexo, situacao, dtNascimento, email, telefone, rua, numero, complemento, cep, bairro, cidade, estado, observacao) "
+		String sql = "INSERT INTO tb_Pessoa(matricula, nome, cpf, rg, estadoCivil, sexo, situacao, dtNascimento, email, telefone, rua, numero, complemento, cep, bairro, cidade, estado, observacao, urlFoto) "
 				+ "VALUES('"+ pessoa.getMatricula() +"',"
 						+ "'"+ pessoa.getNome() +"',"
 						+ "'"+ pessoa.getCpf() +"',"
@@ -37,7 +37,8 @@ public class PersistencePessoa implements IPersistencePessoa {
 						+ "'"+ pessoa.getBairro() +"',"
 						+ "'"+ pessoa.getCidade() +"',"
 						+ "'"+ pessoa.getEstado() +"',"
-						+ "'"+ pessoa.getObservacao() +"'"
+						+ "'"+ pessoa.getObservacao() +"',"
+						+ "'"+ pessoa.getUrlFoto() + "'"
 						+ ")";
 		
 		try {
@@ -87,7 +88,8 @@ public class PersistencePessoa implements IPersistencePessoa {
 				+ " bairro = '"+pessoa.getBairro()+"',"
 				+ " cidade = '"+pessoa.getCidade()+"',"
 				+ " estado = '"+pessoa.getEstado()+"',"
-				+ " observacao = '"+pessoa.getObservacao()+"'"
+				+ " observacao = '"+pessoa.getObservacao()+"',"
+				+ "urlFoto = '"+ pessoa.getUrlFoto() + "'"
 																				
 				+ " WHERE idPessoa = "+pessoa.getId();
 		

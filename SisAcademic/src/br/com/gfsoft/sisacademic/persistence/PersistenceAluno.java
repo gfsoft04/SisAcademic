@@ -132,6 +132,7 @@ public class PersistenceAluno implements IPersistenceAluno {
 				aluno.setCidade(rs.getString("cidade"));
 				aluno.setEstado(rs.getString("estado"));
 				aluno.setComplemento(rs.getString("complemento"));
+				aluno.setUrlFoto(rs.getString("urlFoto"));
 			}
 			return aluno;
 

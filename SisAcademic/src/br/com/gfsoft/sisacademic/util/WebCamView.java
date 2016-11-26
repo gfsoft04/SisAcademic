@@ -15,6 +15,11 @@ import de.humatic.dsj.DSFiltergraph;
 public class WebCamView {
 	private static DSCapture player;
 	
+	
+	public static DSCapture getPlayer() {
+		return player;
+	}
+
 	/**
      * Inicia a conexão com a WebCam
      */
@@ -33,7 +38,7 @@ public class WebCamView {
             if(dsi[0][0].getName().equalsIgnoreCase("PC Camera"))
                 dsi[0][0].setPreferredFormat(2);
             player = new DSCapture(DSFiltergraph.DD7, dsi[0][0], false, DSFilterInfo.doNotRender(), null);
-            player.setSize(640, 480);
+            player.setSize(360, 270);
             //player.stop();
             player.play();
         } catch (Exception e) {
@@ -45,6 +50,10 @@ public class WebCamView {
         }
     }
     
+    public static void pararWebCam(){
+    	player.stop();
+    }
+    
     /**
      * Salva a foto e retorna o caminho
      * @param foto
@@ -53,7 +62,7 @@ public class WebCamView {
 	public static void salvarFoto(BufferedImage foto, File path) {
 		try {
 			if (!path.exists()){
-				File file = new File("img");
+				File file = new File("img\\");
 				file.mkdirs();
 				//local.mkdirs();
 			}
