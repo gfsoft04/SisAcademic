@@ -20,11 +20,12 @@ public class VerificaCamposUnique {
 			if(validaCpf(cpf)){
 				return true;
 			} else {
-				JOptionPane.showMessageDialog(null, "CPF Inválido!", "Erro", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "CPF Invï¿½lido!", "Erro", JOptionPane.ERROR_MESSAGE);
 				return false;
 			}
 			
 		} else {
+			// Data invalida???? Acho que aqui eh aquele bug
 			JOptionPane.showMessageDialog(null, "Data Invalida!", "Erro", JOptionPane.ERROR_MESSAGE);
 			return false;
 		}
