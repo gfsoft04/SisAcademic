@@ -5,20 +5,21 @@ import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyVetoException;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.SoftBevelBorder;
-import javax.swing.ImageIcon;
-import javax.swing.SwingConstants;
-import javax.swing.JLabel;
 
 public class Principal extends JFrame {
 
@@ -255,49 +256,49 @@ public class Principal extends JFrame {
 		
 		
 		
-//		/**
-//		 * Instanciando todas as telas e deixando invisiveis
-//		 */
-//		ALUNO = new CadAluno();
-//		FUNCIONARIO = new CadFuncionario();
-//		PROFESSOR = new CadProfessor();
-//		DISCIPLINA = new CadDisciplina();
-//		CONSULTAALUNO = new ConsultaAluno();
-//		CONSULTAFUNCIONARIO = new ConsultaFuncionario();
-//		CONSULTAPROFESSOR = new ConsultaProfessor();
-//		CONSULTADISCIPLINA = new ConsultaDisciplina();
-//		
-//		desktopPane.add(ALUNO);
-//		desktopPane.add(FUNCIONARIO);
-//		desktopPane.add(PROFESSOR);
-//		desktopPane.add(DISCIPLINA);
-//		desktopPane.add(CONSULTAALUNO);
-//		desktopPane.add(CONSULTAFUNCIONARIO);
-//		desktopPane.add(CONSULTAPROFESSOR);
-//		desktopPane.add(CONSULTADISCIPLINA);
-//		
-//		try {
-//			ALUNO.setMaximum(true);
-//			FUNCIONARIO.setMaximum(true);
-//			PROFESSOR.setMaximum(true);
-//			DISCIPLINA.setMaximum(true);
-//			CONSULTAALUNO.setMaximum(true);
-//			CONSULTAFUNCIONARIO.setMaximum(true);
-//			CONSULTAPROFESSOR.setMaximum(true);
-//			CONSULTADISCIPLINA.setMaximum(true);
-//		} catch (PropertyVetoException e1) {
-//			// TODO Auto-generated catch block
-//			e1.printStackTrace();
-//		}
-//		
-//		ALUNO.setVisible(false);
-//		FUNCIONARIO.setVisible(false);
-//		PROFESSOR.setVisible(false);
-//		DISCIPLINA.setVisible(false);
-//		CONSULTAALUNO.setVisible(false);
-//		CONSULTAFUNCIONARIO.setVisible(false);
-//		CONSULTAPROFESSOR.setVisible(false);
-//		CONSULTADISCIPLINA.setVisible(false);
+		/**
+		 * Instanciando todas as telas e deixando invisiveis
+		 */
+		ALUNO = new CadAluno();
+		FUNCIONARIO = new CadFuncionario();
+		PROFESSOR = new CadProfessor();
+		DISCIPLINA = new CadDisciplina();
+		CONSULTAALUNO = new ConsultaAluno();
+		CONSULTAFUNCIONARIO = new ConsultaFuncionario();
+		CONSULTAPROFESSOR = new ConsultaProfessor();
+		CONSULTADISCIPLINA = new ConsultaDisciplina();
+		
+		desktopPane.add(ALUNO);
+		desktopPane.add(FUNCIONARIO);
+		desktopPane.add(PROFESSOR);
+		desktopPane.add(DISCIPLINA);
+		desktopPane.add(CONSULTAALUNO);
+		desktopPane.add(CONSULTAFUNCIONARIO);
+		desktopPane.add(CONSULTAPROFESSOR);
+		desktopPane.add(CONSULTADISCIPLINA);
+		
+		try {
+			ALUNO.setMaximum(true);
+			FUNCIONARIO.setMaximum(true);
+			PROFESSOR.setMaximum(true);
+			DISCIPLINA.setMaximum(true);
+			CONSULTAALUNO.setMaximum(true);
+			CONSULTAFUNCIONARIO.setMaximum(true);
+			CONSULTAPROFESSOR.setMaximum(true);
+			CONSULTADISCIPLINA.setMaximum(true);
+		} catch (PropertyVetoException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		ALUNO.setVisible(false);
+		FUNCIONARIO.setVisible(false);
+		PROFESSOR.setVisible(false);
+		DISCIPLINA.setVisible(false);
+		CONSULTAALUNO.setVisible(false);
+		CONSULTAFUNCIONARIO.setVisible(false);
+		CONSULTAPROFESSOR.setVisible(false);
+		CONSULTADISCIPLINA.setVisible(false);
 		// =======================================================
 		
 	}
