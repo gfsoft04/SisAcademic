@@ -28,6 +28,7 @@ import javax.swing.JTextPane;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
+import br.com.gfsoft.sisacademic.controller.Academico;
 import br.com.gfsoft.sisacademic.model.Endereco;
 import br.com.gfsoft.sisacademic.model.Funcionario;
 import br.com.gfsoft.sisacademic.model.Professor;
@@ -67,8 +68,8 @@ public class CadFuncionario extends JInternalFrame {
 	private JButton btnDeletar;
 	private JButton btnAlterar;
 	
-	private PersistenceFuncionario pFuncionario;
-	private PersistenceProfessor pProfessor;
+	private Academico academico;
+
 	private Funcionario funcionario;
 
 
@@ -438,7 +439,7 @@ public class CadFuncionario extends JInternalFrame {
 					EnvioEmail email = new EnvioEmail();
 					GeraMatricula geraMatricula = new GeraMatricula();
 					VerificaCamposUnique verificaCamposUnique = new VerificaCamposUnique();
-					pFuncionario = new PersistenceFuncionario();
+					academico = new Academico();
 					funcionario = new Funcionario();
 					
 					String cpf = formattedTxtCpf.getText().replace(".", "").replace("-", "");
@@ -483,7 +484,7 @@ public class CadFuncionario extends JInternalFrame {
 					
 					//Verifica se o cpf ou rg esta cadastrado na base
 					if(verificaCamposUnique.validaCpfRg(cpf, txtRg.getText())){
-						if(pFuncionario.insert(funcionario)){
+						if(academico.cadastrarFuncionario(funcionario)){
 							String assunto = "Cadastro";
 							String mensagem = "Bem vindo "+funcionario.getNome()+", seu cadastro foi efetuado com sucesso!"
 											+ "\n\n\tSua Matricula é: " + funcionario.getMatricula();
@@ -523,7 +524,7 @@ public class CadFuncionario extends JInternalFrame {
 				
 				try {
 					VerificaCamposUnique verificaCamposUnique = new VerificaCamposUnique();
-					pFuncionario = new PersistenceFuncionario();
+					academico = new Academico();
 					funcionario = new Funcionario();
 					
 					String cpf = formattedTxtCpf.getText().replace(".", "").replace("-", "");
@@ -568,7 +569,7 @@ public class CadFuncionario extends JInternalFrame {
 					
 					//Verifica se o cpf ou rg esta cadastrado na base
 					//if(verificaCamposUnique.validaCpfRg(cpf, txtRg.getText())){
-						if(pFuncionario.update(funcionario)){
+						if(academico.atualizarFuncionario(funcionario)){
 							JOptionPane.showMessageDialog(null, "Cadastro alterado com sucesso!", "Atenção", JOptionPane.INFORMATION_MESSAGE);
 							limparCampos();
 						}
@@ -592,23 +593,22 @@ public class CadFuncionario extends JInternalFrame {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					String matricula = txtMatricula.getText();
-					pFuncionario = new PersistenceFuncionario();
-					pProfessor = new PersistenceProfessor();
+					academico = new Academico();
 					funcionario = new Funcionario();
 					
-					funcionario = pFuncionario.selectFuncionario(matricula);
+					funcionario = academico.buscarFuncionario(matricula);
 					
 					//Confirmacao do usuario
 					if(JOptionPane.showConfirmDialog(null, "Tem certeza que deseja excluir?", "Confirmação", JOptionPane.WARNING_MESSAGE) == 0){
 						
 						if(matricula.substring(0,1).equals("3")){
-							if(pProfessor.delete((Professor) funcionario)){
+							if(academico.deletarFuncionario((Professor) funcionario)){
 								JOptionPane.showMessageDialog(null, "Exclusão efetuada com sucesso!", "Exclusão", JOptionPane.INFORMATION_MESSAGE);
 								limparCampos();
 								Principal.CONSULTAFUNCIONARIO.preencherTabela();
 							}
 						} else {
-							if(pFuncionario.delete(funcionario)){
+							if(academico.deletarFuncionario(funcionario)){
 								JOptionPane.showMessageDialog(null, "Exclusão efetuada com sucesso!", "Exclusão", JOptionPane.INFORMATION_MESSAGE);
 								limparCampos();
 								Principal.CONSULTAFUNCIONARIO.preencherTabela();

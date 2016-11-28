@@ -16,7 +16,6 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -31,6 +30,7 @@ import javax.swing.JTextPane;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
+import br.com.gfsoft.sisacademic.controller.Academico;
 import br.com.gfsoft.sisacademic.model.Aluno;
 import br.com.gfsoft.sisacademic.model.Endereco;
 import br.com.gfsoft.sisacademic.persistence.PersistenceAluno;
@@ -39,8 +39,6 @@ import br.com.gfsoft.sisacademic.util.EnvioEmail;
 import br.com.gfsoft.sisacademic.util.GeraMatricula;
 import br.com.gfsoft.sisacademic.util.VerificaCamposUnique;
 import br.com.gfsoft.sisacademic.util.WebCamView;
-import java.awt.FlowLayout;
-import javax.swing.BoxLayout;
 
 public class CadAluno extends JInternalFrame {
 	private JTextField txtMatricula;
@@ -74,7 +72,7 @@ public class CadAluno extends JInternalFrame {
 	private JButton btnVisualizar;
 	private JButton btnCapturaFoto;
 	
-	private PersistenceAluno pAluno;
+	private Academico academico;
 	private Aluno aluno;
 	private WebCamView webView;
 	private String path = ""; //path da imagem
@@ -422,7 +420,7 @@ public class CadAluno extends JInternalFrame {
 					EnvioEmail email = new EnvioEmail();
 					GeraMatricula geraMatricula = new GeraMatricula();
 					VerificaCamposUnique verificaCamposUnique = new VerificaCamposUnique();
-					pAluno = new PersistenceAluno();
+					academico = new Academico();
 					aluno = new Aluno();
 					
 					String cpf = formattedTxtCpf.getText().replace(".", "").replace("-", "");
@@ -465,7 +463,7 @@ public class CadAluno extends JInternalFrame {
 					
 					//Verifica se o cpf ou rg esta cadastrado na base
 					if(verificaCamposUnique.validaCpfRg(cpf, txtRg.getText())){
-						if(pAluno.insert(aluno)){
+						if(academico.cadastrarAluno(aluno)){
 							String assunto = "Cadastro";
 							String mensagem = "Bem vindo "+aluno.getNome()+", seu cadastro foi efetuado com sucesso!"
 											+ "\n\n\tSua Matricula é: " + aluno.getMatricula();
@@ -497,14 +495,14 @@ public class CadAluno extends JInternalFrame {
 				
 				try {
 					String matricula = txtMatricula.getText();
-					pAluno = new PersistenceAluno();
+					academico = new Academico();
 					aluno = new Aluno();
 					
-					aluno = pAluno.selectAluno(matricula);
+					aluno = academico.buscarAluno(matricula);
 					
 					//Confirmacao do usuario
 					if(JOptionPane.showConfirmDialog(null, "Tem certeza que deseja excluir?", "Confirmação", JOptionPane.WARNING_MESSAGE) == 0){
-						if(pAluno.delete(aluno)){
+						if(academico.deletarAluno(aluno)){
 							JOptionPane.showMessageDialog(null, "Exclusão efetuada com sucesso!", "Exclusão", JOptionPane.INFORMATION_MESSAGE);
 							limparCampos();
 							Principal.CONSULTAALUNO.preencherTabela();
@@ -543,7 +541,7 @@ public class CadAluno extends JInternalFrame {
 				
 				try {
 					VerificaCamposUnique verificaCamposUnique = new VerificaCamposUnique();
-					pAluno = new PersistenceAluno();
+					academico = new Academico();
 					aluno = new Aluno();
 					
 					String cpf = formattedTxtCpf.getText().replace(".", "").replace("-", "");
@@ -585,7 +583,7 @@ public class CadAluno extends JInternalFrame {
 					
 					//Verifica se o cpf ou rg esta cadastrado na base
 					//if(verificaCamposUnique.validaCpfRg(cpf, txtRg.getText())){
-						if(pAluno.update(aluno)){
+						if(academico.atualizarAluno(aluno)){
 							JOptionPane.showMessageDialog(null, "Cadastro alterado com sucesso!", "Atenção", JOptionPane.INFORMATION_MESSAGE);
 							limparCampos();
 							Principal.CONSULTAALUNO.preencherTabela();

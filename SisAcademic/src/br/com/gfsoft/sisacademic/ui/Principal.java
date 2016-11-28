@@ -42,26 +42,26 @@ public class Principal extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		try {
-		    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-		        if ("Nimbus".equals(info.getName())) {
-		            UIManager.setLookAndFeel(info.getClassName());
-		            break;
-		        }
-		    }
-		} catch (UnsupportedLookAndFeelException e) {
-		    // handle exception
-			System.out.println(e);
-		} catch (ClassNotFoundException e) {
-		    // handle exception
-			System.out.println(e);
-		} catch (InstantiationException e) {
-		    // handle exception
-			System.out.println(e);
-		} catch (IllegalAccessException e) {
-		    // handle exception
-			System.out.println(e);
-		}
+//		try {
+//		    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+//		        if ("Nimbus".equals(info.getName())) {
+//		            UIManager.setLookAndFeel(info.getClassName());
+//		            break;
+//		        }
+//		    }
+//		} catch (UnsupportedLookAndFeelException e) {
+//		    // handle exception
+//			System.out.println(e);
+//		} catch (ClassNotFoundException e) {
+//		    // handle exception
+//			System.out.println(e);
+//		} catch (InstantiationException e) {
+//		    // handle exception
+//			System.out.println(e);
+//		} catch (IllegalAccessException e) {
+//		    // handle exception
+//			System.out.println(e);
+//		}
 		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {

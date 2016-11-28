@@ -78,11 +78,11 @@ public class Academico {
 		return funcionarioService.cadastrar(funcionario);
 	}
 	
-	public boolean deletarAluno(Funcionario funcionario){
+	public boolean deletarFuncionario(Funcionario funcionario){
 		return funcionarioService.deletar(funcionario);
 	}
 	
-	public boolean atualizarAluno(Funcionario funcionario){
+	public boolean atualizarFuncionario(Funcionario funcionario){
 		return funcionarioService.atualizar(funcionario);
 	}
 	
@@ -94,7 +94,7 @@ public class Academico {
 		return funcionarioService.listar();
 	}
 	
-	//-------------Metodos do Funcionario-----------------------------
+	//-------------Metodos do Professor-----------------------------
 	
 	public boolean cadastrarProfessor(Professor professor){
 		return professorService.cadastrar(professor);

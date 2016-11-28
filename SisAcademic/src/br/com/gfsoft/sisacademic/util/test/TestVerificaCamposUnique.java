@@ -5,7 +5,7 @@ import junit.framework.TestCase;
 
 public class TestVerificaCamposUnique extends TestCase{
 	
-	/*VerificaCamposUnique verificaCamposUnique;
+	VerificaCamposUnique verificaCamposUnique;
 	
 	public void setUp(){
 		verificaCamposUnique = new VerificaCamposUnique();
@@ -13,7 +13,7 @@ public class TestVerificaCamposUnique extends TestCase{
 	
 	public void tearDown(){
 		verificaCamposUnique = null;
-	}*/
+	}
 	
 	public void testValidaCpf(){
 		Boolean valido = VerificaCamposUnique.validaCpf("20128108614");
@@ -22,8 +22,12 @@ public class TestVerificaCamposUnique extends TestCase{
 		
 	}
 	
-	//public void testValidaCpfRg(){
+	public void testValidaCpfRg(){
 		
-	//}
+		Boolean valido = verificaCamposUnique.validaCpfRg("70125998392", "3142345132");
+		
+		assertTrue(valido);
+		
+	}
 
 }

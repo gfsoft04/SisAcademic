@@ -26,6 +26,7 @@ import javax.swing.JTextPane;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
+import br.com.gfsoft.sisacademic.controller.Academico;
 import br.com.gfsoft.sisacademic.model.Disciplina;
 import br.com.gfsoft.sisacademic.persistence.PersistenceDisciplina;
 
@@ -43,7 +44,7 @@ public class CadDisciplina extends JInternalFrame {
 	private JButton btnAlterar;
 	private JButton btnDeletar;
 	
-	private PersistenceDisciplina pDisciplina;
+	private Academico academico;
 	private Disciplina disciplina;
 
 	/**
@@ -181,7 +182,7 @@ public class CadDisciplina extends JInternalFrame {
 				}
 				
 				try {
-					pDisciplina = new PersistenceDisciplina();
+					academico = new Academico();
 					disciplina = new Disciplina();
 					
 					String situacao = comboBoxSituacao.getSelectedItem().toString().substring(0, 1);
@@ -198,7 +199,7 @@ public class CadDisciplina extends JInternalFrame {
 					disciplina.setDtCriacao(dtCriacao);
 					disciplina.setObservacao(textPaneObservacao.getText());
 					
-					if(pDisciplina.insert(disciplina)){
+					if(academico.cadastrarDisciplina(disciplina)){
 						JOptionPane.showMessageDialog(null, "Cadastro eferuado com sucesso!", "Cadastrado", JOptionPane.INFORMATION_MESSAGE);
 						limparCampos();
 					} /*else {
@@ -220,16 +221,16 @@ public class CadDisciplina extends JInternalFrame {
 		btnDeletar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					pDisciplina = new PersistenceDisciplina();
+					academico = new Academico();
 					disciplina = new Disciplina();
 					
 					long id = Long.parseLong(txtId.getText());
 					
-					disciplina = pDisciplina.selectDisciplina(id);
+					disciplina = academico.buscarDisciplina(id);
 					
 					//Confirmacao do usuario
 					if(JOptionPane.showConfirmDialog(null, "Tem certeza que deseja excluir?", "Confirmação", JOptionPane.WARNING_MESSAGE) == 0){
-						if(pDisciplina.delete(disciplina)){
+						if(academico.deletarDisciplina(disciplina)){
 							JOptionPane.showMessageDialog(null, "Exclusão efetuada com sucesso!", "Exclusão", JOptionPane.INFORMATION_MESSAGE);
 							limparCampos();
 							Principal.CONSULTADISCIPLINA.preencherTabela();
@@ -261,7 +262,7 @@ public class CadDisciplina extends JInternalFrame {
 				}
 				
 				try {
-					pDisciplina = new PersistenceDisciplina();
+					academico = new Academico();
 					disciplina = new Disciplina();
 					
 					String situacao = comboBoxSituacao.getSelectedItem().toString().substring(0, 1);
@@ -279,7 +280,7 @@ public class CadDisciplina extends JInternalFrame {
 					disciplina.setDtCriacao(dtCriacao);
 					disciplina.setObservacao(textPaneObservacao.getText());
 					
-					if(pDisciplina.update(disciplina)){
+					if(academico.atualizarDisciplina(disciplina)){
 						JOptionPane.showMessageDialog(null, "Cadastro alterado com sucesso!", "Atenção", JOptionPane.INFORMATION_MESSAGE);
 						limparCampos();
 						Principal.CONSULTADISCIPLINA.preencherTabela();

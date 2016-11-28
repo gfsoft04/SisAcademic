@@ -5,7 +5,7 @@ import junit.framework.TestCase;
 
 public class TestGeraMatricula extends TestCase{
 	
-	/*
+	
 	GeraMatricula geraMatricula;
 	
 	public void setUp(){
@@ -18,12 +18,10 @@ public class TestGeraMatricula extends TestCase{
 	
 	public void testGerarMatricula(){
 		
-		// Nao sei qual o padrao do tipo pessoa
 		String matricula = geraMatricula.gerarMatricula(1, 2016);
 		
-		//Nao sei o padrao que sai na matricula
-		assertEquals(matricula, "120160");
+		assertEquals(matricula, "1201600042");
 		
-	}*/
+	}
 
 }
