@@ -121,7 +121,10 @@ public class PersistenceAluno implements IPersistenceAluno {
 		Aluno aluno = new Aluno();
 		verificaCpf = new VerificaCamposUnique();
 		String sql = "SELECT * FROM tb_Aluno JOIN tb_Pessoa	ON tb_Aluno.tb_Pessoa_idPessoa = tb_Pessoa.idPessoa WHERE matricula='" + matricula + "'";
-
+//
+//	SE DESCOMENTAR ESSAS LINHA DARA ERRO POIS O ALUNO ACABOU DE SER
+//	INSTANCIADO E SEUS ATRIBUTOS AINDA ESTAO NULL
+//
 //		if(verificaCpf.validaCpfRg(aluno.getCpf(), aluno.getRg())){
 //			throw new UsuarioNaoEncontradoException("Usuario nao cadastrado no sistema");
 //		}
