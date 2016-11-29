@@ -37,9 +37,9 @@ public class WebCamView {
             }
             if(dsi[0][0].getName().equalsIgnoreCase("PC Camera"))
                 dsi[0][0].setPreferredFormat(2);
+            
             player = new DSCapture(DSFiltergraph.DD7, dsi[0][0], false, DSFilterInfo.doNotRender(), null);
             player.setSize(360, 270);
-            //player.stop();
             player.play();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Não Foi Possível Iniciar a WebCam. Possíveis Causas:"
@@ -51,7 +51,7 @@ public class WebCamView {
     }
     
     public static void pararWebCam(){
-    	player.stop();
+    	player.dispose();
     }
     
     /**

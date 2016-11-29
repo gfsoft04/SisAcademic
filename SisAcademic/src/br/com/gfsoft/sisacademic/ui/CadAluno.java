@@ -631,6 +631,7 @@ public class CadAluno extends JInternalFrame {
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				limparCampos();
+				webView.pararWebCam();
 				setVisible(false);
 			}
 		});
@@ -657,10 +658,13 @@ public class CadAluno extends JInternalFrame {
 				GeraMatricula geraMatricula = new GeraMatricula();
 				String matricula = geraMatricula.gerarMatricula(1, Integer.parseInt(formattedTxtDtMatricula.getText().substring(6, 10)));
 				File file = new File("img\\"+matricula+".png");
+				ImageIcon icon = new ImageIcon(file.getPath());
 				
 				webView.salvarFoto(webView.getPlayer().getImage(), file);
 				webView.pararWebCam();
 				path = file.getPath();
+				labelImagem.setVisible(true);
+				labelImagem.setIcon(icon);
 			}
 		});
 		btnCapturaFoto.setBounds(1017, 292, 100, 30);
@@ -690,6 +694,7 @@ public class CadAluno extends JInternalFrame {
 		
 		File path = new File("img\\"+aluno.getMatricula()+".png");
 		imagem = new ImageIcon(path.getPath());
+		imagem.setImage(imagem.getImage().getScaledInstance(360, 270, 100));
 		
 		txtMatricula.setText(aluno.getMatricula());
 		txtNome.setText(aluno.getNome());
@@ -766,5 +771,6 @@ public class CadAluno extends JInternalFrame {
 		txtEstado.setText("");
 		txtComplemento.setText("");
 		txtPaneObservacao.setText("");
+		labelImagem.setIcon(null);
 	}
 }
