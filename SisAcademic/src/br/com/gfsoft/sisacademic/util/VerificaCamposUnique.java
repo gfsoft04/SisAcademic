@@ -13,17 +13,8 @@ public class VerificaCamposUnique {
 		pPessoa = new PersistencePessoa();
 		
 		if(pPessoa.qtdRegistros("cpf", cpf) == 0 && pPessoa.qtdRegistros("rg", rg) == 0){
-			
-//			if(validaCpf(cpf)){
-//				return true;
-//			} else {
-//				JOptionPane.showMessageDialog(null, "CPF Invalido!", "Erro", JOptionPane.ERROR_MESSAGE);
-//				return false;
-//			}
 			return true;
 		} else {
-			// Data invalida???? Acho que aqui eh aquele bug
-			//JOptionPane.showMessageDialog(null, "Usuario ja cadastrado!", "Erro", JOptionPane.ERROR_MESSAGE);
 			return false;
 		}
 		

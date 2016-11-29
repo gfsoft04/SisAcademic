@@ -466,7 +466,18 @@ public class CadAluno extends JInternalFrame {
 					aluno.setObservacao(txtPaneObservacao.getText());
 					aluno.setUrlFoto(path);
 					
-					academico.cadastrarAluno(aluno);
+					
+					if(academico.cadastrarAluno(aluno)){
+						String assunto = "Cadastro";
+						String mensagem = "Bem vindo "+aluno.getNome()+", seu cadastro foi efetuado com sucesso!"
+										+ "\n\n\tSua Matricula é: " + aluno.getMatricula();
+						
+						email.enviar(aluno.getEmail(), assunto, mensagem);
+						JOptionPane.showMessageDialog(null, "Cadastro efetuado com sucesso!", "Cadastrado", JOptionPane.INFORMATION_MESSAGE);
+						limparCampos();
+					}
+					
+					
 //					//Verifica se o cpf ou rg esta cadastrado na base
 //					if(verificaCamposUnique.validaCpfRg(cpf, txtRg.getText())){
 //						if(academico.cadastrarAluno(aluno)){

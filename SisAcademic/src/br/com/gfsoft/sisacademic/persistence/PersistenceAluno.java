@@ -34,7 +34,7 @@ public class PersistenceAluno implements IPersistenceAluno {
 			throw new UsuarioJaCadastradoException("Usuario ja cadastrado no sistema");
 		}
 		
-		if (VerificaCamposUnique.validaCpf(aluno.getCpf())) {
+		if (!(VerificaCamposUnique.validaCpf(aluno.getCpf()))) {
 			throw new CpfInvalidoException("CPF Invalido");
 		}
 		
@@ -122,9 +122,9 @@ public class PersistenceAluno implements IPersistenceAluno {
 		verificaCpf = new VerificaCamposUnique();
 		String sql = "SELECT * FROM tb_Aluno JOIN tb_Pessoa	ON tb_Aluno.tb_Pessoa_idPessoa = tb_Pessoa.idPessoa WHERE matricula='" + matricula + "'";
 
-		if(verificaCpf.validaCpfRg(aluno.getCpf(), aluno.getRg())){
-			throw new UsuarioNaoEncontradoException("Usuario nao cadastrado no sistema");
-		}
+//		if(verificaCpf.validaCpfRg(aluno.getCpf(), aluno.getRg())){
+//			throw new UsuarioNaoEncontradoException("Usuario nao cadastrado no sistema");
+//		}
 		
 		try {
 			stmt = con.getConnection().createStatement();

@@ -95,17 +95,16 @@ public class ConsultaAluno extends JInternalFrame {
 					
 					try {
 						aluno = pAluno.selectAluno(matricula);
-					} catch (UsuarioNaoEncontradoException e1) {
+						
+						Principal.ALUNO.preencheCampos(aluno);
+						Principal.ALUNO.setEditable(false);
+						Principal.ALUNO.alternaBotoes(true);
+						Principal.ALUNO.setVisible(true);
+						Principal.ALUNO.setTitle("Editar");
+					} catch (UsuarioNaoEncontradoException ex) {
 						// Excecao para usuario nao encontrado
 						JOptionPane.showMessageDialog(null, "Usuario Nao Cadastrado no Sistema!", "Erro", JOptionPane.ERROR_MESSAGE);
 					}
-					
-					Principal.ALUNO.preencheCampos(aluno);
-					Principal.ALUNO.setEditable(false);
-					Principal.ALUNO.alternaBotoes(true);
-					Principal.ALUNO.setVisible(true);
-					Principal.ALUNO.setTitle("Editar");
-					
 				}
 				
 			}
