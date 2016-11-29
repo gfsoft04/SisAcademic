@@ -10,6 +10,9 @@ import java.util.Set;
 import javax.swing.JOptionPane;
 
 import br.com.gfsoft.sisacademic.model.Funcionario;
+import br.com.gfsoft.sisacademic.model.exception.CpfInvalidoException;
+import br.com.gfsoft.sisacademic.model.exception.UsuarioJaCadastradoException;
+import br.com.gfsoft.sisacademic.util.VerificaCamposUnique;
 
 public class PersistenceFuncionario implements IPersistenceFuncionario {
 
@@ -17,11 +20,23 @@ public class PersistenceFuncionario implements IPersistenceFuncionario {
 	private static ResultSet rs;
 	private static Conexao con = new Conexao();
 	
+	private VerificaCamposUnique verificaCpf;
+	
 	@Override
-	public boolean insert(Funcionario funcionario) {
+	public boolean insert(Funcionario funcionario) throws UsuarioJaCadastradoException, CpfInvalidoException{
 		PersistencePessoa pPessoa = new PersistencePessoa();
 		String sql;
 		long id;
+		
+		verificaCpf = new VerificaCamposUnique();
+		
+		if (!(verificaCpf.validaCpfRg(funcionario.getCpf(), funcionario.getRg()))) {
+			throw new UsuarioJaCadastradoException("Usuario ja cadastrado no sistema");
+		}
+		
+		if (!(VerificaCamposUnique.validaCpf(funcionario.getCpf()))) {
+			throw new CpfInvalidoException("CPF Invalido");
+		}
 		
 		if(pPessoa.insert(funcionario)){
 			id = pPessoa.selectPessoa(funcionario.getMatricula());
@@ -40,7 +55,7 @@ public class PersistenceFuncionario implements IPersistenceFuncionario {
 			}
 			catch (SQLException exept){
 				exept.printStackTrace();
-				JOptionPane.showMessageDialog(null, "Erro na inserção de funcionario na base de dados","Erro", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Erro na inserï¿½ï¿½o de funcionario na base de dados","Erro", JOptionPane.ERROR_MESSAGE);
 			}
 		}
 		return false;

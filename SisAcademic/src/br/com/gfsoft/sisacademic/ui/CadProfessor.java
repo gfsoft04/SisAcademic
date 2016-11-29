@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
@@ -31,6 +32,8 @@ import javax.swing.border.TitledBorder;
 import br.com.gfsoft.sisacademic.controller.Academico;
 import br.com.gfsoft.sisacademic.model.Endereco;
 import br.com.gfsoft.sisacademic.model.Professor;
+import br.com.gfsoft.sisacademic.model.exception.CpfInvalidoException;
+import br.com.gfsoft.sisacademic.model.exception.UsuarioJaCadastradoException;
 import br.com.gfsoft.sisacademic.persistence.PersistenceProfessor;
 import br.com.gfsoft.sisacademic.util.BuscaCep;
 import br.com.gfsoft.sisacademic.util.EnvioEmail;
@@ -428,7 +431,7 @@ public class CadProfessor extends JInternalFrame {
 						|| formattedTxtCep.getText().equals("") || formattedTxtTelefone.getText().equals("")
 						|| txtSalario.getText().equals("")) {
 					
-					JOptionPane.showMessageDialog(null, "Campos Obrigatórios em Branco!", "Erro", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Campos Obrigatï¿½rios em Branco!", "Erro", JOptionPane.ERROR_MESSAGE);
 					return ;					
 				}
 				
@@ -482,25 +485,44 @@ public class CadProfessor extends JInternalFrame {
 					professor.setDtContratacao(dtContratacao);
 					professor.setObservacao(txtPaneObservacao.getText());
 					
+					if(academico.cadastrarProfessor(professor)){
+						String assunto = "Cadastro";
+						String mensagem = "Bem vindo "+professor.getNome()+", seu cadastro foi efetuado com sucesso!"
+										+ "\n\n\tSua Matricula ï¿½: " + professor.getMatricula();
+						
+						email.enviar(professor.getEmail(), assunto, mensagem);
+						JOptionPane.showMessageDialog(null, "Cadastro efetuado com sucesso!", "Cadastrado", JOptionPane.INFORMATION_MESSAGE);
+						limparCampos();
+					}
+					
 					//Verifica se o cpf ou rg esta cadastrado na base
-					if(verificaCamposUnique.validaCpfRg(cpf, txtRg.getText())){
+					/*if(verificaCamposUnique.validaCpfRg(cpf, txtRg.getText())){
 						if(academico.cadastrarProfessor(professor)){
 							String assunto = "Cadastro";
 							String mensagem = "Bem vindo "+professor.getNome()+", seu cadastro foi efetuado com sucesso!"
-											+ "\n\n\tSua Matricula é: " + professor.getMatricula();
+											+ "\n\n\tSua Matricula ï¿½: " + professor.getMatricula();
 							
 							email.enviar(professor.getEmail(), assunto, mensagem);
 							JOptionPane.showMessageDialog(null, "Cadastro efetuado com sucesso!", "Cadastrado", JOptionPane.INFORMATION_MESSAGE);
 							limparCampos();
 						}
-					}
+					}*/
 					
 				} catch (DateTimeException ex) {
 					// Excesao para data invalida
 					JOptionPane.showMessageDialog(null, "Data Invalida!", "Erro", JOptionPane.ERROR_MESSAGE);
 				} catch (NumberFormatException ex) {
 					// Excecao para conversao de texto em numero
-					JOptionPane.showMessageDialog(null, "Campo numero só aceita digitos", "Erro", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Campo numero sï¿½ aceita digitos", "Erro", JOptionPane.ERROR_MESSAGE);
+				} catch (HeadlessException ex) {
+					JOptionPane.showMessageDialog(null, "Nao sei que exception eh esse", "Erro", JOptionPane.ERROR_MESSAGE);
+					ex.printStackTrace();
+				} catch (UsuarioJaCadastradoException ex) {
+					JOptionPane.showMessageDialog(null, "Professor ja cadastrado!", "Erro", JOptionPane.ERROR_MESSAGE);
+					ex.printStackTrace();
+				} catch (CpfInvalidoException ex) {
+					JOptionPane.showMessageDialog(null, "CPF Invalido!", "Erro", JOptionPane.ERROR_MESSAGE);
+					ex.printStackTrace();
 				}
 			}
 		});
@@ -520,9 +542,9 @@ public class CadProfessor extends JInternalFrame {
 					professor = academico.buscarProfessor(matricula);
 					
 					//Confirmacao do usuario
-					if(JOptionPane.showConfirmDialog(null, "Tem certeza que deseja excluir?", "Confirmação", JOptionPane.WARNING_MESSAGE) == 0){
+					if(JOptionPane.showConfirmDialog(null, "Tem certeza que deseja excluir?", "Confirmaï¿½ï¿½o", JOptionPane.WARNING_MESSAGE) == 0){
 						if(academico.deletarProfessor(professor)){
-							JOptionPane.showMessageDialog(null, "Exclusão efetuada com sucesso!", "Exclusão", JOptionPane.INFORMATION_MESSAGE);
+							JOptionPane.showMessageDialog(null, "Exclusï¿½o efetuada com sucesso!", "Exclusï¿½o", JOptionPane.INFORMATION_MESSAGE);
 							limparCampos();
 							Principal.CONSULTAPROFESSOR.preencherTabela();
 						}
@@ -534,7 +556,7 @@ public class CadProfessor extends JInternalFrame {
 					System.out.println(ex);
 				} catch (NumberFormatException ex) {
 					// Excecao para conversao de texto em numero
-					JOptionPane.showMessageDialog(null, "Campo numero só aceita digitos", "Erro", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Campo numero sï¿½ aceita digitos", "Erro", JOptionPane.ERROR_MESSAGE);
 					System.out.println(ex);
 				}
 			}
@@ -553,7 +575,7 @@ public class CadProfessor extends JInternalFrame {
 						|| formattedTxtCep.getText().equals("") || formattedTxtTelefone.getText().equals("")
 						|| txtSalario.getText().equals("")) {
 					
-					JOptionPane.showMessageDialog(null, "Campos Obrigatórios em Branco!", "Erro", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Campos Obrigatï¿½rios em Branco!", "Erro", JOptionPane.ERROR_MESSAGE);
 					return ;					
 				}
 				
@@ -607,7 +629,7 @@ public class CadProfessor extends JInternalFrame {
 					//Verifica se o cpf ou rg esta cadastrado na base
 					//if(verificaCamposUnique.validaCpfRg(cpf, txtRg.getText())){
 						if(academico.atualizarProfessor(professor)){
-							JOptionPane.showMessageDialog(null, "Cadastro alterado com sucesso!", "Atenção", JOptionPane.INFORMATION_MESSAGE);
+							JOptionPane.showMessageDialog(null, "Cadastro alterado com sucesso!", "Atenï¿½ï¿½o", JOptionPane.INFORMATION_MESSAGE);
 							limparCampos();
 						}
 					//}
@@ -617,7 +639,7 @@ public class CadProfessor extends JInternalFrame {
 					JOptionPane.showMessageDialog(null, "Data Invalida!", "Erro", JOptionPane.ERROR_MESSAGE);
 				} catch (NumberFormatException ex) {
 					// Excecao para conversao de texto em numero
-					JOptionPane.showMessageDialog(null, "Campo numero só aceita digitos", "Erro", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Campo numero sï¿½ aceita digitos", "Erro", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});

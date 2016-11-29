@@ -1,8 +1,11 @@
 package br.com.gfsoft.sisacademic.service;
 
+import java.awt.HeadlessException;
 import java.util.Set;
 
 import br.com.gfsoft.sisacademic.model.Professor;
+import br.com.gfsoft.sisacademic.model.exception.CpfInvalidoException;
+import br.com.gfsoft.sisacademic.model.exception.UsuarioJaCadastradoException;
 import br.com.gfsoft.sisacademic.persistence.IPersistenceProfessor;
 import br.com.gfsoft.sisacademic.persistence.PersistenceProfessor;
 
@@ -14,7 +17,7 @@ public class ProfessorService {
 		persistencia = new PersistenceProfessor();
 	}
 		
-	public boolean cadastrar(Professor professor){
+	public boolean cadastrar(Professor professor) throws HeadlessException, UsuarioJaCadastradoException, CpfInvalidoException{
 		return persistencia.insert(professor);
 	}
 	

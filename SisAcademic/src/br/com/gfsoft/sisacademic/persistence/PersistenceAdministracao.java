@@ -1,5 +1,6 @@
 package br.com.gfsoft.sisacademic.persistence;
 
+import java.awt.HeadlessException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -10,21 +11,34 @@ import javax.swing.JOptionPane;
 
 import br.com.gfsoft.sisacademic.model.Administracao;
 import br.com.gfsoft.sisacademic.model.Funcionario;
+import br.com.gfsoft.sisacademic.model.exception.CpfInvalidoException;
+import br.com.gfsoft.sisacademic.model.exception.UsuarioJaCadastradoException;
+import br.com.gfsoft.sisacademic.util.VerificaCamposUnique;
 
 public class PersistenceAdministracao implements IPersistenceAdministracao {
 
 	private static Statement stmt;
 	private static ResultSet rs;
 	private static Conexao con = new Conexao();
+	private VerificaCamposUnique verificaCpf;
 	
 	@Override
-	public boolean insert(Administracao administracao) {
+	public boolean insert(Administracao administracao) throws HeadlessException, UsuarioJaCadastradoException, CpfInvalidoException {
 		
 		PersistenceFuncionario pFuncionario = new PersistenceFuncionario();
 		Funcionario funcionario = new Funcionario ();
+		verificaCpf = new VerificaCamposUnique();
 		
 		String sql;
 		long id;
+		
+		if (!(verificaCpf.validaCpfRg(administracao.getCpf(), administracao.getRg()))) {
+			throw new UsuarioJaCadastradoException("Usuario ja cadastrado no sistema");
+		}
+		
+		if (!(VerificaCamposUnique.validaCpf(administracao.getCpf()))) {
+			throw new CpfInvalidoException("CPF Invalido");
+		}
 		
 		if(pFuncionario.insert(administracao)){
 			funcionario = pFuncionario.selectFuncionario(administracao.getMatricula());
@@ -108,7 +122,7 @@ public class PersistenceAdministracao implements IPersistenceAdministracao {
 		Administracao administracao = new Administracao();
 		String sql =  "SELECT * FROM tb_Administracao JOIN tb_Pessoa " 
 		+ " on tb_Administracao.tb_Funcionario_tb_Pessoa_id_Pessoa = tb_Funcionario.tb_pessoa_idPessoa"
-		+ "WHERE matricula ' "+ matricula + "'";//>>>>>>>>>>>>>>>>>>NÃO SEI SE ESTA CORRETO!!<<<<<<<<<<<<<<<<<<<<
+		+ "WHERE matricula ' "+ matricula + "'";//>>>>>>>>>>>>>>>>>>Nï¿½O SEI SE ESTA CORRETO!!<<<<<<<<<<<<<<<<<<<<
 		
 		try{
 			stmt = con.getConnection().createStatement();

@@ -1,5 +1,6 @@
 package br.com.gfsoft.sisacademic.controller;
 
+import java.awt.HeadlessException;
 import java.util.List;
 import java.util.Set;
 
@@ -77,7 +78,7 @@ public class Academico {
 	
 	//-------------Metodos do Funcionario-----------------------------
 	
-	public boolean cadastrarFuncionario(Funcionario funcionario){
+	public boolean cadastrarFuncionario(Funcionario funcionario) throws UsuarioJaCadastradoException, CpfInvalidoException{
 		return funcionarioService.cadastrar(funcionario);
 	}
 	
@@ -99,7 +100,7 @@ public class Academico {
 	
 	//-------------Metodos do Professor-----------------------------
 	
-	public boolean cadastrarProfessor(Professor professor){
+	public boolean cadastrarProfessor(Professor professor) throws HeadlessException, UsuarioJaCadastradoException, CpfInvalidoException{
 		return professorService.cadastrar(professor);
 	}
 	

@@ -3,6 +3,8 @@ package br.com.gfsoft.sisacademic.service;
 import java.util.Set;
 
 import br.com.gfsoft.sisacademic.model.Funcionario;
+import br.com.gfsoft.sisacademic.model.exception.CpfInvalidoException;
+import br.com.gfsoft.sisacademic.model.exception.UsuarioJaCadastradoException;
 import br.com.gfsoft.sisacademic.persistence.IPersistenceFuncionario;
 import br.com.gfsoft.sisacademic.persistence.PersistenceFuncionario;
 
@@ -14,7 +16,7 @@ public class FuncionarioService {
 		persistencia = new PersistenceFuncionario();
 	}
 	
-	public boolean cadastrar(Funcionario funcionario){
+	public boolean cadastrar(Funcionario funcionario) throws UsuarioJaCadastradoException, CpfInvalidoException{
 		return persistencia.insert(funcionario);
 	}
 	

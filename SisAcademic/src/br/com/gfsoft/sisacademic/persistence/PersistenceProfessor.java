@@ -1,5 +1,6 @@
 package br.com.gfsoft.sisacademic.persistence;
 
+import java.awt.HeadlessException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -11,21 +12,35 @@ import javax.swing.JOptionPane;
 
 import br.com.gfsoft.sisacademic.model.Funcionario;
 import br.com.gfsoft.sisacademic.model.Professor;
+import br.com.gfsoft.sisacademic.model.exception.CpfInvalidoException;
+import br.com.gfsoft.sisacademic.model.exception.UsuarioJaCadastradoException;
+import br.com.gfsoft.sisacademic.util.VerificaCamposUnique;
 
 public class PersistenceProfessor implements IPersistenceProfessor {
 	
 	private static Statement stmt;
 	private static ResultSet rs;
 	private static Conexao con = new Conexao();
+	
+	private VerificaCamposUnique verificaCpf;
 
 	@Override
-	public boolean insert(Professor professor) {
+	public boolean insert(Professor professor) throws HeadlessException, UsuarioJaCadastradoException, CpfInvalidoException {
 		
 		PersistenceFuncionario pFuncionario = new PersistenceFuncionario();
 		Funcionario funcionario = new Funcionario();
+		verificaCpf = new VerificaCamposUnique();
 		
 		String sql;
 		long id;
+		
+		if (!(verificaCpf.validaCpfRg(professor.getCpf(), professor.getRg()))) {
+			throw new UsuarioJaCadastradoException("Usuario ja cadastrado no sistema");
+		}
+		
+		if (!(VerificaCamposUnique.validaCpf(professor.getCpf()))) {
+			throw new CpfInvalidoException("CPF Invalido");
+		}
 		
 		if(pFuncionario.insert(professor)){
 			
