@@ -11,6 +11,7 @@ import br.com.gfsoft.sisacademic.model.Professor;
 import br.com.gfsoft.sisacademic.model.exception.CpfInvalidoException;
 import br.com.gfsoft.sisacademic.model.exception.UsuarioJaCadastradoException;
 import br.com.gfsoft.sisacademic.model.exception.UsuarioNaoEncontradoException;
+import br.com.gfsoft.sisacademic.service.AlunoDisciplinaService;
 import br.com.gfsoft.sisacademic.service.AlunoService;
 import br.com.gfsoft.sisacademic.service.DisciplinaService;
 import br.com.gfsoft.sisacademic.service.FuncionarioService;
@@ -21,6 +22,7 @@ public class Academico {
 	AlunoService alunoService;
 	ProfessorService professorService;
 	FuncionarioService funcionarioService;
+	AlunoDisciplinaService alunoDisciplinaService;
 	
 	DisciplinaService disciplinaService;
 	
@@ -30,6 +32,7 @@ public class Academico {
 		this.alunoService = new AlunoService();
 		this.professorService = new ProfessorService();
 		this.funcionarioService = new FuncionarioService();
+		this.alunoDisciplinaService = new AlunoDisciplinaService();
 	}
 	
 	//-------------Metodos da Disciplina------------------------
@@ -134,6 +137,20 @@ public class Academico {
 	
 	public Set<Professor> filtrarProfessores(String nome){
 		return professorService.filtrar(nome);
+	}
+	
+	//-------------Metodos do Aluno Disciplina-----------------------------
+	
+	public boolean cadastrarAlunoDisciplina(long idAluno, long idDisciplina){
+		return alunoDisciplinaService.cadastrar(idAluno, idDisciplina);
+	}
+	
+	public boolean deletarAlunoDisciplina(long idAluno, long idDisciplina){
+		return alunoDisciplinaService.deletar(idAluno, idDisciplina);
+	}
+	
+	public List<Disciplina> listarAlunoDisciplinas(long idAluno){
+		return alunoDisciplinaService.listar(idAluno);
 	}
 	
 }
