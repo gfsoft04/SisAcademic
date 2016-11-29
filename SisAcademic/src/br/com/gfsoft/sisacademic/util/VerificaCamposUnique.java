@@ -2,14 +2,11 @@ package br.com.gfsoft.sisacademic.util;
 
 import java.util.InputMismatchException;
 
-import javax.swing.JOptionPane;
-
 import br.com.gfsoft.sisacademic.persistence.PersistencePessoa;
 
 public class VerificaCamposUnique {
 	
 	private PersistencePessoa pPessoa;
-	
 	
 	public boolean validaCpfRg(String cpf, String rg){
 		
@@ -17,16 +14,16 @@ public class VerificaCamposUnique {
 		
 		if(pPessoa.qtdRegistros("cpf", cpf) == 0 && pPessoa.qtdRegistros("rg", rg) == 0){
 			
-			if(validaCpf(cpf)){
-				return true;
-			} else {
-				JOptionPane.showMessageDialog(null, "CPF Invalido!", "Erro", JOptionPane.ERROR_MESSAGE);
-				return false;
-			}
-			
+//			if(validaCpf(cpf)){
+//				return true;
+//			} else {
+//				JOptionPane.showMessageDialog(null, "CPF Invalido!", "Erro", JOptionPane.ERROR_MESSAGE);
+//				return false;
+//			}
+			return true;
 		} else {
 			// Data invalida???? Acho que aqui eh aquele bug
-			JOptionPane.showMessageDialog(null, "Usuario ja cadastrado!", "Erro", JOptionPane.ERROR_MESSAGE);
+			//JOptionPane.showMessageDialog(null, "Usuario ja cadastrado!", "Erro", JOptionPane.ERROR_MESSAGE);
 			return false;
 		}
 		

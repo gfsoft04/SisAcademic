@@ -39,16 +39,15 @@ public class BuscaCep {
 			
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
-			System.out.println("Url mal formatada!");
-			e.printStackTrace();
+			//System.out.println("Url mal formatada!");
+			//e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			JOptionPane.showMessageDialog(null, "CEP Não Localizado!", "Erro", JOptionPane.ERROR_MESSAGE);
-			e.printStackTrace();
+			//e.printStackTrace();
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
-			System.out.println("ParseExcepition");
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		
 		return null;

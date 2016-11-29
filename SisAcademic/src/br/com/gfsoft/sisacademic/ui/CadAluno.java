@@ -33,7 +33,9 @@ import javax.swing.border.TitledBorder;
 import br.com.gfsoft.sisacademic.controller.Academico;
 import br.com.gfsoft.sisacademic.model.Aluno;
 import br.com.gfsoft.sisacademic.model.Endereco;
-import br.com.gfsoft.sisacademic.persistence.PersistenceAluno;
+import br.com.gfsoft.sisacademic.model.exception.CpfInvalidoException;
+import br.com.gfsoft.sisacademic.model.exception.UsuarioJaCadastradoException;
+import br.com.gfsoft.sisacademic.model.exception.UsuarioNaoEncontradoException;
 import br.com.gfsoft.sisacademic.util.BuscaCep;
 import br.com.gfsoft.sisacademic.util.EnvioEmail;
 import br.com.gfsoft.sisacademic.util.GeraMatricula;
@@ -41,6 +43,10 @@ import br.com.gfsoft.sisacademic.util.VerificaCamposUnique;
 import br.com.gfsoft.sisacademic.util.WebCamView;
 
 public class CadAluno extends JInternalFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4371247386629035416L;
 	private JTextField txtMatricula;
 	private JLabel labelMatricula;
 	private JTextField txtNome;
@@ -419,7 +425,6 @@ public class CadAluno extends JInternalFrame {
 				try {
 					EnvioEmail email = new EnvioEmail();
 					GeraMatricula geraMatricula = new GeraMatricula();
-					VerificaCamposUnique verificaCamposUnique = new VerificaCamposUnique();
 					academico = new Academico();
 					aluno = new Aluno();
 					
@@ -461,18 +466,19 @@ public class CadAluno extends JInternalFrame {
 					aluno.setObservacao(txtPaneObservacao.getText());
 					aluno.setUrlFoto(path);
 					
-					//Verifica se o cpf ou rg esta cadastrado na base
-					if(verificaCamposUnique.validaCpfRg(cpf, txtRg.getText())){
-						if(academico.cadastrarAluno(aluno)){
-							String assunto = "Cadastro";
-							String mensagem = "Bem vindo "+aluno.getNome()+", seu cadastro foi efetuado com sucesso!"
-											+ "\n\n\tSua Matricula é: " + aluno.getMatricula();
-							
-							email.enviar(aluno.getEmail(), assunto, mensagem);
-							JOptionPane.showMessageDialog(null, "Cadastro efetuado com sucesso!", "Cadastrado", JOptionPane.INFORMATION_MESSAGE);
-							limparCampos();
-						}
-					}
+					academico.cadastrarAluno(aluno);
+//					//Verifica se o cpf ou rg esta cadastrado na base
+//					if(verificaCamposUnique.validaCpfRg(cpf, txtRg.getText())){
+//						if(academico.cadastrarAluno(aluno)){
+//							String assunto = "Cadastro";
+//							String mensagem = "Bem vindo "+aluno.getNome()+", seu cadastro foi efetuado com sucesso!"
+//											+ "\n\n\tSua Matricula é: " + aluno.getMatricula();
+//							
+//							email.enviar(aluno.getEmail(), assunto, mensagem);
+//							JOptionPane.showMessageDialog(null, "Cadastro efetuado com sucesso!", "Cadastrado", JOptionPane.INFORMATION_MESSAGE);
+//							limparCampos();
+//						}
+//					}
 					
 				} catch (DateTimeException ex) {
 					// Excesao para data invalida
@@ -480,7 +486,13 @@ public class CadAluno extends JInternalFrame {
 				} catch (NumberFormatException ex) {
 					// Excecao para conversao de texto em numero
 					JOptionPane.showMessageDialog(null, "Campo numero só aceita digitos", "Erro", JOptionPane.ERROR_MESSAGE);
-				}
+				} catch (UsuarioJaCadastradoException ex) {
+					// Excecao para usuario ja cadastrado
+					JOptionPane.showMessageDialog(null, "Usuario Ja Cadastrado no Sistema!", "Erro", JOptionPane.ERROR_MESSAGE);
+				} catch (CpfInvalidoException ex) {
+					// Excecao para usuario ja cadastrado
+					JOptionPane.showMessageDialog(null, "CPF Invalido!", "Erro", JOptionPane.ERROR_MESSAGE);
+				} 
 			}
 		});
 		
@@ -517,6 +529,9 @@ public class CadAluno extends JInternalFrame {
 					// Excecao para conversao de texto em numero
 					JOptionPane.showMessageDialog(null, "Campo numero só aceita digitos", "Erro", JOptionPane.ERROR_MESSAGE);
 					System.out.println(ex);
+				} catch (UsuarioNaoEncontradoException ex) {
+					// Excecao para usuario ja cadastrado
+					JOptionPane.showMessageDialog(null, "Usuario Nao Cadastrado no Sistema!", "Erro", JOptionPane.ERROR_MESSAGE);
 				}
 				
 			}

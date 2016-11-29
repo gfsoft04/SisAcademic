@@ -10,19 +10,33 @@ import java.util.Set;
 import javax.swing.JOptionPane;
 
 import br.com.gfsoft.sisacademic.model.Aluno;
+import br.com.gfsoft.sisacademic.model.exception.CpfInvalidoException;
+import br.com.gfsoft.sisacademic.model.exception.UsuarioJaCadastradoException;
+import br.com.gfsoft.sisacademic.model.exception.UsuarioNaoEncontradoException;
+import br.com.gfsoft.sisacademic.util.VerificaCamposUnique;
 
 public class PersistenceAluno implements IPersistenceAluno {
 
 	private static Statement stmt;
 	private static ResultSet rs;
 	private static Conexao con = new Conexao();
+	private VerificaCamposUnique verificaCpf;
 
 	@Override
-	public boolean insert(Aluno aluno) {
+	public boolean insert(Aluno aluno) throws UsuarioJaCadastradoException, CpfInvalidoException {
 		
 		PersistencePessoa pPessoa = new PersistencePessoa();
+		verificaCpf = new VerificaCamposUnique();
 		String sql;
 		long id;
+		
+		if (!(verificaCpf.validaCpfRg(aluno.getCpf(), aluno.getRg()))) {
+			throw new UsuarioJaCadastradoException("Usuario ja cadastrado no sistema");
+		}
+		
+		if (VerificaCamposUnique.validaCpf(aluno.getCpf())) {
+			throw new CpfInvalidoException("CPF Invalido");
+		}
 		
 		if(pPessoa.insert(aluno)){
 			id = pPessoa.selectPessoa(aluno.getMatricula());
@@ -103,10 +117,15 @@ public class PersistenceAluno implements IPersistenceAluno {
 	}
 
 	@Override
-	public Aluno selectAluno(String matricula) {
+	public Aluno selectAluno(String matricula) throws UsuarioNaoEncontradoException{
 		Aluno aluno = new Aluno();
+		verificaCpf = new VerificaCamposUnique();
 		String sql = "SELECT * FROM tb_Aluno JOIN tb_Pessoa	ON tb_Aluno.tb_Pessoa_idPessoa = tb_Pessoa.idPessoa WHERE matricula='" + matricula + "'";
 
+		if(verificaCpf.validaCpfRg(aluno.getCpf(), aluno.getRg())){
+			throw new UsuarioNaoEncontradoException("Usuario nao cadastrado no sistema");
+		}
+		
 		try {
 			stmt = con.getConnection().createStatement();
 			rs = stmt.executeQuery(sql);

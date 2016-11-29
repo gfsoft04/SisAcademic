@@ -2,6 +2,8 @@ package br.com.gfsoft.sisacademic.ui;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -11,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -19,11 +22,14 @@ import javax.swing.ListSelectionModel;
 
 import br.com.gfsoft.sisacademic.model.Aluno;
 import br.com.gfsoft.sisacademic.model.TabelaConsulta;
+import br.com.gfsoft.sisacademic.model.exception.UsuarioNaoEncontradoException;
 import br.com.gfsoft.sisacademic.persistence.PersistenceAluno;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class ConsultaAluno extends JInternalFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4975802096628333048L;
 	private JTextField txtNome;
 	private JTextField txtMatricula;
 	private JTable table;
@@ -86,7 +92,13 @@ public class ConsultaAluno extends JInternalFrame {
 					String matricula = (String) table.getValueAt(table.getSelectedRow(), 0);
 					pAluno = new PersistenceAluno();
 					aluno = new Aluno();
-					aluno = pAluno.selectAluno(matricula);
+					
+					try {
+						aluno = pAluno.selectAluno(matricula);
+					} catch (UsuarioNaoEncontradoException e1) {
+						// Excecao para usuario nao encontrado
+						JOptionPane.showMessageDialog(null, "Usuario Nao Cadastrado no Sistema!", "Erro", JOptionPane.ERROR_MESSAGE);
+					}
 					
 					Principal.ALUNO.preencheCampos(aluno);
 					Principal.ALUNO.setEditable(false);
@@ -113,8 +125,8 @@ public class ConsultaAluno extends JInternalFrame {
 		btnFiltrar = new JButton("Filtrar");
 		btnFiltrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String matricula = txtMatricula.getText();
-				String nome = txtNome.getText();
+//				String matricula = txtMatricula.getText();
+//				String nome = txtNome.getText();
 				
 				
 				

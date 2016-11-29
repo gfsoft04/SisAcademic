@@ -7,6 +7,9 @@ import br.com.gfsoft.sisacademic.model.Aluno;
 import br.com.gfsoft.sisacademic.model.Disciplina;
 import br.com.gfsoft.sisacademic.model.Funcionario;
 import br.com.gfsoft.sisacademic.model.Professor;
+import br.com.gfsoft.sisacademic.model.exception.CpfInvalidoException;
+import br.com.gfsoft.sisacademic.model.exception.UsuarioJaCadastradoException;
+import br.com.gfsoft.sisacademic.model.exception.UsuarioNaoEncontradoException;
 import br.com.gfsoft.sisacademic.service.AlunoService;
 import br.com.gfsoft.sisacademic.service.DisciplinaService;
 import br.com.gfsoft.sisacademic.service.FuncionarioService;
@@ -52,7 +55,7 @@ public class Academico {
 	
 	//-------------Metodos do Aluno-----------------------------
 	
-	public boolean cadastrarAluno(Aluno aluno){
+	public boolean cadastrarAluno(Aluno aluno) throws UsuarioJaCadastradoException, CpfInvalidoException{
 		return alunoService.cadastrar(aluno);
 	}
 	
@@ -64,7 +67,7 @@ public class Academico {
 		return alunoService.atualizar(aluno);
 	}
 	
-	public Aluno buscarAluno(String matricula){
+	public Aluno buscarAluno(String matricula) throws UsuarioNaoEncontradoException{
 		return alunoService.buscar(matricula);
 	}
 	
