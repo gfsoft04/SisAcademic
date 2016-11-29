@@ -20,6 +20,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 
+import br.com.gfsoft.sisacademic.controller.Academico;
 import br.com.gfsoft.sisacademic.model.Aluno;
 import br.com.gfsoft.sisacademic.model.TabelaConsulta;
 import br.com.gfsoft.sisacademic.model.exception.UsuarioNaoEncontradoException;
@@ -36,7 +37,7 @@ public class ConsultaAluno extends JInternalFrame {
 	private JButton btnFiltrar;
 	private JButton btnImprimir;
 	
-	private PersistenceAluno pAluno;
+	private Academico academico;
 	private Aluno aluno;
 
 	/**
@@ -90,11 +91,11 @@ public class ConsultaAluno extends JInternalFrame {
 				
 				if(e.getClickCount() == 2){
 					String matricula = (String) table.getValueAt(table.getSelectedRow(), 0);
-					pAluno = new PersistenceAluno();
+					academico = new Academico();
 					aluno = new Aluno();
 					
 					try {
-						aluno = pAluno.selectAluno(matricula);
+						aluno = academico.buscarAluno(matricula);
 						
 						Principal.ALUNO.preencheCampos(aluno);
 						Principal.ALUNO.setEditable(false);
@@ -125,10 +126,9 @@ public class ConsultaAluno extends JInternalFrame {
 		btnFiltrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 //				String matricula = txtMatricula.getText();
-//				String nome = txtNome.getText();
+				String nome = txtNome.getText();
 				
-				
-				
+				preencherTabelaFiltro(nome);
 			}
 		});
 		btnFiltrar.setBounds(510, 48, 100, 30);
@@ -151,9 +151,9 @@ public class ConsultaAluno extends JInternalFrame {
         List<Object> dados = new ArrayList<>();
         List<Aluno> alunos = new ArrayList<>();
         String[] colunas = new String[]{"Matricula","Nome","cpf","rg","email","Data Nascimento", "Data de Matricula"};
-        pAluno = new PersistenceAluno();
+        academico = new Academico();
         
-        alunos.addAll(pAluno.selectAlunos());
+        alunos.addAll(academico.listarAlunos());
         
         for(Aluno a : alunos){
         	dados.add(new Object[]{a.getMatricula(), a.getNome(), a.getCpf(), a.getRg(), a.getEmail(), a.getDtNascimento(), a.getDtMatricula()});
@@ -183,4 +183,47 @@ public class ConsultaAluno extends JInternalFrame {
         table.setAutoCreateRowSorter(true);
         
     } //Fim do Metodo preencherTabela
+	
+	
+	/**
+	 * Metodo para preencher a tabela
+	 * 
+	 */
+	public void preencherTabelaFiltro(String nome){
+        List<Object> dados = new ArrayList<>();
+        List<Aluno> alunos = new ArrayList<>();
+        String[] colunas = new String[]{"Matricula","Nome","cpf","rg","email","Data Nascimento", "Data de Matricula"};
+        academico = new Academico();
+        
+        alunos.addAll(academico.filtrarAlunos(nome));
+        
+        for(Aluno a : alunos){
+        	dados.add(new Object[]{a.getMatricula(), a.getNome(), a.getCpf(), a.getRg(), a.getEmail(), a.getDtNascimento(), a.getDtMatricula()});
+        }
+        
+        TabelaConsulta modelo = new TabelaConsulta(dados, colunas);
+        table.setModel(modelo);
+        
+        table.getColumnModel().getColumn(0).setPreferredWidth(80);
+        table.getColumnModel().getColumn(0).setResizable(true);
+        table.getColumnModel().getColumn(1).setPreferredWidth(80);
+        table.getColumnModel().getColumn(1).setResizable(true);
+        table.getColumnModel().getColumn(2).setPreferredWidth(80);
+        table.getColumnModel().getColumn(2).setResizable(true);
+        table.getColumnModel().getColumn(3).setPreferredWidth(80);
+        table.getColumnModel().getColumn(3).setResizable(true);
+        table.getColumnModel().getColumn(4).setPreferredWidth(80);
+        table.getColumnModel().getColumn(4).setResizable(true);
+        table.getColumnModel().getColumn(5).setPreferredWidth(80);
+        table.getColumnModel().getColumn(5).setResizable(true);
+        table.getColumnModel().getColumn(6).setPreferredWidth(80);
+        table.getColumnModel().getColumn(6).setResizable(true);
+        
+        table.getTableHeader().setReorderingAllowed(true);
+        //jTableConsulta.getAutoResizeMode(jTableConsulta.AUTO_RESIZE_OFF);
+        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        table.setAutoCreateRowSorter(true);
+        
+    } //Fim do Metodo preencherTabela
+	
 }

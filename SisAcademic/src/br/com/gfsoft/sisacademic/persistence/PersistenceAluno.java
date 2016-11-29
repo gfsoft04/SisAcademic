@@ -119,7 +119,7 @@ public class PersistenceAluno implements IPersistenceAluno {
 	@Override
 	public Aluno selectAluno(String matricula) throws UsuarioNaoEncontradoException{
 		Aluno aluno = new Aluno();
-		verificaCpf = new VerificaCamposUnique();
+		//verificaCpf = new VerificaCamposUnique();
 		String sql = "SELECT * FROM tb_Aluno JOIN tb_Pessoa	ON tb_Aluno.tb_Pessoa_idPessoa = tb_Pessoa.idPessoa WHERE matricula='" + matricula + "'";
 //
 //	SE DESCOMENTAR ESSAS LINHA DARA ERRO POIS O ALUNO ACABOU DE SER
@@ -175,6 +175,55 @@ public class PersistenceAluno implements IPersistenceAluno {
 		try {
 			stmt = con.getConnection().createStatement();
 			String sql = "SELECT * FROM tb_Aluno JOIN tb_Pessoa	ON tb_Aluno.tb_Pessoa_idPessoa = tb_Pessoa.idPessoa";
+			rs = stmt.executeQuery(sql);
+
+			while (rs.next()) {
+				aluno = new Aluno();
+				
+				aluno.setId(rs.getInt("idPessoa"));
+				aluno.setMatricula(rs.getString("matricula"));
+				aluno.setNome(rs.getString("nome"));
+				aluno.setRg(rs.getString("rg"));
+				aluno.setCpf(rs.getString("cpf"));
+				aluno.setEmail(rs.getString("email"));
+				aluno.setEstadoCivil(rs.getString("estadoCivil"));
+				aluno.setSexo(rs.getString("sexo"));
+				aluno.setSituacao(rs.getString("situacao"));
+				aluno.setProfissao(rs.getString("profissao"));
+				aluno.setTelefone(rs.getString("telefone"));
+				aluno.setDtNascimento(LocalDate.of(Integer.parseInt(rs.getString("dtNascimento").substring(0, 4)), Integer.parseInt(rs.getString("dtNascimento").substring(5, 7)), Integer.parseInt(rs.getString("dtNascimento").substring(8, 10))));
+				aluno.setDtMatricula(LocalDate.of(Integer.parseInt(rs.getString("dtMatricula").substring(0, 4)), Integer.parseInt(rs.getString("dtMatricula").substring(5, 7)), Integer.parseInt(rs.getString("dtMatricula").substring(8, 10))));
+				aluno.setCep(rs.getString("cep"));
+				aluno.setRua(rs.getString("rua"));
+				aluno.setNumero(rs.getInt("numero"));
+				aluno.setBairro(rs.getString("bairro"));
+				aluno.setCidade(rs.getString("cidade"));
+				aluno.setEstado(rs.getString("estado"));
+				aluno.setComplemento(rs.getString("complemento"));
+				
+				alunos.add(aluno);
+			}
+			return alunos;
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Erro na busca dos alunos na base!", "Erro", JOptionPane.ERROR_MESSAGE);
+		}
+		
+		return null;
+	}
+	
+	
+	@Override
+	public Set<Aluno> filtroAlunos(String nome) {
+		Set<Aluno> alunos = new HashSet<>();
+		Aluno aluno;
+
+		try {
+			stmt = con.getConnection().createStatement();
+			String sql = "SELECT * FROM tb_Aluno JOIN tb_Pessoa	ON tb_Aluno.tb_Pessoa_idPessoa = tb_Pessoa.idPessoa "
+					+ "WHERE nome LIKE '" + nome + "%'";
 			rs = stmt.executeQuery(sql);
 
 			while (rs.next()) {

@@ -33,4 +33,8 @@ public class DisciplinaService {
 	public List<Disciplina> listar(){
 		return this.persistencia.selectDisciplinas();
 	}
+	
+	public List<Disciplina> filtrar(String nome){
+		return this.persistencia.filtroDisciplinas(nome);
+	}
 }

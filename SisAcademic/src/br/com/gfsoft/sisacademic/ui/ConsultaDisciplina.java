@@ -2,6 +2,8 @@ package br.com.gfsoft.sisacademic.ui;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -17,19 +19,22 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 
+import br.com.gfsoft.sisacademic.controller.Academico;
 import br.com.gfsoft.sisacademic.model.Disciplina;
 import br.com.gfsoft.sisacademic.model.TabelaConsulta;
 import br.com.gfsoft.sisacademic.persistence.PersistenceDisciplina;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class ConsultaDisciplina extends JInternalFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 239174010113643168L;
 	private JTextField txtNome;
 	private JTable table;
 	private JButton btnFiltrar;
 	private JButton btnImprimir;
 	
-	private PersistenceDisciplina pDisciplina;
+	private Academico academico;
 	private Disciplina disciplina;
 
 	/**
@@ -84,9 +89,9 @@ public class ConsultaDisciplina extends JInternalFrame {
 				if(e.getClickCount() == 2){
 					long id = Long.parseLong(table.getValueAt(table.getSelectedRow(),0).toString());
 					
-					pDisciplina = new PersistenceDisciplina();
+					academico = new Academico();
 					disciplina = new Disciplina();
-					disciplina = pDisciplina.selectDisciplina(id);
+					disciplina = academico.buscarDisciplina(id);
 					
 					Principal.DISCIPLINA.preencheCampos(disciplina);
 					Principal.DISCIPLINA.setEditable(false);
@@ -105,7 +110,7 @@ public class ConsultaDisciplina extends JInternalFrame {
 		btnFiltrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String nome = txtNome.getText();
-				
+				preencherTabelaFiltro(nome);
 			}
 		});
 		btnFiltrar.setBounds(510, 17, 100, 30);
@@ -128,9 +133,51 @@ public class ConsultaDisciplina extends JInternalFrame {
         List<Object> dados = new ArrayList<>();
         List<Disciplina> disciplinas = new ArrayList<>();
         String[] colunas = new String[]{"Id", "Nome", "Descrição", "Data de Criação", "Situação", "Semestre", "Observação"};
-        pDisciplina = new PersistenceDisciplina();
+        academico = new Academico();
         
-        disciplinas.addAll(pDisciplina.selectDisciplinas());
+        disciplinas.addAll(academico.listarDisciplinas());
+        
+        for(Disciplina disc : disciplinas){
+        	dados.add(new Object[]{disc.getId(), disc.getNome(), disc.getDescricao(), disc.getDtCriacao(), disc.getSituacao(), disc.getSemestre(), disc.getObservacao()});
+        }
+
+        TabelaConsulta modelo = new TabelaConsulta(dados, colunas);
+        table.setModel(modelo);
+        
+        table.getColumnModel().getColumn(0).setPreferredWidth(15);
+        table.getColumnModel().getColumn(0).setResizable(true);
+        table.getColumnModel().getColumn(1).setPreferredWidth(80);
+        table.getColumnModel().getColumn(1).setResizable(true);
+        table.getColumnModel().getColumn(2).setPreferredWidth(80);
+        table.getColumnModel().getColumn(2).setResizable(true);
+        table.getColumnModel().getColumn(3).setPreferredWidth(80);
+        table.getColumnModel().getColumn(3).setResizable(true);
+        table.getColumnModel().getColumn(4).setPreferredWidth(80);
+        table.getColumnModel().getColumn(4).setResizable(true);
+        table.getColumnModel().getColumn(5).setPreferredWidth(80);
+        table.getColumnModel().getColumn(5).setResizable(true);
+        table.getColumnModel().getColumn(6).setPreferredWidth(80);
+        table.getColumnModel().getColumn(6).setResizable(true);
+        
+        table.getTableHeader().setReorderingAllowed(true);
+        //jTableConsulta.getAutoResizeMode(jTableConsulta.AUTO_RESIZE_OFF);
+        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        table.setAutoCreateRowSorter(true);
+        
+    } //Fim do Metodo preencherTabela
+	
+	
+	/**
+	 * Metodo para preencher a tabela
+	 * 
+	 */
+	public void preencherTabelaFiltro(String nome){
+        List<Object> dados = new ArrayList<>();
+        List<Disciplina> disciplinas = new ArrayList<>();
+        String[] colunas = new String[]{"Id", "Nome", "Descrição", "Data de Criação", "Situação", "Semestre", "Observação"};
+        academico = new Academico();
+        
+        disciplinas.addAll(academico.filtrarDisciplinas(nome));
         
         for(Disciplina disc : disciplinas){
         	dados.add(new Object[]{disc.getId(), disc.getNome(), disc.getDescricao(), disc.getDtCriacao(), disc.getSituacao(), disc.getSemestre(), disc.getObservacao()});

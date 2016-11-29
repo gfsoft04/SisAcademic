@@ -14,5 +14,6 @@ public interface IPersistenceAluno {
 	public boolean update(Aluno aluno);
 	public Aluno selectAluno(String matricula) throws UsuarioNaoEncontradoException;
 	public Set<Aluno> selectAlunos();
+	public Set<Aluno> filtroAlunos(String nome);
 	
 }

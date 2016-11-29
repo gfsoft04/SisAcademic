@@ -13,5 +13,6 @@ public interface IPersistenceFuncionario {
 	public boolean update(Funcionario funcionario);
 	public Funcionario selectFuncionario(String matricula);
 	public Set<Funcionario> selectFuncionarios();
+	public Set<Funcionario> filtroFuncionarios(String nome);
 
 }

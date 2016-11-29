@@ -36,5 +36,10 @@ public class ProfessorService {
 	public Set<Professor> listar(){
 		return persistencia.selectProfessores();
 	}
+	
+	public Set<Professor> filtrar(String nome){
+		return persistencia.filtroProfessores(nome);
+	}
+
 
 }

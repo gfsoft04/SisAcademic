@@ -17,9 +17,12 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 
+import br.com.gfsoft.sisacademic.controller.Academico;
 import br.com.gfsoft.sisacademic.model.Funcionario;
 import br.com.gfsoft.sisacademic.model.TabelaConsulta;
 import br.com.gfsoft.sisacademic.persistence.PersistenceFuncionario;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ConsultaFuncionario extends JInternalFrame {
 	private JTextField txtNome;
@@ -29,7 +32,7 @@ public class ConsultaFuncionario extends JInternalFrame {
 	private JButton btnImprimir;
 	
 	private Funcionario funcionario;
-	private PersistenceFuncionario pFuncionario;
+	private Academico academico;
 	
 	/**
 	 * Launch the application.
@@ -84,8 +87,8 @@ public class ConsultaFuncionario extends JInternalFrame {
 					String matricula = (String) table.getValueAt(table.getSelectedRow(), 0);
 					
 					funcionario = new Funcionario();
-					pFuncionario = new PersistenceFuncionario();
-					funcionario = pFuncionario.selectFuncionario(matricula);
+					academico = new Academico();
+					funcionario = academico.buscarFuncionario(matricula);
 					
 					Principal.FUNCIONARIO.preencheCampos(funcionario);
 					Principal.FUNCIONARIO.setEditable(false);
@@ -109,6 +112,12 @@ public class ConsultaFuncionario extends JInternalFrame {
 		
 		/* BOTAO FILTRAR */
 		btnFiltrar = new JButton("Filtrar");
+		btnFiltrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String nome = txtNome.getText();
+				preencherTabelaFiltro(nome);
+			}
+		});
 		btnFiltrar.setBounds(510, 48, 100, 30);
 		panel.add(btnFiltrar);
 		
@@ -126,9 +135,47 @@ public class ConsultaFuncionario extends JInternalFrame {
         List<Object> dados = new ArrayList<>();
         List<Funcionario> funcionario = new ArrayList<>();
         String[] colunas = new String[]{"Matricula","Nome","cpf","rg","email","Data Nascimento", "Data de Contratação"};
-        pFuncionario = new PersistenceFuncionario();
+        academico = new Academico();
         
-        funcionario.addAll(pFuncionario.selectFuncionarios());
+        funcionario.addAll(academico.listarFuncionarios());
+        
+        for(Funcionario f : funcionario){
+        	dados.add(new Object[]{f.getMatricula(), f.getNome(), f.getCpf(), f.getRg(), f.getEmail(), f.getDtNascimento(), f.getDtContratacao()});
+        }
+        
+        TabelaConsulta modelo = new TabelaConsulta(dados, colunas);
+        table.setModel(modelo);
+        
+        table.getColumnModel().getColumn(0).setPreferredWidth(80);
+        table.getColumnModel().getColumn(0).setResizable(true);
+        table.getColumnModel().getColumn(1).setPreferredWidth(80);
+        table.getColumnModel().getColumn(1).setResizable(true);
+        table.getColumnModel().getColumn(2).setPreferredWidth(80);
+        table.getColumnModel().getColumn(2).setResizable(true);
+        table.getColumnModel().getColumn(3).setPreferredWidth(80);
+        table.getColumnModel().getColumn(3).setResizable(true);
+        table.getColumnModel().getColumn(4).setPreferredWidth(80);
+        table.getColumnModel().getColumn(4).setResizable(true);
+        table.getColumnModel().getColumn(5).setPreferredWidth(80);
+        table.getColumnModel().getColumn(5).setResizable(true);
+        table.getColumnModel().getColumn(6).setPreferredWidth(80);
+        table.getColumnModel().getColumn(6).setResizable(true);
+        
+        table.getTableHeader().setReorderingAllowed(true);
+        //jTableConsulta.getAutoResizeMode(jTableConsulta.AUTO_RESIZE_OFF);
+        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        table.setAutoCreateRowSorter(true);
+        
+    } //Fim do Metodo preencherTabela
+	
+	
+	public void preencherTabelaFiltro(String nome){
+        List<Object> dados = new ArrayList<>();
+        List<Funcionario> funcionario = new ArrayList<>();
+        String[] colunas = new String[]{"Matricula","Nome","cpf","rg","email","Data Nascimento", "Data de Contratação"};
+        academico = new Academico();
+        
+        funcionario.addAll(academico.filtrarFuncionarios(nome));
         
         for(Funcionario f : funcionario){
         	dados.add(new Object[]{f.getMatricula(), f.getNome(), f.getCpf(), f.getRg(), f.getEmail(), f.getDtNascimento(), f.getDtContratacao()});

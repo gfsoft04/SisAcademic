@@ -38,4 +38,8 @@ public class AlunoService extends Service{
 	public Set<Aluno> listar(){
 		return persistencia.selectAlunos();
 	}
+	
+	public Set<Aluno> filtrar(String nome){
+		return persistencia.filtroAlunos(nome);
+	} 
 }

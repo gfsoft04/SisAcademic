@@ -631,7 +631,7 @@ public class CadAluno extends JInternalFrame {
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				limparCampos();
-				webView.pararWebCam();
+				//webView.pararWebCam();
 				setVisible(false);
 			}
 		});
@@ -752,6 +752,7 @@ public class CadAluno extends JInternalFrame {
 	 * Metodo para limpar campos
 	 */	
 	public void limparCampos(){
+		txtMatricula.setText("");
 		txtNome.setText("");
 		txtRg.setText("");
 		txtEmail.setText("");

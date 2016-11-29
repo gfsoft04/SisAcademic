@@ -177,5 +177,50 @@ public class PersistenceDisciplina implements IPersistenceDisciplina {
 
 		return null;
 	}
+	
+	@Override
+	public List<Disciplina> filtroDisciplinas(String nome) {
+		
+		List<Disciplina> disciplinas =  new ArrayList<>();
+		Disciplina disciplina;
+		
+		try {
+			stmt = con.getConnection().createStatement();
+			String sql = "SELECT * FROM tb_Disciplina WHERE nome LIKE '" + nome + "%'";
+			rs = stmt.executeQuery(sql);
+			
+			while(rs.next()){
+				disciplina = new Disciplina();
+
+				disciplina.setId(rs.getInt("idDisciplina"));
+				disciplina.setNome(rs.getString("nome"));
+				disciplina.setDescricao(rs.getString("descricao"));
+				disciplina.setDtCriacao(LocalDate.of(Integer.parseInt(rs.getString("dtCriacao").substring(0, 4)), Integer.parseInt(rs.getString("dtCriacao").substring(5, 7)), Integer.parseInt(rs.getString("dtCriacao").substring(8, 10))));
+				disciplina.setSituacao(rs.getString("situacao"));
+				disciplina.setSemestre(rs.getString("semestre"));
+				disciplina.setObservacao(rs.getString("observacao"));
+				
+				disciplinas.add(disciplina);
+			}
+			
+			return disciplinas;
+			
+		} catch (SQLException e) {
+		
+			e.printStackTrace();
+		} /*finally {
+			if (con != null)
+				con.close();
+	
+			if (stmt != null)
+				stmt.close();
+
+			if (rs != null)
+				rs.close();
+			System.out.println("--- Após encerrar as conexões. ---");
+		}*/
+
+		return null;
+	}
 
 }

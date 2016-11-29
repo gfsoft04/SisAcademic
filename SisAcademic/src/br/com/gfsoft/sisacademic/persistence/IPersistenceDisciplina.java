@@ -11,5 +11,6 @@ public interface IPersistenceDisciplina {
 	public boolean update(Disciplina disciplina);
 	public Disciplina selectDisciplina(long id); 
 	public List<Disciplina> selectDisciplinas();
+	public List<Disciplina> filtroDisciplinas(String nome);
 
 }

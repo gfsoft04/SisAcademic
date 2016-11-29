@@ -17,18 +17,25 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 
+import br.com.gfsoft.sisacademic.controller.Academico;
 import br.com.gfsoft.sisacademic.model.Professor;
 import br.com.gfsoft.sisacademic.model.TabelaConsulta;
 import br.com.gfsoft.sisacademic.persistence.PersistenceProfessor;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ConsultaProfessor extends JInternalFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1625071523346202978L;
 	private JTextField txtNome;
 	private JTextField txtMatricula;
 	private JTable table;
 	private JButton btnFiltrar;
 	private JButton btnImprimir;
 	
-	private PersistenceProfessor pProfessor;
+	private Academico academico;
 	private Professor professor;
 
 	/**
@@ -82,9 +89,9 @@ public class ConsultaProfessor extends JInternalFrame {
 				
 				if(e.getClickCount() == 2){
 					String matricula = (String) table.getValueAt(table.getSelectedRow(), 0);
-					pProfessor = new PersistenceProfessor();
+					academico = new Academico();
 					professor = new Professor();
-					professor = pProfessor.selectProfessor(matricula);					
+					professor = academico.buscarProfessor(matricula);					
 					
 					Principal.PROFESSOR.preencheCampos(professor);
 					Principal.PROFESSOR.setEditable(false);
@@ -109,6 +116,12 @@ public class ConsultaProfessor extends JInternalFrame {
 		
 		/* BOTAO FILTRAR */
 		btnFiltrar = new JButton("Filtrar");
+		btnFiltrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String nome = txtNome.getText();
+				preencherTabelaFiltro(nome);
+			}
+		});
 		btnFiltrar.setBounds(510, 48, 100, 30);
 		panel.add(btnFiltrar);
 		
@@ -126,9 +139,46 @@ public class ConsultaProfessor extends JInternalFrame {
         List<Object> dados = new ArrayList<>();
         List<Professor> professor = new ArrayList<>();
         String[] colunas = new String[]{"Matricula","Nome","cpf","rg","email","Data Nascimento", "Data de Contratação"};
-        pProfessor = new PersistenceProfessor();
+        academico = new Academico();
         
-        professor.addAll(pProfessor.selectProfessores());
+        professor.addAll(academico.listarProfessores());
+        
+        for(Professor a : professor){
+        	dados.add(new Object[]{a.getMatricula(), a.getNome(), a.getCpf(), a.getRg(), a.getEmail(), a.getDtNascimento(), a.getDtContratacao()});
+        }
+        
+        TabelaConsulta modelo = new TabelaConsulta(dados, colunas);
+        table.setModel(modelo);
+        
+        table.getColumnModel().getColumn(0).setPreferredWidth(80);
+        table.getColumnModel().getColumn(0).setResizable(true);
+        table.getColumnModel().getColumn(1).setPreferredWidth(80);
+        table.getColumnModel().getColumn(1).setResizable(true);
+        table.getColumnModel().getColumn(2).setPreferredWidth(80);
+        table.getColumnModel().getColumn(2).setResizable(true);
+        table.getColumnModel().getColumn(3).setPreferredWidth(80);
+        table.getColumnModel().getColumn(3).setResizable(true);
+        table.getColumnModel().getColumn(4).setPreferredWidth(80);
+        table.getColumnModel().getColumn(4).setResizable(true);
+        table.getColumnModel().getColumn(5).setPreferredWidth(80);
+        table.getColumnModel().getColumn(5).setResizable(true);
+        table.getColumnModel().getColumn(6).setPreferredWidth(80);
+        table.getColumnModel().getColumn(6).setResizable(true);
+        
+        table.getTableHeader().setReorderingAllowed(true);
+        //jTableConsulta.getAutoResizeMode(jTableConsulta.AUTO_RESIZE_OFF);
+        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        table.setAutoCreateRowSorter(true);
+        
+    } //Fim do Metodo preencherTabela
+	
+	public void preencherTabelaFiltro(String nome){
+        List<Object> dados = new ArrayList<>();
+        List<Professor> professor = new ArrayList<>();
+        String[] colunas = new String[]{"Matricula","Nome","cpf","rg","email","Data Nascimento", "Data de Contratação"};
+        academico = new Academico();
+        
+        professor.addAll(academico.filtrarProfessores(nome));
         
         for(Professor a : professor){
         	dados.add(new Object[]{a.getMatricula(), a.getNome(), a.getCpf(), a.getRg(), a.getEmail(), a.getDtNascimento(), a.getDtContratacao()});

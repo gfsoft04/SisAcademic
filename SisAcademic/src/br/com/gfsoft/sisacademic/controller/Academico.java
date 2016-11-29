@@ -54,6 +54,10 @@ public class Academico {
 		return disciplinaService.listar();
 	}
 	
+	public List<Disciplina> filtrarDisciplinas(String nome){
+		return disciplinaService.filtrar(nome);
+	}
+	
 	//-------------Metodos do Aluno-----------------------------
 	
 	public boolean cadastrarAluno(Aluno aluno) throws UsuarioJaCadastradoException, CpfInvalidoException{
@@ -74,6 +78,10 @@ public class Academico {
 	
 	public Set<Aluno> listarAlunos(){
 		return alunoService.listar();
+	}
+	
+	public Set<Aluno> filtrarAlunos(String nome){
+		return alunoService.filtrar(nome);
 	}
 	
 	//-------------Metodos do Funcionario-----------------------------
@@ -98,6 +106,10 @@ public class Academico {
 		return funcionarioService.listar();
 	}
 	
+	public Set<Funcionario> filtrarFuncionarios(String nome){
+		return funcionarioService.filtrar(nome);
+	}
+	
 	//-------------Metodos do Professor-----------------------------
 	
 	public boolean cadastrarProfessor(Professor professor) throws HeadlessException, UsuarioJaCadastradoException, CpfInvalidoException{
@@ -118,6 +130,10 @@ public class Academico {
 	
 	public Set<Professor> listarProfessores(){
 		return professorService.listar();
+	}
+	
+	public Set<Professor> filtrarProfessores(String nome){
+		return professorService.filtrar(nome);
 	}
 	
 }

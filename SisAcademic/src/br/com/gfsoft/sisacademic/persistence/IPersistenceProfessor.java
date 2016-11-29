@@ -14,5 +14,6 @@ public interface IPersistenceProfessor {
 	public boolean update(Professor professor);
 	public Professor selectProfessor(String matricula);
 	public Set<Professor> selectProfessores();
+	public Set<Professor> filtroProfessores(String nome);
 
 }

@@ -210,5 +210,58 @@ public class PersistenceFuncionario implements IPersistenceFuncionario {
 		
 		return null;
 	}
+	
+	
+	@Override
+	public Set<Funcionario> filtroFuncionarios(String nome) {
+		Set<Funcionario> funcionarios = new HashSet<>();
+		Funcionario funcionario;
+
+		try {
+			stmt = con.getConnection().createStatement();
+			String sql = "SELECT * FROM tb_Funcionario JOIN tb_Pessoa ON tb_Funcionario.tb_Pessoa_idPessoa = tb_Pessoa.idPessoa "
+					+ "WHERE nome LIKE '" + nome + "%'";
+			rs = stmt.executeQuery(sql);
+
+			while (rs.next()) {
+				funcionario = new Funcionario();
+				
+				funcionario.setId(rs.getInt("idPessoa"));
+				funcionario.setMatricula(rs.getString("matricula"));
+				funcionario.setNome(rs.getString("nome"));
+				funcionario.setRg(rs.getString("rg"));
+				funcionario.setCpf(rs.getString("cpf"));
+				funcionario.setEmail(rs.getString("email"));
+				funcionario.setEstadoCivil(rs.getString("estadoCivil"));
+				funcionario.setSexo(rs.getString("sexo"));
+				funcionario.setSituacao(rs.getString("situacao"));
+				funcionario.setTelefone(rs.getString("telefone"));
+				funcionario.setDtNascimento(LocalDate.of(Integer.parseInt(rs.getString("dtNascimento").substring(0, 4)), Integer.parseInt(rs.getString("dtNascimento").substring(5, 7)), Integer.parseInt(rs.getString("dtNascimento").substring(8, 10))));
+				funcionario.setCep(rs.getString("cep"));
+				funcionario.setRua(rs.getString("rua"));
+				funcionario.setNumero(rs.getInt("numero"));
+				funcionario.setBairro(rs.getString("bairro"));
+				funcionario.setCidade(rs.getString("cidade"));
+				funcionario.setEstado(rs.getString("estado"));
+				funcionario.setComplemento(rs.getString("complemento"));
+				funcionario.setDtContratacao(LocalDate.of(Integer.parseInt(rs.getString("dtContratacao").substring(0, 4)),
+						Integer.parseInt(rs.getString("dtContratacao").substring(5, 7)),
+						Integer.parseInt(rs.getString("dtContratacao").substring(8, 10))));
+				funcionario.setCargo(rs.getString("cargo"));
+				funcionario.setSalario(rs.getDouble("salario"));
+				funcionario.setEscolaridade(rs.getString("escolaridade"));
+				
+				funcionarios.add(funcionario);
+			}
+			return funcionarios;
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Erro na busca dos alunos na base!", "Erro", JOptionPane.ERROR_MESSAGE);
+		}
+		
+		return null;
+	}
 
 }

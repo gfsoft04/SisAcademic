@@ -28,9 +28,12 @@ import javax.swing.border.TitledBorder;
 
 import br.com.gfsoft.sisacademic.controller.Academico;
 import br.com.gfsoft.sisacademic.model.Disciplina;
-import br.com.gfsoft.sisacademic.persistence.PersistenceDisciplina;
 
 public class CadDisciplina extends JInternalFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5550174938627783288L;
 	private JLabel labelId;
 	private JTextField txtId;
 	private JTextField txtNome;
@@ -200,7 +203,7 @@ public class CadDisciplina extends JInternalFrame {
 					disciplina.setObservacao(textPaneObservacao.getText());
 					
 					if(academico.cadastrarDisciplina(disciplina)){
-						JOptionPane.showMessageDialog(null, "Cadastro eferuado com sucesso!", "Cadastrado", JOptionPane.INFORMATION_MESSAGE);
+						JOptionPane.showMessageDialog(null, "Cadastro efetuado com sucesso!", "Cadastrado", JOptionPane.INFORMATION_MESSAGE);
 						limparCampos();
 					} /*else {
 						JOptionPane.showMessageDialog(null, "Error!", "Erro", JOptionPane.ERROR_MESSAGE);

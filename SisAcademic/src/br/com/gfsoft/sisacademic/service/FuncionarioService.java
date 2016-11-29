@@ -35,5 +35,9 @@ public class FuncionarioService {
 	public Set<Funcionario> listar(){
 		return persistencia.selectFuncionarios();
 	}
+	
+	public Set<Funcionario> filtrar(String nome){
+		return persistencia.filtroFuncionarios(nome);
+	}
 
 }
