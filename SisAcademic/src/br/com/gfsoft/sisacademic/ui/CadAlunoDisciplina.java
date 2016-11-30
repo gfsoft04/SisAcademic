@@ -19,6 +19,8 @@ import br.com.gfsoft.sisacademic.model.Disciplina;
 import br.com.gfsoft.sisacademic.model.TabelaConsulta;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
+import java.awt.Toolkit;
 
 public class CadAlunoDisciplina extends JDialog {
 	
@@ -54,6 +56,8 @@ public class CadAlunoDisciplina extends JDialog {
 	 * Create the dialog.
 	 */
 	public CadAlunoDisciplina(long idAluno) {
+		setTitle("Disciplinas");
+		setResizable(false);
 		CadAlunoDisciplina.idAluno = idAluno;
 		setBounds(100, 100, 900, 421);
 		getContentPane().setLayout(new BorderLayout());
@@ -82,6 +86,7 @@ public class CadAlunoDisciplina extends JDialog {
 		scrollPane_1.setViewportView(jTableFinal);
 		
 		btnAdd = new JButton(">>");
+		btnAdd.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnAdd.addActionListener(new ActionListener() {
 			//EVENTO PARA ADD DISCIPLINA DA jTableInicial para jTableFinal
 			public void actionPerformed(ActionEvent e) {
@@ -107,14 +112,17 @@ public class CadAlunoDisciplina extends JDialog {
 		panel.add(btnAdd);
 		
 		btnRemover = new JButton("<<");
+		btnRemover.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnRemover.setBounds(388, 227, 100, 30);
 		panel.add(btnRemover);
 		
 		btnOk = new JButton("OK");
+		btnOk.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnOk.setBounds(50, 28, 100, 30);
 		panel.add(btnOk);
 		
 		btnCancelar = new JButton("Cancelar");
+		btnCancelar.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnCancelar.setBounds(190, 28, 100, 30);
 		panel.add(btnCancelar);
 		

@@ -119,12 +119,12 @@ public class CadAluno extends JInternalFrame {
 		JPanel pane_2 = new JPanel();
 		pane_2.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Endere\u00E7o",
 				TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		pane_2.setBounds(10, 259, 804, 196);
+		pane_2.setBounds(10, 259, 804, 183);
 		panel.add(pane_2);
 		pane_2.setLayout(null);
 
 		JLabel lblCep = new JLabel("CEP:");
-		lblCep.setBounds(40, 43, 30, 14);
+		lblCep.setBounds(10, 40, 30, 14);
 		pane_2.add(lblCep);
 
 		formattedTxtCep = new JFormattedTextField();
@@ -155,77 +155,77 @@ public class CadAluno extends JInternalFrame {
 				}
 			}
 		});
-		formattedTxtCep.setBounds(82, 40, 120, 20);
+		formattedTxtCep.setBounds(50, 34, 120, 25);
 		pane_2.add(formattedTxtCep);
 
 		JLabel lblRua = new JLabel("Rua:");
-		lblRua.setBounds(253, 43, 35, 14);
+		lblRua.setBounds(223, 40, 35, 14);
 		pane_2.add(lblRua);
 
 		txtRua = new JTextField();
-		txtRua.setBounds(300, 40, 250, 20);
+		txtRua.setBounds(268, 34, 250, 25);
 		pane_2.add(txtRua);
 		txtRua.setColumns(10);
 
 		JLabel lblNumero = new JLabel("Numero:");
-		lblNumero.setBounds(600, 43, 50, 14);
+		lblNumero.setBounds(570, 40, 50, 14);
 		pane_2.add(lblNumero);
 
 		txtNumero = new JTextField();
-		txtNumero.setBounds(667, 40, 59, 20);
+		txtNumero.setBounds(630, 34, 59, 25);
 		pane_2.add(txtNumero);
 		txtNumero.setColumns(10);
 
 		JLabel lblBairro = new JLabel("Bairro:");
-		lblBairro.setBounds(417, 92, 44, 14);
+		lblBairro.setBounds(387, 91, 44, 14);
 		pane_2.add(lblBairro);
 
 		txtBairro = new JTextField();
-		txtBairro.setBounds(479, 89, 248, 20);
+		txtBairro.setBounds(441, 85, 248, 25);
 		pane_2.add(txtBairro);
 		txtBairro.setColumns(10);
 
 		JLabel lblCidade = new JLabel("Cidade:");
-		lblCidade.setBounds(40, 143, 42, 14);
+		lblCidade.setBounds(10, 142, 50, 14);
 		pane_2.add(lblCidade);
 
 		txtCidade = new JTextField();
 		txtCidade.setColumns(10);
-		txtCidade.setBounds(94, 140, 250, 20);
+		txtCidade.setBounds(70, 136, 250, 25);
 		pane_2.add(txtCidade);
 
 		JLabel lblEstado = new JLabel("Estado:");
-		lblEstado.setBounds(395, 143, 42, 14);
+		lblEstado.setBounds(373, 142, 42, 14);
 		pane_2.add(lblEstado);
 
 		txtEstado = new JTextField();
 		txtEstado.setColumns(10);
-		txtEstado.setBounds(455, 140, 250, 20);
+		txtEstado.setBounds(425, 136, 250, 25);
 		pane_2.add(txtEstado);
 
 		JLabel lblComplemento = new JLabel("Complemento: ");
-		lblComplemento.setBounds(40, 92, 98, 14);
+		lblComplemento.setBounds(10, 91, 98, 14);
 		pane_2.add(lblComplemento);
 
 		txtComplemento = new JTextField();
-		txtComplemento.setBounds(141, 89, 238, 20);
+		txtComplemento.setBounds(109, 85, 238, 25);
 		pane_2.add(txtComplemento);
 		txtComplemento.setColumns(10);
 
 		JPanel panel_3 = new JPanel();
 		panel_3.setBorder(
 				new TitledBorder(null, "Observa\u00E7\u00E3o", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_3.setBounds(10, 468, 296, 127);
+		panel_3.setBounds(10, 453, 296, 142);
 		panel.add(panel_3);
 		panel_3.setLayout(null);
 
 		txtPaneObservacao = new JTextPane();
-		txtPaneObservacao.setBounds(12, 20, 276, 95);
+		txtPaneObservacao.setBounds(12, 20, 276, 111);
 		panel_3.add(txtPaneObservacao);
 
 		JPanel panel_4 = new JPanel();
 		panel_4.setBorder(null);
-		panel_4.setBounds(339, 520, 621, 50);
+		panel_4.setBounds(338, 545, 621, 50);
 		panel.add(panel_4);
 		panel_4.setLayout(null);
 		
@@ -236,16 +236,16 @@ public class CadAluno extends JInternalFrame {
 		pane_1.setLayout(null);
 
 		JLabel lblNewLabel = new JLabel("Nome:");
-		lblNewLabel.setBounds(12, 30, 43, 14);
+		lblNewLabel.setBounds(10, 32, 43, 14);
 		pane_1.add(lblNewLabel);
 
 		txtNome = new JTextField();
-		txtNome.setBounds(51, 27, 329, 20);
+		txtNome.setBounds(51, 27, 329, 25);
 		pane_1.add(txtNome);
 		txtNome.setColumns(10);
 
 		JLabel lblDataDeNascimento = new JLabel("Data de Nascimento:");
-		lblDataDeNascimento.setBounds(10, 69, 132, 14);
+		lblDataDeNascimento.setBounds(10, 72, 132, 14);
 		pane_1.add(lblDataDeNascimento);
 
 		formattedTxtDtNascimento = new JFormattedTextField();
@@ -260,7 +260,7 @@ public class CadAluno extends JInternalFrame {
 				}
 			}
 		});
-		formattedTxtDtNascimento.setBounds(152, 66, 140, 20);
+		formattedTxtDtNascimento.setBounds(152, 66, 140, 25);
 		pane_1.add(formattedTxtDtNascimento);
 
 		JLabel lblEmail = new JLabel("Email:");
@@ -268,7 +268,7 @@ public class CadAluno extends JInternalFrame {
 		pane_1.add(lblEmail);
 
 		txtEmail = new JTextField();
-		txtEmail.setBounds(61, 152, 250, 20);
+		txtEmail.setBounds(51, 149, 250, 25);
 		pane_1.add(txtEmail);
 		txtEmail.setColumns(10);
 
@@ -281,21 +281,21 @@ public class CadAluno extends JInternalFrame {
 		pane_1.add(lblEstadoCivil);
 
 		comboBoxEstadoCivil = new JComboBox();
-		comboBoxEstadoCivil.setBounds(98, 108, 151, 22);
+		comboBoxEstadoCivil.setBounds(88, 107, 151, 25);
 		pane_1.add(comboBoxEstadoCivil);
 		comboBoxEstadoCivil.setModel(new DefaultComboBoxModel(new String[] {"S - Solteiro", "C - Casado", "V - Vi\u00FAvo", "D - Divorciado", "UE - Uni\u00E3o Est\u00E1vel"}));
 
 		txtRg = new JTextField();
-		txtRg.setBounds(445, 27, 139, 20);
+		txtRg.setBounds(445, 27, 139, 25);
 		pane_1.add(txtRg);
 		txtRg.setColumns(10);
 
 		JLabel lblRg = new JLabel("RG:");
-		lblRg.setBounds(414, 30, 24, 14);
+		lblRg.setBounds(412, 32, 24, 14);
 		pane_1.add(lblRg);
 
 		formattedTxtCpf = new JFormattedTextField();
-		formattedTxtCpf.setBounds(647, 27, 139, 20);
+		formattedTxtCpf.setBounds(647, 27, 139, 25);
 		pane_1.add(formattedTxtCpf);
 		formattedTxtCpf.addFocusListener(new FocusAdapter() {
 			@Override
@@ -310,7 +310,7 @@ public class CadAluno extends JInternalFrame {
 		});
 
 		JLabel lblCpf = new JLabel("CPF:");
-		lblCpf.setBounds(605, 30, 35, 14);
+		lblCpf.setBounds(602, 32, 35, 14);
 		pane_1.add(lblCpf);
 
 		JLabel lblSexo = new JLabel("Sexo:");
@@ -318,7 +318,7 @@ public class CadAluno extends JInternalFrame {
 		pane_1.add(lblSexo);
 
 		comboBoxSexo = new JComboBox();
-		comboBoxSexo.setBounds(343, 108, 151, 22);
+		comboBoxSexo.setBounds(337, 107, 151, 25);
 		pane_1.add(comboBoxSexo);
 		comboBoxSexo.setModel(new DefaultComboBoxModel(new String[] {"M - Masculino", "F - Feminino"}));
 
@@ -334,7 +334,7 @@ public class CadAluno extends JInternalFrame {
 				}
 			}
 		});
-		formattedTxtTelefone.setBounds(412, 152, 151, 20);
+		formattedTxtTelefone.setBounds(413, 149, 151, 25);
 		pane_1.add(formattedTxtTelefone);
 
 		JLabel lblProfisso = new JLabel("Profiss\u00E3o:");
@@ -343,7 +343,7 @@ public class CadAluno extends JInternalFrame {
 
 		txtProfissao = new JTextField();
 		txtProfissao.setColumns(10);
-		txtProfissao.setBounds(88, 191, 180, 20);
+		txtProfissao.setBounds(80, 188, 180, 25);
 		pane_1.add(txtProfissao);
 
 		JLabel lblNewLabel_1 = new JLabel("Situa\u00E7\u00E3o:");
@@ -352,11 +352,11 @@ public class CadAluno extends JInternalFrame {
 
 		comboBoxSituacao = new JComboBox();
 		comboBoxSituacao.setModel(new DefaultComboBoxModel(new String[] {"M - Matriculado", "N - N\u00E3o Matriculado", "A - Ativo", "I - Inativo "}));
-		comboBoxSituacao.setBounds(603, 109, 151, 20);
+		comboBoxSituacao.setBounds(597, 107, 151, 25);
 		pane_1.add(comboBoxSituacao);
 
 		JLabel lblDataDeMatricula = new JLabel("Data de matr\u00EDcula:");
-		lblDataDeMatricula.setBounds(362, 69, 116, 14);
+		lblDataDeMatricula.setBounds(343, 72, 116, 14);
 		pane_1.add(lblDataDeMatricula);
 
 		formattedTxtDtMatricula = new JFormattedTextField();
@@ -371,7 +371,7 @@ public class CadAluno extends JInternalFrame {
 				}
 			}
 		});
-		formattedTxtDtMatricula.setBounds(476, 66, 140, 20);
+		formattedTxtDtMatricula.setBounds(455, 66, 140, 25);
 		pane_1.add(formattedTxtDtMatricula);
 		
 		labelMatricula = new JLabel("Matricula:");
@@ -380,7 +380,7 @@ public class CadAluno extends JInternalFrame {
 		
 		txtMatricula = new JTextField();
 		txtMatricula.setColumns(10);
-		txtMatricula.setBounds(390, 191, 250, 20);
+		txtMatricula.setBounds(387, 188, 250, 25);
 		pane_1.add(txtMatricula);
 		formattedTxtDtNascimento.addFocusListener(new FocusAdapter() {
 			@Override
@@ -551,6 +551,7 @@ public class CadAluno extends JInternalFrame {
 		
 		/** BOTAO ALTERAR **/
 		btnAlterar = new JButton("Alterar");
+		btnAlterar.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnAlterar.setBounds(163, 10, 98, 30);
 		panel_4.add(btnAlterar);
 		
@@ -642,6 +643,7 @@ public class CadAluno extends JInternalFrame {
 		
 		/** BOTAO CAPTURA FOTO **/
 		btnCapturaFoto = new JButton("Capturar");
+		btnCapturaFoto.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnCapturaFoto.setEnabled(false);
 		btnCapturaFoto.addActionListener(new ActionListener() {
 			//CAPTURA IMAGEM VIA WEB CAM E SALVA
@@ -673,6 +675,7 @@ public class CadAluno extends JInternalFrame {
 		
 		/** BOTAO VISUALIZAR **/
 		btnVisualizar = new JButton("Visualizar");
+		btnVisualizar.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnVisualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//VISUALIZAR IMAGEM VIA WEB CAM
@@ -687,6 +690,7 @@ public class CadAluno extends JInternalFrame {
 		panel.add(btnVisualizar);
 		
 		btnDisciplinas = new JButton("Disciplinas");
+		btnDisciplinas.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnDisciplinas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				CadAlunoDisciplina cadAlunoDisciplina;

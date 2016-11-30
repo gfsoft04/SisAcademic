@@ -100,7 +100,7 @@ public class CadFuncionario extends JInternalFrame {
 	public CadFuncionario() {
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setClosable(true);
-		setTitle("Cadastro de Funcion�rio");
+		setTitle("Cadastro de Funcionario");
 		setBounds(100, 100, 1000, 670);
 		setLocation(0, 0);
 		
@@ -116,11 +116,11 @@ public class CadFuncionario extends JInternalFrame {
 		pane_1.setLayout(null);
 
 		JLabel lblNewLabel = new JLabel("Nome:");
-		lblNewLabel.setBounds(12, 30, 43, 14);
+		lblNewLabel.setBounds(10, 25, 43, 14);
 		pane_1.add(lblNewLabel);
 
 		txtNome = new JTextField();
-		txtNome.setBounds(51, 27, 329, 20);
+		txtNome.setBounds(51, 20, 329, 25);
 		pane_1.add(txtNome);
 		txtNome.setColumns(10);
 
@@ -140,20 +140,20 @@ public class CadFuncionario extends JInternalFrame {
 				}
 			}
 		});
-		formattedTxtDtNascimento.setBounds(152, 66, 140, 20);
+		formattedTxtDtNascimento.setBounds(136, 64, 140, 25);
 		pane_1.add(formattedTxtDtNascimento);
 
 		JLabel lblEmail = new JLabel("Email:");
-		lblEmail.setBounds(339, 69, 35, 14);
+		lblEmail.setBounds(318, 69, 35, 14);
 		pane_1.add(lblEmail);
 
 		txtEmail = new JTextField();
-		txtEmail.setBounds(390, 66, 250, 20);
+		txtEmail.setBounds(363, 64, 250, 25);
 		pane_1.add(txtEmail);
 		txtEmail.setColumns(10);
 
 		JLabel lblTelefone = new JLabel("Telefone:");
-		lblTelefone.setBounds(12, 155, 60, 14);
+		lblTelefone.setBounds(10, 158, 60, 14);
 		pane_1.add(lblTelefone);
 
 		JLabel lblEstadoCivil = new JLabel("Estado Civil:");
@@ -161,21 +161,21 @@ public class CadFuncionario extends JInternalFrame {
 		pane_1.add(lblEstadoCivil);
 
 		comboBoxEstadoCivil = new JComboBox();
-		comboBoxEstadoCivil.setBounds(98, 108, 151, 22);
+		comboBoxEstadoCivil.setBounds(92, 107, 151, 25);
 		pane_1.add(comboBoxEstadoCivil);
 		comboBoxEstadoCivil.setModel(new DefaultComboBoxModel(new String[] {"S - Solteiro", "C - Casado", "V - Vi\u00FAvo", "D - Divorciado", "UE - Uni\u00E3o Est\u00E1vel"}));
 
 		txtRg = new JTextField();
-		txtRg.setBounds(445, 27, 139, 20);
+		txtRg.setBounds(436, 20, 139, 25);
 		pane_1.add(txtRg);
 		txtRg.setColumns(10);
 
 		JLabel lblRg = new JLabel("RG:");
-		lblRg.setBounds(414, 30, 24, 14);
+		lblRg.setBounds(402, 25, 24, 14);
 		pane_1.add(lblRg);
 
 		formattedTxtCpf = new JFormattedTextField();
-		formattedTxtCpf.setBounds(647, 27, 139, 20);
+		formattedTxtCpf.setBounds(638, 20, 139, 25);
 		pane_1.add(formattedTxtCpf);
 		formattedTxtCpf.addFocusListener(new FocusAdapter() {
 			@Override
@@ -190,7 +190,7 @@ public class CadFuncionario extends JInternalFrame {
 		});
 
 		JLabel lblCpf = new JLabel("CPF:");
-		lblCpf.setBounds(605, 30, 35, 14);
+		lblCpf.setBounds(596, 25, 35, 14);
 		pane_1.add(lblCpf);
 
 		JLabel lblSexo = new JLabel("Sexo:");
@@ -198,7 +198,7 @@ public class CadFuncionario extends JInternalFrame {
 		pane_1.add(lblSexo);
 
 		comboBoxSexo = new JComboBox();
-		comboBoxSexo.setBounds(343, 108, 151, 22);
+		comboBoxSexo.setBounds(328, 107, 151, 25);
 		pane_1.add(comboBoxSexo);
 		comboBoxSexo.setModel(new DefaultComboBoxModel(new String[] {"M - Masculino", "F - Feminino"}));
 
@@ -214,7 +214,7 @@ public class CadFuncionario extends JInternalFrame {
 				}
 			}
 		});
-		formattedTxtTelefone.setBounds(81, 152, 151, 20);
+		formattedTxtTelefone.setBounds(81, 152, 151, 25);
 		pane_1.add(formattedTxtTelefone);
 
 		JLabel lblNewLabel_1 = new JLabel("Situa\u00E7\u00E3o:");
@@ -223,7 +223,7 @@ public class CadFuncionario extends JInternalFrame {
 
 		comboBoxSituacao = new JComboBox();
 		comboBoxSituacao.setModel(new DefaultComboBoxModel(new String[] {"A - Ativo", "I - Inativo "}));
-		comboBoxSituacao.setBounds(603, 109, 151, 20);
+		comboBoxSituacao.setBounds(597, 107, 151, 25);
 		pane_1.add(comboBoxSituacao);
 		
 		labelMatricula = new JLabel("Matricula:");
@@ -232,7 +232,7 @@ public class CadFuncionario extends JInternalFrame {
 		
 		txtMatricula = new JTextField();
 		txtMatricula.setColumns(10);
-		txtMatricula.setBounds(86, 193, 250, 20);
+		txtMatricula.setBounds(81, 190, 250, 25);
 		pane_1.add(txtMatricula);
 		formattedTxtDtNascimento.addFocusListener(new FocusAdapter() {
 			@Override
@@ -250,12 +250,12 @@ public class CadFuncionario extends JInternalFrame {
 		JPanel pane_2 = new JPanel();
 		pane_2.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Endere\u00E7o",
 				TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		pane_2.setBounds(10, 259, 974, 177);
+		pane_2.setBounds(10, 259, 974, 165);
 		panel.add(pane_2);
 		pane_2.setLayout(null);
 
 		JLabel lblCep = new JLabel("CEP:");
-		lblCep.setBounds(39, 38, 30, 14);
+		lblCep.setBounds(12, 34, 30, 14);
 		pane_2.add(lblCep);
 
 		formattedTxtCep = new JFormattedTextField();
@@ -286,100 +286,100 @@ public class CadFuncionario extends JInternalFrame {
 				}
 			}
 		});
-		formattedTxtCep.setBounds(81, 35, 120, 20);
+		formattedTxtCep.setBounds(54, 28, 120, 25);
 		pane_2.add(formattedTxtCep);
 
 		JLabel lblRua = new JLabel("Rua:");
-		lblRua.setBounds(252, 38, 35, 14);
+		lblRua.setBounds(225, 34, 35, 14);
 		pane_2.add(lblRua);
 
 		txtRua = new JTextField();
-		txtRua.setBounds(299, 35, 250, 20);
+		txtRua.setBounds(266, 28, 250, 25);
 		pane_2.add(txtRua);
 		txtRua.setColumns(10);
 
 		JLabel lblNumero = new JLabel("Numero:");
-		lblNumero.setBounds(599, 38, 50, 14);
+		lblNumero.setBounds(572, 34, 50, 14);
 		pane_2.add(lblNumero);
 
 		txtNumero = new JTextField();
-		txtNumero.setBounds(666, 35, 59, 20);
+		txtNumero.setBounds(639, 28, 59, 25);
 		pane_2.add(txtNumero);
 		txtNumero.setColumns(10);
 
 		JLabel lblBairro = new JLabel("Bairro:");
-		lblBairro.setBounds(37, 88, 44, 14);
+		lblBairro.setBounds(12, 77, 44, 14);
 		pane_2.add(lblBairro);
 
 		txtBairro = new JTextField();
-		txtBairro.setBounds(93, 85, 248, 20);
+		txtBairro.setBounds(68, 71, 248, 25);
 		pane_2.add(txtBairro);
 		txtBairro.setColumns(10);
 
 		JLabel lblCidade = new JLabel("Cidade:");
-		lblCidade.setBounds(392, 88, 42, 14);
+		lblCidade.setBounds(360, 77, 49, 14);
 		pane_2.add(lblCidade);
 
 		txtCidade = new JTextField();
 		txtCidade.setColumns(10);
-		txtCidade.setBounds(446, 85, 250, 20);
+		txtCidade.setBounds(423, 71, 250, 25);
 		pane_2.add(txtCidade);
 
 		JLabel lblEstado = new JLabel("Estado:");
-		lblEstado.setBounds(39, 134, 42, 14);
+		lblEstado.setBounds(12, 125, 42, 14);
 		pane_2.add(lblEstado);
 
 		txtEstado = new JTextField();
 		txtEstado.setColumns(10);
-		txtEstado.setBounds(101, 131, 250, 20);
+		txtEstado.setBounds(71, 119, 250, 25);
 		pane_2.add(txtEstado);
 
 		JLabel lblComplemento = new JLabel("Complemento: ");
-		lblComplemento.setBounds(385, 134, 98, 14);
+		lblComplemento.setBounds(351, 125, 98, 14);
 		pane_2.add(lblComplemento);
 
 		txtComplemento = new JTextField();
-		txtComplemento.setBounds(487, 131, 238, 20);
+		txtComplemento.setBounds(457, 119, 238, 25);
 		pane_2.add(txtComplemento);
 		txtComplemento.setColumns(10);
 
 		JPanel panel_3 = new JPanel();
 		panel_3.setBorder(
 				new TitledBorder(null, "Observa\u00E7\u00E3o", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_3.setBounds(360, 447, 296, 186);
+		panel_3.setBounds(360, 437, 296, 196);
 		panel.add(panel_3);
 		panel_3.setLayout(null);
 		
 		txtPaneObservacao = new JTextPane();
-		txtPaneObservacao.setBounds(10, 21, 276, 154);
+		txtPaneObservacao.setBounds(10, 21, 276, 162);
 		panel_3.add(txtPaneObservacao);
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setLayout(null);
 		panel_2.setBorder(new TitledBorder(null, "Dados Profissionais", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_2.setBounds(10, 447, 340, 186);
+		panel_2.setBounds(10, 437, 340, 196);
 		panel.add(panel_2);
 		
 		JLabel lblEscolaridade = new JLabel("Escolaridade:");
-		lblEscolaridade.setBounds(30, 33, 75, 14);
+		lblEscolaridade.setBounds(33, 35, 93, 14);
 		panel_2.add(lblEscolaridade);
 		
 		JLabel label_1 = new JLabel("Sal\u00E1rio: R$");
-		label_1.setBounds(29, 110, 65, 14);
+		label_1.setBounds(33, 115, 65, 14);
 		panel_2.add(label_1);
 		
 		txtSalario = new JTextField();
 		txtSalario.setColumns(10);
-		txtSalario.setBounds(98, 107, 120, 20);
+		txtSalario.setBounds(110, 109, 120, 25);
 		panel_2.add(txtSalario);
 		
 		comboBoxEscolaridade = new JComboBox();
 		comboBoxEscolaridade.setModel(new DefaultComboBoxModel(new String[] {"Fundamental", "M\u00E9dio", "Superior", "P\u00F3s Gradua\u00E7\u00E3o"}));
-		comboBoxEscolaridade.setBounds(105, 29, 180, 22);
+		comboBoxEscolaridade.setBounds(126, 31, 180, 25);
 		panel_2.add(comboBoxEscolaridade);
 		
 		JLabel label_2 = new JLabel("Data de Contrata\u00E7\u00E3o:");
-		label_2.setBounds(30, 145, 120, 14);
+		label_2.setBounds(33, 150, 120, 14);
 		panel_2.add(label_2);
 		
 		formattedtxtDtContratacao = new JFormattedTextField();
@@ -394,16 +394,16 @@ public class CadFuncionario extends JInternalFrame {
 				}
 			}
 		});
-		formattedtxtDtContratacao.setBounds(160, 142, 139, 20);
+		formattedtxtDtContratacao.setBounds(165, 144, 139, 25);
 		panel_2.add(formattedtxtDtContratacao);
 		
 		txtCargo = new JTextField();
 		txtCargo.setColumns(10);
-		txtCargo.setBounds(84, 74, 186, 20);
+		txtCargo.setBounds(84, 69, 186, 25);
 		panel_2.add(txtCargo);
 		
 		JLabel lblCargo = new JLabel("Cargo:");
-		lblCargo.setBounds(30, 77, 52, 14);
+		lblCargo.setBounds(33, 74, 52, 14);
 		panel_2.add(lblCargo);
 		
 		JPanel panel_4 = new JPanel();
@@ -529,10 +529,11 @@ public class CadFuncionario extends JInternalFrame {
 			}
 		});
 		panel_4.add(btnCadastrar);
-		btnCadastrar.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		btnCadastrar.setFont(new Font("Tahoma", Font.BOLD, 11));
 		
 		/* BOTAO ALTERAR */
 		btnAlterar = new JButton("Alterar");
+		btnAlterar.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnAlterar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//VERIFICAR OS CAMPOS OBRIGATORIOS PREENCHIDOS
@@ -613,6 +614,7 @@ public class CadFuncionario extends JInternalFrame {
 		
 		/* BOTAO DELETAR */
 		btnDeletar = new JButton("Deletar");
+		btnDeletar.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnDeletar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -667,7 +669,7 @@ public class CadFuncionario extends JInternalFrame {
 		});
 		btnCancelar.setBounds(10, 11, 100, 30);
 		panel_4.add(btnCancelar);
-		btnCancelar.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		btnCancelar.setFont(new Font("Tahoma", Font.BOLD, 11));
 
 	}
 	

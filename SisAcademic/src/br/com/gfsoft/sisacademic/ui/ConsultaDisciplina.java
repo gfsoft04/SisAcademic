@@ -67,7 +67,7 @@ public class ConsultaDisciplina extends JInternalFrame {
 		panel.setLayout(null);
 		
 		txtNome = new JTextField();
-		txtNome.setBounds(115, 27, 350, 20);
+		txtNome.setBounds(95, 25, 350, 25);
 		panel.add(txtNome);
 		txtNome.setColumns(10);
 		
@@ -112,12 +112,12 @@ public class ConsultaDisciplina extends JInternalFrame {
 				preencherTabelaFiltro(nome);
 			}
 		});
-		btnFiltrar.setBounds(510, 17, 100, 30);
+		btnFiltrar.setBounds(490, 20, 100, 30);
 		panel.add(btnFiltrar);
 		
 		/* BOTAO IMPRIMIR */
 		btnImprimir = new JButton("Imprimir");
-		btnImprimir.setBounds(650, 17, 100, 30);
+		btnImprimir.setBounds(630, 20, 100, 30);
 		panel.add(btnImprimir);
 		
 		

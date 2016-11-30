@@ -28,6 +28,7 @@ import javax.swing.border.TitledBorder;
 
 import br.com.gfsoft.sisacademic.controller.Academico;
 import br.com.gfsoft.sisacademic.model.Disciplina;
+import java.awt.Font;
 
 public class CadDisciplina extends JInternalFrame {
 	/**
@@ -88,17 +89,17 @@ public class CadDisciplina extends JInternalFrame {
 		panel_1.setLayout(null);
 		
 		txtNome = new JTextField();
-		txtNome.setBounds(76, 24, 219, 20);
+		txtNome.setBounds(76, 24, 219, 25);
 		panel_1.add(txtNome);
 		txtNome.setColumns(10);
 		
 		JLabel label_3 = new JLabel("Nome:");
-		label_3.setBounds(24, 27, 53, 14);
+		label_3.setBounds(24, 30, 53, 14);
 		panel_1.add(label_3);
 		
 		txtDescricao = new JTextField();
 		txtDescricao.setColumns(10);
-		txtDescricao.setBounds(95, 80, 200, 20);
+		txtDescricao.setBounds(91, 77, 200, 25);
 		panel_1.add(txtDescricao);
 		
 		JLabel label_2 = new JLabel("Descri\u00E7\u00E3o:");
@@ -110,24 +111,24 @@ public class CadDisciplina extends JInternalFrame {
 		panel_1.add(lblSemestre);
 		
 		textPaneObservacao = new JTextPane();
-		textPaneObservacao.setBounds(109, 191, 299, 141);
+		textPaneObservacao.setBounds(104, 186, 299, 141);
 		panel_1.add(textPaneObservacao);
 		
 		comboBoxSituacao = new JComboBox();
 		comboBoxSituacao.setModel(new DefaultComboBoxModel(new String[] {"Dispon\u00EDvel", "Indispon\u00EDvel"}));
-		comboBoxSituacao.setBounds(421, 23, 155, 22);
+		comboBoxSituacao.setBounds(404, 25, 155, 25);
 		panel_1.add(comboBoxSituacao);
 		
 		JLabel lblSituao = new JLabel("Situa\u00E7\u00E3o:");
-		lblSituao.setBounds(346, 27, 46, 14);
+		lblSituao.setBounds(339, 30, 53, 14);
 		panel_1.add(lblSituao);
 		
 		JLabel lblNewLabel = new JLabel("Observa\u00E7\u00E3o:");
-		lblNewLabel.setBounds(26, 186, 62, 14);
+		lblNewLabel.setBounds(26, 186, 80, 14);
 		panel_1.add(lblNewLabel);
 		
 		JLabel lblDataDeCriao = new JLabel("Data de cria\u00E7\u00E3o:");
-		lblDataDeCriao.setBounds(24, 132, 82, 14);
+		lblDataDeCriao.setBounds(24, 132, 101, 14);
 		panel_1.add(lblDataDeCriao);
 		
 		formattedTxtDtCriacao = new JFormattedTextField();
@@ -142,7 +143,7 @@ public class CadDisciplina extends JInternalFrame {
                 }
             }
         });
-		formattedTxtDtCriacao.setBounds(109, 129, 98, 20);
+		formattedTxtDtCriacao.setBounds(126, 126, 98, 25);
 		panel_1.add(formattedTxtDtCriacao);
 		
 		formattedTextSemestre = new JFormattedTextField();
@@ -157,7 +158,7 @@ public class CadDisciplina extends JInternalFrame {
                 }
 			}
 		});
-		formattedTextSemestre.setBounds(421, 80, 103, 20);
+		formattedTextSemestre.setBounds(418, 77, 103, 25);
 		panel_1.add(formattedTextSemestre);
 		
 		labelId = new JLabel("ID:");
@@ -166,7 +167,7 @@ public class CadDisciplina extends JInternalFrame {
 		
 		txtId = new JTextField();
 		txtId.setColumns(10);
-		txtId.setBounds(291, 129, 101, 20);
+		txtId.setBounds(283, 126, 101, 25);
 		panel_1.add(txtId);
 		
 		JPanel panel_2 = new JPanel();
@@ -176,6 +177,7 @@ public class CadDisciplina extends JInternalFrame {
 		
 		/* BOTAO CADASTRAR */
 		btnCadastrar = new JButton("Cadastrar");
+		btnCadastrar.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//VERIFICAR OS CAMPOS OBRIGATORIOS PREENCHIDOS
@@ -221,6 +223,7 @@ public class CadDisciplina extends JInternalFrame {
 		
 		/* BOTAO DELETAR */
 		btnDeletar = new JButton("Deletar");
+		btnDeletar.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnDeletar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -256,6 +259,7 @@ public class CadDisciplina extends JInternalFrame {
 		
 		/* BOTAO ALTERAR */
 		btnAlterar = new JButton("Alterar");
+		btnAlterar.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnAlterar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//VERIFICAR OS CAMPOS OBRIGATORIOS PREENCHIDOS
@@ -302,6 +306,7 @@ public class CadDisciplina extends JInternalFrame {
 		
 		/* BOTAO CANCELAR */
 		btnCancelar = new JButton("Cancelar");
+		btnCancelar.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				limparCampos();

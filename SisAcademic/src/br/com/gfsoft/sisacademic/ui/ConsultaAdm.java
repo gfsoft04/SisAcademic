@@ -62,16 +62,16 @@ public class ConsultaAdm extends JInternalFrame {
 		panel.setLayout(null);
 		
 		txtNome = new JTextField();
-		txtNome.setBounds(115, 27, 350, 20);
+		txtNome.setBounds(115, 27, 350, 25);
 		panel.add(txtNome);
 		txtNome.setColumns(10);
 		
 		JLabel lblNewLabel = new JLabel("Nome:");
-		lblNewLabel.setBounds(30, 30, 75, 14);
+		lblNewLabel.setBounds(30, 33, 75, 14);
 		panel.add(lblNewLabel);
 		
 		btnFiltrar = new JButton("Filtrar");
-		btnFiltrar.setBounds(510, 48, 100, 30);
+		btnFiltrar.setBounds(510, 47, 100, 30);
 		panel.add(btnFiltrar);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -104,16 +104,16 @@ public class ConsultaAdm extends JInternalFrame {
 		scrollPane.setViewportView(table);
 		
 		JLabel lblMatricula = new JLabel("Matricula:");
-		lblMatricula.setBounds(30, 61, 75, 14);
+		lblMatricula.setBounds(30, 64, 75, 14);
 		panel.add(lblMatricula);
 		
 		txtMatricula = new JTextField();
 		txtMatricula.setColumns(10);
-		txtMatricula.setBounds(115, 58, 350, 20);
+		txtMatricula.setBounds(115, 58, 350, 25);
 		panel.add(txtMatricula);
 		
 		JButton btnImprimir = new JButton("Imprimir");
-		btnImprimir.setBounds(650, 48, 100, 30);
+		btnImprimir.setBounds(650, 47, 100, 30);
 		panel.add(btnImprimir);
 		
 		//preencherTabela();

@@ -70,12 +70,12 @@ public class ConsultaAluno extends JInternalFrame {
 		panel.setLayout(null);
 		
 		txtNome = new JTextField();
-		txtNome.setBounds(115, 27, 350, 20);
+		txtNome.setBounds(115, 27, 350, 25);
 		panel.add(txtNome);
 		txtNome.setColumns(10);
 		
 		JLabel lblNewLabel = new JLabel("Nome:");
-		lblNewLabel.setBounds(30, 30, 75, 14);
+		lblNewLabel.setBounds(30, 32, 75, 14);
 		panel.add(lblNewLabel);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -113,11 +113,11 @@ public class ConsultaAluno extends JInternalFrame {
 		
 		txtMatricula = new JTextField();
 		txtMatricula.setColumns(10);
-		txtMatricula.setBounds(115, 58, 350, 20);
+		txtMatricula.setBounds(115, 58, 350, 25);
 		panel.add(txtMatricula);
 		
 		JLabel lblMatricula = new JLabel("Matricula:");
-		lblMatricula.setBounds(30, 61, 75, 14);
+		lblMatricula.setBounds(30, 64, 75, 14);
 		panel.add(lblMatricula);
 		
 		/* BOTAO FILTRAR */

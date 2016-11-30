@@ -17,6 +17,9 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.SoftBevelBorder;
@@ -43,26 +46,26 @@ public class Principal extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-//		try {
-//		    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-//		        if ("Nimbus".equals(info.getName())) {
-//		            UIManager.setLookAndFeel(info.getClassName());
-//		            break;
-//		        }
-//		    }
-//		} catch (UnsupportedLookAndFeelException e) {
-//		    // handle exception
-//			System.out.println(e);
-//		} catch (ClassNotFoundException e) {
-//		    // handle exception
-//			System.out.println(e);
-//		} catch (InstantiationException e) {
-//		    // handle exception
-//			System.out.println(e);
-//		} catch (IllegalAccessException e) {
-//		    // handle exception
-//			System.out.println(e);
-//		}
+		try {
+		    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+		        if ("Nimbus".equals(info.getName())) {
+		            UIManager.setLookAndFeel(info.getClassName());
+		            break;
+		        }
+		    }
+		} catch (UnsupportedLookAndFeelException e) {
+		    // handle exception
+			System.out.println(e);
+		} catch (ClassNotFoundException e) {
+		    // handle exception
+			System.out.println(e);
+		} catch (InstantiationException e) {
+		    // handle exception
+			System.out.println(e);
+		} catch (IllegalAccessException e) {
+		    // handle exception
+			System.out.println(e);
+		}
 		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
