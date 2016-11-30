@@ -6,6 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +21,11 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
+
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
 
 import br.com.gfsoft.sisacademic.controller.Academico;
 import br.com.gfsoft.sisacademic.model.Aluno;
@@ -135,6 +142,40 @@ public class ConsultaAluno extends JInternalFrame {
 		
 		/* BOTAO IMPRIMIR */
 		btnImprimir = new JButton("Imprimir");
+		btnImprimir.addActionListener(new ActionListener() {
+			private boolean add;
+
+			public void actionPerformed(ActionEvent e) {
+				
+				// criação do documento
+		        Document document = new Document();
+		        try {
+		           
+		            PdfWriter.getInstance(document, new FileOutputStream("/home/felipe/workspace/ArquivoPDF/src/arquivos/PDF_DevMedia.pdf"));
+		            document.open();
+		            
+		            //document.setPageSize(PageSize.A3); // modificado para o tamanho A3;
+		            
+		            String[] colunas = new String[]{"Matricula","Nome","cpf","rg","email","Data Nascimento", "Data de Matricula"};
+		           
+		            // adicionando um parágrafo no documento
+		            document.add(new Paragraph(""));
+		            
+		            document.newPage();
+		            document.add(new Paragraph("Novo parágrafo na nova página"));
+		            
+		            
+		        }
+		        catch(DocumentException de) {
+		            System.err.println(de.getMessage());
+		        }
+		        catch(IOException ioe) {
+		            System.err.println(ioe.getMessage());
+		        }
+		        document.close();
+				
+			}
+		});
 		btnImprimir.setBounds(650, 48, 100, 30);
 		panel.add(btnImprimir);
 		
@@ -224,5 +265,15 @@ public class ConsultaAluno extends JInternalFrame {
         table.setAutoCreateRowSorter(true);
         
     } //Fim do Metodo preencherTabela
+	
+	private void imprimirColunas(){
+		
+		String[] col = new String[]{"Matricula","Nome","cpf","rg","email","Data Nascimento", "Data de Matricula"};
+		
+		for(int i=0;i<col.length;i++){
+			System.out.print(col[i] + " ");
+		}
+
+	}
 	
 }
