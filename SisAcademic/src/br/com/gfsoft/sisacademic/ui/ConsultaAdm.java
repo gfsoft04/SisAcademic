@@ -22,6 +22,10 @@ import br.com.gfsoft.sisacademic.model.TabelaConsulta;
 import br.com.gfsoft.sisacademic.persistence.PersistenceAdministracao;
 
 public class ConsultaAdm extends JInternalFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1393135058574089530L;
 	private JTextField txtNome;
 	private JButton btnFiltrar;
 	private JTable table;

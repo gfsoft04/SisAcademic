@@ -22,7 +22,6 @@ import javax.swing.ListSelectionModel;
 import br.com.gfsoft.sisacademic.controller.Academico;
 import br.com.gfsoft.sisacademic.model.Disciplina;
 import br.com.gfsoft.sisacademic.model.TabelaConsulta;
-import br.com.gfsoft.sisacademic.persistence.PersistenceDisciplina;
 
 public class ConsultaDisciplina extends JInternalFrame {
 	/**

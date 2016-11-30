@@ -24,7 +24,6 @@ import br.com.gfsoft.sisacademic.controller.Academico;
 import br.com.gfsoft.sisacademic.model.Aluno;
 import br.com.gfsoft.sisacademic.model.TabelaConsulta;
 import br.com.gfsoft.sisacademic.model.exception.UsuarioNaoEncontradoException;
-import br.com.gfsoft.sisacademic.persistence.PersistenceAluno;
 
 public class ConsultaAluno extends JInternalFrame {
 	/**

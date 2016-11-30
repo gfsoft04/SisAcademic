@@ -2,6 +2,8 @@ package br.com.gfsoft.sisacademic.ui;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -20,9 +22,6 @@ import javax.swing.ListSelectionModel;
 import br.com.gfsoft.sisacademic.controller.Academico;
 import br.com.gfsoft.sisacademic.model.Professor;
 import br.com.gfsoft.sisacademic.model.TabelaConsulta;
-import br.com.gfsoft.sisacademic.persistence.PersistenceProfessor;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class ConsultaProfessor extends JInternalFrame {
 	/**

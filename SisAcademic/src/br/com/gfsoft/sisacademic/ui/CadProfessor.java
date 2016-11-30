@@ -34,13 +34,16 @@ import br.com.gfsoft.sisacademic.model.Endereco;
 import br.com.gfsoft.sisacademic.model.Professor;
 import br.com.gfsoft.sisacademic.model.exception.CpfInvalidoException;
 import br.com.gfsoft.sisacademic.model.exception.UsuarioJaCadastradoException;
-import br.com.gfsoft.sisacademic.persistence.PersistenceProfessor;
 import br.com.gfsoft.sisacademic.util.BuscaCep;
 import br.com.gfsoft.sisacademic.util.EnvioEmail;
 import br.com.gfsoft.sisacademic.util.GeraMatricula;
 import br.com.gfsoft.sisacademic.util.VerificaCamposUnique;
 
 public class CadProfessor extends JInternalFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5205933326953701965L;
 	private JTextField txtMatricula;
 	private JLabel labelMatricula;
 	private JTextField txtNome;

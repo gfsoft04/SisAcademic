@@ -1,23 +1,27 @@
 package br.com.gfsoft.sisacademic.ui;
 
-import java.awt.EventQueue;
-
-import javax.swing.JInternalFrame;
-import javax.swing.JPanel;
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.EventQueue;
+import java.awt.Font;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
+import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.JTextPane;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
-import java.awt.Color;
-import javax.swing.JLabel;
-import javax.swing.JFormattedTextField;
-import javax.swing.JTextField;
-import javax.swing.JComboBox;
-import javax.swing.JTextPane;
-import javax.swing.JButton;
-import java.awt.Font;
-import javax.swing.JPasswordField;
 
 public class CadAdministracao extends JInternalFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5003983736953466121L;
 	private JTextField txtRua;
 	private JTextField txtNumero;
 	private JTextField txtBairro;

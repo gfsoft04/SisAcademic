@@ -64,36 +64,36 @@ public class PersistenceAdministracao implements IPersistenceAdministracao {
 
 	@Override
 	public boolean delete(Administracao administracao) {
-		PersistenceFuncionario pFuncionario = new PersistenceFuncionario();
-		Funcionario funcionario = new Funcionario ();
-		
-		String sqlPessoa;
-		String sqlFuncionario;
-		String sqlAdministracao;
-
-		long id;
-		
-		if(pFuncionario.delete(administracao)){
-			funcionario = pFuncionario.selectFuncionario(administracao.getMatricula());
-			id = funcionario.getId();
-			
-			sqlAdministracao = "DELETE FROM tb_Administracao WHERE tb_Funcionario_tb_Pessoa_idPessoa "+ administracao.getId() +"";
-			sqlFuncionario = "DELETE FROM  tb_Funcionario WHERE tb_Pessoa_idPessoa" + administracao.getId()+"";
-			sqlPessoa = "DELETE FROM tb_Pessoa WHERE idPessoa" + administracao.getId() + "";
-			
-			try{
-				con.getConnection().createStatement().executeUpdate(sqlAdministracao);
-				con.getConnection().createStatement().executeUpdate(sqlFuncionario);
-				con.getConnection().createStatement().executeUpdate(sqlPessoa);
-				return true;
-			}catch (SQLException ex){
-				ex.printStackTrace();
-				JOptionPane.showMessageDialog(null, "Erro ao deletar administrador da base de dados","Erro", JOptionPane.ERROR_MESSAGE);
-			}
-			
-				
-			
-		}
+//		PersistenceFuncionario pFuncionario = new PersistenceFuncionario();
+//		Funcionario funcionario = new Funcionario ();
+//		
+//		String sqlPessoa;
+//		String sqlFuncionario;
+//		String sqlAdministracao;
+//
+//		long id;
+//		
+//		if(pFuncionario.delete(administracao)){
+//			funcionario = pFuncionario.selectFuncionario(administracao.getMatricula());
+//			id = funcionario.getId();
+//			
+//			sqlAdministracao = "DELETE FROM tb_Administracao WHERE tb_Funcionario_tb_Pessoa_idPessoa "+ administracao.getId() +"";
+//			sqlFuncionario = "DELETE FROM  tb_Funcionario WHERE tb_Pessoa_idPessoa" + administracao.getId()+"";
+//			sqlPessoa = "DELETE FROM tb_Pessoa WHERE idPessoa" + administracao.getId() + "";
+//			
+//			try{
+//				con.getConnection().createStatement().executeUpdate(sqlAdministracao);
+//				con.getConnection().createStatement().executeUpdate(sqlFuncionario);
+//				con.getConnection().createStatement().executeUpdate(sqlPessoa);
+//				return true;
+//			}catch (SQLException ex){
+//				ex.printStackTrace();
+//				JOptionPane.showMessageDialog(null, "Erro ao deletar administrador da base de dados","Erro", JOptionPane.ERROR_MESSAGE);
+//			}
+//			
+//				
+//			
+//		}
 		
 		
 		return false;

@@ -35,14 +35,16 @@ import br.com.gfsoft.sisacademic.model.Funcionario;
 import br.com.gfsoft.sisacademic.model.Professor;
 import br.com.gfsoft.sisacademic.model.exception.CpfInvalidoException;
 import br.com.gfsoft.sisacademic.model.exception.UsuarioJaCadastradoException;
-import br.com.gfsoft.sisacademic.persistence.PersistenceFuncionario;
-import br.com.gfsoft.sisacademic.persistence.PersistenceProfessor;
 import br.com.gfsoft.sisacademic.util.BuscaCep;
 import br.com.gfsoft.sisacademic.util.EnvioEmail;
 import br.com.gfsoft.sisacademic.util.GeraMatricula;
 import br.com.gfsoft.sisacademic.util.VerificaCamposUnique;
 
 public class CadFuncionario extends JInternalFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3139901361093054677L;
 	private JTextField txtMatricula;
 	private JLabel labelMatricula;
 	private JTextField txtNome;
