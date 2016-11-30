@@ -77,6 +77,7 @@ public class CadAluno extends JInternalFrame {
 	private JButton btnCancelar;
 	private JButton btnVisualizar;
 	private JButton btnCapturaFoto;
+	private JButton btnDisciplinas;
 	
 	private Academico academico;
 	private Aluno aluno;
@@ -685,6 +686,23 @@ public class CadAluno extends JInternalFrame {
 		btnVisualizar.setBounds(896, 292, 100, 30);
 		panel.add(btnVisualizar);
 		
+		btnDisciplinas = new JButton("Disciplinas");
+		btnDisciplinas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CadAlunoDisciplina cadAlunoDisciplina;
+				academico = new Academico();
+				try {
+					cadAlunoDisciplina = new CadAlunoDisciplina(academico.buscarAluno(txtMatricula.getText()).getId());
+					cadAlunoDisciplina.setVisible(true);
+				} catch (UsuarioNaoEncontradoException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		btnDisciplinas.setBounds(896, 425, 100, 30);
+		panel.add(btnDisciplinas);
+		
 	}
 	
 	/**
@@ -729,6 +747,7 @@ public class CadAluno extends JInternalFrame {
 		btnCadastrar.setVisible(!flag);
 		btnAlterar.setVisible(flag);
 		btnDeletar.setVisible(flag);
+		btnDisciplinas.setVisible(flag);
 		txtMatricula.setVisible(flag);
 		labelMatricula.setVisible(flag);
 		btnVisualizar.setVisible(!flag);
