@@ -419,7 +419,7 @@ public class CadAluno extends JInternalFrame {
 						|| txtCidade.getText().equals("") || txtEstado.getText().equals("") || formattedTxtCpf.getText().equals("")
 						|| formattedTxtCep.getText().equals("") || formattedTxtTelefone.getText().equals("")) {
 					
-					JOptionPane.showMessageDialog(null, "Campos Obrigatórios em Branco!", "Erro", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Campos Obrigatorios em Branco!", "Erro", JOptionPane.ERROR_MESSAGE);
 					return ;					
 				}
 				
@@ -633,7 +633,10 @@ public class CadAluno extends JInternalFrame {
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				limparCampos();
-				//webView.pararWebCam();
+				
+				if(webView != null)
+					webView.pararWebCam();
+				
 				setVisible(false);
 			}
 		});

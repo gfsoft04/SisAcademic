@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.io.File;
 import java.text.ParseException;
 import java.time.DateTimeException;
 import java.time.LocalDate;
@@ -16,6 +17,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
@@ -39,6 +41,7 @@ import br.com.gfsoft.sisacademic.util.BuscaCep;
 import br.com.gfsoft.sisacademic.util.EnvioEmail;
 import br.com.gfsoft.sisacademic.util.GeraMatricula;
 import br.com.gfsoft.sisacademic.util.VerificaCamposUnique;
+import br.com.gfsoft.sisacademic.util.WebCamView;
 
 public class CadFuncionario extends JInternalFrame {
 	/**
@@ -68,13 +71,19 @@ public class CadFuncionario extends JInternalFrame {
 	private JTextField txtSalario;
 	private JFormattedTextField formattedtxtDtContratacao;
 	private JTextPane txtPaneObservacao;
+	private JPanel panelFoto;
+	private JLabel labelImagem;
+	private ImageIcon imagem;
 	private JButton btnCancelar;
 	private JButton btnCadastrar;
 	private JButton btnDeletar;
 	private JButton btnAlterar;
+	private JButton btnVisualizar;
+	private JButton btnCapturaFoto;
 	
 	private Academico academico;
-
+	private WebCamView webView;
+	private String path = ""; //path da imagem
 	private Funcionario funcionario;
 
 
@@ -101,7 +110,7 @@ public class CadFuncionario extends JInternalFrame {
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setClosable(true);
 		setTitle("Cadastro de Funcionario");
-		setBounds(100, 100, 1000, 670);
+		setBounds(100, 100, 1205, 670);
 		setLocation(0, 0);
 		
 		JPanel panel = new JPanel();
@@ -110,7 +119,7 @@ public class CadFuncionario extends JInternalFrame {
 		panel.setLayout(null);
 
 		JPanel pane_1 = new JPanel();
-		pane_1.setBounds(10, 12, 974, 236);
+		pane_1.setBounds(10, 12, 800, 236);
 		panel.add(pane_1);
 		pane_1.setBorder(new TitledBorder(null, "Dados Pessoais", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		pane_1.setLayout(null);
@@ -250,7 +259,7 @@ public class CadFuncionario extends JInternalFrame {
 		JPanel pane_2 = new JPanel();
 		pane_2.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Endere\u00E7o",
 				TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		pane_2.setBounds(10, 259, 974, 165);
+		pane_2.setBounds(10, 259, 800, 165);
 		panel.add(pane_2);
 		pane_2.setLayout(null);
 
@@ -436,7 +445,7 @@ public class CadFuncionario extends JInternalFrame {
 						|| formattedTxtCep.getText().equals("") || formattedTxtTelefone.getText().equals("")
 						|| txtCargo.getText().equals("") || txtSalario.getText().equals("")) {
 					
-					JOptionPane.showMessageDialog(null, "Campos Obrigat�rios em Branco!", "Erro", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Campos Obrigatorios em Branco!", "Erro", JOptionPane.ERROR_MESSAGE);
 					return ;					
 				}
 				
@@ -664,12 +673,71 @@ public class CadFuncionario extends JInternalFrame {
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				limparCampos();
+				
+				if(webView != null)
+					webView.pararWebCam();
+				
 				setVisible(false);
 			}
 		});
 		btnCancelar.setBounds(10, 11, 100, 30);
 		panel_4.add(btnCancelar);
 		btnCancelar.setFont(new Font("Tahoma", Font.BOLD, 11));
+		
+		panelFoto = new JPanel();
+		panelFoto.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		panelFoto.setBounds(820, 12, 360, 270);
+		panel.add(panelFoto);
+		panelFoto.setLayout(null);
+		
+		labelImagem = new JLabel("");
+		labelImagem.setBounds(0, 0, 360, 270);
+		panelFoto.add(labelImagem);
+		
+		btnVisualizar = new JButton("Visualizar");
+		btnVisualizar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//VISUALIZAR IMAGEM VIA WEB CAM
+				webView = new WebCamView();
+				webView.iniciarWebCam();
+				panelFoto.add(webView.getPlayer().asComponent());
+				
+				btnCapturaFoto.setEnabled(true);
+			}
+		});
+		btnVisualizar.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnVisualizar.setBounds(895, 293, 100, 30);
+		panel.add(btnVisualizar);
+		
+		btnCapturaFoto = new JButton("Capturar");
+		btnCapturaFoto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//VERIFICAR OS CAMPOS OBRIGATORIOS PREENCHIDOS
+				if(txtNome.getText().equals("") || txtRg.getText().equals("") || txtEmail.getText().equals("")
+						|| txtRua.getText().equals("") || txtNumero.getText().equals("") || txtBairro.getText().equals("")
+						|| txtCidade.getText().equals("") || txtEstado.getText().equals("") || formattedTxtCpf.getText().equals("")
+						|| formattedTxtCep.getText().equals("") || formattedTxtTelefone.getText().equals("")
+						|| txtCargo.getText().equals("") || txtSalario.getText().equals("")) {
+					
+					JOptionPane.showMessageDialog(null, "Preencha os campos antes de salvar a imagem!", "Erro", JOptionPane.ERROR_MESSAGE);
+					return ;					
+				}
+				
+				GeraMatricula geraMatricula = new GeraMatricula();
+				String matricula = geraMatricula.gerarMatricula(1, Integer.parseInt(formattedtxtDtContratacao.getText().substring(6, 10)));
+				File file = new File("img\\"+matricula+".png");
+				ImageIcon icon = new ImageIcon(file.getPath());
+				
+				webView.salvarFoto(webView.getPlayer().getImage(), file);
+				webView.pararWebCam();
+				path = file.getPath();
+				labelImagem.setVisible(true);
+				labelImagem.setIcon(icon);
+			}
+		});
+		btnCapturaFoto.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnCapturaFoto.setBounds(1005, 293, 100, 30);
+		panel.add(btnCapturaFoto);
 
 	}
 	
@@ -713,6 +781,9 @@ public class CadFuncionario extends JInternalFrame {
 		btnDeletar.setVisible(flag);
 		txtMatricula.setVisible(flag);
 		labelMatricula.setVisible(flag);
+		btnVisualizar.setVisible(!flag);
+		btnCapturaFoto.setVisible(!flag);
+		labelImagem.setVisible(flag);
 	}
 	
 	/**

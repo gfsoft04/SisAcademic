@@ -23,6 +23,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.SoftBevelBorder;
+import java.awt.Font;
 
 public class Principal extends JFrame {
 
@@ -87,6 +88,8 @@ public class Principal extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1376, 720);
 		setExtendedState(MAXIMIZED_BOTH);
+		//setIconImage(new ImageIcon(getClass().getResource("icon\\logoGF32.png")).getImage());//Ícone do Programa
+		setIconImage(new ImageIcon("icon\\sisAcademic64.png").getImage());
 
 		JPanel contentPane = new JPanel();
 		contentPane.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
@@ -105,57 +108,70 @@ public class Principal extends JFrame {
 		panelInicial.setLayout(null);
 		
 		JButton btnNewButton = new JButton("Aluno");
+		btnNewButton.setFont(new Font("SansSerif", Font.BOLD, 12));
 		btnNewButton.setHorizontalAlignment(SwingConstants.LEFT);
 		btnNewButton.setIcon(new ImageIcon("C:\\Users\\Bruno\\git\\SisAcademic\\SisAcademic\\icon\\add.png"));
-		btnNewButton.setBounds(146, 48, 170, 65);
+		btnNewButton.setBounds(146, 48, 170, 80);
 		panelInicial.add(btnNewButton);
 		
 		JButton btnProfessor = new JButton("Professor");
+		btnProfessor.setFont(new Font("SansSerif", Font.BOLD, 12));
 		btnProfessor.setIcon(new ImageIcon("C:\\Users\\Bruno\\git\\SisAcademic\\SisAcademic\\icon\\add.png"));
 		btnProfessor.setHorizontalAlignment(SwingConstants.LEFT);
-		btnProfessor.setBounds(146, 168, 170, 65);
+		btnProfessor.setBounds(146, 168, 170, 80);
 		panelInicial.add(btnProfessor);
 		
 		JButton btnFuncionario = new JButton("Funcionario");
+		btnFuncionario.setFont(new Font("SansSerif", Font.BOLD, 12));
 		btnFuncionario.setIcon(new ImageIcon("C:\\Users\\Bruno\\git\\SisAcademic\\SisAcademic\\icon\\add.png"));
 		btnFuncionario.setHorizontalAlignment(SwingConstants.LEFT);
-		btnFuncionario.setBounds(146, 288, 170, 65);
+		btnFuncionario.setBounds(146, 288, 170, 80);
 		panelInicial.add(btnFuncionario);
 		
 		JButton btnDisciplina = new JButton("Disciplina");
-		btnDisciplina.setIcon(new ImageIcon("C:\\Users\\Bruno\\git\\SisAcademic\\SisAcademic\\icon\\add.png"));
+		btnDisciplina.setFont(new Font("SansSerif", Font.BOLD, 12));
+		btnDisciplina.setIcon(new ImageIcon("C:\\Users\\Bruno\\git\\SisAcademic\\SisAcademic\\icon\\book.png"));
 		btnDisciplina.setHorizontalAlignment(SwingConstants.LEFT);
-		btnDisciplina.setBounds(146, 408, 170, 65);
+		btnDisciplina.setBounds(146, 408, 170, 80);
 		panelInicial.add(btnDisciplina);
 		
 		JButton button = new JButton("Aluno");
+		button.setFont(new Font("SansSerif", Font.BOLD, 12));
 		button.setIcon(new ImageIcon("C:\\Users\\Bruno\\git\\SisAcademic\\SisAcademic\\icon\\consultar.png"));
 		button.setHorizontalAlignment(SwingConstants.LEFT);
-		button.setBounds(952, 48, 170, 65);
+		button.setBounds(983, 48, 170, 80);
 		panelInicial.add(button);
 		
 		JButton button_1 = new JButton("Professor");
+		button_1.setFont(new Font("SansSerif", Font.BOLD, 12));
 		button_1.setIcon(new ImageIcon("C:\\Users\\Bruno\\git\\SisAcademic\\SisAcademic\\icon\\consultar.png"));
 		button_1.setHorizontalAlignment(SwingConstants.LEFT);
-		button_1.setBounds(952, 168, 170, 65);
+		button_1.setBounds(983, 168, 170, 80);
 		panelInicial.add(button_1);
 		
 		JButton button_2 = new JButton("Funcionario");
+		button_2.setFont(new Font("SansSerif", Font.BOLD, 12));
 		button_2.setIcon(new ImageIcon("C:\\Users\\Bruno\\git\\SisAcademic\\SisAcademic\\icon\\consultar.png"));
 		button_2.setHorizontalAlignment(SwingConstants.LEFT);
-		button_2.setBounds(952, 288, 170, 65);
+		button_2.setBounds(983, 288, 170, 80);
 		panelInicial.add(button_2);
 		
 		JButton button_3 = new JButton("Disciplina");
-		button_3.setIcon(new ImageIcon("C:\\Users\\Bruno\\git\\SisAcademic\\SisAcademic\\icon\\consultar.png"));
+		button_3.setFont(new Font("SansSerif", Font.BOLD, 12));
+		button_3.setIcon(new ImageIcon("C:\\Users\\Bruno\\git\\SisAcademic\\SisAcademic\\icon\\bookLoupe.png"));
 		button_3.setHorizontalAlignment(SwingConstants.LEFT);
-		button_3.setBounds(952, 408, 170, 65);
+		button_3.setBounds(983, 408, 170, 80);
 		panelInicial.add(button_3);
 		
 		JLabel labelLogo = new JLabel("");
 		labelLogo.setIcon(new ImageIcon("C:\\Users\\Bruno\\git\\SisAcademic\\SisAcademic\\icon\\sisAcademic.png"));
 		labelLogo.setBounds(501, 108, 301, 245);
 		panelInicial.add(labelLogo);
+		
+		JLabel label = new JLabel("");
+		label.setIcon(new ImageIcon("C:\\Users\\Bruno\\git\\SisAcademic\\SisAcademic\\icon\\gfSoft.png"));
+		label.setBounds(6, 402, 373, 236);
+		panelInicial.add(label);
 
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -287,46 +303,46 @@ public class Principal extends JFrame {
 		/**
 		 * Instanciando todas as telas e deixando invisiveis
 		 */
-		ALUNO = new CadAluno();
-		FUNCIONARIO = new CadFuncionario();
-		PROFESSOR = new CadProfessor();
-		DISCIPLINA = new CadDisciplina();
-		CONSULTAALUNO = new ConsultaAluno();
-		CONSULTAFUNCIONARIO = new ConsultaFuncionario();
-		CONSULTAPROFESSOR = new ConsultaProfessor();
-		CONSULTADISCIPLINA = new ConsultaDisciplina();
-		
-		desktopPane.add(ALUNO);
-		desktopPane.add(FUNCIONARIO);
-		desktopPane.add(PROFESSOR);
-		desktopPane.add(DISCIPLINA);
-		desktopPane.add(CONSULTAALUNO);
-		desktopPane.add(CONSULTAFUNCIONARIO);
-		desktopPane.add(CONSULTAPROFESSOR);
-		desktopPane.add(CONSULTADISCIPLINA);
-		
-		try {
-			ALUNO.setMaximum(true);
-			FUNCIONARIO.setMaximum(true);
-			PROFESSOR.setMaximum(true);
-			DISCIPLINA.setMaximum(true);
-			CONSULTAALUNO.setMaximum(true);
-			CONSULTAFUNCIONARIO.setMaximum(true);
-			CONSULTAPROFESSOR.setMaximum(true);
-			CONSULTADISCIPLINA.setMaximum(true);
-		} catch (PropertyVetoException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		
-		ALUNO.setVisible(false);
-		FUNCIONARIO.setVisible(false);
-		PROFESSOR.setVisible(false);
-		DISCIPLINA.setVisible(false);
-		CONSULTAALUNO.setVisible(false);
-		CONSULTAFUNCIONARIO.setVisible(false);
-		CONSULTAPROFESSOR.setVisible(false);
-		CONSULTADISCIPLINA.setVisible(false);
+//		ALUNO = new CadAluno();
+//		FUNCIONARIO = new CadFuncionario();
+//		PROFESSOR = new CadProfessor();
+//		DISCIPLINA = new CadDisciplina();
+//		CONSULTAALUNO = new ConsultaAluno();
+//		CONSULTAFUNCIONARIO = new ConsultaFuncionario();
+//		CONSULTAPROFESSOR = new ConsultaProfessor();
+//		CONSULTADISCIPLINA = new ConsultaDisciplina();
+//		
+//		desktopPane.add(ALUNO);
+//		desktopPane.add(FUNCIONARIO);
+//		desktopPane.add(PROFESSOR);
+//		desktopPane.add(DISCIPLINA);
+//		desktopPane.add(CONSULTAALUNO);
+//		desktopPane.add(CONSULTAFUNCIONARIO);
+//		desktopPane.add(CONSULTAPROFESSOR);
+//		desktopPane.add(CONSULTADISCIPLINA);
+//		
+//		try {
+//			ALUNO.setMaximum(true);
+//			FUNCIONARIO.setMaximum(true);
+//			PROFESSOR.setMaximum(true);
+//			DISCIPLINA.setMaximum(true);
+//			CONSULTAALUNO.setMaximum(true);
+//			CONSULTAFUNCIONARIO.setMaximum(true);
+//			CONSULTAPROFESSOR.setMaximum(true);
+//			CONSULTADISCIPLINA.setMaximum(true);
+//		} catch (PropertyVetoException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
+//		
+//		ALUNO.setVisible(false);
+//		FUNCIONARIO.setVisible(false);
+//		PROFESSOR.setVisible(false);
+//		DISCIPLINA.setVisible(false);
+//		CONSULTAALUNO.setVisible(false);
+//		CONSULTAFUNCIONARIO.setVisible(false);
+//		CONSULTAPROFESSOR.setVisible(false);
+//		CONSULTADISCIPLINA.setVisible(false);
 		// =======================================================
 		
 	}
