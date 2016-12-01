@@ -36,6 +36,21 @@ public class PersistenceDisciplina implements IPersistenceDisciplina {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			JOptionPane.showMessageDialog(null, "Erro na insercao dos dados na base!", "Erro", JOptionPane.ERROR_MESSAGE);
+		} finally {
+			try {
+//				if(con != null)
+//					con.getConnection().close();
+				
+				if(stmt != null)
+					stmt.close();
+				
+				if(rs != null)
+					rs.close();
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 		return false;
@@ -54,6 +69,21 @@ public class PersistenceDisciplina implements IPersistenceDisciplina {
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "Erro ao deletar dados na base!", "Erro", JOptionPane.ERROR_MESSAGE);
 			e.printStackTrace();
+		} finally {
+			try {
+//				if(con != null)
+//					con.getConnection().close();
+				
+				if(stmt != null)
+					stmt.close();
+				
+				if(rs != null)
+					rs.close();
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 		return false;
@@ -77,17 +107,22 @@ public class PersistenceDisciplina implements IPersistenceDisciplina {
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
-		} /*finally {
-			if (con != null)
-				con.close();
-			
-			if (stmt != null)
-				stmt.close();
-
-			if (rs != null)
-				rs.close();
-			System.out.println("--- Após encerrar as conexões. ---");
-		}*/
+		} finally {
+			try {
+//				if(con != null)
+//					con.getConnection().close();
+				
+				if(stmt != null)
+					stmt.close();
+				
+				if(rs != null)
+					rs.close();
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		
 		return false;
 	}
@@ -117,17 +152,22 @@ public class PersistenceDisciplina implements IPersistenceDisciplina {
 		} catch (SQLException e) {
 	
 			e.printStackTrace();
-		} /*finally {
-			if (con != null)
-				con.close();
-			
-			if (stmt != null)
-				stmt.close();
-
-			if (rs != null)
-				rs.close();
-			System.out.println("--- Após encerrar as conexões. ---");
-		}*/
+		} finally {
+			try {
+//				if(con != null)
+//					con.getConnection().close();
+				
+				if(stmt != null)
+					stmt.close();
+				
+				if(rs != null)
+					rs.close();
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		
 		
 		return null;
@@ -163,17 +203,22 @@ public class PersistenceDisciplina implements IPersistenceDisciplina {
 		} catch (SQLException e) {
 		
 			e.printStackTrace();
-		} /*finally {
-			if (con != null)
-				con.close();
-	
-			if (stmt != null)
-				stmt.close();
-
-			if (rs != null)
-				rs.close();
-			System.out.println("--- Após encerrar as conexões. ---");
-		}*/
+		} finally {
+			try {
+//				if(con != null)
+//					con.getConnection().close();
+				
+				if(stmt != null)
+					stmt.close();
+				
+				if(rs != null)
+					rs.close();
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 
 		return null;
 	}
@@ -208,17 +253,22 @@ public class PersistenceDisciplina implements IPersistenceDisciplina {
 		} catch (SQLException e) {
 		
 			e.printStackTrace();
-		} /*finally {
-			if (con != null)
-				con.close();
-	
-			if (stmt != null)
-				stmt.close();
-
-			if (rs != null)
-				rs.close();
-			System.out.println("--- Após encerrar as conexões. ---");
-		}*/
+		} finally {
+			try {
+//				if(con != null)
+//					con.getConnection().close();
+				
+				if(stmt != null)
+					stmt.close();
+				
+				if(rs != null)
+					rs.close();
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 
 		return null;
 	}

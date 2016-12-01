@@ -185,19 +185,19 @@ public class Principal extends JFrame {
 				desktopPane.moveToFront(PROFESSOR);
 			}
 		});
+		
+				JMenuItem mntmCadFuncinario = new JMenuItem("Cadastro de Funcion\u00E1rio");
+				mntmCadFuncinario.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						FUNCIONARIO.setVisible(true);
+						FUNCIONARIO.alternaBotoes(false);
+						FUNCIONARIO.setEditable(true);
+						FUNCIONARIO.setTitle("Cadastro de Funcionário");
+						desktopPane.moveToFront(FUNCIONARIO);
+					}
+				});
+				mnArquivo.add(mntmCadFuncinario);
 		mnArquivo.add(mntmCadProfessor);
-
-		JMenuItem mntmCadFuncinario = new JMenuItem("Cadastro de Funcion\u00E1rio");
-		mntmCadFuncinario.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				FUNCIONARIO.setVisible(true);
-				FUNCIONARIO.alternaBotoes(false);
-				FUNCIONARIO.setEditable(true);
-				FUNCIONARIO.setTitle("Cadastro de Funcionário");
-				desktopPane.moveToFront(FUNCIONARIO);
-			}
-		});
-		mnArquivo.add(mntmCadFuncinario);
 
 		JMenuItem mntmCadDisciplina = new JMenuItem("Cadastro de Disciplina");
 		mntmCadDisciplina.addActionListener(new ActionListener() {
@@ -242,7 +242,6 @@ public class Principal extends JFrame {
 				desktopPane.moveToFront(CONSULTADISCIPLINA);
 			}
 		});
-		mnConsulta.add(mntmConsultaDisciplina);
 		
 		JMenuItem mntmFuncionario = new JMenuItem("Funcionario");
 		mntmFuncionario.addActionListener(new ActionListener() {
@@ -265,6 +264,7 @@ public class Principal extends JFrame {
 			}
 		});
 		mnConsulta.add(mntmProfessor);
+		mnConsulta.add(mntmConsultaDisciplina);
 		
 		JMenu mnAjuda = new JMenu("Ajuda");
 		menuBar.add(mnAjuda);

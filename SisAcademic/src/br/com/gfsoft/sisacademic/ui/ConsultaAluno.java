@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
@@ -42,6 +43,7 @@ public class ConsultaAluno extends JInternalFrame {
 	private JTable table;
 	private JButton btnFiltrar;
 	private JButton btnImprimir;
+	private JFileChooser jfcSalvar;
 	
 	private Academico academico;
 	private Aluno aluno;
@@ -143,26 +145,38 @@ public class ConsultaAluno extends JInternalFrame {
 		/* BOTAO IMPRIMIR */
 		btnImprimir = new JButton("Imprimir");
 		btnImprimir.addActionListener(new ActionListener() {
-			private boolean add;
-
 			public void actionPerformed(ActionEvent e) {
 				
-				// criação do documento
+				// criacao do documento
 		        Document document = new Document();
 		        try {
-		           
-		            PdfWriter.getInstance(document, new FileOutputStream("/home/felipe/workspace/ArquivoPDF/src/arquivos/PDF_DevMedia.pdf"));
+		        	
+		        	jfcSalvar = new JFileChooser();
+		        	jfcSalvar.setDialogTitle("Salvar Como...");
+		        	jfcSalvar.setAcceptAllFileFilterUsed(true);
+		        	if (jfcSalvar.showSaveDialog(null) != JFileChooser.APPROVE_OPTION){
+		                return;  
+		            }
+		        	
+		        	PdfWriter.getInstance(document, new FileOutputStream(jfcSalvar.getSelectedFile().getAbsolutePath()+".pdf"));
 		            document.open();
 		            
 		            //document.setPageSize(PageSize.A3); // modificado para o tamanho A3;
 		            
-		            String[] colunas = new String[]{"Matricula","Nome","cpf","rg","email","Data Nascimento", "Data de Matricula"};
-		           
-		            // adicionando um parágrafo no documento
-		            document.add(new Paragraph(""));
+		            document.add(new Paragraph("Matricula" + " - " + "Nome" + " - " + "CPF"));
 		            
-		            document.newPage();
-		            document.add(new Paragraph("Novo parágrafo na nova página"));
+		            // adicionando um parágrafo no documento
+		            for(int row=0; row<table.getRowCount(); row++){
+		            	document.add(new Paragraph(table.getValueAt(row, 0).toString()
+		            			+ " - " + table.getValueAt(row, 1).toString()
+		            			+ " - " + table.getValueAt(row, 2).toString()));
+		            }
+		            
+		            JOptionPane.showMessageDialog(null, "Relatorio gerado com sucesso!", "Relatorio", JOptionPane.INFORMATION_MESSAGE);
+		            
+		            
+//		            document.newPage();
+//		            document.add(new Paragraph("Novo parágrafo na nova página"));
 		            
 		            
 		        }
@@ -190,7 +204,7 @@ public class ConsultaAluno extends JInternalFrame {
 	public void preencherTabela(){
         List<Object> dados = new ArrayList<>();
         List<Aluno> alunos = new ArrayList<>();
-        String[] colunas = new String[]{"Matricula","Nome","cpf","rg","email","Data Nascimento", "Data de Matricula"};
+        String[] colunas = new String[]{"Matricula","Nome","CPF","RG","Email","Data Nascimento", "Data de Matricula"};
         academico = new Academico();
         
         alunos.addAll(academico.listarAlunos());
@@ -232,7 +246,7 @@ public class ConsultaAluno extends JInternalFrame {
 	public void preencherTabelaFiltro(String nome){
         List<Object> dados = new ArrayList<>();
         List<Aluno> alunos = new ArrayList<>();
-        String[] colunas = new String[]{"Matricula","Nome","cpf","rg","email","Data Nascimento", "Data de Matricula"};
+        String[] colunas = new String[]{"Matricula","Nome","CPF","RG","Email","Data Nascimento", "Data de Matricula"};
         academico = new Academico();
         
         alunos.addAll(academico.filtrarAlunos(nome));
@@ -265,15 +279,5 @@ public class ConsultaAluno extends JInternalFrame {
         table.setAutoCreateRowSorter(true);
         
     } //Fim do Metodo preencherTabela
-	
-	private void imprimirColunas(){
-		
-		String[] col = new String[]{"Matricula","Nome","cpf","rg","email","Data Nascimento", "Data de Matricula"};
-		
-		for(int i=0;i<col.length;i++){
-			System.out.print(col[i] + " ");
-		}
-
-	}
 	
 }

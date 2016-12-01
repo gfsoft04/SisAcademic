@@ -56,6 +56,21 @@ public class PersistenceFuncionario implements IPersistenceFuncionario {
 			catch (SQLException exept){
 				exept.printStackTrace();
 				JOptionPane.showMessageDialog(null, "Erro na inser��o de funcionario na base de dados","Erro", JOptionPane.ERROR_MESSAGE);
+			} finally {
+				try {
+//					if(con != null)
+//						con.getConnection().close();
+					
+					if(stmt != null)
+						stmt.close();
+					
+					if(rs != null)
+						rs.close();
+					
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 		return false;
@@ -80,6 +95,21 @@ public class PersistenceFuncionario implements IPersistenceFuncionario {
 		catch (SQLException exept){
 			exept.printStackTrace();
 			JOptionPane.showMessageDialog(null, "Erro ao deletar funcionario da base de dados","Erro", JOptionPane.ERROR_MESSAGE);
+		} finally {
+			try {
+//				if(con != null)
+//					con.getConnection().close();
+				
+				if(stmt != null)
+					stmt.close();
+				
+				if(rs != null)
+					rs.close();
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	
 		return false;
@@ -106,6 +136,21 @@ public class PersistenceFuncionario implements IPersistenceFuncionario {
 			} catch (SQLException e) {
 				
 				e.printStackTrace();
+			} finally {
+				try {
+//					if(con != null)
+//						con.getConnection().close();
+					
+					if(stmt != null)
+						stmt.close();
+					
+					if(rs != null)
+						rs.close();
+					
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 		return false;
@@ -154,6 +199,21 @@ public class PersistenceFuncionario implements IPersistenceFuncionario {
 		}catch(SQLException ex){
 			ex.printStackTrace();
 			JOptionPane.showMessageDialog(null, "Erro na busca do funcionario na base!", "Erro", JOptionPane.ERROR_MESSAGE);
+		} finally {
+			try {
+//				if(con != null)
+//					con.getConnection().close();
+				
+				if(stmt != null)
+					stmt.close();
+				
+				if(rs != null)
+					rs.close();
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 			
 		return null;
@@ -206,6 +266,21 @@ public class PersistenceFuncionario implements IPersistenceFuncionario {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			JOptionPane.showMessageDialog(null, "Erro na busca dos alunos na base!", "Erro", JOptionPane.ERROR_MESSAGE);
+		} finally {
+			try {
+//				if(con != null)
+//					con.getConnection().close();
+				
+				if(stmt != null)
+					stmt.close();
+				
+				if(rs != null)
+					rs.close();
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 		return null;
@@ -259,6 +334,21 @@ public class PersistenceFuncionario implements IPersistenceFuncionario {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			JOptionPane.showMessageDialog(null, "Erro na busca dos alunos na base!", "Erro", JOptionPane.ERROR_MESSAGE);
+		} finally {
+			try {
+//				if(con != null)
+//					con.getConnection().close();
+				
+				if(stmt != null)
+					stmt.close();
+				
+				if(rs != null)
+					rs.close();
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 		return null;

@@ -48,6 +48,21 @@ public class PersistencePessoa implements IPersistencePessoa {
 			// Excecao para banco de dados
 			ex.printStackTrace();
 			JOptionPane.showMessageDialog(null, "Erro na inserÁ„o dos dados na base!", "Erro", JOptionPane.ERROR_MESSAGE);
+		} finally {
+			try {
+//				if(con != null)
+//					con.getConnection().close();
+				
+				if(stmt != null)
+					stmt.close();
+				
+				if(rs != null)
+					rs.close();
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 		return false;
@@ -99,17 +114,22 @@ public class PersistencePessoa implements IPersistencePessoa {
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
-		} /*finally {
-			if (con != null)
-				con.close();
-			
-			if (stmt != null)
-				stmt.close();
-
-			if (rs != null)
-				rs.close();
-			System.out.println("--- Ap√≥s encerrar as conex√µes. ---");
-		}*/
+		} finally {
+			try {
+//				if(con != null)
+//					con.getConnection().close();
+				
+				if(stmt != null)
+					stmt.close();
+				
+				if(rs != null)
+					rs.close();
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		
 		return false;
 	}
@@ -133,6 +153,21 @@ public class PersistencePessoa implements IPersistencePessoa {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			try {
+//				if(con != null)
+//					con.getConnection().close();
+				
+				if(stmt != null)
+					stmt.close();
+				
+				if(rs != null)
+					rs.close();
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 		return id;
@@ -167,6 +202,21 @@ public class PersistencePessoa implements IPersistencePessoa {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			try {
+//				if(con != null)
+//					con.getConnection().close();
+				
+				if(stmt != null)
+					stmt.close();
+				
+				if(rs != null)
+					rs.close();
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 		return qtd;
@@ -188,6 +238,21 @@ public class PersistencePessoa implements IPersistencePessoa {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			try {
+//				if(con != null)
+//					con.getConnection().close();
+				
+				if(stmt != null)
+					stmt.close();
+				
+				if(rs != null)
+					rs.close();
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 		return id;

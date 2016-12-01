@@ -58,6 +58,21 @@ public class PersistenceProfessor implements IPersistenceProfessor {
 				// Excecao para banco de dados
 				ex.printStackTrace();
 				JOptionPane.showMessageDialog(null, "Erro na insercao do professor na base!", "Erro", JOptionPane.ERROR_MESSAGE);
+			} finally {
+				try {
+//					if(con != null)
+//						con.getConnection().close();
+					
+					if(stmt != null)
+						stmt.close();
+					
+					if(rs != null)
+						rs.close();
+					
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}//if inseriu corretamente em funcionario
 		
@@ -83,6 +98,21 @@ public class PersistenceProfessor implements IPersistenceProfessor {
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "Erro ao deletar dados na base!", "Erro", JOptionPane.ERROR_MESSAGE);
 			e.printStackTrace();
+		} finally {
+			try {
+//				if(con != null)
+//					con.getConnection().close();
+				
+				if(stmt != null)
+					stmt.close();
+				
+				if(rs != null)
+					rs.close();
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 		return false;
@@ -112,17 +142,22 @@ public class PersistenceProfessor implements IPersistenceProfessor {
 			} catch (SQLException e) {
 				
 				e.printStackTrace();
-			} /*finally {
-				if (con != null)
-					con.close();
-				
-				if (stmt != null)
-					stmt.close();
-	
-				if (rs != null)
-					rs.close();
-				System.out.println("--- Após encerrar as conexões. ---");
-			}*/
+			} finally {
+				try {
+//					if(con != null)
+//						con.getConnection().close();
+					
+					if(stmt != null)
+						stmt.close();
+					
+					if(rs != null)
+						rs.close();
+					
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 		}
 		
 		
@@ -178,6 +213,21 @@ public class PersistenceProfessor implements IPersistenceProfessor {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			JOptionPane.showMessageDialog(null, "Erro na busca do professor na base!", "Erro", JOptionPane.ERROR_MESSAGE);
+		} finally {
+			try {
+//				if(con != null)
+//					con.getConnection().close();
+				
+				if(stmt != null)
+					stmt.close();
+				
+				if(rs != null)
+					rs.close();
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	
 		return null;
@@ -236,6 +286,21 @@ public class PersistenceProfessor implements IPersistenceProfessor {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			JOptionPane.showMessageDialog(null, "Erro na busca dos professores na base!", "Erro", JOptionPane.ERROR_MESSAGE);
+		} finally {
+			try {
+//				if(con != null)
+//					con.getConnection().close();
+				
+				if(stmt != null)
+					stmt.close();
+				
+				if(rs != null)
+					rs.close();
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 		return null;
@@ -295,6 +360,21 @@ public class PersistenceProfessor implements IPersistenceProfessor {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			JOptionPane.showMessageDialog(null, "Erro na busca dos professores na base!", "Erro", JOptionPane.ERROR_MESSAGE);
+		} finally {
+			try {
+//				if(con != null)
+//					con.getConnection().close();
+				
+				if(stmt != null)
+					stmt.close();
+				
+				if(rs != null)
+					rs.close();
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 		return null;

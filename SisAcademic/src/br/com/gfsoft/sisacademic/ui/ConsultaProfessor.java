@@ -137,7 +137,7 @@ public class ConsultaProfessor extends JInternalFrame {
 	public void preencherTabela(){
         List<Object> dados = new ArrayList<>();
         List<Professor> professor = new ArrayList<>();
-        String[] colunas = new String[]{"Matricula","Nome","cpf","rg","email","Data Nascimento", "Data de Contratação"};
+        String[] colunas = new String[]{"Matricula","Nome","CPF","RG","Email","Data Nascimento", "Data de Contratação"};
         academico = new Academico();
         
         professor.addAll(academico.listarProfessores());

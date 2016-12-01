@@ -55,6 +55,21 @@ public class PersistenceAdministracao implements IPersistenceAdministracao {
 				// Excecao para banco de dados
 				ex.printStackTrace();
 				JOptionPane.showMessageDialog(null, "Erro na insercao do administrador na base!", "Erro", JOptionPane.ERROR_MESSAGE);
+			} finally {
+				try {
+//					if(con != null)
+//						con.getConnection().close();
+					
+					if(stmt != null)
+						stmt.close();
+					
+					if(rs != null)
+						rs.close();
+					
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}//if inseriu corretamente em pessoa
 		
@@ -89,6 +104,21 @@ public class PersistenceAdministracao implements IPersistenceAdministracao {
 //			}catch (SQLException ex){
 //				ex.printStackTrace();
 //				JOptionPane.showMessageDialog(null, "Erro ao deletar administrador da base de dados","Erro", JOptionPane.ERROR_MESSAGE);
+//			} finally {
+//				try {
+//		//			if(con != null)
+//		//				con.getConnection().close();
+//					
+//					if(stmt != null)
+//						stmt.close();
+//					
+//					if(rs != null)
+//						rs.close();
+//					
+//				} catch (SQLException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
 //			}
 //			
 //				
@@ -112,6 +142,21 @@ public class PersistenceAdministracao implements IPersistenceAdministracao {
 				con.getConnection().createStatement().executeQuery(sql);
 			}catch(SQLException ex){
 				ex.printStackTrace();
+			} finally {
+				try {
+//					if(con != null)
+//						con.getConnection().close();
+					
+					if(stmt != null)
+						stmt.close();
+					
+					if(rs != null)
+						rs.close();
+					
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 		return false;
@@ -154,7 +199,23 @@ public class PersistenceAdministracao implements IPersistenceAdministracao {
 		}catch (SQLException ex){
 			ex.printStackTrace();
 			JOptionPane.showMessageDialog(null, "Erro na busca do administrador na base!", "Erro", JOptionPane.ERROR_MESSAGE);
+		} finally {
+			try {
+//				if(con != null)
+//					con.getConnection().close();
+				
+				if(stmt != null)
+					stmt.close();
+				
+				if(rs != null)
+					rs.close();
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
+		
 		return null;
 	}
 

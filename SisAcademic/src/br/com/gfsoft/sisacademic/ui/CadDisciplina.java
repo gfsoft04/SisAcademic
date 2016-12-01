@@ -359,6 +359,7 @@ public class CadDisciplina extends JInternalFrame {
 	 * Metodo para limpar campos
 	 */
 	public void limparCampos(){
+		txtId.setText("");
 		txtNome.setText("");
 		txtDescricao.setText("");
 		textPaneObservacao.setText("");
