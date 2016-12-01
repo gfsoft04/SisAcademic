@@ -6,18 +6,27 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
+
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
 
 import br.com.gfsoft.sisacademic.controller.Academico;
 import br.com.gfsoft.sisacademic.model.Funcionario;
@@ -33,6 +42,7 @@ public class ConsultaFuncionario extends JInternalFrame {
 	private JTable table;
 	private JButton btnFiltrar;
 	private JButton btnImprimir;
+	private JFileChooser jfcSalvar;
 	
 	private Funcionario funcionario;
 	private Academico academico;
@@ -59,7 +69,7 @@ public class ConsultaFuncionario extends JInternalFrame {
 	public ConsultaFuncionario() {
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setClosable(true);
-		setTitle("Consulta de Funcionários");
+		setTitle("Consulta de Funcionï¿½rios");
 		setBounds(100, 100, 1200, 670);
 		setLocation(0, 0);
 		
@@ -126,6 +136,52 @@ public class ConsultaFuncionario extends JInternalFrame {
 		
 		/* BOTAO IMPRIMIR */
 		btnImprimir = new JButton("Imprimir");
+		btnImprimir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				// criacao do documento
+		        Document document = new Document();
+		        try {
+		        	
+		        	jfcSalvar = new JFileChooser();
+		        	jfcSalvar.setDialogTitle("Salvar Como...");
+		        	jfcSalvar.setAcceptAllFileFilterUsed(true);
+		        	if (jfcSalvar.showSaveDialog(null) != JFileChooser.APPROVE_OPTION){
+		                return;  
+		            }
+		        	
+		        	PdfWriter.getInstance(document, new FileOutputStream(jfcSalvar.getSelectedFile().getAbsolutePath()+".pdf"));
+		            document.open();
+		            
+		            //document.setPageSize(PageSize.A3); // modificado para o tamanho A3;
+		            
+		            document.add(new Paragraph("Matricula" + " - " + "Nome" + " - " + "CPF"));
+		            
+		            // adicionando um parÃ¡grafo no documento
+		            for(int row=0; row<table.getRowCount(); row++){
+		            	document.add(new Paragraph(table.getValueAt(row, 0).toString()
+		            			+ " - " + table.getValueAt(row, 1).toString()
+		            			+ " - " + table.getValueAt(row, 2).toString()));
+		            }
+		            
+		            JOptionPane.showMessageDialog(null, "Relatorio gerado com sucesso!", "Relatorio", JOptionPane.INFORMATION_MESSAGE);
+		            
+		            
+//		            document.newPage();
+//		            document.add(new Paragraph("Novo parÃ¡grafo na nova pÃ¡gina"));
+		            
+		            
+		        }
+		        catch(DocumentException de) {
+		            System.err.println(de.getMessage());
+		        }
+		        catch(IOException ioe) {
+		            System.err.println(ioe.getMessage());
+		        }
+		        document.close();
+				
+			}
+		});
 		btnImprimir.setBounds(650, 48, 100, 30);
 		panel.add(btnImprimir);
 		
@@ -137,7 +193,7 @@ public class ConsultaFuncionario extends JInternalFrame {
 	public void preencherTabela(){
         List<Object> dados = new ArrayList<>();
         List<Funcionario> funcionario = new ArrayList<>();
-        String[] colunas = new String[]{"Matricula","Nome","CPF","RG","Email","Data Nascimento", "Data de Contratação"};
+        String[] colunas = new String[]{"Matricula","Nome","CPF","RG","Email","Data Nascimento", "Data de Contrataï¿½ï¿½o"};
         academico = new Academico();
         
         funcionario.addAll(academico.listarFuncionarios());
@@ -175,7 +231,7 @@ public class ConsultaFuncionario extends JInternalFrame {
 	public void preencherTabelaFiltro(String nome){
         List<Object> dados = new ArrayList<>();
         List<Funcionario> funcionario = new ArrayList<>();
-        String[] colunas = new String[]{"Matricula","Nome","CPF","RG","Email","Data Nascimento", "Data de Contratação"};
+        String[] colunas = new String[]{"Matricula","Nome","CPF","RG","Email","Data Nascimento", "Data de Contrataï¿½ï¿½o"};
         academico = new Academico();
         
         funcionario.addAll(academico.filtrarFuncionarios(nome));
