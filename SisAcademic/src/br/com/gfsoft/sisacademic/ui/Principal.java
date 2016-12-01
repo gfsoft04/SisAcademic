@@ -167,11 +167,6 @@ public class Principal extends JFrame {
 		labelLogo.setIcon(new ImageIcon("C:\\Users\\Bruno\\git\\SisAcademic\\SisAcademic\\icon\\sisAcademic.png"));
 		labelLogo.setBounds(501, 108, 301, 245);
 		panelInicial.add(labelLogo);
-		
-		JLabel label = new JLabel("");
-		label.setIcon(new ImageIcon("C:\\Users\\Bruno\\git\\SisAcademic\\SisAcademic\\icon\\gfSoft.png"));
-		label.setBounds(6, 402, 373, 236);
-		panelInicial.add(label);
 
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
