@@ -704,7 +704,7 @@ public class CadAluno extends JInternalFrame {
 				}
 			}
 		});
-		btnDisciplinas.setBounds(896, 425, 100, 30);
+		btnDisciplinas.setBounds(859, 412, 100, 30);
 		panel.add(btnDisciplinas);
 		
 	}

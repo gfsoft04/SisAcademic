@@ -15,6 +15,7 @@ import br.com.gfsoft.sisacademic.service.AlunoDisciplinaService;
 import br.com.gfsoft.sisacademic.service.AlunoService;
 import br.com.gfsoft.sisacademic.service.DisciplinaService;
 import br.com.gfsoft.sisacademic.service.FuncionarioService;
+import br.com.gfsoft.sisacademic.service.ProfessorDisciplinaService;
 import br.com.gfsoft.sisacademic.service.ProfessorService;
 
 public class Academico {
@@ -23,16 +24,16 @@ public class Academico {
 	ProfessorService professorService;
 	FuncionarioService funcionarioService;
 	AlunoDisciplinaService alunoDisciplinaService;
-	
+	ProfessorDisciplinaService professorDisciplinaService;
 	DisciplinaService disciplinaService;
 	
 	public Academico(){
 		this.disciplinaService = new DisciplinaService();
-		
 		this.alunoService = new AlunoService();
 		this.professorService = new ProfessorService();
 		this.funcionarioService = new FuncionarioService();
 		this.alunoDisciplinaService = new AlunoDisciplinaService();
+		this.professorDisciplinaService = new ProfessorDisciplinaService();
 	}
 	
 	//-------------Metodos da Disciplina------------------------
@@ -152,5 +153,19 @@ public class Academico {
 	public List<Disciplina> listarAlunoDisciplinas(long idAluno){
 		return alunoDisciplinaService.listar(idAluno);
 	}
+	
+	//-------------Metodos do Professor Disciplina-----------------------------
+	
+		public boolean cadastrarProfessorDisciplina(long idProfessor, long idDisciplina){
+			return professorDisciplinaService.cadastrar(idProfessor, idDisciplina);
+		}
+		
+		public boolean deletarProfessorDisciplina(long idProfessor, long idDisciplina){
+			return professorDisciplinaService.deletar(idProfessor, idDisciplina);
+		}
+		
+		public List<Disciplina> listarProfessorDisciplinas(long idProfessor){
+			return professorDisciplinaService.listar(idProfessor);
+		}
 	
 }

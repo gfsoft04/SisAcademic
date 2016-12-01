@@ -21,13 +21,13 @@ import br.com.gfsoft.sisacademic.controller.Academico;
 import br.com.gfsoft.sisacademic.model.Disciplina;
 import br.com.gfsoft.sisacademic.model.TabelaConsulta;
 
-public class CadAlunoDisciplina extends JDialog {
+public class CadProfessorDisciplina extends JDialog {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -3134335899633879852L;
-	private static long idAluno;
+	private static final long serialVersionUID = 913298618338982510L;
+	private static long idProfessor;
 	private final JPanel contentPanel = new JPanel();
 	private JTable jTableInicial;
 	private JTable jTableFinal;
@@ -40,7 +40,7 @@ public class CadAlunoDisciplina extends JDialog {
 	 */
 	public static void main(String[] args) {
 		try {
-			CadAlunoDisciplina dialog = new CadAlunoDisciplina(idAluno);
+			CadProfessorDisciplina dialog = new CadProfessorDisciplina(idProfessor);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -51,10 +51,10 @@ public class CadAlunoDisciplina extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public CadAlunoDisciplina(long idAluno) {
+	public CadProfessorDisciplina(long idProfessor) {
 		setTitle("Disciplinas");
 		setResizable(false);
-		CadAlunoDisciplina.idAluno = idAluno;
+		CadProfessorDisciplina.idProfessor = idProfessor;
 		setBounds(100, 100, 900, 421);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -91,19 +91,19 @@ public class CadAlunoDisciplina extends JDialog {
 				int linhaSelecionada = jTableInicial.getSelectedRow();// Linha Selecionada
 				long id = Long.parseLong(jTableInicial.getValueAt(linhaSelecionada ,0).toString());
 				
-				disciplinas.addAll(academico.listarAlunoDisciplinas(idAluno));
+				disciplinas.addAll(academico.listarProfessorDisciplinas(idProfessor));
 				
 				for(Disciplina d : disciplinas){
 					if(d.getId() == id){
-						JOptionPane.showMessageDialog(null, "O aluno ja esta matriculado nesta disciplina!", "Erro", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "O professor ja esta cadastrado nesta disciplina!", "Erro", JOptionPane.ERROR_MESSAGE);
 						return ;
 					}
 				}
 				
-				if(academico.cadastrarAlunoDisciplina(idAluno, id)){
-					//System.out.println("disciplina cadastrado!");
+				if(academico.cadastrarProfessorDisciplina(idProfessor, id)){
+					//System.out.println("disciplina cadastrada!");
 					//atualizar tabela
-					preencherTabelaFinal(idAluno);
+					preencherTabelaFinal(idProfessor);
 				}
 			}
 		});
@@ -117,10 +117,10 @@ public class CadAlunoDisciplina extends JDialog {
 				long id = Long.parseLong(jTableFinal.getValueAt(linhaSelecionada ,0).toString());
 				
 				try{
-		            if(academico.deletarAlunoDisciplina(idAluno, id)){
+		            if(academico.deletarProfessorDisciplina(idProfessor, id)){
 		            	//System.out.println("disciplina deletado!");
 						//atualizar tabela
-						preencherTabelaFinal(idAluno);
+						preencherTabelaFinal(idProfessor);
 		            }
 		        }catch(IndexOutOfBoundsException m){
 		            JOptionPane.showMessageDialog(null, "Nenhuma disciplina selecionada", "Erro", JOptionPane.ERROR_MESSAGE);
@@ -133,7 +133,7 @@ public class CadAlunoDisciplina extends JDialog {
 		panel.add(btnRemover);
 		
 		preencherTabelaInicial();
-		preencherTabelaFinal(CadAlunoDisciplina.idAluno);
+		preencherTabelaFinal(CadProfessorDisciplina.idProfessor);
 	}
 	
 	/**
@@ -167,13 +167,13 @@ public class CadAlunoDisciplina extends JDialog {
         
     } //Fim do Metodo preencherTabela
 	
-	public void preencherTabelaFinal(long idAluno){
+	public void preencherTabelaFinal(long idProfessor){
         List<Object> dados = new ArrayList<>();
         List<Disciplina> disciplinas = new ArrayList<>();
         String[] colunas = new String[]{"Id", "Nome"};
         academico = new Academico();
         
-        disciplinas.addAll(academico.listarAlunoDisciplinas(idAluno));
+        disciplinas.addAll(academico.listarProfessorDisciplinas(idProfessor));
         
         for(Disciplina disc : disciplinas){
         	dados.add(new Object[]{disc.getId(), disc.getNome()});
@@ -193,4 +193,5 @@ public class CadAlunoDisciplina extends JDialog {
         jTableFinal.setAutoCreateRowSorter(true);
         
     } //Fim do Metodo preencherTabela
+	
 }

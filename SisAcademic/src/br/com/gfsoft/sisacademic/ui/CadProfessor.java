@@ -71,6 +71,7 @@ public class CadProfessor extends JInternalFrame {
 	private JButton btnCadastrar;
 	private JButton btnAlterar;
 	private JButton btnDeletar;
+	private JButton btnDisciplinas;
 	
 	private Academico academico;
 
@@ -100,7 +101,7 @@ public class CadProfessor extends JInternalFrame {
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setClosable(true);
 		setTitle("Cadastro de Professor");
-		setBounds(100, 100, 1000, 670);
+		setBounds(100, 100, 1205, 670);
 		setLocation(0, 0);
 		
 		JPanel panel = new JPanel();
@@ -109,7 +110,7 @@ public class CadProfessor extends JInternalFrame {
 		panel.setLayout(null);
 
 		JPanel pane_1 = new JPanel();
-		pane_1.setBounds(10, 11, 974, 237);
+		pane_1.setBounds(10, 11, 810, 237);
 		panel.add(pane_1);
 		pane_1.setBorder(new TitledBorder(null, "Dados Pessoais", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		pane_1.setLayout(null);
@@ -249,7 +250,7 @@ public class CadProfessor extends JInternalFrame {
 		JPanel pane_2 = new JPanel();
 		pane_2.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Endere\u00E7o",
 				TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		pane_2.setBounds(10, 259, 974, 167);
+		pane_2.setBounds(10, 259, 810, 167);
 		panel.add(pane_2);
 		pane_2.setLayout(null);
 
@@ -662,6 +663,19 @@ public class CadProfessor extends JInternalFrame {
 		btnCancelar.setBounds(10, 43, 100, 30);
 		panel_5.add(btnCancelar);
 		btnCancelar.setFont(new Font("Tahoma", Font.BOLD, 11));
+		
+		btnDisciplinas = new JButton("Disciplinas");
+		btnDisciplinas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CadProfessorDisciplina cadProfessorDisciplina;
+				academico = new Academico();
+				cadProfessorDisciplina = new CadProfessorDisciplina(academico.buscarProfessor(txtMatricula.getText()).getId());
+				cadProfessorDisciplina.setVisible(true);
+			}
+		});
+		btnDisciplinas.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnDisciplinas.setBounds(864, 396, 100, 30);
+		panel.add(btnDisciplinas);
 
 	}
 	
@@ -704,6 +718,7 @@ public class CadProfessor extends JInternalFrame {
 		btnDeletar.setVisible(flag);
 		txtMatricula.setVisible(flag);
 		labelMatricula.setVisible(flag);
+		btnDisciplinas.setVisible(flag);
 	}
 	
 	/**
