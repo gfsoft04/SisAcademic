@@ -726,10 +726,11 @@ public class CadFuncionario extends JInternalFrame {
 				GeraMatricula geraMatricula = new GeraMatricula();
 				String matricula = geraMatricula.gerarMatricula(1, Integer.parseInt(formattedtxtDtContratacao.getText().substring(6, 10)));
 				File file = new File("img\\"+matricula+".png");
-				ImageIcon icon = new ImageIcon(file.getPath());
 				
 				webView.salvarFoto(webView.getPlayer().getImage(), file);
 				webView.pararWebCam();
+				
+				ImageIcon icon = new ImageIcon(file.getPath());
 				path = file.getPath();
 				labelImagem.setVisible(true);
 				labelImagem.setIcon(icon);

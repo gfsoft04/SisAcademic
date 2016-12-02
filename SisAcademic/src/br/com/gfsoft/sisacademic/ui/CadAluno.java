@@ -667,6 +667,7 @@ public class CadAluno extends JInternalFrame {
 				
 				webView.salvarFoto(webView.getPlayer().getImage(), file);
 				webView.pararWebCam();
+				
 				ImageIcon icon = new ImageIcon(file.getPath());
 				path = file.getPath();
 				labelImagem.setVisible(true);
