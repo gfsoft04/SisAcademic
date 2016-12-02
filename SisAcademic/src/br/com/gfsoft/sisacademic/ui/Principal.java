@@ -108,6 +108,15 @@ public class Principal extends JFrame {
 		panelInicial.setLayout(null);
 		
 		JButton btnCadAluno = new JButton("Aluno");
+		btnCadAluno.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ALUNO.setVisible(true);
+				ALUNO.alternaBotoes(false);
+				ALUNO.setEditable(true);
+				ALUNO.setTitle("Cadastro de Aluno");
+				desktopPane.moveToFront(ALUNO);
+			}
+		});
 		btnCadAluno.setFont(new Font("SansSerif", Font.BOLD, 12));
 		btnCadAluno.setHorizontalAlignment(SwingConstants.LEFT);
 		btnCadAluno.setIcon(new ImageIcon(Principal.class.getResource("/icon/add.png")));
@@ -115,6 +124,15 @@ public class Principal extends JFrame {
 		panelInicial.add(btnCadAluno);
 		
 		JButton btnCadProfessor = new JButton("Professor");
+		btnCadProfessor.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				PROFESSOR.setVisible(true);
+				PROFESSOR.alternaBotoes(false);
+				PROFESSOR.setEditable(true);
+				PROFESSOR.setTitle("Cadastro de Professor");
+				desktopPane.moveToFront(PROFESSOR);
+			}
+		});
 		btnCadProfessor.setFont(new Font("SansSerif", Font.BOLD, 12));
 		btnCadProfessor.setIcon(new ImageIcon(Principal.class.getResource("/icon/add.png")));
 		btnCadProfessor.setHorizontalAlignment(SwingConstants.LEFT);
@@ -122,6 +140,15 @@ public class Principal extends JFrame {
 		panelInicial.add(btnCadProfessor);
 		
 		JButton btnCadFuncionario = new JButton("Funcionario");
+		btnCadFuncionario.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				FUNCIONARIO.setVisible(true);
+				FUNCIONARIO.alternaBotoes(false);
+				FUNCIONARIO.setEditable(true);
+				FUNCIONARIO.setTitle("Cadastro de Funcionário");
+				desktopPane.moveToFront(FUNCIONARIO);
+			}
+		});
 		btnCadFuncionario.setFont(new Font("SansSerif", Font.BOLD, 12));
 		btnCadFuncionario.setIcon(new ImageIcon(Principal.class.getResource("/icon/add.png")));
 		btnCadFuncionario.setHorizontalAlignment(SwingConstants.LEFT);
@@ -129,6 +156,15 @@ public class Principal extends JFrame {
 		panelInicial.add(btnCadFuncionario);
 		
 		JButton btnCadDisciplina = new JButton("Disciplina");
+		btnCadDisciplina.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DISCIPLINA.setVisible(true);
+				DISCIPLINA.alternaBotoes(false);
+				DISCIPLINA.setEditable(true);
+				DISCIPLINA.setTitle("Cadastro de Disciplina");
+				desktopPane.moveToFront(DISCIPLINA);
+			}
+		});
 		btnCadDisciplina.setFont(new Font("SansSerif", Font.BOLD, 12));
 		btnCadDisciplina.setIcon(new ImageIcon(Principal.class.getResource("/icon/book.png")));
 		btnCadDisciplina.setHorizontalAlignment(SwingConstants.LEFT);
@@ -136,6 +172,14 @@ public class Principal extends JFrame {
 		panelInicial.add(btnCadDisciplina);
 		
 		JButton btnConsultaAluno = new JButton("Aluno");
+		btnConsultaAluno.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CONSULTAALUNO.setVisible(true);
+				CONSULTAALUNO.setTitle("Consulta de Alunos");
+				CONSULTAALUNO.preencherTabela();
+				desktopPane.moveToFront(CONSULTAALUNO);
+			}
+		});
 		btnConsultaAluno.setFont(new Font("SansSerif", Font.BOLD, 12));
 		btnConsultaAluno.setIcon(new ImageIcon(Principal.class.getResource("/icon/consultar.png")));
 		btnConsultaAluno.setHorizontalAlignment(SwingConstants.LEFT);
@@ -143,6 +187,14 @@ public class Principal extends JFrame {
 		panelInicial.add(btnConsultaAluno);
 		
 		JButton btnConsultaProfessor = new JButton("Professor");
+		btnConsultaProfessor.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CONSULTAPROFESSOR.setVisible(true);
+				CONSULTAPROFESSOR.setTitle("Consulta de Professores");
+				CONSULTAPROFESSOR.preencherTabela();
+				desktopPane.moveToFront(CONSULTAPROFESSOR);
+			}
+		});
 		btnConsultaProfessor.setFont(new Font("SansSerif", Font.BOLD, 12));
 		btnConsultaProfessor.setIcon(new ImageIcon(Principal.class.getResource("/icon/consultar.png")));
 		btnConsultaProfessor.setHorizontalAlignment(SwingConstants.LEFT);
@@ -150,6 +202,14 @@ public class Principal extends JFrame {
 		panelInicial.add(btnConsultaProfessor);
 		
 		JButton btnConsultaFuncionario = new JButton("Funcionario");
+		btnConsultaFuncionario.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CONSULTAFUNCIONARIO.setVisible(true);
+				CONSULTAFUNCIONARIO.setTitle("Consulta de Funcionários");
+				CONSULTAFUNCIONARIO.preencherTabela();
+				desktopPane.moveToFront(CONSULTAFUNCIONARIO);
+			}
+		});
 		btnConsultaFuncionario.setFont(new Font("SansSerif", Font.BOLD, 12));
 		btnConsultaFuncionario.setIcon(new ImageIcon(Principal.class.getResource("/icon/consultar.png")));
 		btnConsultaFuncionario.setHorizontalAlignment(SwingConstants.LEFT);
@@ -157,6 +217,14 @@ public class Principal extends JFrame {
 		panelInicial.add(btnConsultaFuncionario);
 		
 		JButton btnConsultaDisciplina = new JButton("Disciplina");
+		btnConsultaDisciplina.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CONSULTADISCIPLINA.setVisible(true);
+				CONSULTADISCIPLINA.setTitle("Consulta de Disciplinas");
+				CONSULTADISCIPLINA.preencherTabela();
+				desktopPane.moveToFront(CONSULTADISCIPLINA);
+			}
+		});
 		btnConsultaDisciplina.setFont(new Font("SansSerif", Font.BOLD, 12));
 		btnConsultaDisciplina.setIcon(new ImageIcon(Principal.class.getResource("/icon/bookLoupe.png")));
 		btnConsultaDisciplina.setHorizontalAlignment(SwingConstants.LEFT);
@@ -197,17 +265,17 @@ public class Principal extends JFrame {
 			}
 		});
 		
-				JMenuItem mntmCadFuncinario = new JMenuItem("Cadastro de Funcion\u00E1rio");
-				mntmCadFuncinario.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						FUNCIONARIO.setVisible(true);
-						FUNCIONARIO.alternaBotoes(false);
-						FUNCIONARIO.setEditable(true);
-						FUNCIONARIO.setTitle("Cadastro de Funcionário");
-						desktopPane.moveToFront(FUNCIONARIO);
-					}
-				});
-				mnArquivo.add(mntmCadFuncinario);
+		JMenuItem mntmCadFuncinario = new JMenuItem("Cadastro de Funcion\u00E1rio");
+		mntmCadFuncinario.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				FUNCIONARIO.setVisible(true);
+				FUNCIONARIO.alternaBotoes(false);
+				FUNCIONARIO.setEditable(true);
+				FUNCIONARIO.setTitle("Cadastro de Funcionário");
+				desktopPane.moveToFront(FUNCIONARIO);
+			}
+		});
+		mnArquivo.add(mntmCadFuncinario);
 		mnArquivo.add(mntmCadProfessor);
 
 		JMenuItem mntmCadDisciplina = new JMenuItem("Cadastro de Disciplina");

@@ -188,7 +188,7 @@ public class ConsultaDisciplina extends JInternalFrame {
 	public void preencherTabela(){
         List<Object> dados = new ArrayList<>();
         List<Disciplina> disciplinas = new ArrayList<>();
-        String[] colunas = new String[]{"Id", "Nome", "Descri��o", "Data de Cria��o", "Situa��o", "Semestre", "Observa��o"};
+        String[] colunas = new String[]{"Id", "Nome", "Descricao", "Data de Criacao", "Situacao", "Semestre", "Observacao"};
         academico = new Academico();
         
         disciplinas.addAll(academico.listarDisciplinas());
@@ -230,7 +230,7 @@ public class ConsultaDisciplina extends JInternalFrame {
 	public void preencherTabelaFiltro(String nome){
         List<Object> dados = new ArrayList<>();
         List<Disciplina> disciplinas = new ArrayList<>();
-        String[] colunas = new String[]{"Id", "Nome", "Descri��o", "Data de Cria��o", "Situa��o", "Semestre", "Observa��o"};
+        String[] colunas = new String[]{"Id", "Nome", "Descricao", "Data de Criacao", "Situacao", "Semestre", "Observacao"};
         academico = new Academico();
         
         disciplinas.addAll(academico.filtrarDisciplinas(nome));
