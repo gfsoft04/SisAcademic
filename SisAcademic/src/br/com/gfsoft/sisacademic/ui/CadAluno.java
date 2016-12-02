@@ -664,10 +664,10 @@ public class CadAluno extends JInternalFrame {
 				GeraMatricula geraMatricula = new GeraMatricula();
 				String matricula = geraMatricula.gerarMatricula(1, Integer.parseInt(formattedTxtDtMatricula.getText().substring(6, 10)));
 				File file = new File("img\\"+matricula+".png");
-				ImageIcon icon = new ImageIcon(file.getPath());
 				
 				webView.salvarFoto(webView.getPlayer().getImage(), file);
 				webView.pararWebCam();
+				ImageIcon icon = new ImageIcon(file.getPath());
 				path = file.getPath();
 				labelImagem.setVisible(true);
 				labelImagem.setIcon(icon);
@@ -730,7 +730,18 @@ public class CadAluno extends JInternalFrame {
 		formattedTxtDtNascimento.setText(aluno.getDtNascimento().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)));
 		formattedTxtDtMatricula.setText(aluno.getDtMatricula().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)));
 		formattedTxtTelefone.setText(aluno.getTelefone());
-		//comboBoxEstadoCivil.setSelectedIndex(0);
+		
+		if(aluno.getEstadoCivil().equals("S"))
+			comboBoxEstadoCivil.setSelectedIndex(0);
+		else if(aluno.getEstadoCivil().equals("C"))
+			comboBoxEstadoCivil.setSelectedIndex(1);
+		else if(aluno.getEstadoCivil().equals("V"))
+			comboBoxEstadoCivil.setSelectedIndex(2);
+		else if(aluno.getEstadoCivil().equals("D"))
+			comboBoxEstadoCivil.setSelectedIndex(3);
+		else if(aluno.getEstadoCivil().equals("UE"))
+			comboBoxEstadoCivil.setSelectedIndex(4);
+		
 		//comboBoxSexo.setSelectedIndex(0);
 		//comboBoxSituacao.setSelectedIndex(0);
 		formattedTxtCep.setText(aluno.getCep());

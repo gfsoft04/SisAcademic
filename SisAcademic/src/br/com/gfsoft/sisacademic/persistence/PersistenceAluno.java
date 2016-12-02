@@ -152,17 +152,10 @@ public class PersistenceAluno implements IPersistenceAluno {
 	}
 
 	@Override
-	public Aluno selectAluno(String matricula) throws UsuarioNaoEncontradoException{
+	public Aluno selectAluno(String matricula){
 		Aluno aluno = new Aluno();
 		//verificaCpf = new VerificaCamposUnique();
 		String sql = "SELECT * FROM tb_Aluno JOIN tb_Pessoa	ON tb_Aluno.tb_Pessoa_idPessoa = tb_Pessoa.idPessoa WHERE matricula='" + matricula + "'";
-//
-//	SE DESCOMENTAR ESSAS LINHA DARA ERRO POIS O ALUNO ACABOU DE SER
-//	INSTANCIADO E SEUS ATRIBUTOS AINDA ESTAO NULL
-//
-//		if(verificaCpf.validaCpfRg(aluno.getCpf(), aluno.getRg())){
-//			throw new UsuarioNaoEncontradoException("Usuario nao cadastrado no sistema");
-//		}
 		
 		try {
 			stmt = con.getConnection().createStatement();
@@ -281,13 +274,13 @@ public class PersistenceAluno implements IPersistenceAluno {
 	
 	
 	@Override
-	public Set<Aluno> filtroAlunos(String nome) {
+	public Set<Aluno> filtroAlunos(String nome) throws UsuarioNaoEncontradoException {
 		Set<Aluno> alunos = new HashSet<>();
 		Aluno aluno;
-
+		
 		try {
 			stmt = con.getConnection().createStatement();
-			String sql = "SELECT * FROM tb_Aluno JOIN tb_Pessoa	ON tb_Aluno.tb_Pessoa_idPessoa = tb_Pessoa.idPessoa "
+			String sql = "SELECT * FROM tb_Aluno INNER JOIN tb_Pessoa ON tb_Aluno.tb_Pessoa_idPessoa = tb_Pessoa.idPessoa "
 					+ "WHERE nome LIKE '" + nome + "%'";
 			rs = stmt.executeQuery(sql);
 
@@ -317,6 +310,11 @@ public class PersistenceAluno implements IPersistenceAluno {
 				
 				alunos.add(aluno);
 			}
+			
+			if(alunos.isEmpty()){
+				throw new UsuarioNaoEncontradoException("Usuario nao cadastrado no sistema");
+			}
+						
 			return alunos;
 
 		} catch (SQLException e) {

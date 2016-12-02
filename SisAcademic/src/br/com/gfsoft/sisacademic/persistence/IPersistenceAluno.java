@@ -12,8 +12,8 @@ public interface IPersistenceAluno {
 	public boolean insert(Aluno aluno) throws UsuarioJaCadastradoException, CpfInvalidoException;
 	public boolean delete(Aluno aluno);
 	public boolean update(Aluno aluno);
-	public Aluno selectAluno(String matricula) throws UsuarioNaoEncontradoException;
-	public Set<Aluno> selectAlunos();
-	public Set<Aluno> filtroAlunos(String nome);
+	public Aluno selectAluno(String matricula);
+	public Set<Aluno> filtroAlunos(String nome) throws UsuarioNaoEncontradoException;
+	Set<Aluno> selectAlunos();
 	
 }

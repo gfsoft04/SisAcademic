@@ -84,7 +84,7 @@ public class Academico {
 		return alunoService.listar();
 	}
 	
-	public Set<Aluno> filtrarAlunos(String nome){
+	public Set<Aluno> filtrarAlunos(String nome) throws UsuarioNaoEncontradoException{
 		return alunoService.filtrar(nome);
 	}
 	

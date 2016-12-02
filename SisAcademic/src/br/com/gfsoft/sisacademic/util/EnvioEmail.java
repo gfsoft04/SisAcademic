@@ -19,13 +19,13 @@ public class EnvioEmail {
 
 	public EnvioEmail() {
 		properties = new Properties();
-		properties.put("mail.transport.protocol", "smtp");
-		properties.put("mail.smtp.host", "smtp.gmail.com");
-		properties.put("mail.smtp.socketFactory.port", "587");
-		properties.put("mail.smtp.socketFactory.fallback", "false");
-		properties.put("mail.smtp.starttls.enable", "true");
-		properties.put("mail.smtp.auth", "true");
-		properties.put("mail.smtp.port", "587");
+		properties.put("mail.transport.protocol", "smtp");//
+		properties.put("mail.smtp.host", "smtp.gmail.com");//
+		properties.put("mail.smtp.socketFactory.port", "587");//
+		properties.put("mail.smtp.socketFactory.fallback", "false");//
+		properties.put("mail.smtp.starttls.enable", "true");//
+		properties.put("mail.smtp.auth", "true");//
+		properties.put("mail.smtp.port", "587");//
 
 		session = Session.getDefaultInstance(properties, new javax.mail.Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {

@@ -39,7 +39,7 @@ public class AlunoService extends Service{
 		return persistencia.selectAlunos();
 	}
 	
-	public Set<Aluno> filtrar(String nome){
+	public Set<Aluno> filtrar(String nome) throws UsuarioNaoEncontradoException{
 		return persistencia.filtroAlunos(nome);
 	} 
 }

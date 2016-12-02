@@ -249,7 +249,11 @@ public class ConsultaAluno extends JInternalFrame {
         String[] colunas = new String[]{"Matricula","Nome","CPF","RG","Email","Data Nascimento", "Data de Matricula"};
         academico = new Academico();
         
-        alunos.addAll(academico.filtrarAlunos(nome));
+        try {
+			alunos.addAll(academico.filtrarAlunos(nome));
+		} catch (UsuarioNaoEncontradoException e) {
+			JOptionPane.showMessageDialog(null, "Usuario Nao Cadastrado no Sistema!", "Erro", JOptionPane.ERROR_MESSAGE);
+		}
         
         for(Aluno a : alunos){
         	dados.add(new Object[]{a.getMatricula(), a.getNome(), a.getCpf(), a.getRg(), a.getEmail(), a.getDtNascimento(), a.getDtMatricula()});
