@@ -9,5 +9,6 @@
 	<classpathentry kind="lib" path="lib/javax.mail.jar"/>
 	<classpathentry kind="lib" path="lib/dsj.jar"/>
 	<classpathentry kind="lib" path="lib/iText-5.0.5.jar"/>
+	<classpathentry kind="lib" path="lib/icons.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

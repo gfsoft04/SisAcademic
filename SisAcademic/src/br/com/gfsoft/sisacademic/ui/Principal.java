@@ -107,64 +107,64 @@ public class Principal extends JFrame {
 		desktopPane.add(panelInicial);
 		panelInicial.setLayout(null);
 		
-		JButton btnNewButton = new JButton("Aluno");
-		btnNewButton.setFont(new Font("SansSerif", Font.BOLD, 12));
-		btnNewButton.setHorizontalAlignment(SwingConstants.LEFT);
-		btnNewButton.setIcon(new ImageIcon("C:\\Users\\Bruno\\git\\SisAcademic\\SisAcademic\\icon\\add.png"));
-		btnNewButton.setBounds(146, 48, 170, 80);
-		panelInicial.add(btnNewButton);
+		JButton btnCadAluno = new JButton("Aluno");
+		btnCadAluno.setFont(new Font("SansSerif", Font.BOLD, 12));
+		btnCadAluno.setHorizontalAlignment(SwingConstants.LEFT);
+		btnCadAluno.setIcon(new ImageIcon(Principal.class.getResource("/icon/add.png")));
+		btnCadAluno.setBounds(146, 48, 170, 80);
+		panelInicial.add(btnCadAluno);
 		
-		JButton btnProfessor = new JButton("Professor");
-		btnProfessor.setFont(new Font("SansSerif", Font.BOLD, 12));
-		btnProfessor.setIcon(new ImageIcon("C:\\Users\\Bruno\\git\\SisAcademic\\SisAcademic\\icon\\add.png"));
-		btnProfessor.setHorizontalAlignment(SwingConstants.LEFT);
-		btnProfessor.setBounds(146, 168, 170, 80);
-		panelInicial.add(btnProfessor);
+		JButton btnCadProfessor = new JButton("Professor");
+		btnCadProfessor.setFont(new Font("SansSerif", Font.BOLD, 12));
+		btnCadProfessor.setIcon(new ImageIcon(Principal.class.getResource("/icon/add.png")));
+		btnCadProfessor.setHorizontalAlignment(SwingConstants.LEFT);
+		btnCadProfessor.setBounds(146, 168, 170, 80);
+		panelInicial.add(btnCadProfessor);
 		
-		JButton btnFuncionario = new JButton("Funcionario");
-		btnFuncionario.setFont(new Font("SansSerif", Font.BOLD, 12));
-		btnFuncionario.setIcon(new ImageIcon("C:\\Users\\Bruno\\git\\SisAcademic\\SisAcademic\\icon\\add.png"));
-		btnFuncionario.setHorizontalAlignment(SwingConstants.LEFT);
-		btnFuncionario.setBounds(146, 288, 170, 80);
-		panelInicial.add(btnFuncionario);
+		JButton btnCadFuncionario = new JButton("Funcionario");
+		btnCadFuncionario.setFont(new Font("SansSerif", Font.BOLD, 12));
+		btnCadFuncionario.setIcon(new ImageIcon(Principal.class.getResource("/icon/add.png")));
+		btnCadFuncionario.setHorizontalAlignment(SwingConstants.LEFT);
+		btnCadFuncionario.setBounds(146, 288, 170, 80);
+		panelInicial.add(btnCadFuncionario);
 		
-		JButton btnDisciplina = new JButton("Disciplina");
-		btnDisciplina.setFont(new Font("SansSerif", Font.BOLD, 12));
-		btnDisciplina.setIcon(new ImageIcon("C:\\Users\\Bruno\\git\\SisAcademic\\SisAcademic\\icon\\book.png"));
-		btnDisciplina.setHorizontalAlignment(SwingConstants.LEFT);
-		btnDisciplina.setBounds(146, 408, 170, 80);
-		panelInicial.add(btnDisciplina);
+		JButton btnCadDisciplina = new JButton("Disciplina");
+		btnCadDisciplina.setFont(new Font("SansSerif", Font.BOLD, 12));
+		btnCadDisciplina.setIcon(new ImageIcon(Principal.class.getResource("/icon/book.png")));
+		btnCadDisciplina.setHorizontalAlignment(SwingConstants.LEFT);
+		btnCadDisciplina.setBounds(146, 408, 170, 80);
+		panelInicial.add(btnCadDisciplina);
 		
-		JButton button = new JButton("Aluno");
-		button.setFont(new Font("SansSerif", Font.BOLD, 12));
-		button.setIcon(new ImageIcon("C:\\Users\\Bruno\\git\\SisAcademic\\SisAcademic\\icon\\consultar.png"));
-		button.setHorizontalAlignment(SwingConstants.LEFT);
-		button.setBounds(983, 48, 170, 80);
-		panelInicial.add(button);
+		JButton btnConsultaAluno = new JButton("Aluno");
+		btnConsultaAluno.setFont(new Font("SansSerif", Font.BOLD, 12));
+		btnConsultaAluno.setIcon(new ImageIcon(Principal.class.getResource("/icon/consultar.png")));
+		btnConsultaAluno.setHorizontalAlignment(SwingConstants.LEFT);
+		btnConsultaAluno.setBounds(983, 48, 170, 80);
+		panelInicial.add(btnConsultaAluno);
 		
-		JButton button_1 = new JButton("Professor");
-		button_1.setFont(new Font("SansSerif", Font.BOLD, 12));
-		button_1.setIcon(new ImageIcon("C:\\Users\\Bruno\\git\\SisAcademic\\SisAcademic\\icon\\consultar.png"));
-		button_1.setHorizontalAlignment(SwingConstants.LEFT);
-		button_1.setBounds(983, 168, 170, 80);
-		panelInicial.add(button_1);
+		JButton btnConsultaProfessor = new JButton("Professor");
+		btnConsultaProfessor.setFont(new Font("SansSerif", Font.BOLD, 12));
+		btnConsultaProfessor.setIcon(new ImageIcon(Principal.class.getResource("/icon/consultar.png")));
+		btnConsultaProfessor.setHorizontalAlignment(SwingConstants.LEFT);
+		btnConsultaProfessor.setBounds(983, 168, 170, 80);
+		panelInicial.add(btnConsultaProfessor);
 		
-		JButton button_2 = new JButton("Funcionario");
-		button_2.setFont(new Font("SansSerif", Font.BOLD, 12));
-		button_2.setIcon(new ImageIcon("C:\\Users\\Bruno\\git\\SisAcademic\\SisAcademic\\icon\\consultar.png"));
-		button_2.setHorizontalAlignment(SwingConstants.LEFT);
-		button_2.setBounds(983, 288, 170, 80);
-		panelInicial.add(button_2);
+		JButton btnConsultaFuncionario = new JButton("Funcionario");
+		btnConsultaFuncionario.setFont(new Font("SansSerif", Font.BOLD, 12));
+		btnConsultaFuncionario.setIcon(new ImageIcon(Principal.class.getResource("/icon/consultar.png")));
+		btnConsultaFuncionario.setHorizontalAlignment(SwingConstants.LEFT);
+		btnConsultaFuncionario.setBounds(983, 288, 170, 80);
+		panelInicial.add(btnConsultaFuncionario);
 		
-		JButton button_3 = new JButton("Disciplina");
-		button_3.setFont(new Font("SansSerif", Font.BOLD, 12));
-		button_3.setIcon(new ImageIcon("C:\\Users\\Bruno\\git\\SisAcademic\\SisAcademic\\icon\\bookLoupe.png"));
-		button_3.setHorizontalAlignment(SwingConstants.LEFT);
-		button_3.setBounds(983, 408, 170, 80);
-		panelInicial.add(button_3);
+		JButton btnConsultaDisciplina = new JButton("Disciplina");
+		btnConsultaDisciplina.setFont(new Font("SansSerif", Font.BOLD, 12));
+		btnConsultaDisciplina.setIcon(new ImageIcon(Principal.class.getResource("/icon/bookLoupe.png")));
+		btnConsultaDisciplina.setHorizontalAlignment(SwingConstants.LEFT);
+		btnConsultaDisciplina.setBounds(983, 408, 170, 80);
+		panelInicial.add(btnConsultaDisciplina);
 		
 		JLabel labelLogo = new JLabel("");
-		labelLogo.setIcon(new ImageIcon("C:\\Users\\Bruno\\git\\SisAcademic\\SisAcademic\\icon\\sisAcademic.png"));
+		labelLogo.setIcon(new ImageIcon(Principal.class.getResource("/icon/sisAcademic.png")));
 		labelLogo.setBounds(501, 108, 301, 245);
 		panelInicial.add(labelLogo);
 
