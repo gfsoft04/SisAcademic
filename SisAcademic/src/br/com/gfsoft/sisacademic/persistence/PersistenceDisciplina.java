@@ -10,6 +10,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import br.com.gfsoft.sisacademic.model.Disciplina;
+import br.com.gfsoft.sisacademic.model.exception.UsuarioNaoEncontradoException;
 
 public class PersistenceDisciplina implements IPersistenceDisciplina {
 	
@@ -224,7 +225,7 @@ public class PersistenceDisciplina implements IPersistenceDisciplina {
 	}
 	
 	@Override
-	public List<Disciplina> filtroDisciplinas(String nome) {
+	public List<Disciplina> filtroDisciplinas(String nome) throws UsuarioNaoEncontradoException{
 		
 		List<Disciplina> disciplinas =  new ArrayList<>();
 		Disciplina disciplina;
@@ -246,6 +247,10 @@ public class PersistenceDisciplina implements IPersistenceDisciplina {
 				disciplina.setObservacao(rs.getString("observacao"));
 				
 				disciplinas.add(disciplina);
+			}
+			
+			if(disciplinas.isEmpty()){
+				throw new UsuarioNaoEncontradoException("Disciplina nao cadastrada no sistema");
 			}
 			
 			return disciplinas;

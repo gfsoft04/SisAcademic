@@ -3,6 +3,7 @@ package br.com.gfsoft.sisacademic.service;
 import java.util.List;
 
 import br.com.gfsoft.sisacademic.model.Disciplina;
+import br.com.gfsoft.sisacademic.model.exception.UsuarioNaoEncontradoException;
 import br.com.gfsoft.sisacademic.persistence.IPersistenceDisciplina;
 import br.com.gfsoft.sisacademic.persistence.PersistenceDisciplina;
 
@@ -34,7 +35,7 @@ public class DisciplinaService {
 		return this.persistencia.selectDisciplinas();
 	}
 	
-	public List<Disciplina> filtrar(String nome){
+	public List<Disciplina> filtrar(String nome) throws UsuarioNaoEncontradoException{
 		return this.persistencia.filtroDisciplinas(nome);
 	}
 }

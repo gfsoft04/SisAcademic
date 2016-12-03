@@ -88,23 +88,29 @@ public class CadProfessorDisciplina extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				academico = new Academico();
 				List<Disciplina> disciplinas = new ArrayList<>();
-				int linhaSelecionada = jTableInicial.getSelectedRow();// Linha Selecionada
-				long id = Long.parseLong(jTableInicial.getValueAt(linhaSelecionada ,0).toString());
 				
-				disciplinas.addAll(academico.listarProfessorDisciplinas(idProfessor));
-				
-				for(Disciplina d : disciplinas){
-					if(d.getId() == id){
-						JOptionPane.showMessageDialog(null, "O professor ja esta cadastrado nesta disciplina!", "Erro", JOptionPane.ERROR_MESSAGE);
-						return ;
+				try{
+					int linhaSelecionada = jTableInicial.getSelectedRow();// Linha Selecionada
+					long id = Long.parseLong(jTableInicial.getValueAt(linhaSelecionada ,0).toString());
+					
+					disciplinas.addAll(academico.listarProfessorDisciplinas(idProfessor));
+					
+					for(Disciplina d : disciplinas){
+						if(d.getId() == id){
+							JOptionPane.showMessageDialog(null, "O professor ja esta cadastrado nesta disciplina!", "Erro", JOptionPane.ERROR_MESSAGE);
+							return ;
+						}
 					}
-				}
-				
-				if(academico.cadastrarProfessorDisciplina(idProfessor, id)){
-					//System.out.println("disciplina cadastrada!");
-					//atualizar tabela
-					preencherTabelaFinal(idProfessor);
-				}
+					
+					if(academico.cadastrarProfessorDisciplina(idProfessor, id)){
+						//System.out.println("disciplina cadastrada!");
+						//atualizar tabela
+						preencherTabelaFinal(idProfessor);
+					}
+				} catch(IndexOutOfBoundsException ex){
+		            JOptionPane.showMessageDialog(null, "Nenhuma disciplina selecionada", "Erro", JOptionPane.ERROR_MESSAGE);
+		            return;
+		        }
 			}
 		});
 		btnAdd.setBounds(388, 111, 100, 40);
@@ -113,10 +119,11 @@ public class CadProfessorDisciplina extends JDialog {
 		btnRemover = new JButton("<<");
 		btnRemover.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int linhaSelecionada = jTableFinal.getSelectedRow();// Linha Selecionada
-				long id = Long.parseLong(jTableFinal.getValueAt(linhaSelecionada ,0).toString());
 				
 				try{
+					int linhaSelecionada = jTableFinal.getSelectedRow();// Linha Selecionada
+					long id = Long.parseLong(jTableFinal.getValueAt(linhaSelecionada ,0).toString());
+					
 		            if(academico.deletarProfessorDisciplina(idProfessor, id)){
 		            	//System.out.println("disciplina deletado!");
 						//atualizar tabela

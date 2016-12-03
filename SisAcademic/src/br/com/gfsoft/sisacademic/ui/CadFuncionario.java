@@ -495,6 +495,7 @@ public class CadFuncionario extends JInternalFrame {
 					funcionario.setSalario(Double.parseDouble(txtSalario.getText()));
 					funcionario.setDtContratacao(dtContratacao);
 					funcionario.setObservacao(txtPaneObservacao.getText());
+					funcionario.setUrlFoto(path);
 					
 					if(academico.cadastrarFuncionario(funcionario)){
 						String assunto = "Cadastro";
@@ -505,19 +506,6 @@ public class CadFuncionario extends JInternalFrame {
 						JOptionPane.showMessageDialog(null, "Cadastro efetuado com sucesso!", "Cadastrado", JOptionPane.INFORMATION_MESSAGE);
 						limparCampos();
 					}
-					
-					//Verifica se o cpf ou rg esta cadastrado na base
-					/*if(verificaCamposUnique.validaCpfRg(cpf, txtRg.getText())){
-						if(academico.cadastrarFuncionario(funcionario)){
-							String assunto = "Cadastro";
-							String mensagem = "Bem vindo "+funcionario.getNome()+", seu cadastro foi efetuado com sucesso!"
-											+ "\n\n\tSua Matricula �: " + funcionario.getMatricula();
-							
-							email.enviar(funcionario.getEmail(), assunto, mensagem);
-							JOptionPane.showMessageDialog(null, "Cadastro efetuado com sucesso!", "Cadastrado", JOptionPane.INFORMATION_MESSAGE);
-							limparCampos();
-						}
-					}*/
 					
 				} catch (DateTimeException ex) {
 					// Excesao para data invalida
@@ -724,7 +712,7 @@ public class CadFuncionario extends JInternalFrame {
 				}
 				
 				GeraMatricula geraMatricula = new GeraMatricula();
-				String matricula = geraMatricula.gerarMatricula(1, Integer.parseInt(formattedtxtDtContratacao.getText().substring(6, 10)));
+				String matricula = geraMatricula.gerarMatricula(2, Integer.parseInt(formattedtxtDtContratacao.getText().substring(6, 10)));
 				File file = new File("img\\"+matricula+".png");
 				
 				webView.salvarFoto(webView.getPlayer().getImage(), file);
@@ -747,6 +735,10 @@ public class CadFuncionario extends JInternalFrame {
 	 * Metodo que recebe um objeto e preenche os campos
 	 */
 	public void preencheCampos(Funcionario funcionario){
+		File path = new File("img\\"+funcionario.getMatricula()+".png");
+		imagem = new ImageIcon(path.getPath());
+		imagem.setImage(imagem.getImage().getScaledInstance(360, 270, 100));
+		
 		txtMatricula.setText(funcionario.getMatricula());
 		txtNome.setText(funcionario.getNome());
 		txtRg.setText(funcionario.getRg());
@@ -754,9 +746,28 @@ public class CadFuncionario extends JInternalFrame {
 		txtEmail.setText(funcionario.getEmail());
 		formattedTxtDtNascimento.setText(funcionario.getDtNascimento().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)));
 		formattedTxtTelefone.setText(funcionario.getTelefone());
-		//comboBoxEstadoCivil.setSelectedIndex(0);
-		//comboBoxSexo.setSelectedIndex(0);
-		//comboBoxSituacao.setSelectedIndex(0);
+		
+		if(funcionario.getEstadoCivil().equals("S"))
+			comboBoxEstadoCivil.setSelectedIndex(0);
+		else if(funcionario.getEstadoCivil().equals("C"))
+			comboBoxEstadoCivil.setSelectedIndex(1);
+		else if(funcionario.getEstadoCivil().equals("V"))
+			comboBoxEstadoCivil.setSelectedIndex(2);
+		else if(funcionario.getEstadoCivil().equals("D"))
+			comboBoxEstadoCivil.setSelectedIndex(3);
+		else
+			comboBoxEstadoCivil.setSelectedIndex(4);
+		
+		if(funcionario.getSexo().equals("M"))
+			comboBoxSexo.setSelectedIndex(0);
+		else
+			comboBoxSexo.setSelectedIndex(1);
+		
+		if(funcionario.getSituacao().equals("A"))
+			comboBoxSituacao.setSelectedIndex(0);
+		else
+			comboBoxSituacao.setSelectedIndex(1);
+		
 		formattedTxtCep.setText(funcionario.getCep());
 		txtRua.setText(funcionario.getRua());
 		txtNumero.setText(Integer.toString(funcionario.getNumero()));
@@ -764,11 +775,21 @@ public class CadFuncionario extends JInternalFrame {
 		txtCidade.setText(funcionario.getCidade());
 		txtEstado.setText(funcionario.getEstado());
 		txtComplemento.setText(funcionario.getComplemento());
-		//comboBoxEscolaridade.setSelectedIndex(0);
+		
+		if(funcionario.getEscolaridade().substring(0, 1).equals("F"))
+			comboBoxEscolaridade.setSelectedIndex(0);
+		else if(funcionario.getEscolaridade().substring(0, 1).equals("M"))
+			comboBoxEscolaridade.setSelectedIndex(1);
+		else if(funcionario.getEscolaridade().substring(0, 1).equals("S"))
+			comboBoxEscolaridade.setSelectedIndex(2);
+		else
+			comboBoxEscolaridade.setSelectedIndex(3);
+		
 		txtCargo.setText(funcionario.getCargo());
 		txtSalario.setText(funcionario.getSalario() + "");
 		formattedtxtDtContratacao.setText(funcionario.getDtContratacao().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)));
 		txtPaneObservacao.setText(funcionario.getObservacao());
+		labelImagem.setIcon(imagem);
 	}
 	
 	/**
@@ -825,5 +846,6 @@ public class CadFuncionario extends JInternalFrame {
 		txtCargo.setText("");
 		txtSalario.setText("");
 		txtPaneObservacao.setText("");
+		labelImagem.setIcon(null);
 	}
 }

@@ -88,23 +88,29 @@ public class CadAlunoDisciplina extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				academico = new Academico();
 				List<Disciplina> disciplinas = new ArrayList<>();
-				int linhaSelecionada = jTableInicial.getSelectedRow();// Linha Selecionada
-				long id = Long.parseLong(jTableInicial.getValueAt(linhaSelecionada ,0).toString());
 				
-				disciplinas.addAll(academico.listarAlunoDisciplinas(idAluno));
-				
-				for(Disciplina d : disciplinas){
-					if(d.getId() == id){
-						JOptionPane.showMessageDialog(null, "O aluno ja esta matriculado nesta disciplina!", "Erro", JOptionPane.ERROR_MESSAGE);
-						return ;
+				try{
+					int linhaSelecionada = jTableInicial.getSelectedRow();// Linha Selecionada
+					long id = Long.parseLong(jTableInicial.getValueAt(linhaSelecionada ,0).toString());
+					
+					disciplinas.addAll(academico.listarAlunoDisciplinas(idAluno));
+					
+					for(Disciplina d : disciplinas){
+						if(d.getId() == id){
+							JOptionPane.showMessageDialog(null, "O aluno ja esta matriculado nesta disciplina!", "Erro", JOptionPane.ERROR_MESSAGE);
+							return ;
+						}
 					}
-				}
-				
-				if(academico.cadastrarAlunoDisciplina(idAluno, id)){
-					//System.out.println("disciplina cadastrado!");
-					//atualizar tabela
-					preencherTabelaFinal(idAluno);
-				}
+					
+					if(academico.cadastrarAlunoDisciplina(idAluno, id)){
+						//System.out.println("disciplina cadastrado!");
+						//atualizar tabela
+						preencherTabelaFinal(idAluno);
+					}
+				} catch(IndexOutOfBoundsException ex){
+		            JOptionPane.showMessageDialog(null, "Nenhuma disciplina selecionada", "Erro", JOptionPane.ERROR_MESSAGE);
+		            return;
+		        }
 			}
 		});
 		btnAdd.setBounds(388, 111, 100, 40);
@@ -113,16 +119,17 @@ public class CadAlunoDisciplina extends JDialog {
 		btnRemover = new JButton("<<");
 		btnRemover.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int linhaSelecionada = jTableFinal.getSelectedRow();// Linha Selecionada
-				long id = Long.parseLong(jTableFinal.getValueAt(linhaSelecionada ,0).toString());
 				
 				try{
+					int linhaSelecionada = jTableFinal.getSelectedRow();// Linha Selecionada
+					long id = Long.parseLong(jTableFinal.getValueAt(linhaSelecionada ,0).toString());
+					
 		            if(academico.deletarAlunoDisciplina(idAluno, id)){
 		            	//System.out.println("disciplina deletado!");
 						//atualizar tabela
 						preencherTabelaFinal(idAluno);
 		            }
-		        }catch(IndexOutOfBoundsException m){
+		        } catch(IndexOutOfBoundsException ex){
 		            JOptionPane.showMessageDialog(null, "Nenhuma disciplina selecionada", "Erro", JOptionPane.ERROR_MESSAGE);
 		            return;
 		        }

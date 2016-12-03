@@ -31,6 +31,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 import br.com.gfsoft.sisacademic.controller.Academico;
 import br.com.gfsoft.sisacademic.model.Funcionario;
 import br.com.gfsoft.sisacademic.model.TabelaConsulta;
+import br.com.gfsoft.sisacademic.model.exception.UsuarioNaoEncontradoException;
 
 public class ConsultaFuncionario extends JInternalFrame {
 	/**
@@ -193,7 +194,7 @@ public class ConsultaFuncionario extends JInternalFrame {
 	public void preencherTabela(){
         List<Object> dados = new ArrayList<>();
         List<Funcionario> funcionario = new ArrayList<>();
-        String[] colunas = new String[]{"Matricula","Nome","CPF","RG","Email","Data Nascimento", "Data de Contrata��o"};
+        String[] colunas = new String[]{"Matricula","Nome","CPF","RG","Email","Data Nascimento", "Data de Contratacao"};
         academico = new Academico();
         
         funcionario.addAll(academico.listarFuncionarios());
@@ -231,10 +232,14 @@ public class ConsultaFuncionario extends JInternalFrame {
 	public void preencherTabelaFiltro(String nome){
         List<Object> dados = new ArrayList<>();
         List<Funcionario> funcionario = new ArrayList<>();
-        String[] colunas = new String[]{"Matricula","Nome","CPF","RG","Email","Data Nascimento", "Data de Contrata��o"};
+        String[] colunas = new String[]{"Matricula","Nome","CPF","RG","Email","Data Nascimento", "Data de Contratacao"};
         academico = new Academico();
         
-        funcionario.addAll(academico.filtrarFuncionarios(nome));
+        try {
+			funcionario.addAll(academico.filtrarFuncionarios(nome));
+		} catch (UsuarioNaoEncontradoException e) {
+			JOptionPane.showMessageDialog(null, "Usuario Nao Cadastrado no Sistema!", "Erro", JOptionPane.ERROR_MESSAGE);
+		}
         
         for(Funcionario f : funcionario){
         	dados.add(new Object[]{f.getMatricula(), f.getNome(), f.getCpf(), f.getRg(), f.getEmail(), f.getDtNascimento(), f.getDtContratacao()});

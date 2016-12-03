@@ -351,7 +351,7 @@ public class CadAluno extends JInternalFrame {
 		pane_1.add(lblNewLabel_1);
 
 		comboBoxSituacao = new JComboBox();
-		comboBoxSituacao.setModel(new DefaultComboBoxModel(new String[] {"M - Matriculado", "N - N\u00E3o Matriculado", "A - Ativo", "I - Inativo "}));
+		comboBoxSituacao.setModel(new DefaultComboBoxModel(new String[] {"M - Matriculado", "N - N\u00E3o Matriculado"}));
 		comboBoxSituacao.setBounds(597, 107, 151, 25);
 		pane_1.add(comboBoxSituacao);
 
@@ -467,7 +467,6 @@ public class CadAluno extends JInternalFrame {
 					aluno.setObservacao(txtPaneObservacao.getText());
 					aluno.setUrlFoto(path);
 					
-					
 					if(academico.cadastrarAluno(aluno)){
 						String assunto = "Cadastro";
 						String mensagem = "Bem vindo "+aluno.getNome()+", seu cadastro foi efetuado com sucesso!"
@@ -478,26 +477,12 @@ public class CadAluno extends JInternalFrame {
 						limparCampos();
 					}
 					
-					
-//					//Verifica se o cpf ou rg esta cadastrado na base
-//					if(verificaCamposUnique.validaCpfRg(cpf, txtRg.getText())){
-//						if(academico.cadastrarAluno(aluno)){
-//							String assunto = "Cadastro";
-//							String mensagem = "Bem vindo "+aluno.getNome()+", seu cadastro foi efetuado com sucesso!"
-//											+ "\n\n\tSua Matricula é: " + aluno.getMatricula();
-//							
-//							email.enviar(aluno.getEmail(), assunto, mensagem);
-//							JOptionPane.showMessageDialog(null, "Cadastro efetuado com sucesso!", "Cadastrado", JOptionPane.INFORMATION_MESSAGE);
-//							limparCampos();
-//						}
-//					}
-					
 				} catch (DateTimeException ex) {
 					// Excesao para data invalida
 					JOptionPane.showMessageDialog(null, "Data Invalida!", "Erro", JOptionPane.ERROR_MESSAGE);
 				} catch (NumberFormatException ex) {
 					// Excecao para conversao de texto em numero
-					JOptionPane.showMessageDialog(null, "Campo numero só aceita digitos", "Erro", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Campo numero so aceita digitos", "Erro", JOptionPane.ERROR_MESSAGE);
 				} catch (UsuarioJaCadastradoException ex) {
 					// Excecao para usuario ja cadastrado
 					JOptionPane.showMessageDialog(null, "Usuario Ja Cadastrado no Sistema!", "Erro", JOptionPane.ERROR_MESSAGE);
@@ -539,7 +524,7 @@ public class CadAluno extends JInternalFrame {
 					System.out.println(ex);
 				} catch (NumberFormatException ex) {
 					// Excecao para conversao de texto em numero
-					JOptionPane.showMessageDialog(null, "Campo numero só aceita digitos", "Erro", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Campo numero so aceita digitos", "Erro", JOptionPane.ERROR_MESSAGE);
 					System.out.println(ex);
 				} catch (UsuarioNaoEncontradoException ex) {
 					// Excecao para usuario ja cadastrado
@@ -563,7 +548,7 @@ public class CadAluno extends JInternalFrame {
 						|| txtCidade.getText().equals("") || txtEstado.getText().equals("") || formattedTxtCpf.getText().equals("")
 						|| formattedTxtCep.getText().equals("") || formattedTxtTelefone.getText().equals("")) {
 					
-					JOptionPane.showMessageDialog(null, "Campos Obrigatórios em Branco!", "Erro", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Campos Obrigatorios em Branco!", "Erro", JOptionPane.ERROR_MESSAGE);
 					return ;					
 				}
 				
@@ -612,7 +597,7 @@ public class CadAluno extends JInternalFrame {
 					//Verifica se o cpf ou rg esta cadastrado na base
 					//if(verificaCamposUnique.validaCpfRg(cpf, txtRg.getText())){
 						if(academico.atualizarAluno(aluno)){
-							JOptionPane.showMessageDialog(null, "Cadastro alterado com sucesso!", "Atenção", JOptionPane.INFORMATION_MESSAGE);
+							JOptionPane.showMessageDialog(null, "Cadastro alterado com sucesso!", "Atencao", JOptionPane.INFORMATION_MESSAGE);
 							limparCampos();
 							Principal.CONSULTAALUNO.preencherTabela();
 						}
@@ -623,7 +608,7 @@ public class CadAluno extends JInternalFrame {
 					JOptionPane.showMessageDialog(null, "Data Invalida!", "Erro", JOptionPane.ERROR_MESSAGE);
 				} catch (NumberFormatException ex) {
 					// Excecao para conversao de texto em numero
-					JOptionPane.showMessageDialog(null, "Campo numero só aceita digitos", "Erro", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Campo numero so aceita digitos", "Erro", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -717,7 +702,6 @@ public class CadAluno extends JInternalFrame {
 	 * Metodo que recebe um objeto e preenche os campos
 	 */
 	public void preencheCampos(Aluno aluno){
-		
 		File path = new File("img\\"+aluno.getMatricula()+".png");
 		imagem = new ImageIcon(path.getPath());
 		imagem.setImage(imagem.getImage().getScaledInstance(360, 270, 100));
@@ -740,11 +724,19 @@ public class CadAluno extends JInternalFrame {
 			comboBoxEstadoCivil.setSelectedIndex(2);
 		else if(aluno.getEstadoCivil().equals("D"))
 			comboBoxEstadoCivil.setSelectedIndex(3);
-		else if(aluno.getEstadoCivil().equals("UE"))
+		else
 			comboBoxEstadoCivil.setSelectedIndex(4);
 		
-		//comboBoxSexo.setSelectedIndex(0);
-		//comboBoxSituacao.setSelectedIndex(0);
+		if(aluno.getSexo().equals("M"))
+			comboBoxSexo.setSelectedIndex(0);
+		else
+			comboBoxSexo.setSelectedIndex(1);
+		
+		if(aluno.getSituacao().equals("M"))
+			comboBoxSituacao.setSelectedIndex(0);
+		else
+			comboBoxSituacao.setSelectedIndex(1);
+		
 		formattedTxtCep.setText(aluno.getCep());
 		txtRua.setText(aluno.getRua());
 		txtNumero.setText(Integer.toString(aluno.getNumero()));

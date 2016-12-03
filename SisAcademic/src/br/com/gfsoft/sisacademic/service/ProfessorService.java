@@ -6,6 +6,7 @@ import java.util.Set;
 import br.com.gfsoft.sisacademic.model.Professor;
 import br.com.gfsoft.sisacademic.model.exception.CpfInvalidoException;
 import br.com.gfsoft.sisacademic.model.exception.UsuarioJaCadastradoException;
+import br.com.gfsoft.sisacademic.model.exception.UsuarioNaoEncontradoException;
 import br.com.gfsoft.sisacademic.persistence.IPersistenceProfessor;
 import br.com.gfsoft.sisacademic.persistence.PersistenceProfessor;
 
@@ -37,7 +38,7 @@ public class ProfessorService {
 		return persistencia.selectProfessores();
 	}
 	
-	public Set<Professor> filtrar(String nome){
+	public Set<Professor> filtrar(String nome) throws UsuarioNaoEncontradoException{
 		return persistencia.filtroProfessores(nome);
 	}
 

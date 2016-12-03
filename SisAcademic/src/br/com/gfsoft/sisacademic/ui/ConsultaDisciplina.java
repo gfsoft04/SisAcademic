@@ -31,6 +31,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 import br.com.gfsoft.sisacademic.controller.Academico;
 import br.com.gfsoft.sisacademic.model.Disciplina;
 import br.com.gfsoft.sisacademic.model.TabelaConsulta;
+import br.com.gfsoft.sisacademic.model.exception.UsuarioNaoEncontradoException;
 
 public class ConsultaDisciplina extends JInternalFrame {
 	/**
@@ -233,7 +234,11 @@ public class ConsultaDisciplina extends JInternalFrame {
         String[] colunas = new String[]{"Id", "Nome", "Descricao", "Data de Criacao", "Situacao", "Semestre", "Observacao"};
         academico = new Academico();
         
-        disciplinas.addAll(academico.filtrarDisciplinas(nome));
+        try {
+			disciplinas.addAll(academico.filtrarDisciplinas(nome));
+		} catch (UsuarioNaoEncontradoException e) {
+			JOptionPane.showMessageDialog(null, "Disciplina Nao Cadastrada no Sistema!", "Erro", JOptionPane.ERROR_MESSAGE);
+		}
         
         for(Disciplina disc : disciplinas){
         	dados.add(new Object[]{disc.getId(), disc.getNome(), disc.getDescricao(), disc.getDtCriacao(), disc.getSituacao(), disc.getSemestre(), disc.getObservacao()});

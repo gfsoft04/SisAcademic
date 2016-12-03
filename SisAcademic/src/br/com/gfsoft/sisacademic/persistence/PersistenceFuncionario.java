@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import br.com.gfsoft.sisacademic.model.Funcionario;
 import br.com.gfsoft.sisacademic.model.exception.CpfInvalidoException;
 import br.com.gfsoft.sisacademic.model.exception.UsuarioJaCadastradoException;
+import br.com.gfsoft.sisacademic.model.exception.UsuarioNaoEncontradoException;
 import br.com.gfsoft.sisacademic.util.VerificaCamposUnique;
 
 public class PersistenceFuncionario implements IPersistenceFuncionario {
@@ -188,6 +189,7 @@ public class PersistenceFuncionario implements IPersistenceFuncionario {
 				funcionario.setCidade(rs.getString("cidade"));
 				funcionario.setEstado(rs.getString("estado"));
 				funcionario.setComplemento(rs.getString("complemento"));
+				funcionario.setObservacao(rs.getString("observacao"));
 				funcionario.setDtContratacao(LocalDate.of(Integer.parseInt(rs.getString("dtContratacao").substring(0, 4)),
 						Integer.parseInt(rs.getString("dtContratacao").substring(5, 7)),
 						Integer.parseInt(rs.getString("dtContratacao").substring(8, 10))));
@@ -288,7 +290,7 @@ public class PersistenceFuncionario implements IPersistenceFuncionario {
 	
 	
 	@Override
-	public Set<Funcionario> filtroFuncionarios(String nome) {
+	public Set<Funcionario> filtroFuncionarios(String nome) throws UsuarioNaoEncontradoException {
 		Set<Funcionario> funcionarios = new HashSet<>();
 		Funcionario funcionario;
 
@@ -328,6 +330,11 @@ public class PersistenceFuncionario implements IPersistenceFuncionario {
 				
 				funcionarios.add(funcionario);
 			}
+			
+			if(funcionarios.isEmpty()){
+				throw new UsuarioNaoEncontradoException("Usuario nao cadastrado no sistema");
+			}
+			
 			return funcionarios;
 
 		} catch (SQLException e) {

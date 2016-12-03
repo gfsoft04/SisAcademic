@@ -85,6 +85,7 @@ public class CadProfessor extends JInternalFrame {
 	private String path = ""; //path da imagem
 	private JPanel panelFoto;
 	private JLabel labelImagem;
+	private ImageIcon imagem;
 
 	/**
 	 * Launch the application.
@@ -491,41 +492,28 @@ public class CadProfessor extends JInternalFrame {
 					professor.setComplemento(txtComplemento.getText());
 					professor.setEscolaridade(escolaridade);
 					professor.setTitularidade(titularidade);
-					//Duvida se deve colocar cargo
-					//professor.setCargo(cargo);
+					professor.setCargo("Professor");
 					professor.setSalario(Double.parseDouble(txtSalario.getText()));
 					professor.setDtContratacao(dtContratacao);
 					professor.setObservacao(txtPaneObservacao.getText());
+					professor.setUrlFoto(path);
 					
 					if(academico.cadastrarProfessor(professor)){
 						String assunto = "Cadastro";
 						String mensagem = "Bem vindo "+professor.getNome()+", seu cadastro foi efetuado com sucesso!"
-										+ "\n\n\tSua Matricula �: " + professor.getMatricula();
+										+ "\n\n\tSua Matricula eh: " + professor.getMatricula();
 						
 						email.enviar(professor.getEmail(), assunto, mensagem);
 						JOptionPane.showMessageDialog(null, "Cadastro efetuado com sucesso!", "Cadastrado", JOptionPane.INFORMATION_MESSAGE);
 						limparCampos();
 					}
 					
-					//Verifica se o cpf ou rg esta cadastrado na base
-					/*if(verificaCamposUnique.validaCpfRg(cpf, txtRg.getText())){
-						if(academico.cadastrarProfessor(professor)){
-							String assunto = "Cadastro";
-							String mensagem = "Bem vindo "+professor.getNome()+", seu cadastro foi efetuado com sucesso!"
-											+ "\n\n\tSua Matricula �: " + professor.getMatricula();
-							
-							email.enviar(professor.getEmail(), assunto, mensagem);
-							JOptionPane.showMessageDialog(null, "Cadastro efetuado com sucesso!", "Cadastrado", JOptionPane.INFORMATION_MESSAGE);
-							limparCampos();
-						}
-					}*/
-					
 				} catch (DateTimeException ex) {
 					// Excesao para data invalida
 					JOptionPane.showMessageDialog(null, "Data Invalida!", "Erro", JOptionPane.ERROR_MESSAGE);
 				} catch (NumberFormatException ex) {
 					// Excecao para conversao de texto em numero
-					JOptionPane.showMessageDialog(null, "Campo numero s� aceita digitos", "Erro", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Campo numero so aceita digitos", "Erro", JOptionPane.ERROR_MESSAGE);
 				} catch (HeadlessException ex) {
 					JOptionPane.showMessageDialog(null, "Nao sei que exception eh esse", "Erro", JOptionPane.ERROR_MESSAGE);
 					ex.printStackTrace();
@@ -555,9 +543,9 @@ public class CadProfessor extends JInternalFrame {
 					professor = academico.buscarProfessor(matricula);
 					
 					//Confirmacao do usuario
-					if(JOptionPane.showConfirmDialog(null, "Tem certeza que deseja excluir?", "Confirma��o", JOptionPane.WARNING_MESSAGE) == 0){
+					if(JOptionPane.showConfirmDialog(null, "Tem certeza que deseja excluir?", "Confirmacao", JOptionPane.WARNING_MESSAGE) == 0){
 						if(academico.deletarProfessor(professor)){
-							JOptionPane.showMessageDialog(null, "Exclus�o efetuada com sucesso!", "Exclus�o", JOptionPane.INFORMATION_MESSAGE);
+							JOptionPane.showMessageDialog(null, "Exclusao efetuada com sucesso!", "Exclusao", JOptionPane.INFORMATION_MESSAGE);
 							limparCampos();
 							Principal.CONSULTAPROFESSOR.preencherTabela();
 						}
@@ -569,7 +557,7 @@ public class CadProfessor extends JInternalFrame {
 					System.out.println(ex);
 				} catch (NumberFormatException ex) {
 					// Excecao para conversao de texto em numero
-					JOptionPane.showMessageDialog(null, "Campo numero s� aceita digitos", "Erro", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Campo numero so aceita digitos", "Erro", JOptionPane.ERROR_MESSAGE);
 					System.out.println(ex);
 				}
 			}
@@ -589,7 +577,7 @@ public class CadProfessor extends JInternalFrame {
 						|| formattedTxtCep.getText().equals("") || formattedTxtTelefone.getText().equals("")
 						|| txtSalario.getText().equals("")) {
 					
-					JOptionPane.showMessageDialog(null, "Campos Obrigat�rios em Branco!", "Erro", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Campos Obrigatorios em Branco!", "Erro", JOptionPane.ERROR_MESSAGE);
 					return ;					
 				}
 				
@@ -643,7 +631,7 @@ public class CadProfessor extends JInternalFrame {
 					//Verifica se o cpf ou rg esta cadastrado na base
 					//if(verificaCamposUnique.validaCpfRg(cpf, txtRg.getText())){
 						if(academico.atualizarProfessor(professor)){
-							JOptionPane.showMessageDialog(null, "Cadastro alterado com sucesso!", "Aten��o", JOptionPane.INFORMATION_MESSAGE);
+							JOptionPane.showMessageDialog(null, "Cadastro alterado com sucesso!", "Atencao", JOptionPane.INFORMATION_MESSAGE);
 							limparCampos();
 						}
 					//}
@@ -653,7 +641,7 @@ public class CadProfessor extends JInternalFrame {
 					JOptionPane.showMessageDialog(null, "Data Invalida!", "Erro", JOptionPane.ERROR_MESSAGE);
 				} catch (NumberFormatException ex) {
 					// Excecao para conversao de texto em numero
-					JOptionPane.showMessageDialog(null, "Campo numero s� aceita digitos", "Erro", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Campo numero so aceita digitos", "Erro", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -729,7 +717,7 @@ public class CadProfessor extends JInternalFrame {
 				}
 				
 				GeraMatricula geraMatricula = new GeraMatricula();
-				String matricula = geraMatricula.gerarMatricula(1, Integer.parseInt(formattedTxtDtContratacao.getText().substring(6, 10)));
+				String matricula = geraMatricula.gerarMatricula(3, Integer.parseInt(formattedTxtDtContratacao.getText().substring(6, 10)));
 				File file = new File("img\\"+matricula+".png");
 				
 				webView.salvarFoto(webView.getPlayer().getImage(), file);
@@ -751,6 +739,10 @@ public class CadProfessor extends JInternalFrame {
 	 * Metodo que recebe um objeto e preenche os campos
 	 */
 	public void preencheCampos(Professor professor){
+		File path = new File("img\\"+professor.getMatricula()+".png");
+		imagem = new ImageIcon(path.getPath());
+		imagem.setImage(imagem.getImage().getScaledInstance(360, 270, 100));
+		
 		txtMatricula.setText(professor.getMatricula());
 		txtNome.setText(professor.getNome());
 		txtRg.setText(professor.getRg());
@@ -758,9 +750,28 @@ public class CadProfessor extends JInternalFrame {
 		txtEmail.setText(professor.getEmail());
 		formattedTxtDtNascimento.setText(professor.getDtNascimento().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)));
 		formattedTxtTelefone.setText(professor.getTelefone());
-		//comboBoxEstadoCivil.setSelectedIndex(0);
-		//comboBoxSexo.setSelectedIndex(0);
-		//comboBoxSituacao.setSelectedIndex(0);
+		
+		if(professor.getEstadoCivil().equals("S"))
+			comboBoxEstadoCivil.setSelectedIndex(0);
+		else if(professor.getEstadoCivil().equals("C"))
+			comboBoxEstadoCivil.setSelectedIndex(1);
+		else if(professor.getEstadoCivil().equals("V"))
+			comboBoxEstadoCivil.setSelectedIndex(2);
+		else if(professor.getEstadoCivil().equals("D"))
+			comboBoxEstadoCivil.setSelectedIndex(3);
+		else
+			comboBoxEstadoCivil.setSelectedIndex(4);
+		
+		if(professor.getSexo().equals("M"))
+			comboBoxSexo.setSelectedIndex(0);
+		else
+			comboBoxSexo.setSelectedIndex(1);
+		
+		if(professor.getSituacao().equals("A"))
+			comboBoxSituacao.setSelectedIndex(0);
+		else
+			comboBoxSituacao.setSelectedIndex(1);
+		
 		formattedTxtCep.setText(professor.getCep());
 		txtRua.setText(professor.getRua());
 		txtNumero.setText(Integer.toString(professor.getNumero()));
@@ -768,11 +779,29 @@ public class CadProfessor extends JInternalFrame {
 		txtCidade.setText(professor.getCidade());
 		txtEstado.setText(professor.getEstado());
 		txtComplemento.setText(professor.getComplemento());
-		//comboBoxEscolaridade.setSelectedIndex(0);
-		//comboBoxEstadoTitularidade.setSelectedIndex(0);
+		
+		if(professor.getEscolaridade().substring(0, 1).equals("F"))
+			comboBoxEscolaridade.setSelectedIndex(0);
+		else if(professor.getEscolaridade().substring(0, 1).equals("M"))
+			comboBoxEscolaridade.setSelectedIndex(1);
+		else if(professor.getEscolaridade().substring(0, 1).equals("S"))
+			comboBoxEscolaridade.setSelectedIndex(2);
+		else
+			comboBoxEscolaridade.setSelectedIndex(3);
+
+		if(professor.getTitularidade().substring(0, 1).equals("E"))
+			comboBoxTitularidade.setSelectedIndex(0);
+		else if(professor.getTitularidade().substring(0, 1).equals("M"))
+			comboBoxTitularidade.setSelectedIndex(1);
+		else if(professor.getTitularidade().substring(0, 1).equals("D"))
+			comboBoxTitularidade.setSelectedIndex(2);
+		else
+			comboBoxTitularidade.setSelectedIndex(3);
+		
 		txtSalario.setText(professor.getSalario() + "");
 		formattedTxtDtContratacao.setText(professor.getDtContratacao().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)));
 		txtPaneObservacao.setText(professor.getObservacao());
+		labelImagem.setIcon(imagem);
 	}
 	
 	/**
@@ -830,5 +859,6 @@ public class CadProfessor extends JInternalFrame {
 		txtSalario.setText("");
 		formattedTxtDtContratacao.setText("");
 		txtPaneObservacao.setText("");
+		labelImagem.setIcon(null);
 	}
 }

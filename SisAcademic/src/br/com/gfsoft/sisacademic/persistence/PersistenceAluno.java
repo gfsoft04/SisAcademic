@@ -76,9 +76,14 @@ public class PersistenceAluno implements IPersistenceAluno {
 
 	@Override
 	public boolean delete(Aluno aluno) {
-		
 		String sqlAluno;
 		String sqlPessoa;
+		
+		PersistenceAlunoDisciplina pAlunoDisciplina = new PersistenceAlunoDisciplina();
+		if(!(pAlunoDisciplina.select(aluno.getId()).isEmpty())){
+			JOptionPane.showMessageDialog(null, "O Aluno encontra-se matriculado em alguma disciplina.\nRemova e tente novamente.", "Erro", JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
 		
 		sqlAluno = "DELETE FROM tb_Aluno WHERE tb_Pessoa_idPessoa = "+aluno.getId()+"";
 		
@@ -182,6 +187,7 @@ public class PersistenceAluno implements IPersistenceAluno {
 				aluno.setCidade(rs.getString("cidade"));
 				aluno.setEstado(rs.getString("estado"));
 				aluno.setComplemento(rs.getString("complemento"));
+				aluno.setObservacao(rs.getString("observacao"));
 				aluno.setUrlFoto(rs.getString("urlFoto"));
 			}
 			return aluno;

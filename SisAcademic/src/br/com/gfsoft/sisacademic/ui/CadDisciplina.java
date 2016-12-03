@@ -207,9 +207,7 @@ public class CadDisciplina extends JInternalFrame {
 					if(academico.cadastrarDisciplina(disciplina)){
 						JOptionPane.showMessageDialog(null, "Cadastro efetuado com sucesso!", "Cadastrado", JOptionPane.INFORMATION_MESSAGE);
 						limparCampos();
-					} /*else {
-						JOptionPane.showMessageDialog(null, "Error!", "Erro", JOptionPane.ERROR_MESSAGE);
-					}*/
+					}
 					
 				} catch (DateTimeException ex) {
 					// Excesao para data invalida
@@ -327,7 +325,12 @@ public class CadDisciplina extends JInternalFrame {
 		txtId.setText(""+disciplina.getId());
 		txtNome.setText(disciplina.getNome());
 		txtDescricao.setText(disciplina.getDescricao());
-		//comboBoxSituacao.setSelectedIndex(0);
+		
+		if(disciplina.getSituacao().equals("D"))
+			comboBoxSituacao.setSelectedIndex(0);
+		else
+			comboBoxSituacao.setSelectedIndex(1);
+			
 		formattedTxtDtCriacao.setText(disciplina.getDtCriacao().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)));
 		formattedTextSemestre.setText(disciplina.getSemestre());
 		textPaneObservacao.setText(disciplina.getObservacao());

@@ -14,6 +14,7 @@ import br.com.gfsoft.sisacademic.model.Funcionario;
 import br.com.gfsoft.sisacademic.model.Professor;
 import br.com.gfsoft.sisacademic.model.exception.CpfInvalidoException;
 import br.com.gfsoft.sisacademic.model.exception.UsuarioJaCadastradoException;
+import br.com.gfsoft.sisacademic.model.exception.UsuarioNaoEncontradoException;
 import br.com.gfsoft.sisacademic.util.VerificaCamposUnique;
 
 public class PersistenceProfessor implements IPersistenceProfessor {
@@ -81,10 +82,15 @@ public class PersistenceProfessor implements IPersistenceProfessor {
 
 	@Override
 	public boolean delete(Professor professor) {
-		
 		String sqlProfessor;
 		String sqlFuncionario;
 		String sqlPessoa;
+		
+		PersistenceProfessorDisciplina pProfessorDisciplina = new PersistenceProfessorDisciplina();
+		if(!(pProfessorDisciplina.select(professor.getId()).isEmpty())){
+			JOptionPane.showMessageDialog(null, "O Professor encontra-se cadastrado em alguma disciplina.\nRemova e tente novamente.", "Erro", JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
 		
 		sqlProfessor = "DELETE FROM tb_Professor WHERE tb_Funcionario_idPessoa = "+professor.getId();
 		sqlFuncionario = "DELETE FROM tb_Funcionario WHERE tb_Pessoa_idPessoa = "+professor.getId();
@@ -125,9 +131,6 @@ public class PersistenceProfessor implements IPersistenceProfessor {
 		PersistenceFuncionario pFuncionario = new PersistenceFuncionario();
 		
 		professor.setId(pPessoa.selectPessoa(professor.getMatricula()));
-		
-		System.out.println(professor.getMatricula());
-		System.out.println(professor.getId());
 		
 		if(pFuncionario.update(professor)){
 			
@@ -307,7 +310,7 @@ public class PersistenceProfessor implements IPersistenceProfessor {
 	}
 	
 	@Override
-	public Set<Professor> filtroProfessores(String nome) {
+	public Set<Professor> filtroProfessores(String nome) throws UsuarioNaoEncontradoException{
 		
 		Set<Professor> professores = new HashSet<>();
 		Professor professor;
@@ -352,6 +355,10 @@ public class PersistenceProfessor implements IPersistenceProfessor {
 				professor.setTitularidade(rs.getString("titularidade"));
 				
 				professores.add(professor);
+			}
+			
+			if(professores.isEmpty()){
+				throw new UsuarioNaoEncontradoException("Usuario nao cadastrado no sistema");
 			}
 			
 			return professores;

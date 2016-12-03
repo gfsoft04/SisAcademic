@@ -5,6 +5,7 @@ import java.util.Set;
 import br.com.gfsoft.sisacademic.model.Funcionario;
 import br.com.gfsoft.sisacademic.model.exception.CpfInvalidoException;
 import br.com.gfsoft.sisacademic.model.exception.UsuarioJaCadastradoException;
+import br.com.gfsoft.sisacademic.model.exception.UsuarioNaoEncontradoException;
 import br.com.gfsoft.sisacademic.persistence.IPersistenceFuncionario;
 import br.com.gfsoft.sisacademic.persistence.PersistenceFuncionario;
 
@@ -36,7 +37,7 @@ public class FuncionarioService {
 		return persistencia.selectFuncionarios();
 	}
 	
-	public Set<Funcionario> filtrar(String nome){
+	public Set<Funcionario> filtrar(String nome) throws UsuarioNaoEncontradoException{
 		return persistencia.filtroFuncionarios(nome);
 	}
 

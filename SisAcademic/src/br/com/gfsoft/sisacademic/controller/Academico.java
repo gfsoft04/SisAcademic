@@ -58,7 +58,7 @@ public class Academico {
 		return disciplinaService.listar();
 	}
 	
-	public List<Disciplina> filtrarDisciplinas(String nome){
+	public List<Disciplina> filtrarDisciplinas(String nome) throws UsuarioNaoEncontradoException{
 		return disciplinaService.filtrar(nome);
 	}
 	
@@ -110,7 +110,7 @@ public class Academico {
 		return funcionarioService.listar();
 	}
 	
-	public Set<Funcionario> filtrarFuncionarios(String nome){
+	public Set<Funcionario> filtrarFuncionarios(String nome) throws UsuarioNaoEncontradoException{
 		return funcionarioService.filtrar(nome);
 	}
 	
@@ -136,7 +136,7 @@ public class Academico {
 		return professorService.listar();
 	}
 	
-	public Set<Professor> filtrarProfessores(String nome){
+	public Set<Professor> filtrarProfessores(String nome) throws UsuarioNaoEncontradoException{
 		return professorService.filtrar(nome);
 	}
 	

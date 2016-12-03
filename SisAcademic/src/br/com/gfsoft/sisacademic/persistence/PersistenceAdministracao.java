@@ -194,6 +194,7 @@ public class PersistenceAdministracao implements IPersistenceAdministracao {
 			administracao.setCidade(rs.getString("cidade"));
 			administracao.setEstado(rs.getString("estado"));
 			administracao.setComplemento(rs.getString("complemento"));
+			administracao.setObservacao(rs.getString("observacao"));
 			}
 		return administracao;	
 		}catch (SQLException ex){
