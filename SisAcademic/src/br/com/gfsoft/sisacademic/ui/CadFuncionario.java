@@ -42,6 +42,7 @@ import br.com.gfsoft.sisacademic.util.EnvioEmail;
 import br.com.gfsoft.sisacademic.util.GeraMatricula;
 import br.com.gfsoft.sisacademic.util.VerificaCamposUnique;
 import br.com.gfsoft.sisacademic.util.WebCamView;
+import javax.swing.SwingConstants;
 
 public class CadFuncionario extends JInternalFrame {
 	/**
@@ -417,7 +418,7 @@ public class CadFuncionario extends JInternalFrame {
 		
 		JPanel panel_4 = new JPanel();
 		panel_4.setBorder(null);
-		panel_4.setBounds(666, 455, 290, 178);
+		panel_4.setBounds(666, 455, 315, 178);
 		panel.add(panel_4);
 		panel_4.setLayout(null);
 		
@@ -435,7 +436,9 @@ public class CadFuncionario extends JInternalFrame {
 		
 		/* BOTAO CADASTRAR */
 		btnCadastrar = new JButton("Cadastrar");
-		btnCadastrar.setBounds(180, 11, 100, 35);
+		btnCadastrar.setIcon(new ImageIcon(CadFuncionario.class.getResource("/icon/cadastrar.png")));
+		btnCadastrar.setHorizontalAlignment(SwingConstants.LEFT);
+		btnCadastrar.setBounds(180, 11, 125, 45);
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//VERIFICAR OS CAMPOS OBRIGATORIOS PREENCHIDOS
@@ -530,6 +533,8 @@ public class CadFuncionario extends JInternalFrame {
 		
 		/* BOTAO ALTERAR */
 		btnAlterar = new JButton("Alterar");
+		btnAlterar.setIcon(new ImageIcon(CadFuncionario.class.getResource("/icon/cadastrar.png")));
+		btnAlterar.setHorizontalAlignment(SwingConstants.LEFT);
 		btnAlterar.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnAlterar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -606,11 +611,13 @@ public class CadFuncionario extends JInternalFrame {
 				}
 			}
 		});
-		btnAlterar.setBounds(180, 99, 100, 35);
+		btnAlterar.setBounds(180, 99, 125, 45);
 		panel_4.add(btnAlterar);
 		
 		/* BOTAO DELETAR */
 		btnDeletar = new JButton("Deletar");
+		btnDeletar.setIcon(new ImageIcon(CadFuncionario.class.getResource("/icon/del.png")));
+		btnDeletar.setHorizontalAlignment(SwingConstants.LEFT);
 		btnDeletar.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnDeletar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -653,11 +660,13 @@ public class CadFuncionario extends JInternalFrame {
 				}
 			}
 		});
-		btnDeletar.setBounds(10, 99, 100, 35);
+		btnDeletar.setBounds(10, 99, 125, 45);
 		panel_4.add(btnDeletar);
 		
 		/* BOTAO CANCELAR */
 		btnCancelar = new JButton("Cancelar");
+		btnCancelar.setIcon(new ImageIcon(CadFuncionario.class.getResource("/icon/cancel.png")));
+		btnCancelar.setHorizontalAlignment(SwingConstants.LEFT);
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				limparCampos();
@@ -668,7 +677,7 @@ public class CadFuncionario extends JInternalFrame {
 				setVisible(false);
 			}
 		});
-		btnCancelar.setBounds(10, 11, 100, 35);
+		btnCancelar.setBounds(10, 11, 125, 45);
 		panel_4.add(btnCancelar);
 		btnCancelar.setFont(new Font("Tahoma", Font.BOLD, 11));
 		
@@ -683,6 +692,8 @@ public class CadFuncionario extends JInternalFrame {
 		panelFoto.add(labelImagem);
 		
 		btnVisualizar = new JButton("Visualizar");
+		btnVisualizar.setIcon(new ImageIcon(CadFuncionario.class.getResource("/icon/view.png")));
+		btnVisualizar.setHorizontalAlignment(SwingConstants.LEFT);
 		btnVisualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//VISUALIZAR IMAGEM VIA WEB CAM
@@ -694,10 +705,12 @@ public class CadFuncionario extends JInternalFrame {
 			}
 		});
 		btnVisualizar.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnVisualizar.setBounds(895, 293, 100, 35);
+		btnVisualizar.setBounds(871, 294, 125, 45);
 		panel.add(btnVisualizar);
 		
 		btnCapturaFoto = new JButton("Capturar");
+		btnCapturaFoto.setIcon(new ImageIcon(CadFuncionario.class.getResource("/icon/cam.png")));
+		btnCapturaFoto.setHorizontalAlignment(SwingConstants.LEFT);
 		btnCapturaFoto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//VERIFICAR OS CAMPOS OBRIGATORIOS PREENCHIDOS
@@ -725,7 +738,7 @@ public class CadFuncionario extends JInternalFrame {
 			}
 		});
 		btnCapturaFoto.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnCapturaFoto.setBounds(1005, 293, 100, 35);
+		btnCapturaFoto.setBounds(1008, 294, 125, 45);
 		panel.add(btnCapturaFoto);
 
 	}

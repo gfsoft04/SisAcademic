@@ -41,6 +41,7 @@ import br.com.gfsoft.sisacademic.util.EnvioEmail;
 import br.com.gfsoft.sisacademic.util.GeraMatricula;
 import br.com.gfsoft.sisacademic.util.VerificaCamposUnique;
 import br.com.gfsoft.sisacademic.util.WebCamView;
+import javax.swing.SwingConstants;
 
 public class CadAluno extends JInternalFrame {
 	/**
@@ -225,7 +226,7 @@ public class CadAluno extends JInternalFrame {
 
 		JPanel panel_4 = new JPanel();
 		panel_4.setBorder(null);
-		panel_4.setBounds(338, 540, 476, 55);
+		panel_4.setBounds(338, 526, 476, 69);
 		panel.add(panel_4);
 		panel_4.setLayout(null);
 		
@@ -407,7 +408,9 @@ public class CadAluno extends JInternalFrame {
 		
 		/** BOTAO CADASTRAR **/
 		btnCadastrar = new JButton("Cadastrar");
-		btnCadastrar.setBounds(163, 11, 100, 35);
+		btnCadastrar.setIcon(new ImageIcon(CadAluno.class.getResource("/icon/cadastrar.png")));
+		btnCadastrar.setHorizontalAlignment(SwingConstants.LEFT);
+		btnCadastrar.setBounds(149, 10, 125, 45);
 		btnCadastrar.setFont(new Font("Tahoma", Font.BOLD, 11));
 		panel_4.add(btnCadastrar);
 		
@@ -495,7 +498,9 @@ public class CadAluno extends JInternalFrame {
 		
 		/** BOTAO DELETAR **/
 		btnDeletar = new JButton("Deletar");
-		btnDeletar.setBounds(314, 10, 98, 35);
+		btnDeletar.setIcon(new ImageIcon(CadAluno.class.getResource("/icon/del.png")));
+		btnDeletar.setHorizontalAlignment(SwingConstants.LEFT);
+		btnDeletar.setBounds(286, 10, 125, 45);
 		btnDeletar.setFont(new Font("Tahoma", Font.BOLD, 11));
 		panel_4.add(btnDeletar);
 		
@@ -536,8 +541,10 @@ public class CadAluno extends JInternalFrame {
 		
 		/** BOTAO ALTERAR **/
 		btnAlterar = new JButton("Alterar");
+		btnAlterar.setIcon(new ImageIcon(CadAluno.class.getResource("/icon/cadastrar.png")));
+		btnAlterar.setHorizontalAlignment(SwingConstants.LEFT);
 		btnAlterar.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnAlterar.setBounds(163, 10, 98, 30);
+		btnAlterar.setBounds(149, 10, 125, 45);
 		panel_4.add(btnAlterar);
 		
 		btnAlterar.addActionListener(new ActionListener() {
@@ -615,6 +622,8 @@ public class CadAluno extends JInternalFrame {
 		
 		/** BOTAO CANCELAR **/
 		btnCancelar = new JButton("Cancelar");
+		btnCancelar.setHorizontalAlignment(SwingConstants.LEFT);
+		btnCancelar.setIcon(new ImageIcon(CadAluno.class.getResource("/icon/cancel.png")));
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				limparCampos();
@@ -625,12 +634,14 @@ public class CadAluno extends JInternalFrame {
 				setVisible(false);
 			}
 		});
-		btnCancelar.setBounds(12, 11, 100, 35);
+		btnCancelar.setBounds(12, 11, 125, 45);
 		btnCancelar.setFont(new Font("Tahoma", Font.BOLD, 11));
 		panel_4.add(btnCancelar);
 		
 		/** BOTAO CAPTURA FOTO **/
 		btnCapturaFoto = new JButton("Capturar");
+		btnCapturaFoto.setHorizontalAlignment(SwingConstants.LEFT);
+		btnCapturaFoto.setIcon(new ImageIcon(CadAluno.class.getResource("/icon/cam.png")));
 		btnCapturaFoto.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnCapturaFoto.setEnabled(false);
 		btnCapturaFoto.addActionListener(new ActionListener() {
@@ -659,11 +670,13 @@ public class CadAluno extends JInternalFrame {
 				labelImagem.setIcon(icon);
 			}
 		});
-		btnCapturaFoto.setBounds(1017, 292, 100, 35);
+		btnCapturaFoto.setBounds(1015, 293, 125, 45);
 		panel.add(btnCapturaFoto);
 		
 		/** BOTAO VISUALIZAR **/
 		btnVisualizar = new JButton("Visualizar");
+		btnVisualizar.setHorizontalAlignment(SwingConstants.LEFT);
+		btnVisualizar.setIcon(new ImageIcon(CadAluno.class.getResource("/icon/view.png")));
 		btnVisualizar.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnVisualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -675,7 +688,7 @@ public class CadAluno extends JInternalFrame {
 				btnCapturaFoto.setEnabled(true);
 			}
 		});
-		btnVisualizar.setBounds(896, 292, 100, 35);
+		btnVisualizar.setBounds(878, 293, 125, 45);
 		panel.add(btnVisualizar);
 		
 		btnDisciplinas = new JButton("Disciplinas");
@@ -693,7 +706,7 @@ public class CadAluno extends JInternalFrame {
 				}
 			}
 		});
-		btnDisciplinas.setBounds(859, 412, 100, 35);
+		btnDisciplinas.setBounds(878, 407, 100, 35);
 		panel.add(btnDisciplinas);
 		
 	}

@@ -41,6 +41,7 @@ import br.com.gfsoft.sisacademic.util.EnvioEmail;
 import br.com.gfsoft.sisacademic.util.GeraMatricula;
 import br.com.gfsoft.sisacademic.util.VerificaCamposUnique;
 import br.com.gfsoft.sisacademic.util.WebCamView;
+import javax.swing.SwingConstants;
 
 public class CadProfessor extends JInternalFrame {
 	/**
@@ -417,7 +418,7 @@ public class CadProfessor extends JInternalFrame {
 		
 		JPanel panel_5 = new JPanel();
 		panel_5.setBorder(null);
-		panel_5.setBounds(674, 454, 290, 179);
+		panel_5.setBounds(674, 454, 320, 179);
 		panel.add(panel_5);
 		panel_5.setLayout(null);
 		
@@ -435,6 +436,8 @@ public class CadProfessor extends JInternalFrame {
 		
 		/* BOTAO CADASTRAR */
 		btnCadastrar = new JButton("Cadastrar");
+		btnCadastrar.setIcon(new ImageIcon(CadProfessor.class.getResource("/icon/cadastrar.png")));
+		btnCadastrar.setHorizontalAlignment(SwingConstants.LEFT);
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//VERIFICAR OS CAMPOS OBRIGATORIOS PREENCHIDOS
@@ -526,12 +529,14 @@ public class CadProfessor extends JInternalFrame {
 				}
 			}
 		});
-		btnCadastrar.setBounds(180, 43, 100, 35);
+		btnCadastrar.setBounds(180, 43, 125, 45);
 		panel_5.add(btnCadastrar);
 		btnCadastrar.setFont(new Font("Tahoma", Font.BOLD, 11));
 		
 		/* BOTAO DELETAR */
 		btnDeletar = new JButton("Deletar");
+		btnDeletar.setIcon(new ImageIcon(CadProfessor.class.getResource("/icon/del.png")));
+		btnDeletar.setHorizontalAlignment(SwingConstants.LEFT);
 		btnDeletar.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnDeletar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -562,11 +567,13 @@ public class CadProfessor extends JInternalFrame {
 				}
 			}
 		});
-		btnDeletar.setBounds(10, 101, 100, 35);
+		btnDeletar.setBounds(10, 113, 125, 45);
 		panel_5.add(btnDeletar);
 		
 		/* BOTAO ALTERAR */
 		btnAlterar = new JButton("Alterar");
+		btnAlterar.setIcon(new ImageIcon(CadProfessor.class.getResource("/icon/cadastrar.png")));
+		btnAlterar.setHorizontalAlignment(SwingConstants.LEFT);
 		btnAlterar.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnAlterar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -645,11 +652,13 @@ public class CadProfessor extends JInternalFrame {
 				}
 			}
 		});
-		btnAlterar.setBounds(180, 101, 100, 35);
+		btnAlterar.setBounds(180, 113, 125, 45);
 		panel_5.add(btnAlterar);
 		
 		/* BOTAO CANCELAR */
 		btnCancelar = new JButton("Cancelar");
+		btnCancelar.setIcon(new ImageIcon(CadProfessor.class.getResource("/icon/cancel.png")));
+		btnCancelar.setHorizontalAlignment(SwingConstants.LEFT);
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				limparCampos();
@@ -660,7 +669,7 @@ public class CadProfessor extends JInternalFrame {
 				setVisible(false);
 			}
 		});
-		btnCancelar.setBounds(10, 43, 100, 35);
+		btnCancelar.setBounds(10, 43, 125, 45);
 		panel_5.add(btnCancelar);
 		btnCancelar.setFont(new Font("Tahoma", Font.BOLD, 11));
 		
@@ -674,7 +683,7 @@ public class CadProfessor extends JInternalFrame {
 			}
 		});
 		btnDisciplinas.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnDisciplinas.setBounds(864, 396, 100, 35);
+		btnDisciplinas.setBounds(881, 391, 100, 35);
 		panel.add(btnDisciplinas);
 		
 		panelFoto = new JPanel();
@@ -688,6 +697,8 @@ public class CadProfessor extends JInternalFrame {
 		panelFoto.add(labelImagem);
 		
 		btnVisualizar = new JButton("Visualizar");
+		btnVisualizar.setIcon(new ImageIcon(CadProfessor.class.getResource("/icon/view.png")));
+		btnVisualizar.setHorizontalAlignment(SwingConstants.LEFT);
 		btnVisualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//VISUALIZAR IMAGEM VIA WEB CAM
@@ -699,10 +710,12 @@ public class CadProfessor extends JInternalFrame {
 			}
 		});
 		btnVisualizar.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnVisualizar.setBounds(909, 292, 100, 35);
+		btnVisualizar.setBounds(881, 293, 125, 45);
 		panel.add(btnVisualizar);
 		
 		btnCapturaFoto = new JButton("Capturar");
+		btnCapturaFoto.setIcon(new ImageIcon(CadProfessor.class.getResource("/icon/cam.png")));
+		btnCapturaFoto.setHorizontalAlignment(SwingConstants.LEFT);
 		btnCapturaFoto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//VERIFICAR OS CAMPOS OBRIGATORIOS PREENCHIDOS
@@ -730,7 +743,7 @@ public class CadProfessor extends JInternalFrame {
 			}
 		});
 		btnCapturaFoto.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnCapturaFoto.setBounds(1019, 292, 100, 35);
+		btnCapturaFoto.setBounds(1018, 293, 125, 45);
 		panel.add(btnCapturaFoto);
 
 	}
