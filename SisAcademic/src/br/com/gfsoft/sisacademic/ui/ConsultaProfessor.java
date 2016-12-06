@@ -39,7 +39,6 @@ public class ConsultaProfessor extends JInternalFrame {
 	 */
 	private static final long serialVersionUID = -1625071523346202978L;
 	private JTextField txtNome;
-	private JTextField txtMatricula;
 	private JTable table;
 	private JButton btnFiltrar;
 	private JButton btnImprimir;
@@ -79,12 +78,12 @@ public class ConsultaProfessor extends JInternalFrame {
 		panel.setLayout(null);
 		
 		txtNome = new JTextField();
-		txtNome.setBounds(115, 27, 350, 25);
+		txtNome.setBounds(115, 27, 350, 30);
 		panel.add(txtNome);
 		txtNome.setColumns(10);
 		
 		JLabel lblNewLabel = new JLabel("Nome:");
-		lblNewLabel.setBounds(30, 32, 75, 14);
+		lblNewLabel.setBounds(30, 35, 75, 14);
 		panel.add(lblNewLabel);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -115,15 +114,6 @@ public class ConsultaProfessor extends JInternalFrame {
 		});
 		scrollPane.setViewportView(table);
 		
-		txtMatricula = new JTextField();
-		txtMatricula.setColumns(10);
-		txtMatricula.setBounds(115, 58, 350, 25);
-		panel.add(txtMatricula);
-		
-		JLabel lblMatricula = new JLabel("Matricula:");
-		lblMatricula.setBounds(30, 64, 75, 14);
-		panel.add(lblMatricula);
-		
 		/* BOTAO FILTRAR */
 		btnFiltrar = new JButton("Filtrar");
 		btnFiltrar.addActionListener(new ActionListener() {
@@ -132,7 +122,7 @@ public class ConsultaProfessor extends JInternalFrame {
 				preencherTabelaFiltro(nome);
 			}
 		});
-		btnFiltrar.setBounds(510, 48, 100, 30);
+		btnFiltrar.setBounds(510, 27, 100, 30);
 		panel.add(btnFiltrar);
 		
 		/* BOTAO IMPRIMIR */
@@ -183,7 +173,7 @@ public class ConsultaProfessor extends JInternalFrame {
 				
 			}
 		});
-		btnImprimir.setBounds(650, 48, 100, 30);
+		btnImprimir.setBounds(650, 27, 100, 30);
 		panel.add(btnImprimir);
 		
 		//preencherTabela();

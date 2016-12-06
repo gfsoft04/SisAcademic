@@ -129,7 +129,7 @@ public class CadProfessor extends JInternalFrame {
 		pane_1.add(lblNewLabel);
 
 		txtNome = new JTextField();
-		txtNome.setBounds(51, 27, 329, 25);
+		txtNome.setBounds(51, 27, 329, 30);
 		pane_1.add(txtNome);
 		txtNome.setColumns(10);
 
@@ -149,7 +149,7 @@ public class CadProfessor extends JInternalFrame {
 				}
 			}
 		});
-		formattedTxtDtNascimento.setBounds(139, 66, 140, 25);
+		formattedTxtDtNascimento.setBounds(139, 66, 140, 30);
 		pane_1.add(formattedTxtDtNascimento);
 
 		JLabel lblEmail = new JLabel("Email:");
@@ -157,7 +157,7 @@ public class CadProfessor extends JInternalFrame {
 		pane_1.add(lblEmail);
 
 		txtEmail = new JTextField();
-		txtEmail.setBounds(390, 66, 250, 25);
+		txtEmail.setBounds(390, 66, 250, 30);
 		pane_1.add(txtEmail);
 		txtEmail.setColumns(10);
 
@@ -170,12 +170,12 @@ public class CadProfessor extends JInternalFrame {
 		pane_1.add(lblEstadoCivil);
 
 		comboBoxEstadoCivil = new JComboBox();
-		comboBoxEstadoCivil.setBounds(98, 108, 151, 25);
+		comboBoxEstadoCivil.setBounds(98, 108, 151, 30);
 		pane_1.add(comboBoxEstadoCivil);
 		comboBoxEstadoCivil.setModel(new DefaultComboBoxModel(new String[] {"S - Solteiro", "C - Casado", "V - Vi\u00FAvo", "D - Divorciado", "UE - Uni\u00E3o Est\u00E1vel"}));
 
 		txtRg = new JTextField();
-		txtRg.setBounds(445, 27, 139, 25);
+		txtRg.setBounds(445, 27, 139, 30);
 		pane_1.add(txtRg);
 		txtRg.setColumns(10);
 
@@ -184,7 +184,7 @@ public class CadProfessor extends JInternalFrame {
 		pane_1.add(lblRg);
 
 		formattedTxtCpf = new JFormattedTextField();
-		formattedTxtCpf.setBounds(647, 27, 139, 25);
+		formattedTxtCpf.setBounds(647, 27, 139, 30);
 		pane_1.add(formattedTxtCpf);
 		formattedTxtCpf.addFocusListener(new FocusAdapter() {
 			@Override
@@ -207,7 +207,7 @@ public class CadProfessor extends JInternalFrame {
 		pane_1.add(lblSexo);
 
 		comboBoxSexo = new JComboBox();
-		comboBoxSexo.setBounds(343, 108, 151, 25);
+		comboBoxSexo.setBounds(343, 108, 151, 30);
 		pane_1.add(comboBoxSexo);
 		comboBoxSexo.setModel(new DefaultComboBoxModel(new String[] {"M - Masculino", "F - Feminino"}));
 
@@ -223,7 +223,7 @@ public class CadProfessor extends JInternalFrame {
 				}
 			}
 		});
-		formattedTxtTelefone.setBounds(81, 152, 151, 25);
+		formattedTxtTelefone.setBounds(81, 152, 151, 30);
 		pane_1.add(formattedTxtTelefone);
 
 		JLabel lblNewLabel_1 = new JLabel("Situa\u00E7\u00E3o:");
@@ -232,7 +232,7 @@ public class CadProfessor extends JInternalFrame {
 
 		comboBoxSituacao = new JComboBox();
 		comboBoxSituacao.setModel(new DefaultComboBoxModel(new String[] {"A - Ativo", "I - Inativo "}));
-		comboBoxSituacao.setBounds(603, 109, 151, 25);
+		comboBoxSituacao.setBounds(603, 109, 151, 29);
 		pane_1.add(comboBoxSituacao);
 		
 		labelMatricula = new JLabel("Matricula:");
@@ -241,7 +241,7 @@ public class CadProfessor extends JInternalFrame {
 		
 		txtMatricula = new JTextField();
 		txtMatricula.setColumns(10);
-		txtMatricula.setBounds(86, 193, 250, 25);
+		txtMatricula.setBounds(86, 193, 250, 30);
 		pane_1.add(txtMatricula);
 		formattedTxtDtNascimento.addFocusListener(new FocusAdapter() {
 			@Override
@@ -295,7 +295,7 @@ public class CadProfessor extends JInternalFrame {
 				}
 			}
 		});
-		formattedTxtCep.setBounds(54, 28, 120, 25);
+		formattedTxtCep.setBounds(54, 28, 120, 30);
 		pane_2.add(formattedTxtCep);
 
 		JLabel lblRua = new JLabel("Rua:");
@@ -303,7 +303,7 @@ public class CadProfessor extends JInternalFrame {
 		pane_2.add(lblRua);
 
 		txtRua = new JTextField();
-		txtRua.setBounds(272, 28, 250, 25);
+		txtRua.setBounds(272, 28, 250, 30);
 		pane_2.add(txtRua);
 		txtRua.setColumns(10);
 
@@ -312,7 +312,7 @@ public class CadProfessor extends JInternalFrame {
 		pane_2.add(lblNumero);
 
 		txtNumero = new JTextField();
-		txtNumero.setBounds(639, 28, 59, 25);
+		txtNumero.setBounds(639, 28, 59, 30);
 		pane_2.add(txtNumero);
 		txtNumero.setColumns(10);
 
@@ -321,7 +321,7 @@ public class CadProfessor extends JInternalFrame {
 		pane_2.add(lblBairro);
 
 		txtBairro = new JTextField();
-		txtBairro.setBounds(64, 77, 248, 25);
+		txtBairro.setBounds(64, 77, 248, 30);
 		pane_2.add(txtBairro);
 		txtBairro.setColumns(10);
 
@@ -331,7 +331,7 @@ public class CadProfessor extends JInternalFrame {
 
 		txtCidade = new JTextField();
 		txtCidade.setColumns(10);
-		txtCidade.setBounds(417, 77, 250, 25);
+		txtCidade.setBounds(417, 77, 250, 30);
 		pane_2.add(txtCidade);
 
 		JLabel lblEstado = new JLabel("Estado:");
@@ -340,7 +340,7 @@ public class CadProfessor extends JInternalFrame {
 
 		txtEstado = new JTextField();
 		txtEstado.setColumns(10);
-		txtEstado.setBounds(70, 124, 250, 25);
+		txtEstado.setBounds(70, 124, 250, 30);
 		pane_2.add(txtEstado);
 
 		JLabel lblComplemento = new JLabel("Complemento: ");
@@ -348,7 +348,7 @@ public class CadProfessor extends JInternalFrame {
 		pane_2.add(lblComplemento);
 
 		txtComplemento = new JTextField();
-		txtComplemento.setBounds(456, 124, 238, 25);
+		txtComplemento.setBounds(456, 124, 238, 30);
 		pane_2.add(txtComplemento);
 		txtComplemento.setColumns(10);
 
@@ -379,12 +379,12 @@ public class CadProfessor extends JInternalFrame {
 		
 		txtSalario = new JTextField();
 		txtSalario.setColumns(10);
-		txtSalario.setBounds(100, 110, 100, 25);
+		txtSalario.setBounds(100, 110, 100, 30);
 		panel_4.add(txtSalario);
 		
 		comboBoxTitularidade = new JComboBox();
 		comboBoxTitularidade.setModel(new DefaultComboBoxModel(new String[] {"Especialista", "Mestrado", "Doutorado", "P\u00F3s-doutorado"}));
-		comboBoxTitularidade.setBounds(106, 66, 180, 25);
+		comboBoxTitularidade.setBounds(106, 66, 180, 30);
 		panel_4.add(comboBoxTitularidade);
 		
 		JLabel lblDataDeContratao = new JLabel("Data de Contrata\u00E7\u00E3o:");
@@ -403,7 +403,7 @@ public class CadProfessor extends JInternalFrame {
 				}
 			}
 		});
-		formattedTxtDtContratacao.setBounds(161, 151, 139, 25);
+		formattedTxtDtContratacao.setBounds(161, 151, 139, 30);
 		panel_4.add(formattedTxtDtContratacao);
 		
 		JLabel label = new JLabel("Escolaridade:");
@@ -412,7 +412,7 @@ public class CadProfessor extends JInternalFrame {
 		
 		comboBoxEscolaridade = new JComboBox();
 		comboBoxEscolaridade.setModel(new DefaultComboBoxModel(new String[] {"Fundamental", "M\u00E9dio", "Superior", "P\u00F3s Gradua\u00E7\u00E3o"}));
-		comboBoxEscolaridade.setBounds(119, 28, 180, 25);
+		comboBoxEscolaridade.setBounds(119, 28, 180, 30);
 		panel_4.add(comboBoxEscolaridade);
 		
 		JPanel panel_5 = new JPanel();
@@ -526,7 +526,7 @@ public class CadProfessor extends JInternalFrame {
 				}
 			}
 		});
-		btnCadastrar.setBounds(180, 43, 100, 30);
+		btnCadastrar.setBounds(180, 43, 100, 35);
 		panel_5.add(btnCadastrar);
 		btnCadastrar.setFont(new Font("Tahoma", Font.BOLD, 11));
 		
@@ -562,7 +562,7 @@ public class CadProfessor extends JInternalFrame {
 				}
 			}
 		});
-		btnDeletar.setBounds(10, 101, 100, 30);
+		btnDeletar.setBounds(10, 101, 100, 35);
 		panel_5.add(btnDeletar);
 		
 		/* BOTAO ALTERAR */
@@ -645,7 +645,7 @@ public class CadProfessor extends JInternalFrame {
 				}
 			}
 		});
-		btnAlterar.setBounds(180, 101, 100, 30);
+		btnAlterar.setBounds(180, 101, 100, 35);
 		panel_5.add(btnAlterar);
 		
 		/* BOTAO CANCELAR */
@@ -660,7 +660,7 @@ public class CadProfessor extends JInternalFrame {
 				setVisible(false);
 			}
 		});
-		btnCancelar.setBounds(10, 43, 100, 30);
+		btnCancelar.setBounds(10, 43, 100, 35);
 		panel_5.add(btnCancelar);
 		btnCancelar.setFont(new Font("Tahoma", Font.BOLD, 11));
 		
@@ -674,7 +674,7 @@ public class CadProfessor extends JInternalFrame {
 			}
 		});
 		btnDisciplinas.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnDisciplinas.setBounds(864, 396, 100, 30);
+		btnDisciplinas.setBounds(864, 396, 100, 35);
 		panel.add(btnDisciplinas);
 		
 		panelFoto = new JPanel();
@@ -699,7 +699,7 @@ public class CadProfessor extends JInternalFrame {
 			}
 		});
 		btnVisualizar.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnVisualizar.setBounds(909, 292, 100, 30);
+		btnVisualizar.setBounds(909, 292, 100, 35);
 		panel.add(btnVisualizar);
 		
 		btnCapturaFoto = new JButton("Capturar");
@@ -730,7 +730,7 @@ public class CadProfessor extends JInternalFrame {
 			}
 		});
 		btnCapturaFoto.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnCapturaFoto.setBounds(1019, 292, 100, 30);
+		btnCapturaFoto.setBounds(1019, 292, 100, 35);
 		panel.add(btnCapturaFoto);
 
 	}

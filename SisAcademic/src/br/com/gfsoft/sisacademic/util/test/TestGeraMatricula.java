@@ -20,7 +20,7 @@ public class TestGeraMatricula extends TestCase{
 		
 		String matricula = geraMatricula.gerarMatricula(1, 2016);
 		
-		assertEquals(matricula, "1201600042");
+		assertEquals(matricula, "1201500001");
 		
 	}
 

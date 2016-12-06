@@ -129,7 +129,7 @@ public class CadFuncionario extends JInternalFrame {
 		pane_1.add(lblNewLabel);
 
 		txtNome = new JTextField();
-		txtNome.setBounds(51, 20, 329, 25);
+		txtNome.setBounds(51, 20, 329, 30);
 		pane_1.add(txtNome);
 		txtNome.setColumns(10);
 
@@ -149,7 +149,7 @@ public class CadFuncionario extends JInternalFrame {
 				}
 			}
 		});
-		formattedTxtDtNascimento.setBounds(136, 64, 140, 25);
+		formattedTxtDtNascimento.setBounds(136, 64, 140, 30);
 		pane_1.add(formattedTxtDtNascimento);
 
 		JLabel lblEmail = new JLabel("Email:");
@@ -157,12 +157,12 @@ public class CadFuncionario extends JInternalFrame {
 		pane_1.add(lblEmail);
 
 		txtEmail = new JTextField();
-		txtEmail.setBounds(363, 64, 250, 25);
+		txtEmail.setBounds(363, 64, 250, 30);
 		pane_1.add(txtEmail);
 		txtEmail.setColumns(10);
 
 		JLabel lblTelefone = new JLabel("Telefone:");
-		lblTelefone.setBounds(10, 158, 60, 14);
+		lblTelefone.setBounds(10, 158, 60, 30);
 		pane_1.add(lblTelefone);
 
 		JLabel lblEstadoCivil = new JLabel("Estado Civil:");
@@ -170,12 +170,12 @@ public class CadFuncionario extends JInternalFrame {
 		pane_1.add(lblEstadoCivil);
 
 		comboBoxEstadoCivil = new JComboBox();
-		comboBoxEstadoCivil.setBounds(92, 107, 151, 25);
+		comboBoxEstadoCivil.setBounds(92, 107, 151, 30);
 		pane_1.add(comboBoxEstadoCivil);
 		comboBoxEstadoCivil.setModel(new DefaultComboBoxModel(new String[] {"S - Solteiro", "C - Casado", "V - Vi\u00FAvo", "D - Divorciado", "UE - Uni\u00E3o Est\u00E1vel"}));
 
 		txtRg = new JTextField();
-		txtRg.setBounds(436, 20, 139, 25);
+		txtRg.setBounds(436, 20, 139, 30);
 		pane_1.add(txtRg);
 		txtRg.setColumns(10);
 
@@ -184,7 +184,7 @@ public class CadFuncionario extends JInternalFrame {
 		pane_1.add(lblRg);
 
 		formattedTxtCpf = new JFormattedTextField();
-		formattedTxtCpf.setBounds(638, 20, 139, 25);
+		formattedTxtCpf.setBounds(638, 20, 139, 30);
 		pane_1.add(formattedTxtCpf);
 		formattedTxtCpf.addFocusListener(new FocusAdapter() {
 			@Override
@@ -207,7 +207,7 @@ public class CadFuncionario extends JInternalFrame {
 		pane_1.add(lblSexo);
 
 		comboBoxSexo = new JComboBox();
-		comboBoxSexo.setBounds(328, 107, 151, 25);
+		comboBoxSexo.setBounds(328, 107, 151, 30);
 		pane_1.add(comboBoxSexo);
 		comboBoxSexo.setModel(new DefaultComboBoxModel(new String[] {"M - Masculino", "F - Feminino"}));
 
@@ -223,7 +223,7 @@ public class CadFuncionario extends JInternalFrame {
 				}
 			}
 		});
-		formattedTxtTelefone.setBounds(81, 152, 151, 25);
+		formattedTxtTelefone.setBounds(81, 152, 151, 30);
 		pane_1.add(formattedTxtTelefone);
 
 		JLabel lblNewLabel_1 = new JLabel("Situa\u00E7\u00E3o:");
@@ -232,7 +232,7 @@ public class CadFuncionario extends JInternalFrame {
 
 		comboBoxSituacao = new JComboBox();
 		comboBoxSituacao.setModel(new DefaultComboBoxModel(new String[] {"A - Ativo", "I - Inativo "}));
-		comboBoxSituacao.setBounds(597, 107, 151, 25);
+		comboBoxSituacao.setBounds(597, 107, 151, 30);
 		pane_1.add(comboBoxSituacao);
 		
 		labelMatricula = new JLabel("Matricula:");
@@ -241,7 +241,7 @@ public class CadFuncionario extends JInternalFrame {
 		
 		txtMatricula = new JTextField();
 		txtMatricula.setColumns(10);
-		txtMatricula.setBounds(81, 190, 250, 25);
+		txtMatricula.setBounds(81, 190, 250, 30);
 		pane_1.add(txtMatricula);
 		formattedTxtDtNascimento.addFocusListener(new FocusAdapter() {
 			@Override
@@ -295,7 +295,7 @@ public class CadFuncionario extends JInternalFrame {
 				}
 			}
 		});
-		formattedTxtCep.setBounds(54, 28, 120, 25);
+		formattedTxtCep.setBounds(54, 28, 120, 30);
 		pane_2.add(formattedTxtCep);
 
 		JLabel lblRua = new JLabel("Rua:");
@@ -303,7 +303,7 @@ public class CadFuncionario extends JInternalFrame {
 		pane_2.add(lblRua);
 
 		txtRua = new JTextField();
-		txtRua.setBounds(266, 28, 250, 25);
+		txtRua.setBounds(266, 28, 250, 30);
 		pane_2.add(txtRua);
 		txtRua.setColumns(10);
 
@@ -312,7 +312,7 @@ public class CadFuncionario extends JInternalFrame {
 		pane_2.add(lblNumero);
 
 		txtNumero = new JTextField();
-		txtNumero.setBounds(639, 28, 59, 25);
+		txtNumero.setBounds(639, 28, 59, 30);
 		pane_2.add(txtNumero);
 		txtNumero.setColumns(10);
 
@@ -321,7 +321,7 @@ public class CadFuncionario extends JInternalFrame {
 		pane_2.add(lblBairro);
 
 		txtBairro = new JTextField();
-		txtBairro.setBounds(68, 71, 248, 25);
+		txtBairro.setBounds(68, 71, 248, 30);
 		pane_2.add(txtBairro);
 		txtBairro.setColumns(10);
 
@@ -331,7 +331,7 @@ public class CadFuncionario extends JInternalFrame {
 
 		txtCidade = new JTextField();
 		txtCidade.setColumns(10);
-		txtCidade.setBounds(423, 71, 250, 25);
+		txtCidade.setBounds(423, 71, 250, 30);
 		pane_2.add(txtCidade);
 
 		JLabel lblEstado = new JLabel("Estado:");
@@ -340,7 +340,7 @@ public class CadFuncionario extends JInternalFrame {
 
 		txtEstado = new JTextField();
 		txtEstado.setColumns(10);
-		txtEstado.setBounds(71, 119, 250, 25);
+		txtEstado.setBounds(71, 119, 250, 30);
 		pane_2.add(txtEstado);
 
 		JLabel lblComplemento = new JLabel("Complemento: ");
@@ -348,7 +348,7 @@ public class CadFuncionario extends JInternalFrame {
 		pane_2.add(lblComplemento);
 
 		txtComplemento = new JTextField();
-		txtComplemento.setBounds(457, 119, 238, 25);
+		txtComplemento.setBounds(457, 119, 238, 30);
 		pane_2.add(txtComplemento);
 		txtComplemento.setColumns(10);
 
@@ -379,12 +379,12 @@ public class CadFuncionario extends JInternalFrame {
 		
 		txtSalario = new JTextField();
 		txtSalario.setColumns(10);
-		txtSalario.setBounds(110, 109, 120, 25);
+		txtSalario.setBounds(110, 109, 120, 30);
 		panel_2.add(txtSalario);
 		
 		comboBoxEscolaridade = new JComboBox();
 		comboBoxEscolaridade.setModel(new DefaultComboBoxModel(new String[] {"Fundamental", "M\u00E9dio", "Superior", "P\u00F3s Gradua\u00E7\u00E3o"}));
-		comboBoxEscolaridade.setBounds(126, 31, 180, 25);
+		comboBoxEscolaridade.setBounds(126, 31, 180, 30);
 		panel_2.add(comboBoxEscolaridade);
 		
 		JLabel label_2 = new JLabel("Data de Contrata\u00E7\u00E3o:");
@@ -403,12 +403,12 @@ public class CadFuncionario extends JInternalFrame {
 				}
 			}
 		});
-		formattedtxtDtContratacao.setBounds(165, 144, 139, 25);
+		formattedtxtDtContratacao.setBounds(165, 144, 139, 30);
 		panel_2.add(formattedtxtDtContratacao);
 		
 		txtCargo = new JTextField();
 		txtCargo.setColumns(10);
-		txtCargo.setBounds(84, 69, 186, 25);
+		txtCargo.setBounds(84, 69, 186, 30);
 		panel_2.add(txtCargo);
 		
 		JLabel lblCargo = new JLabel("Cargo:");
@@ -435,7 +435,7 @@ public class CadFuncionario extends JInternalFrame {
 		
 		/* BOTAO CADASTRAR */
 		btnCadastrar = new JButton("Cadastrar");
-		btnCadastrar.setBounds(180, 11, 100, 30);
+		btnCadastrar.setBounds(180, 11, 100, 35);
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//VERIFICAR OS CAMPOS OBRIGATORIOS PREENCHIDOS
@@ -606,7 +606,7 @@ public class CadFuncionario extends JInternalFrame {
 				}
 			}
 		});
-		btnAlterar.setBounds(180, 99, 100, 30);
+		btnAlterar.setBounds(180, 99, 100, 35);
 		panel_4.add(btnAlterar);
 		
 		/* BOTAO DELETAR */
@@ -653,7 +653,7 @@ public class CadFuncionario extends JInternalFrame {
 				}
 			}
 		});
-		btnDeletar.setBounds(10, 99, 100, 30);
+		btnDeletar.setBounds(10, 99, 100, 35);
 		panel_4.add(btnDeletar);
 		
 		/* BOTAO CANCELAR */
@@ -668,7 +668,7 @@ public class CadFuncionario extends JInternalFrame {
 				setVisible(false);
 			}
 		});
-		btnCancelar.setBounds(10, 11, 100, 30);
+		btnCancelar.setBounds(10, 11, 100, 35);
 		panel_4.add(btnCancelar);
 		btnCancelar.setFont(new Font("Tahoma", Font.BOLD, 11));
 		
@@ -694,7 +694,7 @@ public class CadFuncionario extends JInternalFrame {
 			}
 		});
 		btnVisualizar.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnVisualizar.setBounds(895, 293, 100, 30);
+		btnVisualizar.setBounds(895, 293, 100, 35);
 		panel.add(btnVisualizar);
 		
 		btnCapturaFoto = new JButton("Capturar");
@@ -725,7 +725,7 @@ public class CadFuncionario extends JInternalFrame {
 			}
 		});
 		btnCapturaFoto.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnCapturaFoto.setBounds(1005, 293, 100, 30);
+		btnCapturaFoto.setBounds(1005, 293, 100, 35);
 		panel.add(btnCapturaFoto);
 
 	}
